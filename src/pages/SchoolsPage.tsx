@@ -128,7 +128,7 @@ const SchoolsPage = (props: any) => {
     console.log(query);
     navigate(`?query=${query.split(' ').join('+')}`);
     props.fetchSchools({
-      name: query,
+      school_name: query,
     });
   };
 
@@ -139,11 +139,11 @@ const SchoolsPage = (props: any) => {
       : '';
     setQuery(initialQuery);
     if (
-      props.schools.schools.length === 0 ||
+      props.schools.results.length === 0 ||
       props.schools.params.name !== initialQuery
     ) {
       props.fetchSchools({
-        name: initialQuery.split(' ').join('+') || '',
+        school_name: initialQuery.split(' ').join('+') || '',
       });
     }
   }, []);
@@ -186,8 +186,8 @@ const SchoolsPage = (props: any) => {
               <Results>
                 {props.schools.isFetching && 'Loading...'}
                 {!props.schools.isFetching &&
-                  props.schools.schools.map((school: School) => (
-                    <SchoolItem to={`/school/${school.school_name}`}>
+                  props.schools.results.map((school: any) => (
+                    <SchoolItem to={`/school/${school.id}`}>
                       <SchoolTypeBadgeWrapper>
                         <HighSchoolBadge />
                       </SchoolTypeBadgeWrapper>

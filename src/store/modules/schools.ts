@@ -1,16 +1,19 @@
 import { ofType, Epic } from 'redux-observable';
-import { map, mergeMap } from 'rxjs/operators';
+import {expand, map, mergeMap, reduce} from 'rxjs/operators';
 import { ajax } from 'rxjs/ajax';
 import { School, SearchParams } from '../../types';
+import {EMPTY} from "rxjs";
+import {fetchSchoolDetailsSucceeded} from "./schoolDetails";
 
 const FETCH_SCHOOLS = 'FETCH_SCHOOLS';
 const FETCH_SCHOOLS_SUCCEEDED = 'FETCH_SCHOOL_SUCCEEDED';
 
-type State = {
-  schools: School[];
-  params: SearchParams;
-  isFetching: boolean;
-};
+type State = any;
+// type State = {
+//   schools: School[];
+//   params: SearchParams;
+//   isFetching: boolean;
+// };
 
 interface FetchSchoolsAction {
   type: typeof FETCH_SCHOOLS;
@@ -18,7 +21,7 @@ interface FetchSchoolsAction {
 }
 interface FetchSchoolsSucceededAction {
   type: typeof FETCH_SCHOOLS_SUCCEEDED;
-  payload: School[];
+  payload: any;
 }
 
 export const fetchSchools = (payload: SearchParams): FetchSchoolsAction => ({
@@ -26,33 +29,39 @@ export const fetchSchools = (payload: SearchParams): FetchSchoolsAction => ({
   payload,
 });
 export const fetchSchoolsSucceeded = (
-  payload: School[],
+  payload: any,
 ): FetchSchoolsSucceededAction => ({ type: FETCH_SCHOOLS_SUCCEEDED, payload });
 
 type Actions = FetchSchoolsAction | FetchSchoolsSucceededAction;
 
 export const fetchSchoolsEpic: Epic<
   Actions,
-  FetchSchoolsSucceededAction,
+  any,
   State
 > = action$ =>
   action$.pipe(
     ofType<Actions, FetchSchoolsAction>(FETCH_SCHOOLS),
     mergeMap(action => {
       const URLParams = new URLSearchParams();
-      Object.entries(action.payload).forEach(([key, value]) => {
+      Object.entries({
+        ...action.payload,
+        school_type_generalised: 'szkoła ponadpodstawowa'
+      }).forEach(([key, value]) => {
         if (value) URLParams.set(key, value);
       });
       return ajax
-        .getJSON<School[]>(
-          `${process.env.REACT_APP_API_URL}/search/?${URLParams.toString()}`,
-        )
-        .pipe(map(response => fetchSchoolsSucceeded(response)));
+        .getJSON<any>(
+          `${process.env.REACT_APP_API_URL}/highschool/?${URLParams.toString()}`,
+        ).pipe(
+            expand((res) => res.next ? ajax.getJSON<any>(res.next) : EMPTY),
+            reduce((acc, res) => acc.concat(res.results), []),
+            map(results => fetchSchoolsSucceeded(results))
+        );
     }),
   );
 
 const initialState: State = {
-  schools: [],
+  results: [],
   params: {
     name: '',
   },
@@ -72,7 +81,7 @@ const schools = (state: State = initialState, action: Actions): State => {
       return {
         ...state,
         isFetching: false,
-        schools: action.payload,
+        results: [...action.payload],
       };
 
     default:

@@ -2,12 +2,26 @@ import React, { FC } from 'react';
 import Container from './Container';
 import styled from '../styling/styled';
 import { Link } from '@reach/router';
+import Logo from "./Logo";
 
 const Brand = styled(Link)`
   color: inherit;
   text-decoration: none;
   font-size: 1.5em;
   margin-right: 2em;
+  display: flex;
+  align-items: center;
+  svg{
+    width: 2.5em;
+    transform: translateY(-10%);
+    margin-right: .2em;
+    path{
+      fill: #BA97FF;
+    }
+  }
+  span{
+    color: #BA97FF;
+  }
 `;
 const NavWrapper = styled.div`
   position: fixed;
@@ -15,12 +29,13 @@ const NavWrapper = styled.div`
   left: 0;
   width: 100%;
   z-index: 10;
+  background: white;
 `;
 const Nav = styled.nav`
   height: 5em;
   display: flex;
   justify-content: space-between;
-  background: white;
+  
   * {
     font-family: ${props => props.theme.fonts.primary};
   }
@@ -62,7 +77,11 @@ const Navbar: FC = props => (
     <Container>
       <Nav>
         <FlexWrapper>
-          <Brand to="/">WarsawLO</Brand>
+          <Brand to="/">
+            <Logo />
+            Warsaw
+            <span>LO</span>
+          </Brand>
           <Menu>
             <MenuItem>
               <Link to="/">Home</Link>
@@ -70,13 +89,15 @@ const Navbar: FC = props => (
             <MenuItem>
               <Link to="/schools">Szkoły</Link>
             </MenuItem>
-            <MenuItem>Kalkulator punktów</MenuItem>
+            <MenuItem>
+              <Link to="/calculator">Kalkulator punktów</Link>
+            </MenuItem>
           </Menu>
         </FlexWrapper>
-        <FlexWrapper>
-          <ActionText>Zaloguj się</ActionText>
-          <ActionButton to="/auth">Zarejestruj się</ActionButton>
-        </FlexWrapper>
+        {/*<FlexWrapper>*/}
+        {/*  <ActionText>Zaloguj się</ActionText>*/}
+        {/*  <ActionButton to="/auth">Zarejestruj się</ActionButton>*/}
+        {/*</FlexWrapper>*/}
       </Nav>
     </Container>
   </NavWrapper>

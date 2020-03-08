@@ -50,32 +50,32 @@ const Footer: FC = props => (
       <FooterGrid>
         <ul>
           <li>
-            <Link to="/search">Strona główna</Link>
+            <Link to="/">Strona główna</Link>
           </li>
           <li>
-            <Link to="/search">Wyszukiwarka szkół</Link>
+            <Link to="/schools">Wyszukiwarka szkół</Link>
           </li>
           <li>
-            <Link to="/search">Kalkulator punktów</Link>
-          </li>
-        </ul>
-        <ul>
-          <li>
-            <Link to="/search">O naszych danych</Link>
-          </li>
-          <li>
-            <Link to="/search">Pomóż nam!</Link>
-          </li>
-          <li>
-            <Link to="/search">Dla developerów / API</Link>
+            <Link to="/calculator">Kalkulator punktów</Link>
           </li>
         </ul>
         <ul>
           <li>
-            <Link to="/search">Polityka prywatności</Link>
+            <Link to="/about-data">O naszych danych</Link>
           </li>
           <li>
-            <Link to="/search">Ustawienia prywatności</Link>
+            <Link to="/get-involved">Pomóż nam!</Link>
+          </li>
+          <li>
+            <Link to="/for-developers">Dla developerów / API</Link>
+          </li>
+        </ul>
+        <ul>
+          <li>
+            <Link to="/privacy-policy">Polityka prywatności</Link>
+          </li>
+          <li>
+            <Link to="/privacy-settings">Ustawienia prywatności</Link>
           </li>
         </ul>
         <div className="info-col">

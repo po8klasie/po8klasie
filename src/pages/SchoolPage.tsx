@@ -80,15 +80,17 @@ const ContactGrid = styled.div`
   }
 `;
 
+const isObjEmpty = (obj: any) => Object.keys(obj).length === 0 && obj.constructor === Object
 const SchoolPage = (props: any) => {
   const chartCanvas: Ref<HTMLCanvasElement> = useRef(null);
+  const school = props.schoolDetails.result;
   useEffect(() => {
     if (props.schoolID && props.schoolID !== props.schoolDetails.id) {
       props.fetchSchoolDetails(props.schoolID);
     }
   }, []);
   useEffect(() => {
-    if (!props.schoolDetails.school) return;
+    if (isObjEmpty(school)) return;
     const ctx = (chartCanvas.current as any).getContext('2d');
     const generateRandomThresholds = () =>
       new Array(7)
@@ -118,9 +120,9 @@ const SchoolPage = (props: any) => {
         maintainAspectRatio: false,
       },
     });
-  }, [props.schoolDetails.school]);
+  }, [school]);
   if (!props.schoolID) return <Redirect to="/" />;
-  if (props.schoolDetails.isFetching || !props.schoolDetails.school)
+  if (props.schoolDetails.isFetching || isObjEmpty(school))
     return (
       <Layout>
         <Container>
@@ -137,8 +139,8 @@ const SchoolPage = (props: any) => {
           </div>
           <div>
             <SchoolTypeBadge>LO</SchoolTypeBadge>
-            <h1>{props.schoolDetails.school.school_name}</h1>
-            <h3>{props.schoolDetails.school.address.district}</h3>
+            <h1>{school.school_name}</h1>
+            <h3>{school.address.district}</h3>
           </div>
         </HeaderGrid>
         <Section>
@@ -149,7 +151,7 @@ const SchoolPage = (props: any) => {
                 <i className="material-icons">people</i>
                 Publiczna
               </div>
-              <div className="info">N/A</div>
+              <div className="info">{school.is_public ? 'TAK' : 'NIE'}</div>
             </InfoBox>
             <InfoBox>
               <div className="header">
@@ -186,15 +188,15 @@ const SchoolPage = (props: any) => {
             <ul>
               <li>
                 <i className="material-icons">phone</i>
-                <span>{props.schoolDetails.school.contact.phone}</span>
+                <span>{school.contact.phone}</span>
               </li>
               <li>
                 <i className="material-icons">mail_outline</i>
-                <span>{props.schoolDetails.school.contact.email}</span>
+                <span>{school.contact.email}</span>
               </li>
               <li>
                 <i className="material-icons">public</i>
-                <span>{props.schoolDetails.school.contact.website}</span>
+                <span>{school.contact.website}</span>
               </li>
             </ul>
           </ContactGrid>

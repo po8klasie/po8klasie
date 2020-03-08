@@ -1,64 +1,69 @@
 import { ofType, Epic } from 'redux-observable';
-import { map, mergeMap } from 'rxjs/operators';
+import {expand, map, mergeMap, reduce} from 'rxjs/operators';
 import { ajax } from 'rxjs/ajax';
-import { School } from '../../types';
+import { School, SearchParams } from '../../types';
+import {EMPTY} from "rxjs";
 
 const FETCH_SCHOOL_DETAILS = 'FETCH_SCHOOL_DETAILS';
 const FETCH_SCHOOL_DETAILS_SUCCEEDED = 'FETCH_SCHOOL_DETAILS_SUCCEEDED';
 
-type State = {
-  school: School | null;
-  id: string | null;
-  isFetching: boolean;
-};
+type State = any;
+// type State = {
+//   schools: School[];
+//   params: SearchParams;
+//   isFetching: boolean;
+// };
 
 interface FetchSchoolDetailsAction {
   type: typeof FETCH_SCHOOL_DETAILS;
-  payload: string;
+  payload: number;
 }
 interface FetchSchoolDetailsSucceededAction {
   type: typeof FETCH_SCHOOL_DETAILS_SUCCEEDED;
-  payload: School;
+  payload: any;
 }
 
-export const fetchSchoolDetails = (
-  payload: string,
-): FetchSchoolDetailsAction => ({
+export const fetchSchoolDetails = (payload: number): FetchSchoolDetailsAction => ({
   type: FETCH_SCHOOL_DETAILS,
   payload,
 });
 export const fetchSchoolDetailsSucceeded = (
-  payload: School,
-): FetchSchoolDetailsSucceededAction => ({
-  type: FETCH_SCHOOL_DETAILS_SUCCEEDED,
-  payload,
-});
+    payload: any,
+): FetchSchoolDetailsSucceededAction => ({ type: FETCH_SCHOOL_DETAILS_SUCCEEDED, payload });
 
 type Actions = FetchSchoolDetailsAction | FetchSchoolDetailsSucceededAction;
 
 export const fetchSchoolDetailsEpic: Epic<
-  Actions,
-  FetchSchoolDetailsSucceededAction,
-  State
-> = action$ =>
-  action$.pipe(
-    ofType<Actions, FetchSchoolDetailsAction>(FETCH_SCHOOL_DETAILS),
-    mergeMap(action =>
-      ajax
-        .getJSON<School[]>(
-          `${process.env.REACT_APP_API_URL}/search/?name=${action.payload}`, // TODO: change name to school id
-        )
-        .pipe(map(response => fetchSchoolDetailsSucceeded(response[0]))),
-    ),
-  );
+    Actions,
+    any,
+    State
+    > = action$ =>
+    action$.pipe(
+        ofType<Actions, FetchSchoolDetailsAction>(FETCH_SCHOOL_DETAILS),
+        mergeMap(action => {
+          const URLParams = new URLSearchParams();
+          Object.entries({
+            id: Number(action.payload).toString(),
+            school_type_generalised: 'szkoła ponadpodstawowa'
+          }).forEach(([key, value]) => {
+            if (value) URLParams.set(key, value);
+          });
+          return ajax
+              .getJSON<any>(
+                  `${process.env.REACT_APP_API_URL}/highschool/?${URLParams.toString()}`,
+              ).pipe(
+                  map(res => fetchSchoolDetailsSucceeded(res.results[0]))
+              );
+        }),
+    );
 
 const initialState: State = {
-  school: null,
+  result: {},
   id: null,
   isFetching: false,
 };
 
-const schoolDetails = (state: State = initialState, action: Actions): State => {
+const schools = (state: State = initialState, action: Actions): State => {
   switch (action.type) {
     case FETCH_SCHOOL_DETAILS:
       return {
@@ -71,7 +76,7 @@ const schoolDetails = (state: State = initialState, action: Actions): State => {
       return {
         ...state,
         isFetching: false,
-        school: action.payload,
+        result: action.payload,
       };
 
     default:
@@ -79,4 +84,4 @@ const schoolDetails = (state: State = initialState, action: Actions): State => {
   }
 };
 
-export default schoolDetails;
+export default schools;
