@@ -1,19 +1,19 @@
 import React, { FC } from 'react';
 import { Global, css } from '@emotion/core';
+import theme from "./theme";
 
 const GlobalStyles: FC = () => (
   <Global
     styles={css`
-      @import url('https://fonts.googleapis.com/css?family=Roboto+Condensed|Signika&display=swap&subset=latin-ext');
       h1,
       h2,
       h3,
       h4,
       h5 {
-        font-family: Signika;
+        font-family: IBM Plex Sans;
       }
       * {
-        font-family: Roboto Condensed;
+        font-family: Open Sans;
       }
       html,
       body,
@@ -23,6 +23,11 @@ const GlobalStyles: FC = () => (
         height: 100%;
         margin: 0;
         padding: 0;
+      }
+      a{
+        color: ${theme.colors.primary};
+        font-weight: bold;
+        text-decoration: none;
       }
     `}
   />

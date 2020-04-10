@@ -40,17 +40,11 @@ export const fetchSchoolDetailsEpic: Epic<
     > = action$ =>
     action$.pipe(
         ofType<Actions, FetchSchoolDetailsAction>(FETCH_SCHOOL_DETAILS),
+
         mergeMap(action => {
-          const URLParams = new URLSearchParams();
-          Object.entries({
-            id: Number(action.payload).toString(),
-            school_type_generalised: 'szkoła ponadpodstawowa'
-          }).forEach(([key, value]) => {
-            if (value) URLParams.set(key, value);
-          });
           return ajax
               .getJSON<any>(
-                  `${process.env.REACT_APP_API_URL}/highschool/?${URLParams.toString()}`,
+                  `${process.env.REACT_APP_API_URL}/school/?id=${Number(action.payload).toString()}`,
               ).pipe(
                   map(res => fetchSchoolDetailsSucceeded(res.results[0]))
               );

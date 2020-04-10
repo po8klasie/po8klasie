@@ -101,7 +101,7 @@ const Calculator: FC<RouteComponentProps> = () => {
                                     <span>{category.name}</span>
                                     <div>
                                         <ExamInputWrapper>
-                                            <InputWithAddon addon={"%"} type={"number"} max={100} min={0} />
+                                            <InputWithAddon addon={"%"} addonPosition={"right"} type={"number"} max={100} min={0} />
                                         </ExamInputWrapper>
                                     </div>
                                 </ExamInputSection>

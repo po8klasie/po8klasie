@@ -16,11 +16,11 @@ const Brand = styled(Link)`
     transform: translateY(-10%);
     margin-right: .2em;
     path{
-      fill: #BA97FF;
+      fill: ${props => props.theme.colors.primary};
     }
   }
   span{
-    color: #BA97FF;
+    color: ${props => props.theme.colors.primary};
   }
 `;
 const NavWrapper = styled.div`
@@ -32,12 +32,25 @@ const NavWrapper = styled.div`
   background: white;
 `;
 const Nav = styled.nav`
-  height: 5em;
+  height: 7em;
+  width: 100%;
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  
+  position: relative;
   * {
-    font-family: ${props => props.theme.fonts.primary};
+    font-family: Open Sans;
+  }
+  &::after{
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 110%;
+    transform: translateX(-50%);
+    height: 1px;
+    background: black;
   }
 `;
 const Menu = styled.ul`
@@ -50,12 +63,8 @@ const MenuItem = styled.li`
   margin: 0 2em;
   color: rgba(0, 0, 0, 0.6);
   a {
-    color: inherit;
     text-decoration: none;
     transition: color 0.3s;
-  }
-  a:hover {
-    color: black;
   }
 `;
 const FlexWrapper = styled.div`
@@ -76,7 +85,6 @@ const Navbar: FC = props => (
   <NavWrapper>
     <Container>
       <Nav>
-        <FlexWrapper>
           <Brand to="/">
             <Logo />
             Warsaw
@@ -93,11 +101,6 @@ const Navbar: FC = props => (
               <Link to="/calculator">Kalkulator punktów</Link>
             </MenuItem>
           </Menu>
-        </FlexWrapper>
-        {/*<FlexWrapper>*/}
-        {/*  <ActionText>Zaloguj się</ActionText>*/}
-        {/*  <ActionButton to="/auth">Zarejestruj się</ActionButton>*/}
-        {/*</FlexWrapper>*/}
       </Nav>
     </Container>
   </NavWrapper>

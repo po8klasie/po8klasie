@@ -2,43 +2,58 @@ import styled from "../styling/styled";
 import React, {FC} from "react";
 
 const Input = styled.input`
-  padding: 0.2em .5em;
-  background: rgba(230, 230, 230);
+  padding: 0.5em .5em;
+  background: ${props => props.theme.colors.light};
   border: 2px solid transparent;
-  border-radius: 5px;
+  border-radius: 10px;
   font-size: 1.2em;
   outline: none;
   transition: 0.3s all;
   display: block;
-  font-family: ${props => props.theme.fonts.secondary};
   &:focus {
     border: 2px solid rgb(200, 200, 200);
   }
 `;
-const InputWithAddonWrapper = styled.div`
-  display: flex;
+const InputWithAddonWrapper = styled.div<{addonPosition: 'left' | 'right'}>`
+  display: inline-flex;
+  flex-direction: ${props => props.addonPosition === 'left' ? 'row' : 'row-reverse'};
   input{
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
+       ${props => props.addonPosition === 'left' ? `
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+       ` : `
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+       `}
+        &:focus{
+            border-color: transparent;
+        }
   }
-  span{
+  span.addon{
     display: flex;
     align-items: center;
-    background: black;
-    color: white;
-    padding: .2em .5em;
-    border-top-right-radius: 3px;
-    border-bottom-right-radius: 3px;
+    background: ${props => props.theme.colors.light};
+    color: ${props => props.theme.colors.primaryLight};
+    padding: .2em 1em;
+    ${props => props.addonPosition === 'left' ? `
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    ` : `
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    `}
   }
 `;
 interface InputWithAddonProps extends React.HTMLProps<HTMLInputElement>{
-        addon: string;
+        addon: React.ReactNode
+        addonPosition: 'left' | 'right'
 }
 
 export const InputWithAddon = React.forwardRef<HTMLDivElement, InputWithAddonProps> ((props, ref) => (
-    <InputWithAddonWrapper ref={ref}>
+    <InputWithAddonWrapper ref={ref} addonPosition={props.addonPosition}>
+            <span className={"addon"}>{props.addon}</span>
             <Input {...props} />
-            <span>{props.addon}</span>
+
     </InputWithAddonWrapper>
 ))
 export default Input;

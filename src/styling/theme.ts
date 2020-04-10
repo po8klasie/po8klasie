@@ -1,7 +1,9 @@
 export interface Theme {
   colors: {
     primary: string;
+    primaryLight: string;
     secondary: string;
+    light: string;
   };
   fonts: {
     primary: string;
@@ -11,13 +13,15 @@ export interface Theme {
 
 const theme: Theme = {
   colors: {
-    primary: 'purple',
-    secondary: 'black',
+    primary: '#965BD4',
+    primaryLight: '#BA98FF',
+    secondary: '#82EAAC',
+    light: '#F2F2F2'
   },
   fonts: {
     primary: 'Signika',
     secondary: 'Roboto Condensed',
   },
 };
-
+//#BA97FF
 export default theme;

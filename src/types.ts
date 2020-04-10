@@ -51,5 +51,6 @@ export interface School {
   };
 }
 export type SearchParams = {
-  name?: string;
+  school_name?: string;
+  page?: number;
 };
