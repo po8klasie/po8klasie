@@ -1,0 +1,4 @@
+.git/objects
+Dockerfile
+node_modules
+build
