@@ -38,8 +38,6 @@ COPY entrypoint.sh .
 
 COPY --from=js-build /opt/warsawlo/build ./build
 
-EXPOSE 8000
-
 ENTRYPOINT ["/bin/sh", "-c"]
 
 CMD ["sh /opt/nginx/entrypoint.sh"]
