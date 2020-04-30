@@ -1,4 +1,4 @@
-import styled from "../styling/styled";
+import styled from '../styling/styled';
 
 const FeaturesGrid = styled.div`
   display: grid;

@@ -3,8 +3,7 @@ import Container from './Container';
 import styled from '../styling/styled';
 import { Link } from '@reach/router';
 
-const DataInfo = styled.div`
-`;
+const DataInfo = styled.div``;
 const FooterGrid = styled.div`
   margin-top: 10vh;
   padding: 2em 0;
@@ -14,12 +13,12 @@ const FooterGrid = styled.div`
   grid-column-gap: 4em;
   color: #707070;
   position: relative;
-  .sitemap{
+  .sitemap {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-column-gap: 2em;
   }
-    &::after{
+  &::after {
     content: '';
     display: block;
     position: absolute;
@@ -57,14 +56,14 @@ const FooterGrid = styled.div`
   }
 `;
 const Footer: FC = props => (
-    <Container>
-        <FooterGrid>
-          <div>
-          <DataInfo>
-            Dokładamy wszelkich starań, aby dane były aktualne, ale nie ponosimy
-            odpwiedzialności za ich prawidłowość.
-          </DataInfo>
-            <div className="sitemap">
+  <Container>
+    <FooterGrid>
+      <div>
+        <DataInfo>
+          Dokładamy wszelkich starań, aby dane były aktualne, ale nie ponosimy
+          odpwiedzialności za ich prawidłowość.
+        </DataInfo>
+        <div className="sitemap">
           <ul>
             <li>
               <Link to="/">Strona główna</Link>
@@ -95,28 +94,27 @@ const Footer: FC = props => (
               <Link to="/privacy-settings">Ustawienia prywatności</Link>
             </li>
           </ul>
-            </div>
-      </div>
-        <div className="info-col">
-          <p>
-            WarsawLO to open-source'owy projekt civic tech tworzony przez
-            wolonatariuszy we współpracy z programem Koduj Dla Polski Fundacji
-            ePaństwo
-          </p>
-          <div className="logos-wrapper">
-            <img
-                src={require('../assets/images/epf.png')}
-                alt={'Logo Fundacji ePaństwo'}
-            />
-            <img
-              src={require('../assets/images/kdp-logo.png')}
-              alt={'Logo Koduj dla Polski'}
-            />
-          </div>
         </div>
-      </FooterGrid>
+      </div>
+      <div className="info-col">
+        <p>
+          WarsawLO to open-source'owy projekt civic tech tworzony przez
+          wolonatariuszy we współpracy z programem Koduj Dla Polski Fundacji
+          ePaństwo
+        </p>
+        <div className="logos-wrapper">
+          <img
+            src={require('../assets/images/epf.png')}
+            alt={'Logo Fundacji ePaństwo'}
+          />
+          <img
+            src={require('../assets/images/kdp-logo.png')}
+            alt={'Logo Koduj dla Polski'}
+          />
+        </div>
+      </div>
+    </FooterGrid>
   </Container>
-
 );
 
 export default Footer;

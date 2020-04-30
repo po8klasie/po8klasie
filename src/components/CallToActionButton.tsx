@@ -1,5 +1,5 @@
-import {Link} from "@reach/router";
-import styled from "../styling/styled";
+import { Link } from '@reach/router';
+import styled from '../styling/styled';
 
 const CallToActionButton = styled(Link)`
   text-decoration: none;
@@ -13,7 +13,7 @@ const CallToActionButton = styled(Link)`
   font-size: 1.125em;
   font-weight: 600;
   border-radius: 10px;
-  box-shadow: 0 7px 20px #2D1B5426;
+  box-shadow: 0 7px 20px #2d1b5426;
   &:hover {
     background: ${props => props.theme.colors.primaryLight};
   }

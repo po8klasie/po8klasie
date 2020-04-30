@@ -1,11 +1,11 @@
-import styled from "../styling/styled";
+import styled from '../styling/styled';
 
 const Feature = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 10px;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   box-shadow: 0 3px 12px #00000026;
   border-radius: 20px;
   & img {

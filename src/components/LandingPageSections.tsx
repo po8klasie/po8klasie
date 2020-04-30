@@ -1,4 +1,4 @@
-import styled from "../styling/styled";
+import styled from '../styling/styled';
 
 const LandingPageSectionOne = styled.div`
   padding: 4rem 0 5rem 0;
@@ -6,7 +6,7 @@ const LandingPageSectionOne = styled.div`
   &:after {
     content: '';
     display: block;
-    background-color: #F5F5F5;
+    background-color: #f5f5f5;
     position: absolute;
     width: 120%;
     height: 110%;
@@ -27,4 +27,8 @@ const LandingPageSectionThree = styled(LandingPageSectionOne)`
   }
 `;
 
-export { LandingPageSectionOne, LandingPageSectionTwo, LandingPageSectionThree };
+export {
+  LandingPageSectionOne,
+  LandingPageSectionTwo,
+  LandingPageSectionThree,
+};

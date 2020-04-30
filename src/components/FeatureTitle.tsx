@@ -1,4 +1,4 @@
-import styled from "../styling/styled";
+import styled from '../styling/styled';
 
 const FeatureTitle = styled.p`
   font-size: 1.125em;

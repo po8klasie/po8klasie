@@ -1,10 +1,18 @@
 import { ofType, Epic } from 'redux-observable';
-import {expand, map, mergeMap, reduce, take, takeLast, takeWhile} from 'rxjs/operators';
+import {
+  expand,
+  map,
+  mergeMap,
+  reduce,
+  take,
+  takeLast,
+  takeWhile,
+} from 'rxjs/operators';
 import { ajax } from 'rxjs/ajax';
 import { School, SearchParams } from '../../types';
-import {EMPTY, from, Observable, of} from "rxjs";
-import {fetchSchoolDetailsSucceeded} from "./schoolDetails";
-import {getTotalPages} from "../../utils/pagination";
+import { EMPTY, from, Observable, of } from 'rxjs';
+import { fetchSchoolDetailsSucceeded } from './schoolDetails';
+import { getTotalPages } from '../../utils/pagination';
 
 const FETCH_SCHOOLS = 'FETCH_SCHOOLS';
 const FETCH_SCHOOLS_SUCCEEDED = 'FETCH_SCHOOLS_SUCCEEDED';
@@ -27,7 +35,7 @@ interface FetchSchoolsSucceededAction {
   payload: any;
 }
 interface FetchMoreSchoolsAction {
-    type: string
+  type: string;
 }
 
 export const fetchSchools = (payload: SearchParams): FetchSchoolsAction => ({
@@ -35,7 +43,7 @@ export const fetchSchools = (payload: SearchParams): FetchSchoolsAction => ({
   payload,
 });
 export const fetchMoreSchools = (): FetchMoreSchoolsAction => ({
-    type: FETCH_MORE_SCHOOLS,
+  type: FETCH_MORE_SCHOOLS,
 });
 export const fetchSchoolsSucceeded = (
   payload: any,
@@ -44,54 +52,54 @@ export const fetchSchoolsSucceeded = (
 type Actions = any;
 
 const generateSchoolUrl = (params: any) => {
-    const URLParams = new URLSearchParams();
-    Object.entries({
-        ...params,
-        school_type_generalised: 'szkoła ponadpodstawowa'
-    }).forEach(([key, value]) => {
-        if (value) URLParams.set(key,(value as any));
-    });
-    return `${process.env.REACT_APP_API_URL}/school/?${URLParams.toString()}`
+  const URLParams = new URLSearchParams();
+  Object.entries({
+    ...params,
+    school_type_generalised: 'szkoła ponadpodstawowa',
+  }).forEach(([key, value]) => {
+    if (value) URLParams.set(key, value as any);
+  });
+  return `${process.env.REACT_APP_API_URL}/school/?${URLParams.toString()}`;
 };
 
-export const fetchSchoolsEpic: Epic<
-  Actions,
-  any,
-  State
-> = (action$, state$) =>
+export const fetchSchoolsEpic: Epic<Actions, any, State> = (action$, state$) =>
   action$.pipe(
     ofType<Actions, any>(FETCH_SCHOOLS),
     mergeMap(action => {
-        const paramsDiff = JSON.stringify(action.payload) === JSON.stringify(state$.value.params);
+      const paramsDiff =
+        JSON.stringify(action.payload) === JSON.stringify(state$.value.params);
 
-        return ajax
-            .getJSON<any>(generateSchoolUrl(action.payload)).pipe(
-                map(res => {
-                    const lastFetched = !paramsDiff && action.payload.page ? action.payload.page : 1;
-                    const results = state$.value.schools.results.length > 0 && !paramsDiff ? state$.value.schools.results : new Array(getTotalPages(res.count)+1).fill([]);
-                    results[lastFetched] = res.results;
-                    return ({
-                    type: FETCH_SCHOOLS_SUCCEEDED,
-                    payload: {
-                        ...res,
-                        results,
-                        lastFetched
-                    }
-                })})
-            );
+      return ajax.getJSON<any>(generateSchoolUrl(action.payload)).pipe(
+        map(res => {
+          const lastFetched =
+            !paramsDiff && action.payload.page ? action.payload.page : 1;
+          const results =
+            state$.value.schools.results.length > 0 && !paramsDiff
+              ? state$.value.schools.results
+              : new Array(getTotalPages(res.count) + 1).fill([]);
+          results[lastFetched] = res.results;
+          return {
+            type: FETCH_SCHOOLS_SUCCEEDED,
+            payload: {
+              ...res,
+              results,
+              lastFetched,
+            },
+          };
+        }),
+      );
     }),
   );
-export const fetchMoreSchoolsEpic: Epic<
-    Actions,
-    any,
-    State
-    > = (action$, state$) =>
-    action$.pipe(
-        ofType<Actions, any>(FETCH_MORE_SCHOOLS),
-        // mergeMap(action => {
-        //
-        // }),
-    );
+export const fetchMoreSchoolsEpic: Epic<Actions, any, State> = (
+  action$,
+  state$,
+) =>
+  action$.pipe(
+    ofType<Actions, any>(FETCH_MORE_SCHOOLS),
+    // mergeMap(action => {
+    //
+    // }),
+  );
 
 const initialState: State = {
   results: [],
@@ -102,7 +110,7 @@ const initialState: State = {
     school_name: '',
   },
   isFetching: false,
-  reachedEnd: false
+  reachedEnd: false,
 };
 
 const schools = (state: State = initialState, action: Actions): State => {
@@ -112,11 +120,11 @@ const schools = (state: State = initialState, action: Actions): State => {
         ...state,
         isFetching: true,
         params: {
-            ...action.payload
-        }
+          ...action.payload,
+        },
       };
 
-      case FETCH_SCHOOLS_SUCCEEDED:
+    case FETCH_SCHOOLS_SUCCEEDED:
       return {
         ...state,
         isFetching: false,
@@ -126,11 +134,11 @@ const schools = (state: State = initialState, action: Actions): State => {
         lastFetched: action.payload.lastFetched,
         results: [...action.payload.results],
       };
-      case FETCH_MORE_SCHOOLS:
-          return {
-              ...state,
-              fetching: 'next',
-          };
+    case FETCH_MORE_SCHOOLS:
+      return {
+        ...state,
+        fetching: 'next',
+      };
 
     default:
       return state;

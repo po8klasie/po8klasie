@@ -1,4 +1,4 @@
-import styled from "../styling/styled";
+import styled from '../styling/styled';
 
 const DoubleGrid = styled.div`
   display: grid;

@@ -2,20 +2,20 @@ import React, { useEffect, useState, Component } from 'react';
 import { RouteComponentProps, Link, navigate } from '@reach/router';
 import Layout from '../components/Layout';
 import Container from '../components/Container';
-import {badges, HighSchoolBadge} from '../components/SchoolTypeBadge';
+import { badges, HighSchoolBadge } from '../components/SchoolTypeBadge';
 import styled from '../styling/styled';
 import { connect } from 'react-redux';
 import { School } from '../types';
-import { fetchSchools} from '../store/modules/schools';
+import { fetchSchools } from '../store/modules/schools';
 import { Dispatch } from 'redux';
 import Jumbotron from '../components/Jumbotron';
-import Filters from "../components/Filters";
-import Input, {InputWithAddon} from "../components/Input";
-import SchoolCard from "../components/SchoolCard";
-import Card from "../components/Card";
-import {createPlaceholderStyles} from "../utils/loading";
-import {getTotalPages} from "../utils/pagination";
-import Pagination from "../components/Pagination";
+import Filters from '../components/Filters';
+import Input, { InputWithAddon } from '../components/Input';
+import SchoolCard from '../components/SchoolCard';
+import Card from '../components/Card';
+import { createPlaceholderStyles } from '../utils/loading';
+import { getTotalPages } from '../utils/pagination';
+import Pagination from '../components/Pagination';
 
 const Header = styled.h1`
   font-size: 4em;
@@ -33,7 +33,7 @@ const LoadingCard = styled(Card)`
   ${createPlaceholderStyles()}
   height: 200px;
   box-shadow: none;
-  &::after{
+  &::after {
     background: #eee;
   }
 `;
@@ -41,7 +41,7 @@ const LoadingCard = styled(Card)`
 interface SchoolsPageProps extends RouteComponentProps {}
 
 const SchoolsPage = (props: any) => {
-  console.log(props)
+  console.log(props);
   const [query, setQuery] = useState('');
   const [currentPage, setCurrentPage] = useState<number>(1);
   const handleQueryChange = (e: any) => setQuery(e.target.value);
@@ -51,7 +51,7 @@ const SchoolsPage = (props: any) => {
     console.log(query);
     navigate(`?query=${query.split(' ').join('+')}`);
     props.fetchSchools({
-      school_name: query
+      school_name: query,
     });
   };
   const paginate = (page: number) => {
@@ -59,13 +59,24 @@ const SchoolsPage = (props: any) => {
     const p = new URLSearchParams(props.location.search);
     p.set('page', page.toString());
     navigate(`?${p.toString()}`);
-    console.log(page, props.schools.results[page], !props.schools.results, !props.schools.results[page], props.schools.results[page].length === 0);
-    if(!props.schools.results || !props.schools.results[page] || props.schools.results[page].length === 0){
-      console.log('load')
+    console.log(
+      page,
+      props.schools.results[page],
+      !props.schools.results,
+      !props.schools.results[page],
+      props.schools.results[page].length === 0,
+    );
+    if (
+      !props.schools.results ||
+      !props.schools.results[page] ||
+      props.schools.results[page].length === 0
+    ) {
+      console.log('load');
       props.fetchSchools({
-          ...params,
-          page
-      })}
+        ...params,
+        page,
+      });
+    }
   };
   useEffect(() => {
     const params = new URLSearchParams(props.location.search);
@@ -83,7 +94,12 @@ const SchoolsPage = (props: any) => {
     }
   }, []);
 
-  const schoolsPerCurrentPage = props.schools.results && props.schools.results[currentPage] && props.schools.results[currentPage] ? props.schools.results[currentPage] : []
+  const schoolsPerCurrentPage =
+    props.schools.results &&
+    props.schools.results[currentPage] &&
+    props.schools.results[currentPage]
+      ? props.schools.results[currentPage]
+      : [];
   return (
     <Layout>
       <Container>
@@ -91,26 +107,26 @@ const SchoolsPage = (props: any) => {
 
         <form onSubmit={handleSubmit}>
           <InputWithAddon
-              addon={<span className="material-icons">search</span>}
-              addonPosition={"left"}
-              placeholder="Szukaj szkoły"
-                          onChange={handleQueryChange}
-                          value={query} />
+            addon={<span className="material-icons">search</span>}
+            addonPosition={'left'}
+            placeholder="Szukaj szkoły"
+            onChange={handleQueryChange}
+            value={query}
+          />
 
           <Filters />
-              <Results>
-                {
-                  props.schools.isFetching && new Array(3).fill(<LoadingCard/>)
-                }
-                {
-                  schoolsPerCurrentPage.map((school: any) => (
-                      <SchoolCard key={school.id} school={school} />
-                  ))
-                }
-              </Results>
+          <Results>
+            {props.schools.isFetching && new Array(3).fill(<LoadingCard />)}
+            {schoolsPerCurrentPage.map((school: any) => (
+              <SchoolCard key={school.id} school={school} />
+            ))}
+          </Results>
         </form>
-        <Pagination count={props.schools.count} page={currentPage} onPaginate={paginate}/>
-
+        <Pagination
+          count={props.schools.count}
+          page={currentPage}
+          onPaginate={paginate}
+        />
       </Container>
     </Layout>
   );
@@ -120,8 +136,8 @@ const mapStateToProps = (state: any): any => ({
   schools: state.schools,
 });
 const mapDispatchToProps = {
-  fetchSchools
-}
+  fetchSchools,
+};
 export default connect<any, any, SchoolsPageProps>(
   mapStateToProps,
   mapDispatchToProps,

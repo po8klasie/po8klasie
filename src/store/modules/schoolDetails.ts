@@ -1,8 +1,8 @@
 import { ofType, Epic } from 'redux-observable';
-import {expand, map, mergeMap, reduce} from 'rxjs/operators';
+import { expand, map, mergeMap, reduce } from 'rxjs/operators';
 import { ajax } from 'rxjs/ajax';
 import { School, SearchParams } from '../../types';
-import {EMPTY} from "rxjs";
+import { EMPTY } from 'rxjs';
 
 const FETCH_SCHOOL_DETAILS = 'FETCH_SCHOOL_DETAILS';
 const FETCH_SCHOOL_DETAILS_SUCCEEDED = 'FETCH_SCHOOL_DETAILS_SUCCEEDED';
@@ -23,33 +23,35 @@ interface FetchSchoolDetailsSucceededAction {
   payload: any;
 }
 
-export const fetchSchoolDetails = (payload: number): FetchSchoolDetailsAction => ({
+export const fetchSchoolDetails = (
+  payload: number,
+): FetchSchoolDetailsAction => ({
   type: FETCH_SCHOOL_DETAILS,
   payload,
 });
 export const fetchSchoolDetailsSucceeded = (
-    payload: any,
-): FetchSchoolDetailsSucceededAction => ({ type: FETCH_SCHOOL_DETAILS_SUCCEEDED, payload });
+  payload: any,
+): FetchSchoolDetailsSucceededAction => ({
+  type: FETCH_SCHOOL_DETAILS_SUCCEEDED,
+  payload,
+});
 
 type Actions = FetchSchoolDetailsAction | FetchSchoolDetailsSucceededAction;
 
-export const fetchSchoolDetailsEpic: Epic<
-    Actions,
-    any,
-    State
-    > = action$ =>
-    action$.pipe(
-        ofType<Actions, FetchSchoolDetailsAction>(FETCH_SCHOOL_DETAILS),
+export const fetchSchoolDetailsEpic: Epic<Actions, any, State> = action$ =>
+  action$.pipe(
+    ofType<Actions, FetchSchoolDetailsAction>(FETCH_SCHOOL_DETAILS),
 
-        mergeMap(action => {
-          return ajax
-              .getJSON<any>(
-                  `${process.env.REACT_APP_API_URL}/school/?id=${Number(action.payload).toString()}`,
-              ).pipe(
-                  map(res => fetchSchoolDetailsSucceeded(res.results[0]))
-              );
-        }),
-    );
+    mergeMap(action => {
+      return ajax
+        .getJSON<any>(
+          `${process.env.REACT_APP_API_URL}/school/?id=${Number(
+            action.payload,
+          ).toString()}`,
+        )
+        .pipe(map(res => fetchSchoolDetailsSucceeded(res.results[0])));
+    }),
+  );
 
 const initialState: State = {
   result: {},
