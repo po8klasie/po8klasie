@@ -1,4 +1,4 @@
-import styled from "../styling/styled";
+import styled from '../styling/styled';
 
 const Card = styled.div`
   position: relative;
@@ -10,8 +10,8 @@ const Card = styled.div`
   border-radius: 20px;
   padding: 20px;
   background: white;
-  
-  &::after{
+
+  &::after {
     content: '';
     position: absolute;
     display: block;
@@ -19,7 +19,7 @@ const Card = styled.div`
     left: -13px;
     width: 110px;
     height: 110px;
-    background: #82EAAC;
+    background: #82eaac;
     border-radius: inherit;
     z-index: -1;
   }

@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import Container from './Container';
 import styled from '../styling/styled';
 import { Link } from '@reach/router';
-import Logo from "./Logo";
+import Logo from './Logo';
 
 const Brand = styled(Link)`
   color: inherit;
@@ -11,15 +11,15 @@ const Brand = styled(Link)`
   margin-right: 2em;
   display: flex;
   align-items: center;
-  svg{
+  svg {
     width: 2.5em;
     transform: translateY(-10%);
-    margin-right: .2em;
-    path{
+    margin-right: 0.2em;
+    path {
       fill: ${props => props.theme.colors.primary};
     }
   }
-  span{
+  span {
     color: ${props => props.theme.colors.primary};
   }
 `;
@@ -41,7 +41,7 @@ const Nav = styled.nav`
   * {
     font-family: Open Sans;
   }
-  &::after{
+  &::after {
     content: '';
     display: block;
     position: absolute;
@@ -85,22 +85,22 @@ const Navbar: FC = props => (
   <NavWrapper>
     <Container>
       <Nav>
-          <Brand to="/">
-            <Logo />
-            Warsaw
-            <span>LO</span>
-          </Brand>
-          <Menu>
-            <MenuItem>
-              <Link to="/">Home</Link>
-            </MenuItem>
-            <MenuItem>
-              <Link to="/schools">Szkoły</Link>
-            </MenuItem>
-            <MenuItem>
-              <Link to="/calculator">Kalkulator punktów</Link>
-            </MenuItem>
-          </Menu>
+        <Brand to="/">
+          <Logo />
+          Warsaw
+          <span>LO</span>
+        </Brand>
+        <Menu>
+          <MenuItem>
+            <Link to="/">Home</Link>
+          </MenuItem>
+          <MenuItem>
+            <Link to="/schools">Szkoły</Link>
+          </MenuItem>
+          <MenuItem>
+            <Link to="/calculator">Kalkulator punktów</Link>
+          </MenuItem>
+        </Menu>
       </Nav>
     </Container>
   </NavWrapper>

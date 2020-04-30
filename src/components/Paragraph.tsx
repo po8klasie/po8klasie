@@ -1,8 +1,16 @@
-import styled from "../styling/styled";
+import React from 'react';
+import styled from '../styling/styled';
 
-const Paragraph = styled.div`
-    line-height: 1.5em;
-    // letter-spacing: 0.05em;
-    font-size: 1.2em;
+type ParagraphProps = {
+  textAlign?: 'right' | 'center';
+  children: string;
+};
+
+const Paragraph = styled.div<ParagraphProps>`
+  font-size: 1.125em;
+  line-height: 1.45em;
+  color: ${props => props.theme.colors.text};
+  text-align: ${props => props.textAlign || 'left'};
 `;
-export default Paragraph;
+
+export default (props: ParagraphProps) => <Paragraph {...props} />;
