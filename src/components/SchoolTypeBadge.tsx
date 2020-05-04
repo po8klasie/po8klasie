@@ -36,24 +36,23 @@ export const TechSchoolBadge = () => (
   </SchoolTypeBadge>
 );
 const VocationalSchoolBadge = () => (
-    <SchoolTypeBadge
-        {...{
-          bgColor: '#FFE8C2',
-          borderColor: '#E6CFA9',
-        }}
-    >
-      B
-    </SchoolTypeBadge>
+  <SchoolTypeBadge
+    {...{
+      bgColor: '#FFE8C2',
+      borderColor: '#E6CFA9',
+    }}
+  >
+    B
+  </SchoolTypeBadge>
 );
 interface Badge {
   [k: string]: any;
 }
 
-
 export const badges: Badge = {
   'liceum ogólnokształcące': HighSchoolBadge,
   technikum: TechSchoolBadge,
-  'szkoła branżowa I stopnia': VocationalSchoolBadge
+  'szkoła branżowa I stopnia': VocationalSchoolBadge,
 };
 
 export default SchoolTypeBadge;

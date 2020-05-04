@@ -16,7 +16,7 @@ const theme: Theme = {
     primary: '#965BD4',
     primaryLight: '#BA98FF',
     secondary: '#82EAAC',
-    light: '#F2F2F2'
+    light: '#F2F2F2',
   },
   fonts: {
     primary: 'Signika',

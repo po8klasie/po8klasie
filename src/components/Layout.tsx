@@ -11,7 +11,7 @@ const LayoutWrapper = styled.div`
 `;
 const Content = styled.div`
   flex: 1 0 auto;
-  margin-top: 10vh;
+  margin-top: 7vh;
 `;
 const FooterWrapper = styled.div`
   flex-shrink: 0;

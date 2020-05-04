@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Global, css } from '@emotion/core';
-import theme from "./theme";
+import theme from './theme';
 
 const GlobalStyles: FC = () => (
   <Global
@@ -12,9 +12,6 @@ const GlobalStyles: FC = () => (
       h5 {
         font-family: IBM Plex Sans;
       }
-      * {
-        font-family: Open Sans;
-      }
       html,
       body,
       #root,
@@ -23,8 +20,9 @@ const GlobalStyles: FC = () => (
         height: 100%;
         margin: 0;
         padding: 0;
+        font-family: Open Sans;
       }
-      a{
+      a {
         color: ${theme.colors.primary};
         font-weight: bold;
         text-decoration: none;

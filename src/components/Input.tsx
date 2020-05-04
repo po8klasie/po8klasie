@@ -1,8 +1,8 @@
-import styled from "../styling/styled";
-import React, {FC} from "react";
+import React from 'react';
+import styled from '../styling/styled';
 
 const Input = styled.input`
-  padding: 0.5em .5em;
+  padding: 0.5em 0.5em;
   background: ${props => props.theme.colors.light};
   border: 2px solid transparent;
   border-radius: 10px;
@@ -14,46 +14,55 @@ const Input = styled.input`
     border: 2px solid rgb(200, 200, 200);
   }
 `;
-const InputWithAddonWrapper = styled.div<{addonPosition: 'left' | 'right'}>`
+const InputWithAddonWrapper = styled.div<{ addonPosition: 'left' | 'right' }>`
   display: inline-flex;
-  flex-direction: ${props => props.addonPosition === 'left' ? 'row' : 'row-reverse'};
-  input{
-       ${props => props.addonPosition === 'left' ? `
+  flex-direction: ${props =>
+    props.addonPosition === 'left' ? 'row' : 'row-reverse'};
+  input {
+    ${props =>
+      props.addonPosition === 'left'
+        ? `
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
-       ` : `
+       `
+        : `
         border-top-right-radius: 0;
         border-bottom-right-radius: 0;
        `}
-        &:focus{
-            border-color: transparent;
-        }
+    &:focus {
+      border-color: transparent;
+    }
   }
-  span.addon{
+  span.addon {
     display: flex;
     align-items: center;
     background: ${props => props.theme.colors.light};
     color: ${props => props.theme.colors.primaryLight};
-    padding: .2em 1em;
-    ${props => props.addonPosition === 'left' ? `
+    padding: 0.2em 1em;
+    ${props =>
+      props.addonPosition === 'left'
+        ? `
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
-    ` : `
+    `
+        : `
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
     `}
   }
 `;
-interface InputWithAddonProps extends React.HTMLProps<HTMLInputElement>{
-        addon: React.ReactNode
-        addonPosition: 'left' | 'right'
+interface InputWithAddonProps extends React.HTMLProps<HTMLInputElement> {
+  addon: React.ReactNode;
+  addonPosition: 'left' | 'right';
 }
 
-export const InputWithAddon = React.forwardRef<HTMLDivElement, InputWithAddonProps> ((props, ref) => (
-    <InputWithAddonWrapper ref={ref} addonPosition={props.addonPosition}>
-            <span className={"addon"}>{props.addon}</span>
-            <Input {...props} />
-
-    </InputWithAddonWrapper>
-))
+export const InputWithAddon = React.forwardRef<
+  HTMLDivElement,
+  InputWithAddonProps
+>((props, ref) => (
+  <InputWithAddonWrapper ref={ref} addonPosition={props.addonPosition}>
+    <span className={'addon'}>{props.addon}</span>
+    <Input {...props} />
+  </InputWithAddonWrapper>
+));
 export default Input;
