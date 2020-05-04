@@ -11,6 +11,7 @@ const GlobalStyles: FC = () => (
       h4,
       h5 {
         font-family: IBM Plex Sans;
+        color: ${theme.colors.text};
       }
       html,
       body,

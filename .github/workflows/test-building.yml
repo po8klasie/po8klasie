@@ -1,0 +1,19 @@
+name: Test building
+
+on: [pull_request]
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2.1.0
+
+    - uses: docker/build-push-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        repository: warsawlo/warsawlo-2.0
+        tag_with_ref: true
+        tag_with_sha: true
+        push: false

@@ -12,6 +12,12 @@ const ForDevelopersPage = lazyLoaded(
 const GetInvolvedPage = lazyLoaded(
   lazy(() => import('./pages/articles/GetInvolved')),
 );
+const AboutDataPage = lazyLoaded(
+    lazy(() => import('./pages/articles/AboutData')),
+);
+const PrivacySettingsPage = lazyLoaded(
+    lazy(() => import('./pages/articles/PrivacySettings')),
+);
 const PrivacyPolicyPage = lazyLoaded(
   lazy(() => import('./pages/articles/PrivacyPolicy')),
 );
@@ -22,9 +28,12 @@ const Routes: FC = () => (
     <SchoolPage path="/school/:schoolID" />
     <Calculator path="/calculator" />
 
-    <ForDevelopersPage path={'/for-developers'} />
-    <GetInvolvedPage path={'/get-involved'} />
-    <PrivacyPolicyPage path={'/privacy-policy'} />
+    <ForDevelopersPage path='/for-developers' />
+    <GetInvolvedPage path='/get-involved' />
+      <AboutDataPage path='/about-data' />
+
+    <PrivacyPolicyPage path='/privacy-policy' />
+    <PrivacySettingsPage path='/privacy-settings' />
   </Router>
 );
 

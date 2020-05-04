@@ -1,5 +1,5 @@
-import React from 'react';
 import styled from '../styling/styled';
+import React from 'react';
 
 const Input = styled.input`
   padding: 0.5em 0.5em;
