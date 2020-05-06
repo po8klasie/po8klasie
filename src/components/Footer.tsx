@@ -80,72 +80,79 @@ const FooterGrid = styled.div`
   }
 `;
 const Footer: FC = props => (
- <FooterWrapper>
-   <Container>
-     <FooterGrid>
-       <div>
-         <DataInfo>
-           Dokładamy wszelkich starań, aby dane były aktualne, ale nie ponosimy
-           odpowiedzialności za ich prawidłowość.
-         </DataInfo>
-         <div className="sitemap">
-           <ul>
-             <li>
-               <Link to="/">Strona główna</Link>
-             </li>
-             <li>
-               <Link to="/schools">Wyszukiwarka szkół</Link>
-             </li>
-             <li>
-               <Link to="/calculator">Kalkulator punktów</Link>
-             </li>
-           </ul>
-           <ul>
-             <li>
-               <Link to="/about-data">O naszych danych</Link>
-             </li>
-             <li>
-               <Link to="/get-involved">Pomóż nam!</Link>
-             </li>
-             <li>
-               <Link to="/for-developers">Dla deweloperów / API</Link>
-             </li>
-           </ul>
-           <ul>
-             <li>
-               <Link to="/privacy-policy">Polityka prywatności</Link>
-             </li>
-             <li>
-               <Link to="/privacy-settings">Ustawienia prywatności</Link>
-             </li>
-           </ul>
-         </div>
-       </div>
-       <div className="info-col">
-         <p>
-           WarsawLO to open-source'owy projekt civic tech tworzony przez
-           wolonatariuszy we współpracy z programem Koduj Dla Polski Fundacji
-           ePaństwo
-         </p>
-         <div className="logos-wrapper">
-           <a href="https://epf.org.pl" rel="noopener noreferrer" target="_blank">
-             <img
-                 src={require('../assets/images/epf.png')}
-                 alt={'Logo Fundacji ePaństwo'}
-             />
-           </a>
-           <a href="https://kodujdlapolski.pl" rel="noopener noreferrer" target="_blank">
-           <img
-               src={require('../assets/images/kdp-logo.png')}
-               alt={'Logo Koduj dla Polski'}
-           />
-           </a>
-         </div>
-       </div>
-     </FooterGrid>
-   </Container>
- </FooterWrapper>
-
+  <FooterWrapper>
+    <Container>
+      <FooterGrid>
+        <div>
+          <DataInfo>
+            Dokładamy wszelkich starań, aby dane były aktualne, ale nie ponosimy
+            odpowiedzialności za ich prawidłowość.
+          </DataInfo>
+          <div className="sitemap">
+            <ul>
+              <li>
+                <Link to="/">Strona główna</Link>
+              </li>
+              <li>
+                <Link to="/schools">Wyszukiwarka szkół</Link>
+              </li>
+              <li>
+                <Link to="/calculator">Kalkulator punktów</Link>
+              </li>
+            </ul>
+            <ul>
+              <li>
+                <Link to="/about-data">O naszych danych</Link>
+              </li>
+              <li>
+                <Link to="/get-involved">Pomóż nam!</Link>
+              </li>
+              <li>
+                <Link to="/for-developers">Dla deweloperów</Link>
+              </li>
+            </ul>
+            <ul>
+              <li>
+                <Link to="/privacy-policy">Polityka prywatności</Link>
+              </li>
+              <li>
+                <Link to="/privacy-settings">Ustawienia prywatności</Link>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div className="info-col">
+          <p>
+            WarsawLO to open-source'owy projekt civic tech tworzony przez
+            wolonatariuszy we współpracy z programem Koduj Dla Polski Fundacji
+            ePaństwo
+          </p>
+          <div className="logos-wrapper">
+            <a
+              href="https://epf.org.pl"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <img
+                src={require('../assets/images/epf.png')}
+                alt={'Logo Fundacji ePaństwo'}
+              />
+            </a>
+            <a
+              href="https://kodujdlapolski.pl"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <img
+                src={require('../assets/images/kdp-logo.png')}
+                alt={'Logo Koduj dla Polski'}
+              />
+            </a>
+          </div>
+        </div>
+      </FooterGrid>
+    </Container>
+  </FooterWrapper>
 );
 
 export default Footer;
