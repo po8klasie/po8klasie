@@ -4,6 +4,9 @@ const DoubleGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-row-gap: 2em;
+  @media (max-width: 780px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 export default DoubleGrid;
