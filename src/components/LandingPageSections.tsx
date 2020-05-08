@@ -14,10 +14,16 @@ const LandingPageSectionOne = styled.div`
     left: -10%;
     z-index: -1;
   }
+  @media (max-width: 780px) {
+    padding: 1.5em 0;
+  }
 `;
 
 const LandingPageSectionTwo = styled.div`
   padding: 5rem 0 6rem 0;
+  @media (max-width: 780px) {
+    padding: 1.5em 0;
+  }
 `;
 
 const LandingPageSectionThree = styled(LandingPageSectionOne)`
