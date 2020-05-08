@@ -66,12 +66,76 @@ export const filters: FilterData[] = [
     multiple: true,
     choices: [
       {
-        id: 'pol',
+        id: 'Bemowo',
+        label: 'Bemowo',
+      },
+      {
+        id: 'Białołęka',
+        label: 'Białołęka',
+      },
+      {
+        id: 'Bielany',
+        label: 'Bielany',
+      },
+      {
+        id: 'Mokotów',
+        label: 'Mokotów',
+      },
+      {
+        id: 'Ochota',
+        label: 'Ochota',
+      },
+      {
+        id: 'Praga Południe',
+        label: 'Praga Południe',
+      },
+      {
+        id: 'Praga Północ',
+        label: 'Praga Północ',
+      },
+      {
+        id: 'Rembertów',
+        label: 'Rembertów',
+      },
+      {
+        id: 'Śródmieście',
         label: 'Śródmieście',
       },
       {
-        id: 'mat',
+        id: 'Targówek',
+        label: 'Targówek',
+      },
+      {
+        id: 'Ursus',
+        label: 'Ursus',
+      },
+      {
+        id: 'Ursynów',
+        label: 'Ursynów',
+      },
+      {
+        id: 'Wawer',
+        label: 'Wawer',
+      },
+      {
+        id: 'Wesoła',
+        label: 'Wesoła',
+      },
+      {
+        id: 'Wilanów',
+        label: 'Wilanów',
+      },
+      {
+        id: 'Włochy',
         label: 'Włochy',
+      },
+      {
+        id: 'Wola',
+        label: 'Wola',
+      },
+      {
+        id: 'Żoliborz',
+        label: 'Żoliborz',
       },
     ],
   },

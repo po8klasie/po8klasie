@@ -1,118 +1,247 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect, useLayoutEffect, useState } from 'react';
 import Layout from '../components/Layout';
 import Container from '../components/Container';
 import { RouteComponentProps } from '@reach/router';
 import styled from '../styling/styled';
-import Input, { InputWithAddon } from '../components/Input';
+import Input from '../components/Input';
+import PageTitle from '../components/PageTitle';
+import { useForm } from 'react-hook-form';
 
-const Grid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-column-gap: 2em;
-`;
-const GradeBox = styled.span`
-  margin: 0 10px;
-  padding: 5px 10px;
-  border: 2px solid #ba97ff;
-  border-radius: 3px;
-`;
-const renderGrades = () =>
-  [2, 3, 4, 5, 6].map(grade => <GradeBox>{grade}</GradeBox>);
-const InputSection = styled.div`
-  padding: 0.8em 0;
-  display: grid;
-  grid-template-columns: 1.2em 0.7fr auto;
-  padding-bottom: 10px;
-  border-bottom: 2px solid rgb(242, 242, 242);
-  grid-column-gap: 20px;
-  margin: 10px 0px;
-  i ~ span {
-    display: flex;
-    align-items: center;
+import Checkbox from '../components/Checkbox';
+import { examParts, subjects } from '../data/calculator';
+
+import {
+  PointsCalculator,
+  validators,
+  initialData,
+  configs,
+  CalculatedPoints,
+} from '@warsawlo/points-calculator';
+const { isGradeValid, isExamResultValid } = validators;
+const { initialInputData, initialCalculatedPoints } = initialData;
+const { config2018_2019 } = configs;
+
+const InputGrid = styled.div`
+  display: inline-grid;
+  grid-template-columns: auto auto auto;
+  grid-column-gap: 30px;
+  grid-row-gap: 10px;
+  .row {
+    display: contents;
+
+    * {
+      display: flex;
+      align-items: center;
+    }
+  }
+  .header-row {
+    font-size: 0.8em;
+  }
+  .value-label,
+  .value,
+  .points-label,
+  .points {
+    justify-content: center;
+  }
+  .points {
+    font-weight: bold;
+  }
+  .value input {
+    width: 2em;
     text-align: center;
   }
-`;
-const ExamInputSection = styled.div`
-  padding: 0.8em 0;
-  display: grid;
-  grid-template-columns: 1.2em 0.7fr auto;
-  padding-bottom: 10px;
-  border-bottom: 2px solid rgb(242, 242, 242);
-  grid-column-gap: 20px;
-  margin: 10px 0px;
-  span {
-    display: flex;
-    align-items: center;
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
   }
-  input {
-    width: 3em;
+  input::placeholder {
+    font-size: 0.6em;
+  }
+  /* Firefox */
+  input[type='number'] {
+    -moz-appearance: textfield;
+  }
+  .title,
+  title-label {
+    padding-right: 20px;
+  }
+  h2 {
+    grid-column: 1 / 4;
   }
 `;
-const FlexWrapper = styled.div`
+const CheckboxFlex = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: center;
+  div {
+    margin-right: 3em;
+
+    label {
+      user-select: none;
+    }
+    span {
+      font-weight: bold;
+      margin-left: 20px;
+    }
+    @media (max-width: 720px) {
+      margin: 20px 0;
+    }
+  }
+  @media (max-width: 720px) {
+    display: block;
+  }
 `;
-const ExamInputWrapper = styled.div``;
-const examCategories = [
-  {
-    name: 'Matematyka',
-    icon: 'square_foot',
-  },
-];
-const schoolSubjects = [
-  {
-    name: 'Język polski',
-    icon: 'spellcheck',
-  },
-];
+const Result = styled.div`
+  margin-top: 4em;
+  h2 {
+    text-transform: uppercase;
+    font-size: 2em;
+
+    span {
+      color: ${props => props.theme.colors.primary};
+    }
+  }
+  button {
+    border: none;
+    background: none;
+    color: ${props => props.theme.colors.primary};
+    font-weight: bold;
+    cursor: pointer;
+  }
+`;
+
+const calc = new PointsCalculator(config2018_2019);
+
 const Calculator: FC<RouteComponentProps> = () => {
+  const [points, setPoints] = useState<CalculatedPoints>(
+    initialCalculatedPoints,
+  );
+  const { register, watch, reset } = useForm();
+  useLayoutEffect(() => {
+    const observable = calc.watch().subscribe(setPoints);
+    return () => observable.unsubscribe();
+  }, []);
+
+  const grades = watch('grades');
+  useEffect(() => {
+    const gradesData: { [x: string]: number | null } = {};
+    if (grades) {
+      for (const [subject, rawGrade] of Object.entries(grades)) {
+        const grade = parseInt(rawGrade as any);
+        gradesData[subject] = isGradeValid(grade) ? grade : null;
+      }
+      calc.setGrades(gradesData);
+    }
+    // eslint-disable-next-line
+  }, [JSON.stringify(grades)]);
+
+  const examResult = watch('examResult');
+  useEffect(() => {
+    const examData: { [x: string]: number | null } = {};
+    if (examResult) {
+      for (const [subject, rawScore] of Object.entries(examResult)) {
+        const score = parseInt(rawScore as any) / 100;
+        examData[subject] = isExamResultValid(score) ? score : null;
+      }
+      calc.setExamResult(examData);
+    }
+    // eslint-disable-next-line
+  }, [JSON.stringify(examResult)]);
+
+  const merit = watch('merit');
+  useEffect(() => {
+    calc.setMerit(merit);
+  }, [merit]);
+
+  const activity = watch('activity');
+  useEffect(() => {
+    calc.setActivity(activity);
+  }, [activity]);
+
+  const resetForm = () => {
+    reset(initialInputData);
+  };
+
   return (
     <Layout>
       <Container>
-        <h1>Kalkulator punktów</h1>
-        <Grid>
-          <div>
-            <h3>Świadectwo</h3>
-            {schoolSubjects.map(subject => (
-              <InputSection>
-                <FlexWrapper>
-                  <i className="material-icons">{subject.icon}</i>
-                </FlexWrapper>
+        <PageTitle>Kalkulator punktów</PageTitle>
+        <p>
+          Podaj swoje oceny, wyniki z egzaminu ósmoklasisty oraz dodatkowe
+          osiągnięcia (jeśli takie masz) i oblicz punkty, jakie uzyskasz podczas
+          rekrutacji do szkoły średniej.
+        </p>
 
-                <span>{subject.name}</span>
-                <div>{renderGrades()}</div>
-              </InputSection>
-            ))}
+        <InputGrid>
+          <h2>Świadectwo</h2>
+          <div className="row header-row">
+            <span className={'title-label'}>Przedmiot</span>
+            <span className={'value-label'}>Ocena</span>
+            <span className={'points-label'}>Liczba punktów</span>
+          </div>
+          {subjects.map(subject => (
+            <div className="row" key={`${subject.id}`}>
+              <span className="title">{subject.label}</span>
+              <div className="value">
+                <Input
+                  type="number"
+                  min={1}
+                  max={6}
+                  placeholder={'Ocena'}
+                  ref={register}
+                  name={`grades[${subject.id}]`}
+                />
+              </div>
+              <span className="points">
+                {(points.grades[subject.id] ?? 0).toFixed(2)}
+              </span>
+            </div>
+          ))}
+
+          <h2>Egzamin ósmoklasisty</h2>
+
+          <div className="row header-row">
+            <span className={'title-label'}>Przedmiot</span>
+            <span className={'value-label'}>Wynik (%)</span>
+            <span className={'points-label'}>Liczba punktów</span>
+          </div>
+          {examParts.map(examPart => (
+            <div className="row" key={examPart.id}>
+              <span className="title">{examPart.label}</span>
+              <div className="value">
+                <Input
+                  type="number"
+                  min={0}
+                  max={100}
+                  placeholder={'Wynik'}
+                  ref={register}
+                  name={`examResult[${examPart.id}]`}
+                />
+              </div>
+              <span className="points">
+                {(points.examResult[examPart.id] ?? 0).toFixed()}
+              </span>
+            </div>
+          ))}
+        </InputGrid>
+        <h2>Szczególne osiągnięcia</h2>
+        <CheckboxFlex>
+          <div>
+            <Checkbox ref={register} name={'merit'} id={'xd'} />
+            <label htmlFor="xd">Świadectwo z wyróżnieniem</label>
+            <span>{points.merit}</span>
           </div>
           <div>
-            <h3>Egzamin</h3>
-            {examCategories.map(category => (
-              <ExamInputSection>
-                <FlexWrapper>
-                  <i className="material-icons">{category.icon}</i>
-                </FlexWrapper>
-                <span>{category.name}</span>
-                <div>
-                  <ExamInputWrapper>
-                    <InputWithAddon
-                      addon={'%'}
-                      addonPosition={'right'}
-                      type={'number'}
-                      max={100}
-                      min={0}
-                    />
-                  </ExamInputWrapper>
-                </div>
-              </ExamInputSection>
-            ))}
+            <Checkbox ref={register} name={'activity'} id={'activity'} />
+            <label htmlFor="activity">Aktywność społeczna</label>
+            <span>{points.activity}</span>
           </div>
-          <div>
-            <h3>Osiągnięcia</h3>
-            <p>Jeszcze nad tym pracujemy...</p>
-          </div>
-        </Grid>
-        <h3>Razem: 160 pkt</h3>
+        </CheckboxFlex>
+        <Result>
+          <h2>
+            Suma: <span>{(points.total ?? 0).toFixed()}</span>
+          </h2>
+          <button onClick={resetForm}>Resetuj wynik</button>
+        </Result>
       </Container>
     </Layout>
   );

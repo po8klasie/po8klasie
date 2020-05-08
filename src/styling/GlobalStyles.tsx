@@ -13,9 +13,6 @@ const GlobalStyles: FC = () => (
         font-family: IBM Plex Sans;
         color: ${theme.colors.text};
       }
-      * {
-        font-family: Open Sans;
-      }
       html,
       body,
       #root,
@@ -24,6 +21,7 @@ const GlobalStyles: FC = () => (
         height: 100%;
         margin: 0;
         padding: 0;
+        font-family: Open Sans;
       }
       a {
         color: ${theme.colors.primary};

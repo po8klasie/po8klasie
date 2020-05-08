@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$USER_HOME$/projects/points-calculator/.idea/points-calculator.iml" filepath="$USER_HOME$/projects/points-calculator/.idea/points-calculator.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/warsawlo-2.0.iml" filepath="$PROJECT_DIR$/.idea/warsawlo-2.0.iml" />
     </modules>
   </component>

@@ -41,7 +41,7 @@ const DropdownWrapper = styled.div<{ active: boolean }>`
     position: absolute;
     top: calc(100% + 10px);
     left: 0;
-    z-index: 1;
+    z-index: 3;
     min-width: 100%;
     background: white;
     box-shadow: 0px 3px 6px #00000029;
@@ -104,11 +104,15 @@ type DropdownProps = {
   title: string;
   choices: Choice[];
   selected: string[];
+  onSubmit: Function;
   onSelect: any;
 };
 const Dropdown = (props: DropdownProps) => {
   return (
-    <DropdownWrapper active={props.selected.length !== 0}>
+    <DropdownWrapper
+      active={props.selected.length !== 0}
+      onMouseLeave={() => props.onSubmit()}
+    >
       <button type={'button'}>
         {props.title}
         <span className="material-icons">expand_more</span>

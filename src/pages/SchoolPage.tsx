@@ -1,17 +1,14 @@
-import React, { useEffect, useRef, Ref } from 'react';
+import React, { useEffect } from 'react';
 import { Redirect, RouteComponentProps } from '@reach/router';
 import Layout from '../components/Layout';
 import Container from '../components/Container';
 import styled from '../styling/styled';
-import ChartJS from 'chart.js';
 import { connect } from 'react-redux';
 import { fetchSchoolDetails } from '../store/modules/schoolDetails';
 import Card from '../components/Card';
-import { css, keyframes } from '@emotion/core';
 import { createPlaceholderStyles } from '../utils/loading';
-interface SchoolPageProps extends RouteComponentProps {
-  schoolID: string;
-}
+import { splitArrayInHalf } from '../utils/misc';
+
 const GOOGLE_MAPS_KEY = 'AIzaSyCCLfhaD7OtyTnU61UBTFKGaRhYyUz9dSs';
 
 const Header = styled.div`
@@ -42,6 +39,7 @@ const ContactGrid = styled.div`
   display: inline-grid;
   grid-template-columns: repeat(2, auto);
   grid-column-gap: 4em;
+  grid-row-gap: 10px;
   line-height: 1.8em;
 
   address {
@@ -51,10 +49,14 @@ const ContactGrid = styled.div`
     color: black;
     font-weight: normal;
   }
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+  }
 `;
 const SchoolProfiles = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  grid-row-gap: 3em;
   grid-column-gap: 4em;
 
   h5 {
@@ -69,6 +71,13 @@ const SchoolProfiles = styled.div`
   span {
     color: #707070;
     font-size: 0.8em;
+  }
+
+  @media (max-width: 1100px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (max-width: 750px) {
+    grid-template-columns: 1fr;
   }
 `;
 const PastProfilesGrid = styled.div`
@@ -97,6 +106,19 @@ const PastProfilesGrid = styled.div`
   tbody tr:last-of-type td {
     border-bottom: none;
   }
+  @media (max-width: 800px) {
+    grid-template-columns: 1fr;
+  }
+  table:last-of-type {
+    thead {
+      @media (max-width: 800px) {
+        display: none;
+      }
+    }
+    @media (max-width: 800px) {
+      border-top: 1px solid black;
+    }
+  }
 `;
 const ActionLinkWrapper = styled.div`
   margin-top: 20px;
@@ -108,25 +130,29 @@ const MapFrame = styled.iframe`
   margin-top: 3em;
   filter: grayscale(1);
 `;
+
+interface SchoolPageProps extends RouteComponentProps<{ schoolID: string }> {
+  schoolDetails: any;
+  fetchSchoolDetails: Function;
+}
+
 const isObjEmpty = (obj: any) =>
   Object.keys(obj).length === 0 && obj.constructor === Object;
-const SchoolPage = (props: any) => {
-  const school = props.schoolDetails.result;
+
+const SchoolPage = (props: SchoolPageProps) => {
+  const { school, classes } = props.schoolDetails;
+
   useEffect(() => {
     if (props.schoolID && props.schoolID !== props.schoolDetails.id) {
       props.fetchSchoolDetails(props.schoolID);
     }
+    // eslint-disable-next-line
   }, []);
+
   if (!props.schoolID) return <Redirect to="/" />;
+
   const isLoading = props.schoolDetails.isFetching || isObjEmpty(school);
-  // if (props.schoolDetails.isFetching || isObjEmpty(school))
-  //   return (
-  //     <Layout>
-  //       <Container>
-  //         <h3>Loading...</h3>
-  //       </Container>
-  //     </Layout>
-  //   );
+
   return (
     <Layout>
       <Container className={isLoading ? 'loading' : ''}>
@@ -190,70 +216,65 @@ const SchoolPage = (props: any) => {
             </Section>
             <Section>
               <h2>Progi punktowe 2018</h2>
-              <Card>
-                <PastProfilesGrid>
-                  <table>
-                    <thead>
-                      <tr>
-                        <th>Klasa z przedmiotami rozszerzonymi</th>
-                        <th>Próg punktowy</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>matematyka, fizyka, chemia</td>
-                        <td>
-                          <strong>168</strong> pkt
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>matematyka, fizyka, chemia</td>
-                        <td>
-                          <strong>168</strong> pkt
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  <table>
-                    <thead>
-                      <tr>
-                        <th>Klasa z przedmiotami rozszerzonymi</th>
-                        <th>Próg punktowy</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>matematyka, fizyka, chemia</td>
-                        <td>
-                          <strong>168</strong> pkt
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>matematyka, fizyka, chemia</td>
-                        <td>
-                          <strong>168</strong> pkt
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </PastProfilesGrid>
-              </Card>
+              {classes.length === 0 && <p>Brak danych</p>}
+              {classes.length > 0 && (
+                <Card>
+                  <PastProfilesGrid>
+                    {splitArrayInHalf(classes).map((half: any) => (
+                      <table>
+                        <thead>
+                          <tr>
+                            <th>Klasa z przedmiotami rozszerzonymi</th>
+                            <th>Próg punktowy</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {half.map((c: any) => (
+                            <tr>
+                              <td>
+                                {c.subjects.map((s: any) => s.name).join('-')}
+                              </td>
+                              <td>
+                                {c.stats && c.stats[0].points_min > 0 && (
+                                  <>
+                                    <strong>{c.stats[0].points_min}</strong> pkt
+                                  </>
+                                )}
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    ))}
+                  </PastProfilesGrid>
+                </Card>
+              )}
             </Section>
             <Section>
               <h2>Kontakt</h2>
-              <ContactGrid>
-                <address>
-                  {school.address.postcode} {school.address.city} <br />
-                  {school.address.street} {school.contact.building_nr}
-                </address>
-                <div>
-                  <a href="#">{school.contact.phone}</a> <br />
-                  <a href="#">{school.contact.email}</a>
-                </div>
-              </ContactGrid>
-              <ActionLinkWrapper>
-                <a href={school.contact.website}>Strona www szkoły</a>
-              </ActionLinkWrapper>
+              {(!school.contact || !school.address) && <p>Brak danych</p>}
+              {school.contact && (
+                <>
+                  <ContactGrid>
+                    <address>
+                      {school.address.postcode} {school.address.city} <br />
+                      {school.address.street} {school.contact.building_nr}
+                    </address>
+                    <div>
+                      <a href={`tel:${school.contact.phone}`}>
+                        {school.contact.phone}
+                      </a>{' '}
+                      <br />
+                      <a href={`tel:${school.contact.email}`}>
+                        {school.contact.email}
+                      </a>
+                    </div>
+                  </ContactGrid>
+                  <ActionLinkWrapper>
+                    <a href={school.contact.website}>Strona www szkoły</a>
+                  </ActionLinkWrapper>
+                </>
+              )}
             </Section>
           </Container>
           <MapFrame

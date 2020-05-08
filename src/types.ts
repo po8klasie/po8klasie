@@ -50,7 +50,3 @@ export interface School {
     };
   };
 }
-export type SearchParams = {
-  school_name?: string;
-  page?: number;
-};

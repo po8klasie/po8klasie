@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import Container from './Container';
 import styled from '../styling/styled';
 import { Link } from '@reach/router';
@@ -30,6 +30,25 @@ const NavWrapper = styled.div`
   width: 100%;
   z-index: 10;
   background: white;
+  position: relative;
+  font-family: Open Sans;
+  &::after {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 75%;
+    transform: translateX(-50%);
+    height: 1px;
+    background: black;
+    @media (max-width: 780px) {
+      content: none;
+    }
+  }
+  @media (max-width: 780px) {
+    border-bottom: 1px solid black;
+  }
 `;
 const Nav = styled.nav`
   height: 7em;
@@ -37,26 +56,25 @@ const Nav = styled.nav`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  position: relative;
-  * {
-    font-family: Open Sans;
-  }
-  &::after {
-    content: '';
-    display: block;
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    width: 110%;
-    transform: translateX(-50%);
-    height: 1px;
-    background: black;
+  font-family: Open Sans;
   }
 `;
-const Menu = styled.ul`
+const Menu = styled.ul<{ active: boolean }>`
   display: flex;
   align-items: center;
   margin: 0;
+  @media (max-width: 780px) {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    display: block;
+    padding-inline-start: 0;
+    background: white;
+    text-align: center;
+    border-bottom: 1px solid black;
+    display: ${props => (props.active ? 'block' : 'none')};
+  }
 `;
 const MenuItem = styled.li`
   display: block;
@@ -66,44 +84,60 @@ const MenuItem = styled.li`
     text-decoration: none;
     transition: color 0.3s;
   }
+  @media (max-width: 780px) {
+    padding: 1em 0;
+  }
 `;
-const FlexWrapper = styled.div`
+const MobileBar = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  .material-icons {
+    color: ${props => props.theme.colors.primary};
+    display: none;
+
+    @media (max-width: 780px) {
+      display: block;
+    }
+  }
+  @media (max-width: 780px) {
+    width: 100%;
+  }
 `;
-const ActionText = styled.span``;
-const ActionButton = styled(Link)`
-  margin-left: 2em;
-  padding: 0.5em 1em;
-  background: black;
-  color: white;
-  border-radius: 2em;
-  text-decoration: none;
-`;
-const Navbar: FC = props => (
-  <NavWrapper>
-    <Container>
-      <Nav>
-        <Brand to="/">
-          <Logo />
-          Warsaw
-          <span>LO</span>
-        </Brand>
-        <Menu>
-          <MenuItem>
-            <Link to="/">Home</Link>
-          </MenuItem>
-          <MenuItem>
-            <Link to="/schools">Szkoły</Link>
-          </MenuItem>
-          <MenuItem>
-            <Link to="/calculator">Kalkulator punktów</Link>
-          </MenuItem>
-        </Menu>
-      </Nav>
-    </Container>
-  </NavWrapper>
-);
+const Navbar: FC = props => {
+  const [isNavOpen, setNavOpen] = useState(false);
+  return (
+    <NavWrapper>
+      <Container>
+        <Nav>
+          <MobileBar>
+            <Brand to="/">
+              <Logo />
+              Warsaw
+              <span>LO</span>
+            </Brand>
+            <span
+              className="material-icons"
+              onClick={() => setNavOpen(!isNavOpen)}
+            >
+              {isNavOpen ? 'close' : 'menu'}
+            </span>
+          </MobileBar>
+          <Menu active={isNavOpen}>
+            <MenuItem>
+              <Link to="/">Home</Link>
+            </MenuItem>
+            <MenuItem>
+              <Link to="/schools">Szkoły</Link>
+            </MenuItem>
+            <MenuItem>
+              <Link to="/calculator">Kalkulator punktów</Link>
+            </MenuItem>
+          </Menu>
+        </Nav>
+      </Container>
+    </NavWrapper>
+  );
+};
 
 export default Navbar;

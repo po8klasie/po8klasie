@@ -1,9 +1,20 @@
 import { combineEpics } from 'redux-observable';
 import { combineReducers } from 'redux';
-import schools, { fetchSchoolsEpic } from './schools';
-import schoolDetails, { fetchSchoolDetailsEpic } from './schoolDetails';
+import schools, { fetchSchoolsEpic, SchoolsState } from './schools';
+import schoolDetails, {
+  fetchSchoolClassesEpic,
+  fetchSchoolDetailsEpic,
+} from './schoolDetails';
 
-export const rootEpic = combineEpics(fetchSchoolsEpic, fetchSchoolDetailsEpic);
+export type State = {
+  schools: SchoolsState;
+};
+
+export const rootEpic = combineEpics(
+  fetchSchoolsEpic,
+  fetchSchoolDetailsEpic,
+  fetchSchoolClassesEpic,
+);
 
 export const rootReducer = combineReducers({
   schools,

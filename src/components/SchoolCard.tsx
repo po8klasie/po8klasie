@@ -40,7 +40,9 @@ type SchoolCardProps = {
 const SchoolCard = (props: SchoolCardProps) => (
   <Wrapper>
     <div className="content">
-      <span className={'school-type'}>Szkoła publiczna</span>
+      <span className={'school-type'}>
+        Szkoła {!props.school.is_public && 'nie'}publiczna
+      </span>
       <h4>{props.school.school_name}</h4>
       <span className={'district'}>{props.school.address.district}</span>
     </div>
