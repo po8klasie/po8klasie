@@ -11,6 +11,11 @@ const LandingPageImage = styled.div<LandingPageImageProps>`
   background-position: ${props => props.position};
   background-repeat: no-repeat;
   background-size: contain;
+  min-height: 300px;
+  @media (max-width: 780px) {
+    background-position: center;
+    min-height: 200px;
+  }
 `;
 
 export default (props: LandingPageImageProps) => (
