@@ -107,8 +107,8 @@ const LandingPage: FC<LandingPageProps> = props => {
               moderatorzy zajmą się tym tak szybko, jak tylko będę mogli.
             </Paragraph>
             <LandingPageImage
-                bgImage={require('../assets/images/landingPage/dane.png')}
-                position="left"
+              bgImage={require('../assets/images/landingPage/dane.png')}
+              position="left"
             />
           </DoubleGrid>
         </LandingPageSectionTwo>
