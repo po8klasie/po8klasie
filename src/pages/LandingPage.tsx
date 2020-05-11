@@ -6,6 +6,7 @@ import Paragraph from '../components/Paragraph';
 import H1 from '../components/H1';
 import H2 from '../components/H2';
 import DoubleGrid from '../components/DoubleGrid';
+import LandingMainGrid from '../components/LandingMainGrid';
 import Feature from '../components/Feature';
 import FeatureTitle from '../components/FeatureTitle';
 import FeaturesGrid from '../components/FeaturesGrid';
@@ -24,7 +25,7 @@ const LandingPage: FC<LandingPageProps> = props => {
   return (
     <Layout>
       <Container>
-        <DoubleGrid>
+        <LandingMainGrid>
           <div>
             <H1>Wybierz z nami swoją drogę!</H1>
             <Paragraph>
@@ -40,7 +41,7 @@ const LandingPage: FC<LandingPageProps> = props => {
             bgImage={require('../assets/images/landingPage/wybierz_z_nami.png')}
             position="right"
           />
-        </DoubleGrid>
+        </LandingMainGrid>
 
         <H2>Dzięki nam szybko sprawdzisz</H2>
         <FeaturesGrid>
@@ -76,20 +77,18 @@ const LandingPage: FC<LandingPageProps> = props => {
 
         <LandingPageSectionOne>
           <DoubleGrid>
-            <div>
-              <H2>Jak to działa?</H2>
-              <Paragraph>
-                Pobieramy dane z różnych źródeł, aby móc przedstawić Ci je w jak
-                najlepszej postaci.
-              </Paragraph>
-              <Paragraph>
-                Korzystamy z danych Urzędu Miasta Warszawy, aby pobrać listę
-                szkół oraz średnie liczby punktów. Na bieżąco łączymy się z
-                wieloma serwisami lokalizacyjnymi, aby dostarczyć Ci informacje
-                o jak najlepszym połączeniu komunikacyjnym z Twoją wymarzoną
-                szkołą. A to wszystko zebrane tylko w jednym miejscu...
-              </Paragraph>
-            </div>
+            <H2>Jak to działa?</H2>
+            <Paragraph>
+              Pobieramy dane z różnych źródeł, aby móc przedstawić Ci je w jak
+              najlepszej postaci.
+              <br />
+              Korzystamy z danych Urzędu Miasta Warszawy, aby pobrać listę szkół
+              oraz średnie liczby punktów. Na bieżąco łączymy się z wieloma
+              serwisami lokalizacyjnymi, aby dostarczyć Ci informacje o jak
+              najlepszym połączeniu komunikacyjnym z Twoją wymarzoną szkołą. A
+              to wszystko zebrane tylko w jednym miejscu...
+            </Paragraph>
+
             <LandingPageImage
               bgImage={require('../assets/images/landingPage/jak_dziala.png')}
               position="right"
@@ -98,36 +97,34 @@ const LandingPage: FC<LandingPageProps> = props => {
         </LandingPageSectionOne>
 
         <LandingPageSectionTwo>
-          <DoubleGrid>
+          <DoubleGrid reversed>
+            <H2 textAlign="right">Nieaktualne dane?</H2>
+            <Paragraph textAlign="right">
+              Nobody's perfect...
+              <br />
+              Przetwarzając ogromne ilości informacji może wkraść się do danych
+              jakiś błąd. Jeżeli natkniesz się na niego, zgłoś to. Nasi
+              moderatorzy zajmą się tym tak szybko, jak tylko będę mogli.
+            </Paragraph>
             <LandingPageImage
               bgImage={require('../assets/images/landingPage/dane.png')}
               position="left"
             />
-            <div>
-              <H2 textAlign="right">Nieaktualne dane?</H2>
-              <Paragraph textAlign="right">Nobody's perfect...</Paragraph>
-              <Paragraph textAlign="right">
-                Przetwarzając ogromne ilości informacji może wkraść się do
-                danych jakiś błąd. Jeżeli natkniesz się na niego, zgłoś to. Nasi
-                moderatorzy zajmą się tym tak szybko, jak tylko będę mogli.
-              </Paragraph>
-            </div>
           </DoubleGrid>
         </LandingPageSectionTwo>
 
         <LandingPageSectionThree>
           <DoubleGrid>
-            <div>
-              <H2>Społeczność</H2>
-              <Paragraph>Ten portal tworzy każdy z nas!</Paragraph>
-              <Paragraph>
-                Wybierasz liceum i robisz ogromny research, czy może masz już
-                rekrutację za sobą i wiesz jak to działa? Podziel się swoimi
-                spostrzeżeniami tutaj. Każdego ucznia ostatniej klasy
-                podstawówki czeka to samo. Pomagajmy sobie nawzajem. WarsawLO to
-                portal tworzony przez uczniów dla uczniów.
-              </Paragraph>
-            </div>
+            <H2>Społeczność</H2>
+            <Paragraph>
+              Ten portal tworzy każdy z nas!
+              <br />
+              Wybierasz liceum i robisz ogromny research, czy może masz już
+              rekrutację za sobą i wiesz jak to działa? Podziel się swoimi
+              spostrzeżeniami tutaj. Każdego ucznia ostatniej klasy podstawówki
+              czeka to samo. Pomagajmy sobie nawzajem. WarsawLO to portal
+              tworzony przez uczniów dla uczniów.
+            </Paragraph>
             <LandingPageImage
               bgImage={require('../assets/images/landingPage/spolecznosc.png')}
               position="right"
