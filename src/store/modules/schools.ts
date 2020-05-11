@@ -5,7 +5,7 @@ import { School } from '../../types';
 import { getTotalPages } from '../../utils/pagination';
 import { Params, toParams } from '../../utils/params';
 import { State } from './root';
-import {removeDuplicates} from "../../utils/removeDuplicates";
+import { removeDuplicates } from '../../utils/removeDuplicates';
 
 export type SchoolsState = {
   results: School[];
