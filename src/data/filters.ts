@@ -46,7 +46,7 @@ export const filters: FilterData[] = [
     ],
   },
   {
-    fieldId: 'extendedSubjects',
+    fieldId: 'highschoolclass__extendedsubject__name',
     title: 'Rozszerzone przedmioty',
     multiple: true,
     choices: [
@@ -55,13 +55,41 @@ export const filters: FilterData[] = [
         label: 'język polski',
       },
       {
+        id: 'hist',
+        label: 'historia',
+      },
+      {
+        id: 'wos',
+        label: 'WOS',
+      },
+      {
         id: 'mat',
         label: 'matematyka',
+      },
+      {
+        id: 'fiz',
+        label: 'fizyka',
+      },
+      {
+        id: 'inf',
+        label: 'informatyka',
+      },
+      {
+        id: 'chem',
+        label: 'chemia',
+      },
+      {
+        id: 'biol',
+        label: 'biologia',
+      },
+      {
+        id: 'geogr',
+        label: 'geografia',
       },
     ],
   },
   {
-    fieldId: 'dzielnica',
+    fieldId: 'address__district',
     title: 'Dzielnica',
     multiple: true,
     choices: [

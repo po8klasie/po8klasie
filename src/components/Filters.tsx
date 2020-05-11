@@ -4,7 +4,7 @@ import Dropdown from './Dropdown';
 import { FilterData, filters } from '../data/filters';
 import MobileFilters from './MobileFilters';
 const DropdownsWrapper = styled.div`
-  margin: 2em 0;
+  margin: 2em 0 0 0;
   display: none;
   @media (min-width: 900px) {
     display: flex;
