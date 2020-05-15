@@ -36,6 +36,10 @@ const LoadingCard = styled(Card)`
     background: #eee;
   }
 `;
+const Count = styled.small`
+  display: block;
+  margin: 1em 0 2em 0;
+`;
 
 interface SchoolsPageProps extends RouteComponentProps {}
 
@@ -94,6 +98,7 @@ const SchoolsPage = (props: any) => {
             setFiltersValues={setFiltersValues}
             onSubmit={submit}
           />
+          {/*{!props.schools.isFetching && <Count>Liczba wyników: {props.schools.count}</Count>}*/}
           <Results>
             {props.schools.isFetching &&
               new Array(3).fill(null).map((_, i) => <LoadingCard key={i} />)}

@@ -5,6 +5,7 @@ import { School } from '../../types';
 import { getTotalPages } from '../../utils/pagination';
 import { Params, toParams } from '../../utils/params';
 import { State } from './root';
+import { removeDuplicates } from '../../utils/removeDuplicates';
 
 export type SchoolsState = {
   results: School[];
@@ -71,7 +72,7 @@ export const fetchSchoolsEpic: Epic<Actions, any, State> = (action$, state$) =>
             state$.value.schools.results.length > 0 && paramsDiff
               ? state$.value.schools.results
               : new Array(getTotalPages(res.count) + 1).fill([]);
-          results[lastFetched] = res.results;
+          results[lastFetched] = removeDuplicates(res.results);
           return fetchSchoolsSucceeded({
             ...res,
             results,
