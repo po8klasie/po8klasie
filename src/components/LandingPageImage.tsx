@@ -12,7 +12,7 @@ const LandingPageImage = styled.div<LandingPageImageProps>`
   background-repeat: no-repeat;
   background-size: contain;
   min-height: 300px;
-  @media (max-width: 780px) {
+  @media (max-width: 880px) {
     background-position: center;
     min-height: 200px;
   }

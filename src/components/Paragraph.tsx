@@ -11,7 +11,7 @@ const Paragraph = styled.p<ParagraphProps>`
   line-height: 1.45em;
   color: ${props => props.theme.colors.text};
   text-align: ${props => props.textAlign || 'left'};
-  @media (max-width: 780px) {
+  @media (max-width: 880px) {
     text-align: left;
   }
 `;

@@ -30,8 +30,6 @@ const NavWrapper = styled.div`
   width: 100%;
   z-index: 10;
   background: white;
-  position: relative;
-  font-family: Open Sans;
   &::after {
     content: '';
     display: block;
@@ -51,12 +49,11 @@ const NavWrapper = styled.div`
   }
 `;
 const Nav = styled.nav`
-  height: 7em;
+  height: 6em;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-family: Open Sans;
   }
 `;
 const Menu = styled.ul<{ active: boolean }>`
@@ -68,7 +65,6 @@ const Menu = styled.ul<{ active: boolean }>`
     top: 100%;
     left: 0;
     width: 100%;
-    display: block;
     padding-inline-start: 0;
     background: white;
     text-align: center;

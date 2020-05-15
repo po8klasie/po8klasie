@@ -19,6 +19,9 @@ const Header = styled.div`
   h1 {
     font-size: 3em;
     margin: 20px 0;
+    @media (max-width: 1210px) {
+      font-size: 2em;
+    }
   }
   .loading & h1,
   .loading & span {
@@ -271,7 +274,7 @@ const SchoolPage = (props: SchoolPageProps) => {
                     </div>
                   </ContactGrid>
                   <ActionLinkWrapper>
-                    <a href={school.contact.website}>Strona www szkoły</a>
+                    <a href={school.contact.website} target="_blank">Strona www szkoły</a>
                   </ActionLinkWrapper>
                 </>
               )}

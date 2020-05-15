@@ -3,7 +3,7 @@ import { RouteComponentProps } from '@reach/router';
 import Layout from '../components/Layout';
 import Container from '../components/Container';
 import Paragraph from '../components/Paragraph';
-import H1 from '../components/H1';
+import PageTitle from '../components/PageTitle';
 import H2 from '../components/H2';
 import DoubleGrid from '../components/DoubleGrid';
 import LandingMainGrid from '../components/LandingMainGrid';
@@ -11,7 +11,7 @@ import Feature from '../components/Feature';
 import FeatureTitle from '../components/FeatureTitle';
 import FeaturesGrid from '../components/FeaturesGrid';
 import CallToActionButton from '../components/CallToActionButton';
-import CenterContainer from '../components/CenterContainer';
+import CallToActionContainer from '../components/CallToActionContainer';
 import {
   LandingPageSectionOne,
   LandingPageSectionTwo,
@@ -27,7 +27,7 @@ const LandingPage: FC<LandingPageProps> = props => {
       <Container>
         <LandingMainGrid>
           <div>
-            <H1>Wybierz z nami swoją drogę!</H1>
+            <PageTitle>Wybierz z nami swoją drogę!</PageTitle>
             <Paragraph>
               Nie wiesz którą szkołę wybrać? Rekrutacja do szkół średnich to
               poważna sprawa. W tym roku wybór będzie znacznie prostszy. Znajdź
@@ -132,11 +132,11 @@ const LandingPage: FC<LandingPageProps> = props => {
           </DoubleGrid>
         </LandingPageSectionThree>
 
-        <CenterContainer>
+        <CallToActionContainer>
           <CallToActionButton to={'/schools'}>
             Znajdź swoją szkołę już teraz
           </CallToActionButton>
-        </CenterContainer>
+        </CallToActionContainer>
       </Container>
     </Layout>
   );

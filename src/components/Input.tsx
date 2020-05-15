@@ -62,7 +62,7 @@ export const InputWithAddon = React.forwardRef<
 >((props, ref) => (
   <InputWithAddonWrapper ref={ref} addonPosition={props.addonPosition}>
     <span className={'addon'}>{props.addon}</span>
-    <Input {...props} />
+    <Input {...props} size={15} />
   </InputWithAddonWrapper>
 ));
 export default Input;
