@@ -22,7 +22,6 @@ const Wrapper = styled(Card)`
     color: #707070;
     text-transform: uppercase;
     margin: 1em 0;
-    font-family: Open Sans;
   }
   .bottom {
     flex-shrink: 0;

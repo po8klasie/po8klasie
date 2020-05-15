@@ -25,6 +25,9 @@ const InputGrid = styled.div`
   display: inline-grid;
   grid-template-columns: auto auto auto;
   grid-column-gap: 30px;
+  @media (max-width: 400px) {
+    grid-column-gap: 15px;
+  }
   grid-row-gap: 10px;
   .row {
     display: contents;

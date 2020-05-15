@@ -9,7 +9,7 @@ const CallToActionButton = styled(Link)`
   padding: 1rem 1.375rem;
   background: ${props => props.theme.colors.primary};
   color: white;
-  margin: 3em auto 3em auto;
+  margin: 1em auto 2em auto;
   font-size: 1.125em;
   font-weight: 600;
   border-radius: 10px;

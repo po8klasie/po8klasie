@@ -24,7 +24,7 @@ const DoubleGrid = styled.div<{ reversed?: boolean }>`
   & div {
     grid-area: image;
   }
-  @media (max-width: 780px) {
+  @media (max-width: 880px) {
     grid-template-columns: 1fr;
     grid-template-areas:
       'title'
