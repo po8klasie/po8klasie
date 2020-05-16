@@ -40,4 +40,4 @@ jobs:
     - name: Deploy
       run: |-
         gcloud compute ssh --zone ${GCE_INSTANCE_ZONE} ${GCE_INSTANCE} -- \
-          -tt -C "cd /home/mlazowik/infra && bash update-frontend.sh && docker system prune"
+          -tt -C "cd /home/mlazowik/infra && bash update-frontend.sh && yes | docker system prune"
