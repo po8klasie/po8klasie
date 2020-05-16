@@ -1,9 +1,18 @@
-name: Build and push
+name: Build, push, and deploy
 
-on: [push]
+on:
+  push:
+    branches:
+    - master
+
+env:
+  PROJECT_ID: ${{ secrets.GCE_PROJECT }}
+  GCE_INSTANCE: instance-1
+  GCE_INSTANCE_ZONE: europe-west4-a
 
 jobs:
-  build-and-push:
+  build-push-deploy:
+    timeout-minutes: 30
     runs-on: ubuntu-latest
 
     steps:
@@ -16,3 +25,19 @@ jobs:
         repository: warsawlo/warsawlo-2.0
         tag_with_ref: true
         tag_with_sha: true
+
+    - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+      with:
+        version: '290.0.1'
+        service_account_key: ${{ secrets.GCE_SA_KEY }}
+        project_id: ${{ secrets.GCE_PROJECT }}
+
+    - name: Turnstyle
+      uses: softprops/turnstyle@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Deploy
+      run: |-
+        gcloud compute ssh --zone ${GCE_INSTANCE_ZONE} ${GCE_INSTANCE} -- \
+          -tt -C "cd /home/mlazowik/infra && bash update-frontend.sh && docker system prune"
