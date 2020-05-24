@@ -1,29 +1,37 @@
 import { ofType, Epic } from 'redux-observable';
-import { map, mergeMap } from 'rxjs/operators';
+import { expand, map, mergeMap } from 'rxjs/operators';
 import { ajax } from 'rxjs/ajax';
 import { School } from '../../types';
 import { getTotalPages } from '../../utils/pagination';
-import { Params, toParams } from '../../utils/params';
+import { Params } from '../../utils/params';
 import { State } from './root';
-import { removeDuplicates } from '../../utils/removeDuplicates';
+import {EMPTY, of} from 'rxjs';
+import {areObjectsDifferent, removeFromObject, withoutPageAndView} from '../../utils/misc';
+import {
+  generateSchoolUrl,
+  getPageNumberFromPaginationUrl,
+} from '../../utils/urls';
 
 export type SchoolsState = {
   results: School[];
   count: number | null;
-  lastFetched: number | null;
-  next: number | null;
-  previous: number | null;
+  pageNo: number | null;
   params: Params;
   isFetching: boolean;
-  reachedEnd: boolean;
+  fetchedAll: boolean;
 };
 
 const FETCH_SCHOOLS = 'FETCH_SCHOOLS';
 const FETCH_SCHOOLS_SUCCEEDED = 'FETCH_SCHOOLS_SUCCEEDED';
 
+interface FetchSchoolsActionPayload {
+  params: Params;
+  fetchAll?: boolean;
+}
+
 interface FetchSchoolsAction {
   type: typeof FETCH_SCHOOLS;
-  payload: Params;
+  payload: FetchSchoolsActionPayload;
 }
 
 interface FetchSchoolsSucceededAction {
@@ -31,7 +39,9 @@ interface FetchSchoolsSucceededAction {
   payload: any;
 }
 
-export const fetchSchools = (payload: Params): FetchSchoolsAction => ({
+export const fetchSchools = (
+  payload: FetchSchoolsActionPayload,
+): FetchSchoolsAction => ({
   type: FETCH_SCHOOLS,
   payload,
 });
@@ -45,38 +55,56 @@ export const fetchSchoolsSucceeded = (
 
 type Actions = FetchSchoolsAction | FetchSchoolsSucceededAction;
 
-const generateSchoolUrl = (params: Params) => {
-  const paramsStr = toParams(
-    {
-      ...params,
-      school_type_generalised: 'szkoła ponadpodstawowa',
-    },
-    'api',
-  );
-  return `${process.env.REACT_APP_API_URL}/school/?${paramsStr}`;
-};
-
 export const fetchSchoolsEpic: Epic<Actions, any, State> = (action$, state$) =>
   action$.pipe(
     ofType<Actions, any>(FETCH_SCHOOLS),
     mergeMap(action => {
-      const paramsDiff =
-        JSON.stringify(action.payload) !==
-        JSON.stringify(state$.value.schools.params);
-
-      return ajax.getJSON<any>(generateSchoolUrl(action.payload)).pipe(
-        map(res => {
-          const lastFetched =
-            !paramsDiff && action.payload.page ? action.payload.page : 1;
+      const { payload } = action;
+      const paramsWithoutViewDidChange = areObjectsDifferent(
+          removeFromObject(state$.value.schools.params, ['view']),
+          removeFromObject(payload.params, ['view'])
+      );
+      if(state$.value.schools.fetchedAll && !paramsWithoutViewDidChange)
+        return of(fetchSchoolsSucceeded({
+          isFetching: false,
+          fetchedAll: true,
+          count: state$.value.schools.count,
+          pageNo: state$.value.schools.pageNo,
+          params: state$.value.schools.params,
+          results: state$.value.schools.results,
+        }));
+    console.log(removeFromObject(state$.value.schools.params, ['view']), removeFromObject(payload.params, ['view']),
+      payload.fetchAll, paramsWithoutViewDidChange, !payload.page, payload);
+      const requestUrl = generateSchoolUrl({
+            ...payload.params,
+            page: payload.fetchAll || (paramsWithoutViewDidChange && !payload.params.page) ? 1 : payload.params.page,
+      });
+      return ajax.getJSON<any>(requestUrl).pipe(
+        expand(res =>
+          payload.fetchAll && res.next ? ajax.getJSON<any>(res.next) : EMPTY,
+        ),
+        map((res: any) => {
+          const pageNo = getPageNumberFromPaginationUrl(res.previous, res.next);
+          const resultsFromState = state$.value.schools.results;
+          const totalPages = getTotalPages(res.count) + 1;
+          const didParamsChange = areObjectsDifferent(
+              payload.params,
+              state$.value.schools.params,
+          );
           const results =
-            state$.value.schools.results.length > 0 && paramsDiff
-              ? state$.value.schools.results
-              : new Array(getTotalPages(res.count) + 1).fill([]);
-          results[lastFetched] = removeDuplicates(res.results);
+            resultsFromState.length > 0 && !didParamsChange
+              ? resultsFromState
+              : new Array(totalPages).fill([]); // create 2d array
+
+          results[pageNo] = res.results;
+          console.log(payload.fetchAll, pageNo, totalPages)
           return fetchSchoolsSucceeded({
             ...res,
             results,
-            lastFetched,
+            pageNo,
+            params: payload.params,
+            isFetching: payload.fetchAll ? (totalPages === 1 ? false : pageNo !== totalPages - 1) : false,
+            fetchedAll: payload.fetchAll && pageNo === totalPages - 1
           });
         }),
       );
@@ -86,12 +114,10 @@ export const fetchSchoolsEpic: Epic<Actions, any, State> = (action$, state$) =>
 const initialState: SchoolsState = {
   results: [],
   count: null,
-  lastFetched: null,
-  next: null,
-  previous: null,
+  pageNo: null,
+  fetchedAll: false,
   params: {},
   isFetching: false,
-  reachedEnd: false,
 };
 
 const schools = (
@@ -103,19 +129,18 @@ const schools = (
       return {
         ...state,
         isFetching: true,
-        params: {
-          ...action.payload,
-        },
       };
 
     case FETCH_SCHOOLS_SUCCEEDED:
       return {
         ...state,
-        isFetching: false,
-        next: action.payload.next,
-        previous: action.payload.previous,
+        isFetching: action.payload.isFetching,
+        fetchedAll: action.payload.fetchedAll,
         count: action.payload.count,
-        lastFetched: action.payload.lastFetched,
+        pageNo: action.payload.pageNo,
+        params: {
+          ...action.payload.params,
+        },
         results: [...action.payload.results],
       };
 

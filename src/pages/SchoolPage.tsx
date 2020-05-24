@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Redirect, RouteComponentProps } from '@reach/router';
 import Layout from '../components/Layout';
 import Container from '../components/Container';
@@ -8,8 +8,16 @@ import { fetchSchoolDetails } from '../store/modules/schoolDetails';
 import Card from '../components/Card';
 import { createPlaceholderStyles } from '../utils/loading';
 import { splitArrayInHalf } from '../utils/misc';
+import L, { LatLngExpression } from 'leaflet';
+import 'leaflet/dist/leaflet.css';
+import icon from 'leaflet/dist/images/marker-icon.png';
+import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 
-const GOOGLE_MAPS_KEY = 'AIzaSyCCLfhaD7OtyTnU61UBTFKGaRhYyUz9dSs';
+const DefaultIcon = L.icon({
+  iconUrl: icon,
+  shadowUrl: iconShadow,
+});
+L.Marker.prototype.options.icon = DefaultIcon;
 
 const Header = styled.div`
   margin-top: 5vh;
@@ -123,7 +131,8 @@ const PastProfilesGrid = styled.div`
 const ActionLinkWrapper = styled.div`
   margin-top: 20px;
 `;
-const MapFrame = styled.iframe`
+
+const Map = styled.div`
   width: 100%;
   border: none;
   height: 40vh;
@@ -140,14 +149,35 @@ const isObjEmpty = (obj: any) =>
   Object.keys(obj).length === 0 && obj.constructor === Object;
 
 const SchoolPage = (props: SchoolPageProps) => {
+  const mapEl = useRef<HTMLDivElement>(null);
+  const map = useRef<any>(null);
   const { school, classes } = props.schoolDetails;
 
   useEffect(() => {
     if (props.schoolID && props.schoolID !== props.schoolDetails.id) {
       props.fetchSchoolDetails(props.schoolID);
     }
+    map.current = L.map(mapEl.current as HTMLDivElement);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution:
+        '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+    }).addTo(map.current);
     // eslint-disable-next-line
   }, []);
+
+  useEffect(() => {
+    if (school && school.address) {
+      const coords: LatLngExpression = [
+        school.address.longitude,
+        school.address.latitude,
+      ];
+      map.current.setView(coords, 13);
+      L.marker(coords)
+        .addTo(map.current)
+        .bindPopup(school.school_name)
+        .openPopup();
+    }
+  }, [school]);
 
   if (!props.schoolID) return <Redirect to="/" />;
 
@@ -277,11 +307,9 @@ const SchoolPage = (props: SchoolPageProps) => {
               )}
             </Section>
           </Container>
-          <MapFrame
-            src={`https://www.google.com/maps/embed/v1/place?q=${school.school_name}&key=${GOOGLE_MAPS_KEY}`}
-          />
         </>
       )}
+      <Map ref={mapEl} />
     </Layout>
   );
 };

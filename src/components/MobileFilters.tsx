@@ -98,7 +98,7 @@ const MobileFilters = (props: any) => {
             <List>
               {props.filters.map((filter: FilterData, i: number) => (
                 <li
-                  key={filter.fieldId}
+                  key={filter.apiParam}
                   onClick={() => setActiveFilterIndex(i)}
                 >
                   {filter.title}
