@@ -62,7 +62,12 @@ const FooterGrid = styled.div`
     p {
       line-height: 1.5em;
       margin-top: 0;
-      text-align: justify;
+      text-align: center;
+
+      @media (min-width: 1001px) {
+        text-align: left;
+      }
+    }
     }
     .logos-wrapper {
       display: grid;
@@ -125,7 +130,7 @@ const Footer: FC = props => (
           <p>
             WarsawLO to open-source'owy projekt civic tech tworzony przez
             wolonatariuszy we współpracy z programem Koduj Dla Polski Fundacji
-            ePaństwo
+            ePaństwo.
           </p>
           <div className="logos-wrapper">
             <a
