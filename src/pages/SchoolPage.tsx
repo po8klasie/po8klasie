@@ -274,7 +274,9 @@ const SchoolPage = (props: SchoolPageProps) => {
                     </div>
                   </ContactGrid>
                   <ActionLinkWrapper>
-                    <a href={school.contact.website} target="_blank">Strona www szkoły</a>
+                    <a href={school.contact.website} target="_blank">
+                      Strona www szkoły
+                    </a>
                   </ActionLinkWrapper>
                 </>
               )}
