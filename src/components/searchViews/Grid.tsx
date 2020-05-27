@@ -1,11 +1,12 @@
-import React, {FC} from "react";
-import SchoolCard from "../SchoolCard";
-import {School} from "../../types";
-import styled from "../../styling/styled";
-import Card from "../Card";
-import {createPlaceholderStyles} from "../../utils/loading";
-import {SearchViewProps} from "../../data/searchViews";
-import Container from "../Container";
+import React, { FC } from 'react';
+import SchoolCard from '../SchoolCard';
+import { School } from '../../types';
+import styled from '../../styling/styled';
+import Card from '../Card';
+import { createPlaceholderStyles } from '../../utils/loading';
+import { SearchViewProps } from '../../data/searchViews';
+import Container from '../Container';
+import {useSelector} from "react-redux";
 
 const Results = styled.div`
   display: grid;
@@ -30,21 +31,36 @@ const LoadingCard = styled(Card)`
   }
 `;
 
-const GridSearchView: FC<SearchViewProps> = ({isFetching, schools, count}) => {
-    return (
-        <Container>
-            <Results>
-                {isFetching && new Array(3).fill(null).map((_, i) => <LoadingCard key={i} />)}
-                {!isFetching &&
-                schools.map((school: School) => (
-                    <SchoolCard key={school.id} school={school} />
-                ))}
-            </Results>
-            {!isFetching && count === 0 && (
-                <p>Brak szkół o podanych kryteriach</p>
-            )}
-        </Container>
-    );
+const GridSearchView: FC = () => {
+    const {
+        isFetching,
+        schools,
+        count,
+        page
+    } = useSelector((state: any) => ({
+        isFetching: state.schools.fetchingData.isFetching,
+        schools: state.schools.results,
+        count: state.schools.responseData.count,
+        page: state.schools.searchData.page
+    }));
+    // const page = 1;
+    const schoolsPerCurrentPage =
+        schools && schools[page]
+            ? schools[page]
+            : [];
+  return (
+    <Container>
+      <Results>
+        {isFetching &&
+          new Array(3).fill(null).map((_, i) => <LoadingCard key={i} />)}
+        {!isFetching &&
+        schoolsPerCurrentPage.map((school: School) => (
+            <SchoolCard key={school.id} school={school} />
+          ))}
+      </Results>
+      {!isFetching && count === 0 && <p>Brak szkół o podanych kryteriach</p>}
+    </Container>
+  );
 };
 
 export default GridSearchView;

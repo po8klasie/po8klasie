@@ -1,5 +1,5 @@
 import { FilterData, filters } from '../data/filters';
-import {removeFromArray} from "./misc";
+import { removeFromArray } from './misc';
 
 export const initialFiltersValues = Object.fromEntries(
   filters.map((filter: FilterData) => [filter.apiParam, []]),
