@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import { Redirect, RouteComponentProps } from '@reach/router';
 import Layout from '../components/Layout';
 import Container from '../components/Container';
@@ -8,9 +8,23 @@ import { fetchSchoolDetails } from '../store/modules/schoolDetails';
 import Card from '../components/Card';
 import { createPlaceholderStyles } from '../utils/loading';
 import { splitArrayInHalf } from '../utils/misc';
+import Map from '../components/Map'
+import 'leaflet/dist/leaflet.css';
+import L, { LatLngExpression } from 'leaflet';
 
-const GOOGLE_MAPS_KEY = 'AIzaSyCCLfhaD7OtyTnU61UBTFKGaRhYyUz9dSs';
 
+import icon from 'leaflet/dist/images/marker-icon.png';
+import iconShadow from 'leaflet/dist/images/marker-shadow.png';
+const DefaultIcon = L.icon({
+  iconUrl: icon,
+  shadowUrl: iconShadow,
+  iconSize:     [25, 41], // size of the icon
+  shadowSize:   [41, 41], // size of the shadow
+  iconAnchor:   [12.5, 41], // point of the icon which will correspond to marker's location
+  shadowAnchor: [12.5, 41],  // the same for the shadow
+  popupAnchor:  [0, -43] // point from which the popup should open relative to the iconAnchor
+});
+L.Marker.prototype.options.icon = DefaultIcon;
 const Header = styled.div`
   margin-top: 5vh;
   span {
@@ -126,14 +140,38 @@ const PastProfilesGrid = styled.div`
 const ActionLinkWrapper = styled.div`
   margin-top: 20px;
 `;
-const MapFrame = styled.iframe`
+
+const MapWrapper = styled.div`
   width: 100%;
   border: none;
   height: 40vh;
-  margin-top: 3em;
   filter: grayscale(1);
 `;
-
+const SwitchButton = styled.button<{active: boolean}>`
+  color: ${props => props.theme.colors.primary};
+  font-weight: bold;
+  font-size: 1em;
+  font-family: inherit;
+  background: none;
+  padding: 0;
+  margin: 2em 0;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+  
+  &::after{
+    content: '';
+    display: block;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: ${props => props.active ? '100%' : 0};
+    height: 2px;
+    background: ${props => props.theme.colors.primary};
+    transition: .2s all;
+  }
+`;
 interface SchoolPageProps extends RouteComponentProps<{ schoolID: string }> {
   schoolDetails: any;
   fetchSchoolDetails: Function;
@@ -142,15 +180,51 @@ interface SchoolPageProps extends RouteComponentProps<{ schoolID: string }> {
 const isObjEmpty = (obj: any) =>
   Object.keys(obj).length === 0 && obj.constructor === Object;
 
+const transportLayer = L.tileLayer('https://{s}.tile.thunderforest.com/transport/{z}/{x}/{y}.png?apikey={apikey}', {
+  attribution: '&copy; <a href="http://www.thunderforest.com/">Thunderforest</a>, &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+  apikey: '185ab81cb2d44f7f8e386c5442c705ca',
+  maxZoom: 22
+} as any);
+
 const SchoolPage = (props: SchoolPageProps) => {
   const { school, classes } = props.schoolDetails;
+  const map = useRef<any>(null);
+  const defaultBaseLayer = useRef<any>(null);
+  const [showPublicTransportRoutes, setShowPublicTransportRoutes] = useState(false);
 
+  const handleConfig = (_map: any, _defaultBaseLayer: any) => {
+    _map.setView([52.237049, 21.017532], 15);
+    map.current = _map;
+    defaultBaseLayer.current = _defaultBaseLayer;
+  };
+  const changeMapBaseLayer = () => {
+    if(!map.current || !defaultBaseLayer.current)
+      return;
+
+    map.current.removeLayer(showPublicTransportRoutes ? transportLayer : defaultBaseLayer.current);
+    map.current.addLayer(showPublicTransportRoutes ? defaultBaseLayer.current : transportLayer);
+    setShowPublicTransportRoutes(!showPublicTransportRoutes);
+  };
   useEffect(() => {
     if (props.schoolID && props.schoolID !== props.schoolDetails.id) {
       props.fetchSchoolDetails(props.schoolID);
     }
     // eslint-disable-next-line
   }, []);
+
+  useEffect(() => {
+    if (map.current && school && school.address) {
+      const coords: LatLngExpression = {
+        lat: school.address.longitude,
+        lng: school.address.latitude,
+      };
+      map.current.setView(coords, 13);
+      L.marker(coords)
+        .addTo(map.current)
+        .bindPopup(school.school_name)
+        .openPopup();
+    }
+  }, [school, map.current]);
 
   if (!props.schoolID) return <Redirect to="/" />;
 
@@ -174,10 +248,7 @@ const SchoolPage = (props: SchoolPageProps) => {
         <>
           <Container>
             <SchoolDescription>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci
-              corporis dolore eligendi error et magni omnis repellat veniam.
-              Aperiam asperiores ex velit voluptates. Blanditiis dolores
-              excepturi, molestias officia reiciendis soluta!
+              [Opis szkoły: np.] Publiczne liceum ogólnokształcące w Warszawie założone w 1874. Jest najstarszym warszawskim liceum.
             </SchoolDescription>
             <Section>
               <h2>Tegoroczne profile klas</h2>
@@ -187,7 +258,7 @@ const SchoolPage = (props: SchoolPageProps) => {
                   <h4>matematyka, fizyka, chemia</h4>
                   <span>dwa oddziały</span>
                   <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    [Opis profilu] Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                     Commodi consectetur debitis delectus harum hic ipsa, iste,
                     neque nobis nostrum nulla optio placeat ratione, sint sit
                     tenetur vel voluptatem voluptates. Cupiditate.
@@ -198,7 +269,7 @@ const SchoolPage = (props: SchoolPageProps) => {
                   <h4>matematyka, fizyka, chemia</h4>
                   <span>dwa oddziały</span>
                   <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    [Opis profilu] Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                     Commodi consectetur debitis delectus harum hic ipsa, iste,
                     neque nobis nostrum nulla optio placeat ratione, sint sit
                     tenetur vel voluptatem voluptates. Cupiditate.
@@ -209,7 +280,7 @@ const SchoolPage = (props: SchoolPageProps) => {
                   <h4>matematyka, fizyka, chemia</h4>
                   <span>dwa oddziały</span>
                   <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    [Opis profilu] Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                     Commodi consectetur debitis delectus harum hic ipsa, iste,
                     neque nobis nostrum nulla optio placeat ratione, sint sit
                     tenetur vel voluptatem voluptates. Cupiditate.
@@ -282,11 +353,14 @@ const SchoolPage = (props: SchoolPageProps) => {
               )}
             </Section>
           </Container>
-          <MapFrame
-            src={`https://www.google.com/maps/embed/v1/place?q=${school.school_name}&key=${GOOGLE_MAPS_KEY}`}
-          />
         </>
       )}
+      <Container>
+        <SwitchButton onClick={changeMapBaseLayer} active={showPublicTransportRoutes}>Pokaż dojazd komunikacją miejską</SwitchButton>
+      </Container>
+      <MapWrapper>
+        <Map onConfig={handleConfig}/>
+      </MapWrapper>
     </Layout>
   );
 };

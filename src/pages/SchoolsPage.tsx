@@ -1,124 +1,123 @@
-import React, { useLayoutEffect } from 'react';
+import React, {createElement, useEffect, useLayoutEffect, useRef, useState} from 'react';
 import { RouteComponentProps, navigate } from '@reach/router';
 import Layout from '../components/Layout';
 import Container from '../components/Container';
 import styled from '../styling/styled';
-import { connect } from 'react-redux';
+import {connect, useSelector} from 'react-redux';
 import { fetchSchools } from '../store/modules/schools';
-import Filters from '../components/Filters';
-import { InputWithAddon } from '../components/Input';
-import SchoolCard from '../components/SchoolCard';
-import Card from '../components/Card';
-import { createPlaceholderStyles } from '../utils/loading';
-import Pagination from '../components/Pagination';
-import { useSearch } from '../hooks/useSearch';
+// import FiltersControl from '../components/schoolsPage/SearchFiltersControler';
+// import { InputWithAddon } from '../components/Input';
+// import SchoolCard from '../components/SchoolCard';
+// import Card from '../components/Card';
+// import { createPlaceholderStyles } from '../utils/loading';
+// import Pagination from '../components/Pagination';
+// import { useSearch } from '../hooks/useSearch';
 import PageTitle from '../components/PageTitle';
+import {DEFAULT_VIEW, searchViews} from '../data/searchViews';
+// import SearchOrderingController from '../components/schoolsPage/SearchOrderingControl';
+// import { BehaviorSubject } from 'rxjs';
+import SearchQueryController from '../components/schoolsPage/SearchQueryController';
+import {getSearchDataFromParams, toParams} from '../utils/params';
+// import SearchViewController from '../components/schoolsPage/SearchViewControl';
+// import { frontendOnlyParams } from '../data/paramsOverwrites';
+import SearchPaginationController from '../components/schoolsPage/SearchPaginationController';
+import SearchViewController from "../components/schoolsPage/SearchViewController";
+import SearchOrderingController from "../components/schoolsPage/SearchOrderingController";
+import SearchFiltersController from "../components/schoolsPage/SearchFiltersController";
+// import { useParamsChangeHandler } from '../hooks/useParamsChangeHandler';
 
-const Results = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-column-gap: 3em;
-  grid-row-gap: 3em;
-  margin-top: 2em;
-  @media (max-width: 970px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  @media (max-width: 720px) {
-    grid-template-columns: 1fr;
-  }
-`;
-
-const LoadingCard = styled(Card)`
-  ${createPlaceholderStyles()}
-  height: 200px;
-  box-shadow: none;
-  &::after {
-    background: #eee;
-  }
-`;
 const Count = styled.small`
   display: block;
   margin: 1em 0 2em 0;
 `;
 
+const AdditionalOptions = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+
+  & > div:first-of-type {
+    display: inline-flex;
+  }
+`;
+
 interface SchoolsPageProps extends RouteComponentProps {}
 
 const SchoolsPage = (props: any) => {
-  const {
-    query,
-    setQuery,
-    filtersValues,
-    setFiltersValues,
-    currentPage,
-    paginate,
-    params$,
-    payload$,
-    submit,
-  } = useSearch(props.location.search, props.schools);
-
+  const { searchData } = useSelector((state: any) => ({
+    searchData: state.schools.searchData
+  }));
   useLayoutEffect(() => {
-    params$.subscribe(params => {
-      navigate(`?${params}`);
+    props.fetchSchools({
+      searchData: getSearchDataFromParams(props.location.search)
     });
-
-    payload$.subscribe(payload => {
-      props.fetchSchools(payload);
-    });
-    // eslint-disable-next-line
   }, []);
+  useEffect(() => {
+    const params = toParams(searchData, 'search');
+    navigate(`?${params}`);
+  }, [searchData])
+  // useParamsChangeHandler({
+  //   payload$: payload$.current,
+  //   excludeKeys: [],
+  //   deps: [view],
+  //   onParamsChange: (prevData: any, data: any) => {
+  //     const params = toParams(data, 'search');
+  //     navigate(`?${params}`);
+  //     console.log(data, page);
+  //     let currentView = view;
+  //     console.log(view.id, data.view);
+  //     if (view.id !== data.view) {
+  //       console.log('changed');
+  //       let v = searchViews.find(v => v.id === data.view);
+  //       if (!v) return;
+  //       currentView = v;
+  //       setView(currentView);
+  //     }
+  //     console.log(data.page);
+  //     setPage(data.page);
+  //
+  //     // const dontFetch = Boolean(frontendOnlyParams.find(p => lastData.current && lastData.current[p] !== data[p]));
+  //     // lastData.current = data;
+  //     // if(dontFetch)
+  //     //   return;
+  //     props.fetchSchools({
+  //       params: data,
+  //       fetchAll: !currentView.layout || !currentView.layout.enablePagination,
+  //     });
+  //   },
+  // });
 
-  const handleQueryChange = (e: any) => setQuery(e.target.value);
-
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
-    submit();
-  };
-
-  const schoolsPerCurrentPage =
-    props.schools.results && props.schools.results[currentPage]
-      ? props.schools.results[currentPage]
-      : [];
+  // const showAll = !view.layout || !view.layout.enablePagination;
+  // const schoolsPerCurrentPage =
+  //   props.schools.results && props.schools.results[page]
+  //     ? props.schools.results[page]
+  //     : [];
+  // const schools = showAll
+  //   ? props.schools.results.flat()
+  //   : schoolsPerCurrentPage;
+  // console.log(schools, page);
+  // @ts-ignore
+  const view = searchViews.find(v => v.id === props.schools.searchData.view) ?? DEFAULT_VIEW;
 
   return (
     <Layout>
       <Container>
         <PageTitle>Znajdź swoją wymarzoną szkołę</PageTitle>
 
-        <form onSubmit={handleSubmit}>
-          <InputWithAddon
-            addon={<span className="material-icons">search</span>}
-            addonPosition={'left'}
-            placeholder="Szukaj szkoły"
-            onChange={handleQueryChange}
-            value={query}
-          />
-
-          <Filters
-            filtersValues={filtersValues}
-            setFiltersValues={setFiltersValues}
-            onSubmit={submit}
-          />
-          {/*{!props.schools.isFetching && <Count>Liczba wyników: {props.schools.count}</Count>}*/}
-          <Results>
-            {props.schools.isFetching &&
-              new Array(3).fill(null).map((_, i) => <LoadingCard key={i} />)}
-            {!props.schools.isFetching &&
-              schoolsPerCurrentPage.map((school: any) => (
-                <SchoolCard key={school.id} school={school} />
-              ))}
-          </Results>
-        </form>
-        {props.schools.isFetching ||
-          (props.schools.count !== 0 && (
-            <Pagination
-              count={props.schools.count}
-              page={currentPage}
-              onPaginate={paginate}
-            />
-          ))}
-        {!props.schools.isFetching && props.schools.count === 0 && (
-          <p>Brak szkół o podanych kryteriach</p>
-        )}
+        <SearchQueryController />
+        <SearchFiltersController />
+        <AdditionalOptions>
+          <div>
+            <SearchOrderingController />
+          </div>
+          <SearchViewController />
+        </AdditionalOptions>
+        {/*  /!*{!props.schools.isFetching && <Count>Liczba wyników: {props.schools.count}</Count>}*!/*/}
+      </Container>
+      {createElement(view.component)}
+      <Container>
+        <SearchPaginationController />
       </Container>
     </Layout>
   );

@@ -68,13 +68,14 @@ const CheckIcon = styled.span<{ active: boolean }>`
 
 const MobileFilters = (props: any) => {
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
-  const [activeFilterIndex, setActiveFilterIndex] = useState<number | null>(
+  const getFilterById = (id: string) => props.filters.find((f: FilterData) => (f as any)[props.idKey as string] === id);
+  const [activeFilterId, setActiveFilterId] = useState<string | null>(
     null,
   );
 
   const goBack = () => {
-    if (activeFilterIndex === null) setModalOpen(false);
-    else setActiveFilterIndex(null);
+    if (activeFilterId === null) setModalOpen(false);
+    else setActiveFilterId(null);
   };
 
   return (
@@ -88,18 +89,18 @@ const MobileFilters = (props: any) => {
             chevron_left
           </span>
           <span className="title">
-            {activeFilterIndex === null
+            {activeFilterId === null
               ? 'Filtry'
-              : props.filters[activeFilterIndex].title}
+              : getFilterById(activeFilterId).title}
           </span>
         </ModalHeader>
         <PerfectScrollbar>
-          {activeFilterIndex === null ? (
+          {activeFilterId === null ? (
             <List>
-              {props.filters.map((filter: FilterData, i: number) => (
+              {props.filters.map((filter: FilterData) => (
                 <li
-                  key={filter.fieldId}
-                  onClick={() => setActiveFilterIndex(i)}
+                  key={filter.apiParam}
+                  onClick={() => setActiveFilterId((filter as any)[props.idKey])}
                 >
                   {filter.title}
                   <span className="material-icons">chevron_right</span>
@@ -108,27 +109,23 @@ const MobileFilters = (props: any) => {
             </List>
           ) : (
             <List>
-              {props.filters[activeFilterIndex].choices.map(
-                (choice: Choice) => (
-                  <li
-                    key={choice.id}
-                    onClick={(e: any) =>
-                      props.onSelect(
-                        props.filters[activeFilterIndex].fieldId,
-                        props.filters[activeFilterIndex].multiple,
-                        choice.id,
-                      )
-                    }
-                  >
-                    {choice.label}
-                    <CheckIcon
-                      active={props.filtersValues[
-                        props.filters[activeFilterIndex].fieldId
-                      ].includes(choice.id)}
-                      className={'material-icons'}
-                    />
-                  </li>
-                ),
+              {getFilterById(activeFilterId).choices.map(
+                (choice: Choice) => {
+                  const filter = getFilterById(activeFilterId);
+                  const handleClick = () => props.createHandler(filter)(choice.id);
+                  console.log(filter)
+                  return (
+                      <li
+                          key={choice.id}
+                          onClick={handleClick}>
+                        {choice.label}
+                        <CheckIcon
+                            active={props.filtersValues[filter[props.idKey]] && props.filtersValues[filter[props.idKey]].includes(choice.id)}
+                            className={'material-icons'}
+                        />
+                      </li>
+                  )
+                },
               )}
             </List>
           )}
