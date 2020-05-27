@@ -50,3 +50,5 @@ export interface School {
     };
   };
 }
+
+export type SearchData = Record<string, string | number | any[]>;
