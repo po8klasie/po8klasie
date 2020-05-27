@@ -3,6 +3,7 @@ import { map, mergeMap } from 'rxjs/operators';
 import { ajax } from 'rxjs/ajax';
 import { of } from 'rxjs';
 import { School } from '../../types';
+import {environment} from "../../environments/environment";
 
 const FETCH_SCHOOL_DETAILS = 'FETCH_SCHOOL_DETAILS';
 const FETCH_SCHOOL_DETAILS_SUCCEEDED = 'FETCH_SCHOOL_DETAILS_SUCCEEDED';
@@ -79,7 +80,7 @@ export const fetchSchoolDetailsEpic: Epic<
     mergeMap(action => {
       return ajax
         .getJSON<any>(
-          `${process.env.REACT_APP_API_URL}/school/?id=${Number(
+          `${environment.API_URL}/school/?id=${Number(
             action.payload,
           ).toString()}`,
         )

@@ -1,4 +1,5 @@
-import { Params, toParams } from './params';
+import { toParams } from './params';
+import {environment} from "../environments/environment";
 
 export const generateSchoolUrl = (searchData: any) => {
   console.log(searchData)
@@ -10,7 +11,7 @@ export const generateSchoolUrl = (searchData: any) => {
     'api',
   );
   console.log(paramsStr)
-  return `${process.env.REACT_APP_API_URL}/school/?${paramsStr}`;
+  return `${environment.API_URL}/school/?${paramsStr}`;
 };
 
 export const getPageNumberFromPaginationUrl = (
