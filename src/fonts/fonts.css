@@ -3,13 +3,8 @@
     font-family: 'IBM Plex Sans';
     font-style: normal;
     font-weight: 700;
-    src: url('./IBMPlexSans-Bold/IBMPlexSans-Bold.eot'); /* IE9 Compat Modes */
     src: local('IBM Plex Sans Bold'), local('IBMPlexSans-Bold'),
-         url('./IBMPlexSans-Bold/IBMPlexSans-Bold.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-         url('./IBMPlexSans-Bold/IBMPlexSans-Bold.woff2') format('woff2'), /* Super Modern Browsers */
-         url('./IBMPlexSans-Bold/IBMPlexSans-Bold.woff') format('woff'), /* Modern Browsers */
-         url('./IBMPlexSans-Bold/IBMPlexSans-Bold.ttf') format('truetype'), /* Safari, Android, iOS */
-         url('./IBMPlexSans-Bold/IBMPlexSans-Bold.svg#IBMPlexSans') format('svg'); /* Legacy iOS */
+         url('./IBMPlexSans-Bold.woff2') format('woff2')
 }
 
 /* open-sans-regular - latin-ext_latin */
@@ -17,11 +12,6 @@
     font-family: 'Open Sans';
     font-style: normal;
     font-weight: 400;
-    src: url('./OpenSans-Regular/OpenSans-Regular.eot'); /* IE9 Compat Modes */
     src: local('Open Sans Regular'), local('OpenSans-Regular'),
-         url('./OpenSans-Regular/OpenSans-Regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-         url('./OpenSans-Regular/OpenSans-Regular.woff2') format('woff2'), /* Super Modern Browsers */
-         url('./OpenSans-Regular/OpenSans-Regular.woff') format('woff'), /* Modern Browsers */
-         url('./OpenSans-Regular/OpenSans-Regular.ttf') format('truetype'), /* Safari, Android, iOS */
-         url('./OpenSans-Regular/OpenSans-Regular.svg#OpenSans') format('svg'); /* Legacy iOS */
+         url('./OpenSans-Regular.woff2') format('woff2')
 }
