@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {setupSentry} from "./utils/sentry";
+import { setupSentry } from './utils/sentry';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 

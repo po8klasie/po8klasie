@@ -1,9 +1,15 @@
-import React, {createElement, useEffect, useLayoutEffect, useRef, useState} from 'react';
+import React, {
+  createElement,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from 'react';
 import { RouteComponentProps, navigate } from '@reach/router';
 import Layout from '../components/Layout';
 import Container from '../components/Container';
 import styled from '../styling/styled';
-import {connect, useSelector} from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { fetchSchools } from '../store/modules/schools';
 // import FiltersControl from '../components/schoolsPage/SearchFiltersControler';
 // import { InputWithAddon } from '../components/Input';
@@ -13,17 +19,17 @@ import { fetchSchools } from '../store/modules/schools';
 // import Pagination from '../components/Pagination';
 // import { useSearch } from '../hooks/useSearch';
 import PageTitle from '../components/PageTitle';
-import {DEFAULT_VIEW, searchViews} from '../data/searchViews';
+import { DEFAULT_VIEW, searchViews } from '../data/searchViews';
 // import SearchOrderingController from '../components/schoolsPage/SearchOrderingControl';
 // import { BehaviorSubject } from 'rxjs';
 import SearchQueryController from '../components/schoolsPage/SearchQueryController';
-import {getSearchDataFromParams, toParams} from '../utils/params';
+import { getSearchDataFromParams, toParams } from '../utils/params';
 // import SearchViewController from '../components/schoolsPage/SearchViewControl';
 // import { frontendOnlyParams } from '../data/paramsOverwrites';
 import SearchPaginationController from '../components/schoolsPage/SearchPaginationController';
-import SearchViewController from "../components/schoolsPage/SearchViewController";
-import SearchOrderingController from "../components/schoolsPage/SearchOrderingController";
-import SearchFiltersController from "../components/schoolsPage/SearchFiltersController";
+import SearchViewController from '../components/schoolsPage/SearchViewController';
+import SearchOrderingController from '../components/schoolsPage/SearchOrderingController';
+import SearchFiltersController from '../components/schoolsPage/SearchFiltersController';
 // import { useParamsChangeHandler } from '../hooks/useParamsChangeHandler';
 
 const Count = styled.small`
@@ -46,17 +52,17 @@ interface SchoolsPageProps extends RouteComponentProps {}
 
 const SchoolsPage = (props: any) => {
   const { searchData } = useSelector((state: any) => ({
-    searchData: state.schools.searchData
+    searchData: state.schools.searchData,
   }));
   useLayoutEffect(() => {
     props.fetchSchools({
-      searchData: getSearchDataFromParams(props.location.search)
+      searchData: getSearchDataFromParams(props.location.search),
     });
   }, []);
   useEffect(() => {
     const params = toParams(searchData, 'search');
     navigate(`?${params}`);
-  }, [searchData])
+  }, [searchData]);
   // useParamsChangeHandler({
   //   payload$: payload$.current,
   //   excludeKeys: [],
@@ -98,7 +104,9 @@ const SchoolsPage = (props: any) => {
   //   : schoolsPerCurrentPage;
   // console.log(schools, page);
   // @ts-ignore
-  const view = searchViews.find(v => v.id === props.schools.searchData.view) ?? DEFAULT_VIEW;
+  const view =
+    searchViews.find(v => v.id === props.schools.searchData.view) ??
+    DEFAULT_VIEW;
 
   return (
     <Layout>

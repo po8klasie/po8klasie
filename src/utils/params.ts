@@ -5,7 +5,7 @@ import { FilterData, filters } from '../data/filters';
 // } from '../data/paramsOverwrites';
 // import { orderingTypes } from '../data/ordering';
 // import { defaultViewId } from '../data/searchViews';
-import {searchControllersConfigs} from "../data/searchControllers";
+import { searchControllersConfigs } from '../data/searchControllers';
 
 export type Params = Record<string, string | number | any[]>;
 export type ParamsMode = 'api' | 'search';
@@ -37,22 +37,19 @@ export const getSearchDataFromParams = (searchStr: string) => {
   const searchData: any = {};
 
   Object.entries(searchControllersConfigs).forEach(([key, config]) => {
-    const fromParam = config.fromParamHandler({key, p});
+    const fromParam = config.fromParamHandler({ key, p });
     searchData[key] = fromParam ? fromParam : config.defaultValue;
   });
 
   return searchData;
 };
 
-
-
 export const toParams = (obj: Params, mode: ParamsMode, searchStr?: string) => {
   const p = new URLSearchParams(searchStr ?? '');
 
   Object.entries(obj).forEach(([key, value]) => {
     const config = searchControllersConfigs[key];
-    if(config)
-      return config.toParamHandler({key, value, mode, p});
+    if (config) return config.toParamHandler({ key, value, mode, p });
 
     if (
       typeof value === 'number' ||
@@ -82,7 +79,6 @@ export const toParams = (obj: Params, mode: ParamsMode, searchStr?: string) => {
     //   if (p.has(key)) p.delete(key);
     //   return;
     // }
-
 
     //
     //

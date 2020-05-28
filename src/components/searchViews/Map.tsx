@@ -5,8 +5,8 @@ import L, { LatLngExpression } from 'leaflet';
 import styled from '../../styling/styled';
 import { keyframes } from '@emotion/core';
 import { render } from 'react-dom';
-import {useSelector} from "react-redux";
-import {School} from "../../types";
+import { useSelector } from 'react-redux';
+import { School } from '../../types';
 
 const loaderAnimation = keyframes`
     0%, 100% {
@@ -43,10 +43,7 @@ const MapWrapper = styled.div<{ loading: boolean }>`
 `;
 
 const MapSearchView: FC = () => {
-  const {
-    isFetching,
-    schools,
-  } = useSelector((state: any) => ({
+  const { isFetching, schools } = useSelector((state: any) => ({
     isFetching: state.schools.fetchingData.isFetching,
     schools: state.schools.results.flat(),
   }));

@@ -1,13 +1,14 @@
 import { ofType, Epic } from 'redux-observable';
 import { expand, map, mergeMap } from 'rxjs/operators';
 import { ajax } from 'rxjs/ajax';
-import {School, SearchData} from '../../types';
+import { School, SearchData } from '../../types';
 import { getTotalPages } from '../../utils/pagination';
 import { Params } from '../../utils/params';
 import { State } from './root';
 import { EMPTY, of } from 'rxjs';
 import {
-  areObjectsDifferent, areObjectsDifferentWithout,
+  areObjectsDifferent,
+  areObjectsDifferentWithout,
   removeFromObject,
   withoutPageAndView,
 } from '../../utils/misc';
@@ -19,27 +20,27 @@ import {
   generateResults,
   getPayloadFromState,
   getResetedSearchDataProperties,
-} from "../../utils/schoolsModuleUtils";
-import {searchControllersConfigs} from "../../data/searchControllers";
-import {getSearchViewById} from "../../utils/searchViews";
+} from '../../utils/schoolsModuleUtils';
+import { searchControllersConfigs } from '../../data/searchControllers';
+import { getSearchViewById } from '../../utils/searchViews';
 
 export type SchoolsState = {
-  results: School[][]
-  searchData: SearchData
+  results: School[][];
+  searchData: SearchData;
   responseData: {
-    count: number | null
-  }
+    count: number | null;
+  };
   fetchingData: {
-    isFetching: boolean
-    fetchedAll: boolean
-  }
+    isFetching: boolean;
+    fetchedAll: boolean;
+  };
 };
 
 const FETCH_SCHOOLS = 'FETCH_SCHOOLS';
 const FETCH_SCHOOLS_SUCCEEDED = 'FETCH_SCHOOLS_SUCCEEDED';
 
 interface FetchSchoolsActionPayload {
-  searchData: SearchData
+  searchData: SearchData;
 }
 
 interface FetchSchoolsAction {
@@ -72,20 +73,33 @@ export const fetchSchoolsEpic: Epic<Actions, any, State> = (action$, state$) =>
   action$.pipe(
     ofType<Actions, any>(FETCH_SCHOOLS),
     mergeMap(action => {
-      const { payload: { searchData } } = action;
+      const {
+        payload: { searchData },
+      } = action;
       const { schools } = state$.value;
 
       // return value from state if params hasn't changed
-      const searchDataDidChange = areObjectsDifferentWithout(state$.value.schools.searchData, searchData, ['page']);
-      if(!searchDataDidChange
-         && (schools.fetchingData.fetchedAll || (schools.results[searchData.page] && schools.results[searchData.page].length > 0)))
+      const searchDataDidChange = areObjectsDifferentWithout(
+        state$.value.schools.searchData,
+        searchData,
+        ['page'],
+      );
+      if (
+        !searchDataDidChange &&
+        (schools.fetchingData.fetchedAll ||
+          (schools.results[searchData.page] &&
+            schools.results[searchData.page].length > 0))
+      )
         return of(fetchSchoolsSucceeded(getPayloadFromState(state$.value)));
 
       const freshSearchData = areObjectsDifferentWithout(
-          state$.value.schools.searchData,
-          searchData,
-          ['page']) ? getResetedSearchDataProperties(searchData): searchData;
-      if(state$.value.schools.searchData.view !== searchData.view)
+        state$.value.schools.searchData,
+        searchData,
+        ['page'],
+      )
+        ? getResetedSearchDataProperties(searchData)
+        : searchData;
+      if (state$.value.schools.searchData.view !== searchData.view)
         freshSearchData.ordering = null;
 
       const layoutSettings = getSearchViewById(freshSearchData.view).layout;
@@ -101,7 +115,8 @@ export const fetchSchoolsEpic: Epic<Actions, any, State> = (action$, state$) =>
           const resultsFromState = state$.value.schools.results;
           const totalPages = getTotalPages(res.count) + 1;
 
-          const results = resultsFromState.length > 0 && searchDataDidChange
+          const results =
+            resultsFromState.length > 0 && searchDataDidChange
               ? resultsFromState
               : new Array(totalPages).fill([]); // create 2d array
 
@@ -110,7 +125,7 @@ export const fetchSchoolsEpic: Epic<Actions, any, State> = (action$, state$) =>
           const fetchedAll = fetchAll && pageNo === totalPages - 1;
           let isFetching = false;
 
-          if(fetchAll && totalPages > 1)
+          if (fetchAll && totalPages > 1)
             isFetching = pageNo !== totalPages - 1;
 
           return fetchSchoolsSucceeded({
@@ -121,7 +136,7 @@ export const fetchSchoolsEpic: Epic<Actions, any, State> = (action$, state$) =>
             searchData: freshSearchData,
             fetchingData: {
               isFetching,
-              fetchedAll
+              fetchedAll,
             },
           });
         }),
@@ -131,14 +146,19 @@ export const fetchSchoolsEpic: Epic<Actions, any, State> = (action$, state$) =>
 
 const initialState: SchoolsState = {
   results: [],
-  searchData: Object.fromEntries(Object.entries(searchControllersConfigs).map(([key, config]) => [key, config.defaultValue])),
+  searchData: Object.fromEntries(
+    Object.entries(searchControllersConfigs).map(([key, config]) => [
+      key,
+      config.defaultValue,
+    ]),
+  ),
   responseData: {
     count: null,
   },
   fetchingData: {
     isFetching: false,
-    fetchedAll: false
-  }
+    fetchedAll: false,
+  },
 };
 
 const schools = (
@@ -151,14 +171,14 @@ const schools = (
         ...state,
         fetchingData: {
           isFetching: false,
-          fetchedAll: false
+          fetchedAll: false,
         },
       };
 
     case FETCH_SCHOOLS_SUCCEEDED:
       return {
         ...state,
-        ...action.payload
+        ...action.payload,
       };
 
     default:

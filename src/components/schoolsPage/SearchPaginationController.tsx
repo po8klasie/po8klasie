@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from '../../styling/styled';
 import { getTotalPages } from '../../utils/pagination';
 import {
@@ -7,12 +7,12 @@ import {
 } from '../../hooks/useSearchControl';
 import { School } from '../../types';
 import { useParamsChangeHandler } from '../../hooks/useParamsChangeHandler';
-import {useDispatch, useSelector} from "react-redux";
-import {fetchSchools} from "../../store/modules/schools";
-import {createToParamHandler} from "../../utils/paramHandlers";
-import {createSearchControllerConfig} from "../../utils/searchControllers";
-import {DEFAULT_VIEW, searchViews} from "../../data/searchViews";
-import {getSearchViewById} from "../../utils/searchViews";
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchSchools } from '../../store/modules/schools';
+import { createToParamHandler } from '../../utils/paramHandlers';
+import { createSearchControllerConfig } from '../../utils/searchControllers';
+import { DEFAULT_VIEW, searchViews } from '../../data/searchViews';
+import { getSearchViewById } from '../../utils/searchViews';
 
 const PaginationWrapper = styled.div`
   display: flex;
@@ -55,26 +55,30 @@ interface SearchPaginationControlProps extends SearchControlProps {
 const SearchPaginationController = () => {
   const { searchData, count } = useSelector((page: any) => ({
     searchData: page.schools.searchData,
-    count: page.schools.responseData.count
+    count: page.schools.responseData.count,
   }));
-  const [active, setActive] = useState(getSearchViewById(searchData.view)?.layout?.enablePagination);
+  const [active, setActive] = useState(
+    getSearchViewById(searchData.view)?.layout?.enablePagination,
+  );
 
   useEffect(() => {
-    setActive(getSearchViewById(searchData.view)?.layout?.enablePagination)
+    setActive(getSearchViewById(searchData.view)?.layout?.enablePagination);
   }, [searchData.view]);
 
   const { page } = searchData;
-  
+
   const dispatch = useDispatch();
 
   const totalPages = getTotalPages(count);
   const paginate = (e: any, updatedPage: number) => {
-    dispatch(fetchSchools({
-      searchData: {
-        ...searchData,
-        page: updatedPage
-      }
-    }));
+    dispatch(
+      fetchSchools({
+        searchData: {
+          ...searchData,
+          page: updatedPage,
+        },
+      }),
+    );
   };
 
   if (!active) {
@@ -138,28 +142,25 @@ const SearchPaginationController = () => {
 
 const searchDataKey = 'page';
 
-export const searchPaginationControllerConfig = createSearchControllerConfig(searchDataKey, {
-  defaultValue: 1,
-  toParamHandler: ({value, key, p }) => {
-    if (
-        typeof value === 'number' &&
-        Number.isInteger(value) &&
-        value > 1
-    )
-      return p.set(key, value as any);
+export const searchPaginationControllerConfig = createSearchControllerConfig(
+  searchDataKey,
+  {
+    defaultValue: 1,
+    toParamHandler: ({ value, key, p }) => {
+      if (typeof value === 'number' && Number.isInteger(value) && value > 1)
+        return p.set(key, value as any);
 
-    if(p.has(key)) p.delete(key)
-  },
-  fromParamHandler: ({p, key}) => {
-    const param = p.has(key) && p.get(key) ? p.get(key) : null;
-    if(!param)
+      if (p.has(key)) p.delete(key);
+    },
+    fromParamHandler: ({ p, key }) => {
+      const param = p.has(key) && p.get(key) ? p.get(key) : null;
+      if (!param) return null;
+
+      if (parseInt(param) && parseInt(param) > 0) return parseInt(param);
+
       return null;
-
-    if(parseInt(param) && parseInt(param) > 0)
-      return parseInt(param);
-
-    return null;
-  }
-});
+    },
+  },
+);
 
 export default SearchPaginationController;

@@ -39,6 +39,6 @@ export const useFilters = (options: UseFiltersOptions) => {
   return {
     filtersValues,
     createHandler,
-    setFiltersValues
+    setFiltersValues,
   };
 };

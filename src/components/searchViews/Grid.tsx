@@ -6,7 +6,7 @@ import Card from '../Card';
 import { createPlaceholderStyles } from '../../utils/loading';
 import { SearchViewProps } from '../../data/searchViews';
 import Container from '../Container';
-import {useSelector} from "react-redux";
+import { useSelector } from 'react-redux';
 
 const Results = styled.div`
   display: grid;
@@ -32,29 +32,21 @@ const LoadingCard = styled(Card)`
 `;
 
 const GridSearchView: FC = () => {
-    const {
-        isFetching,
-        schools,
-        count,
-        page
-    } = useSelector((state: any) => ({
-        isFetching: state.schools.fetchingData.isFetching,
-        schools: state.schools.results,
-        count: state.schools.responseData.count,
-        page: state.schools.searchData.page
-    }));
-    // const page = 1;
-    const schoolsPerCurrentPage =
-        schools && schools[page]
-            ? schools[page]
-            : [];
+  const { isFetching, schools, count, page } = useSelector((state: any) => ({
+    isFetching: state.schools.fetchingData.isFetching,
+    schools: state.schools.results,
+    count: state.schools.responseData.count,
+    page: state.schools.searchData.page,
+  }));
+  // const page = 1;
+  const schoolsPerCurrentPage = schools && schools[page] ? schools[page] : [];
   return (
     <Container>
       <Results>
         {isFetching &&
           new Array(3).fill(null).map((_, i) => <LoadingCard key={i} />)}
         {!isFetching &&
-        schoolsPerCurrentPage.map((school: School) => (
+          schoolsPerCurrentPage.map((school: School) => (
             <SchoolCard key={school.id} school={school} />
           ))}
       </Results>

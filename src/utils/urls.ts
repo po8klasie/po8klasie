@@ -1,8 +1,8 @@
 import { toParams } from './params';
-import {environment} from "../environments/environment";
+import { environment } from '../environments/environment';
 
 export const generateSchoolUrl = (searchData: any) => {
-  console.log(searchData)
+  console.log(searchData);
   const paramsStr = toParams(
     {
       ...searchData,
@@ -10,7 +10,7 @@ export const generateSchoolUrl = (searchData: any) => {
     },
     'api',
   );
-  console.log(paramsStr)
+  console.log(paramsStr);
   return `${environment.API_URL}/school/?${paramsStr}`;
 };
 

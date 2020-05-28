@@ -43,4 +43,6 @@ export const searchViews: SearchView[] = [
   },
 ];
 
-export const DEFAULT_VIEW = searchViews.find(v => v.id === DEFAULT_VIEW_ID) as SearchView;
+export const DEFAULT_VIEW = searchViews.find(
+  v => v.id === DEFAULT_VIEW_ID,
+) as SearchView;
