@@ -17,13 +17,13 @@ const DropdownWrapper = styled.div<{ active: boolean }>`
     background: white;
     border-style: solid;
     border-width: ${props => (props.active ? '2' : '1')}px;
-    border-color: ${props => props.theme.colors.primaryLight};
+    border-color: ${props => props.theme.colors.dark};
     border-radius: 10px;
     font-size: 1em;
     transition: 0.2s all;
 
     .material-icons {
-      color: ${props => props.theme.colors.primaryLight};
+      color: ${props => props.theme.colors.dark};
       margin-left: 10px;
       transition: transform 0.2s;
     }
@@ -36,12 +36,12 @@ const DropdownWrapper = styled.div<{ active: boolean }>`
     left: 0;
     width: 100%;
     height: 20px;
+    z-index: 1000;
   }
   .list {
     position: absolute;
     top: calc(100% + 10px);
     left: 0;
-    z-index: 3;
     min-width: 100%;
     background: white;
     box-shadow: 0px 3px 6px #00000029;
@@ -51,6 +51,7 @@ const DropdownWrapper = styled.div<{ active: boolean }>`
     visibility: hidden;
     opacity: 0;
     transition: 0.2s all;
+    z-index: 1000;
 
     ul {
       margin: 0;
@@ -75,8 +76,6 @@ const DropdownWrapper = styled.div<{ active: boolean }>`
   }
   &:hover button {
     background: ${props => props.theme.colors.light};
-    border-color: ${props =>
-      props.active ? props.theme.colors.primaryLight : 'transparent'};
   }
 `;
 const ListItem = styled.li<{ active: boolean }>`

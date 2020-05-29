@@ -15,7 +15,7 @@ export const filters: FilterData[] = [
   {
     searchParam: 'public',
     apiParam: 'is_public',
-    title: 'Publiczna',
+    title: 'Szkoła publiczna',
     multiple: true,
     choices: [
       {

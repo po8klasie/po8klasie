@@ -55,7 +55,7 @@ const SearchOrderingController: FC = () => {
 
   return (
     <Dropdown
-      title={'Sortuj po'}
+      title={'Sortuj według'}
       choices={orderingDropdownChoices}
       onSelect={changeOrdering}
       onSubmit={handleChange}

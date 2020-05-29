@@ -31,15 +31,29 @@ const Count = styled.small`
   margin: 1em 0 2em 0;
 `;
 
-const AdditionalOptions = styled.div`
+const QueryRow = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin-top: 10px;
-
-  & > div:first-of-type {
-    display: inline-flex;
+  aling-items: center;
+  
+  & > div {
+    display: flex;
+    
+    & > div {
+      margin-right: 10px;
+      
+      @media(max-width: 690px) {
+        margin: 0 0 10px 0;
+      }
+    }
+    @media(max-width: 690px) {
+        display: block;
+        margin-bottom: 10px;
+   }
   }
+      @media(max-width: 690px) {
+        display: block;
+   }
 `;
 
 interface SchoolsPageProps extends RouteComponentProps {}
@@ -57,62 +71,22 @@ const SchoolsPage = (props: any) => {
     const params = toParams(searchData, 'search');
     navigate(`?${params}`);
   }, [searchData])
-  // useParamsChangeHandler({
-  //   payload$: payload$.current,
-  //   excludeKeys: [],
-  //   deps: [view],
-  //   onParamsChange: (prevData: any, data: any) => {
-  //     const params = toParams(data, 'search');
-  //     navigate(`?${params}`);
-  //     console.log(data, page);
-  //     let currentView = view;
-  //     console.log(view.id, data.view);
-  //     if (view.id !== data.view) {
-  //       console.log('changed');
-  //       let v = searchViews.find(v => v.id === data.view);
-  //       if (!v) return;
-  //       currentView = v;
-  //       setView(currentView);
-  //     }
-  //     console.log(data.page);
-  //     setPage(data.page);
-  //
-  //     // const dontFetch = Boolean(frontendOnlyParams.find(p => lastData.current && lastData.current[p] !== data[p]));
-  //     // lastData.current = data;
-  //     // if(dontFetch)
-  //     //   return;
-  //     props.fetchSchools({
-  //       params: data,
-  //       fetchAll: !currentView.layout || !currentView.layout.enablePagination,
-  //     });
-  //   },
-  // });
-
-  // const showAll = !view.layout || !view.layout.enablePagination;
-  // const schoolsPerCurrentPage =
-  //   props.schools.results && props.schools.results[page]
-  //     ? props.schools.results[page]
-  //     : [];
-  // const schools = showAll
-  //   ? props.schools.results.flat()
-  //   : schoolsPerCurrentPage;
-  // console.log(schools, page);
-  // @ts-ignore
   const view = searchViews.find(v => v.id === props.schools.searchData.view) ?? DEFAULT_VIEW;
 
   return (
     <Layout>
       <Container>
         <PageTitle>Znajdź swoją wymarzoną szkołę</PageTitle>
-
-        <SearchQueryController />
-        <SearchFiltersController />
-        <AdditionalOptions>
+        <QueryRow>
           <div>
-            <SearchOrderingController />
+            <div>
+              <SearchQueryController />
+            </div>
+              <SearchOrderingController />
           </div>
           <SearchViewController />
-        </AdditionalOptions>
+        </QueryRow>
+        <SearchFiltersController />
         {/*  /!*{!props.schools.isFetching && <Count>Liczba wyników: {props.schools.count}</Count>}*!/*/}
       </Container>
       {createElement(view.component)}
