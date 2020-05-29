@@ -3,21 +3,14 @@ import { expand, map, mergeMap } from 'rxjs/operators';
 import { ajax } from 'rxjs/ajax';
 import { School, SearchData } from '../../types';
 import { getTotalPages } from '../../utils/pagination';
-import { Params } from '../../utils/params';
 import { State } from './root';
 import { EMPTY, of } from 'rxjs';
-import {
-  areObjectsDifferent,
-  areObjectsDifferentWithout,
-  removeFromObject,
-  withoutPageAndView,
-} from '../../utils/misc';
+import { areObjectsDifferentWithout } from '../../utils/misc';
 import {
   generateSchoolUrl,
   getPageNumberFromPaginationUrl,
 } from '../../utils/urls';
 import {
-  generateResults,
   getPayloadFromState,
   getResetedSearchDataProperties,
 } from '../../utils/schoolsModuleUtils';
@@ -79,18 +72,15 @@ export const fetchSchoolsEpic: Epic<Actions, any, State> = (action$, state$) =>
       const { schools } = state$.value;
 
       // return value from state if params hasn't changed
-      const searchDataDidChange = areObjectsDifferentWithout(
-        state$.value.schools.searchData,
-        searchData,
-        ['page'],
-      );
-      if (
-        !searchDataDidChange &&
-        (schools.fetchingData.fetchedAll ||
-          (schools.results[searchData.page] &&
-            schools.results[searchData.page].length > 0))
-      )
-        return of(fetchSchoolsSucceeded(getPayloadFromState(state$.value)));
+
+      // console.log(searchDataDidChange)
+      // if (
+      //   !searchDataDidChange &&
+      //   (schools.fetchingData.fetchedAll ||
+      //     (schools.results[searchData.page] &&
+      //       schools.results[searchData.page].length > 0))
+      // )
+      //   return of(fetchSchoolsSucceeded(getPayloadFromState(state$.value)));
 
       const freshSearchData = areObjectsDifferentWithout(
         state$.value.schools.searchData,
@@ -114,9 +104,14 @@ export const fetchSchoolsEpic: Epic<Actions, any, State> = (action$, state$) =>
           const pageNo = getPageNumberFromPaginationUrl(res.previous, res.next);
           const resultsFromState = state$.value.schools.results;
           const totalPages = getTotalPages(res.count) + 1;
+          const searchDataDidChange = areObjectsDifferentWithout(
+            state$.value.schools.searchData,
+            searchData,
+            ['page'],
+          );
 
           const results =
-            resultsFromState.length > 0 && searchDataDidChange
+            resultsFromState.length > 0 && !searchDataDidChange
               ? resultsFromState
               : new Array(totalPages).fill([]); // create 2d array
 

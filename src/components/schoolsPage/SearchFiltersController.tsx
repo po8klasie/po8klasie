@@ -50,6 +50,8 @@ const SearchFiltersController: FC = () => {
   }, [searchData.filters]);
 
   const handleSubmit = (e: any) => {
+    if (!areObjectsDifferent(filtersValues, searchData.filters)) return;
+
     dispatch(
       fetchSchools({
         searchData: {

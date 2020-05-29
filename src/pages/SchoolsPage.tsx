@@ -37,14 +37,10 @@ const Count = styled.small`
   margin: 1em 0 2em 0;
 `;
 
-const AdditionalOptions = styled.div`
+const QueryRow = styled.div`
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 10px;
-
-  & > div:first-of-type {
-    display: inline-flex;
+  & > *:first-of-type {
+    margin-right: 10px;
   }
 `;
 
@@ -112,15 +108,13 @@ const SchoolsPage = (props: any) => {
     <Layout>
       <Container>
         <PageTitle>Znajdź swoją wymarzoną szkołę</PageTitle>
+        <QueryRow>
+          <SearchQueryController />
+          <SearchOrderingController />
+        </QueryRow>
 
-        <SearchQueryController />
         <SearchFiltersController />
-        <AdditionalOptions>
-          <div>
-            <SearchOrderingController />
-          </div>
-          <SearchViewController />
-        </AdditionalOptions>
+        <SearchViewController />
         {/*  /!*{!props.schools.isFetching && <Count>Liczba wyników: {props.schools.count}</Count>}*!/*/}
       </Container>
       {createElement(view.component)}

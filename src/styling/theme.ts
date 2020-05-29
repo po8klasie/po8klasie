@@ -4,6 +4,7 @@ export interface Theme {
     primaryLight: string;
     secondary: string;
     light: string;
+    dark: string;
     text: string;
   };
   fonts: {
@@ -18,6 +19,7 @@ const theme: Theme = {
     primaryLight: '#BA98FF',
     secondary: '#82EAAC',
     light: '#F2F2F2',
+    dark: '#707070',
     text: '#272727',
   },
   fonts: {

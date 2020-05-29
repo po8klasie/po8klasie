@@ -14,6 +14,7 @@ import L, { LatLngExpression } from 'leaflet';
 
 import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
+import { getSchoolMarker } from '../utils/map';
 const DefaultIcon = L.icon({
   iconUrl: icon,
   shadowUrl: iconShadow,
@@ -144,7 +145,6 @@ const MapWrapper = styled.div`
   width: 100%;
   border: none;
   height: 40vh;
-  filter: grayscale(1);
 `;
 const SwitchButton = styled.button<{ active: boolean }>`
   color: ${props => props.theme.colors.primary};
@@ -193,6 +193,7 @@ const SchoolPage = (props: SchoolPageProps) => {
   const { school, classes } = props.schoolDetails;
   const map = useRef<any>(null);
   const defaultBaseLayer = useRef<any>(null);
+  const marker = useRef<any>(null);
   const [showPublicTransportRoutes, setShowPublicTransportRoutes] = useState(
     false,
   );
@@ -222,12 +223,18 @@ const SchoolPage = (props: SchoolPageProps) => {
 
   useEffect(() => {
     if (map.current && school && school.address) {
-      const coords: LatLngExpression = {
+      let coords: LatLngExpression = {
         lat: school.address.longitude,
         lng: school.address.latitude,
       };
       map.current.setView(coords, 13);
-      L.marker(coords)
+      if (marker.current) {
+        map.current.removeLayer(marker.current);
+        map.current.setView(coords, 13);
+      }
+      marker.current = L.marker(coords, {
+        icon: getSchoolMarker(school.school_type),
+      })
         .addTo(map.current)
         .bindPopup(school.school_name)
         .openPopup();
