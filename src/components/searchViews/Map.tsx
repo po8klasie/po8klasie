@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useRef, useState } from 'react';
+import React, { FC, useEffect, useRef } from 'react';
 import { SearchViewProps } from '../../data/searchViews';
 import Map from '../Map';
 import L, { LatLngExpression } from 'leaflet';
@@ -7,15 +7,6 @@ import { keyframes } from '@emotion/core';
 import { render } from 'react-dom';
 import { useSelector } from 'react-redux';
 import { School } from '../../types';
-import {
-  getSchoolMarker,
-  highSchoolMarkerImage,
-  specialSchoolMarkerImage,
-  technicalSchoolMarkerImage,
-  vocationalSchoolMarkerImage,
-} from '../../utils/map';
-import Container from '../Container';
-import { Link } from '@reach/router';
 
 const loaderAnimation = keyframes`
     0%, 100% {
@@ -48,39 +39,10 @@ const MapWrapper = styled.div<{ loading: boolean }>`
     visibility: ${props => (props.loading ? 'visible' : 'hidden')};
     opacity: ${props => (props.loading ? '1' : '0')};
     transition: 0.2s all;
-    z-index: 100;
   }
 `;
-const MarkerKey = styled.div`
-  display: flex;
-  justify-content: space-between;
-  div {
-    display: flex;
-    align-items: center;
-    margin: 0 10px;
-    
-    img {
-      width 30.5px;
-      margin-right: 1em;
-    }
-    
-    @media(max-width: 900px) {
-      margin: 20px 10px;
-    }
-  }
-  @media(max-width: 900px) {
-     display: block;
-  }
-`;
-const PopupLink = styled(Link)`
-  color: black !important;
-  text-decoration: underline;
-  text-align: center;
-  font-family: 'Open Sans';
-  display: block;
-`;
+
 const MapSearchView: FC = () => {
-  const [isLoading, setLoading] = useState(true);
   const { isFetching, schools } = useSelector((state: any) => ({
     isFetching: state.schools.fetchingData.isFetching,
     schools: state.schools.results.flat(),
@@ -94,8 +56,6 @@ const MapSearchView: FC = () => {
     map.current = _map;
   };
   useEffect(() => {
-    console.log('changed schools', schools);
-    setLoading(true);
     if (!map.current || isFetching) return;
 
     markers.current.forEach(m => {
@@ -103,7 +63,6 @@ const MapSearchView: FC = () => {
     });
 
     schools.map((school: School) => {
-      console.log(school.school_type);
       if (
         !school.address ||
         !school.address.longitude ||
@@ -115,47 +74,21 @@ const MapSearchView: FC = () => {
         school.address.longitude,
         school.address.latitude,
       ];
-      const popupEl = document.createElement('span');
-      render(
-        <PopupLink to={`/school/${school.id}`}>{school.school_name}</PopupLink>,
-        popupEl,
-      );
 
       markers.current.push(
-        L.marker(coords, {
-          icon: getSchoolMarker(school.school_type),
-        })
+        L.marker(coords)
           .addTo(map.current)
-          .bindPopup(popupEl),
+          .bindPopup(
+            `<a href="/school/${school.id}">${school.school_name}</a>`,
+          ),
       );
     });
-    setLoading(false);
   }, [schools]);
 
   return (
-    <>
-      <Container>
-        <MarkerKey>
-          {[
-            ['liceum ogólnokształcące', highSchoolMarkerImage],
-            ['technikum', technicalSchoolMarkerImage],
-            ['szkoła branżowa', vocationalSchoolMarkerImage],
-            [
-              'szkoła specjalna przyspasabiająca do zawodu',
-              specialSchoolMarkerImage,
-            ],
-          ].map(([name, imageUrl]) => (
-            <div key={name}>
-              <img src={imageUrl} alt="" />
-              <span>{name}</span>
-            </div>
-          ))}
-        </MarkerKey>
-      </Container>
-      <MapWrapper loading={isLoading}>
-        <Map onConfig={handleConfig} />
-      </MapWrapper>
-    </>
+    <MapWrapper loading={isFetching}>
+      <Map onConfig={handleConfig} />
+    </MapWrapper>
   );
 };
 

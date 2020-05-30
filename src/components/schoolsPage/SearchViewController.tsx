@@ -10,16 +10,18 @@ import SearchQueryController from './SearchQueryController';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSchools } from '../../store/modules/schools';
 
-const Switch = styled.div`
-  margin: 2em 0 calc(2em + 20px) 0;
+const Icons = styled.div`
   button {
     background: none;
     border: none;
     outline: none;
-    color: ${props => props.theme.colors.primary};
-    font-weight: bold;
-    font-family: inherit;
+    padding: 10px;
     cursor: pointer;
+
+    svg {
+      width: 1.3em;
+      height: 1.3em;
+    }
   }
 `;
 
@@ -41,17 +43,13 @@ const SearchViewController: FC = () => {
   };
 
   return (
-    <Switch>
-      {searchViews
-        .filter(v => v.id !== searchData.view)
-        .map(v => {
-          return (
-            <button onClick={() => changeView(v.id)} key={v.id}>
-              {v.title}
-            </button>
-          );
-        })}
-    </Switch>
+    <Icons>
+      {searchViews.map(view => (
+        <button onClick={() => changeView(view.id)}>
+          {createElement(view.iconComponent)}
+        </button>
+      ))}
+    </Icons>
   );
 };
 

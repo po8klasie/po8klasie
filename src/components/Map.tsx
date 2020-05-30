@@ -9,9 +9,19 @@ import React, {
 } from 'react';
 import 'leaflet/dist/leaflet.css';
 import L, { LatLngExpression } from 'leaflet';
-import { defaultMarker } from '../utils/map';
+import icon from 'leaflet/dist/images/marker-icon.png';
+import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 
-L.Marker.prototype.options.icon = defaultMarker;
+const DefaultIcon = L.icon({
+  iconUrl: icon,
+  shadowUrl: iconShadow,
+  iconSize: [25, 41], // size of the icon
+  shadowSize: [41, 41], // size of the shadow
+  iconAnchor: [12.5, 41], // point of the icon which will correspond to marker's location
+  shadowAnchor: [12.5, 41], // the same for the shadow
+  popupAnchor: [0, -43], // point from which the popup should open relative to the iconAnchor
+});
+L.Marker.prototype.options.icon = DefaultIcon;
 
 const MapWrapper = styled.div`
   width: 100%;
@@ -22,10 +32,8 @@ const MapElement = styled.div`
   width: 100%;
   border: none;
   height: 100%;
-
-  .base-layer {
-    filter: grayscale(1);
-  }
+  // margin-top: 3em;
+  filter: grayscale(1);
 `;
 
 interface MapProps {
@@ -42,7 +50,6 @@ const Map: FC<MapProps> = props => {
     const defaultTileLayer = L.tileLayer(
       'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
       {
-        className: 'base-layer',
         attribution:
           '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
       },

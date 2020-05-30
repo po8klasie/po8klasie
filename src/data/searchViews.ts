@@ -14,6 +14,7 @@ export interface SearchViewProps {
 export interface SearchView {
   title: string;
   id: string;
+  iconComponent: FC;
   component: FC<SearchViewProps>;
   layout?: {
     enablePagination?: boolean;
@@ -25,8 +26,9 @@ export const DEFAULT_VIEW_ID = 'grid';
 
 export const searchViews: SearchView[] = [
   {
-    title: 'Widok listy',
+    title: 'Siatka',
     id: 'grid',
+    iconComponent: FiGrid,
     component: GridSearchView,
     layout: {
       enablePagination: true,
@@ -34,8 +36,9 @@ export const searchViews: SearchView[] = [
     },
   },
   {
-    title: 'Widok mapy',
+    title: 'Mapa',
     id: 'map',
+    iconComponent: FiMap,
     component: MapSearchView,
   },
 ];
