@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from '../styling/styled';
 
 const DoubleGrid = styled.div<{ reversed?: boolean }>`
@@ -15,13 +14,13 @@ const DoubleGrid = styled.div<{ reversed?: boolean }>`
       "title image"
       "text image"
     `};
-  & h2 {
+  h2 {
     grid-area: title;
   }
-  & p {
+  p {
     grid-area: text;
   }
-  & div {
+  div {
     grid-area: image;
   }
   @media (max-width: 880px) {

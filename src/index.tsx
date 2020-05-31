@@ -1,8 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import * as Sentry from '@sentry/browser';
-import './icons/material-icons.css';
-import './fonts/fonts.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 

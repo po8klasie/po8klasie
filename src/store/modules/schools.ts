@@ -1,21 +1,17 @@
 import { ofType, Epic } from 'redux-observable';
+import { EMPTY } from 'rxjs';
 import { expand, map, mergeMap } from 'rxjs/operators';
 import { ajax } from 'rxjs/ajax';
+import { searchControllersConfigs } from '../../data/searchControllers';
 import { School, SearchData } from '../../types';
 import { getTotalPages } from '../../utils/pagination';
-import { State } from './root';
-import { EMPTY, of } from 'rxjs';
 import { areObjectsDifferentWithout } from '../../utils/misc';
 import {
   generateSchoolUrl,
   getPageNumberFromPaginationUrl,
 } from '../../utils/urls';
-import {
-  getPayloadFromState,
-  getResetedSearchDataProperties,
-} from '../../utils/schoolsModuleUtils';
-import { searchControllersConfigs } from '../../data/searchControllers';
 import { getSearchViewById } from '../../utils/searchViews';
+import {RootState} from "./root";
 
 export type SchoolsState = {
   results: School[][];
@@ -62,14 +58,13 @@ export const fetchSchoolsSucceeded = (
 
 type Actions = FetchSchoolsAction | FetchSchoolsSucceededAction;
 
-export const fetchSchoolsEpic: Epic<Actions, any, State> = (action$, state$) =>
+export const fetchSchoolsEpic: Epic<Actions, any, RootState> = (action$, state$) =>
   action$.pipe(
     ofType<Actions, any>(FETCH_SCHOOLS),
     mergeMap(action => {
       const {
         payload: { searchData },
       } = action;
-      const { schools } = state$.value;
 
       // return value from state if params hasn't changed
 
@@ -87,8 +82,11 @@ export const fetchSchoolsEpic: Epic<Actions, any, State> = (action$, state$) =>
         searchData,
         ['page'],
       )
-        ? getResetedSearchDataProperties(searchData)
-        : searchData;
+        ? {
+            ...searchData,
+            page: 1,
+          }
+          : searchData;
       if (state$.value.schools.searchData.view !== searchData.view)
         freshSearchData.ordering = null;
 

@@ -2,13 +2,12 @@ import styled from '../styling/styled';
 import React, {
   FC,
   forwardRef,
-  HTMLProps,
   Ref,
   useEffect,
   useRef,
 } from 'react';
 import 'leaflet/dist/leaflet.css';
-import L, { LatLngExpression } from 'leaflet';
+import L from 'leaflet';
 import { defaultMarker } from '../utils/map';
 
 L.Marker.prototype.options.icon = defaultMarker;
@@ -18,6 +17,7 @@ const MapWrapper = styled.div`
   border: none;
   height: 100%;
 `;
+
 const MapElement = styled.div`
   width: 100%;
   border: none;

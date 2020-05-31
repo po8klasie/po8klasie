@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from '../styling/styled';
-import 'react-perfect-scrollbar/dist/css/styles.css';
 import PerfectScrollbar from 'react-perfect-scrollbar';
+import 'react-perfect-scrollbar/dist/css/styles.css';
+import {MdCheck, MdExpandMore} from 'react-icons/md';
 import { Choice } from '../data/filters';
 
 const DropdownWrapper = styled.div<{ active: boolean }>`
@@ -22,9 +23,10 @@ const DropdownWrapper = styled.div<{ active: boolean }>`
     font-size: 1em;
     transition: 0.2s all;
 
-    .material-icons {
+    & > svg {
       color: ${props => props.theme.colors.dark};
       margin-left: 10px;
+      font-size: 24px;
       transition: transform 0.2s;
     }
   }
@@ -71,7 +73,7 @@ const DropdownWrapper = styled.div<{ active: boolean }>`
     opacity: 1;
     visibility: visible;
   }
-  &:hover button .material-icons {
+  &:hover button svg {
     transform: rotate(-180deg);
   }
   &:hover button {
@@ -91,9 +93,10 @@ const ListItem = styled.li<{ active: boolean }>`
   &:hover {
     background: #f2f2f2;
   }
-  .material-icons {
+  svg {
     color: green;
     margin-left: 10px;
+    font-size: 24px;
     transition: opacity 0.2s;
     opacity: ${props => (props.active ? 1 : 0)};
   }
@@ -114,8 +117,8 @@ const Dropdown = (props: DropdownProps) => {
     >
       <button type={'button'}>
         {props.title}
-        <span className="material-icons">expand_more</span>
-        <span className="space"></span>
+        <MdExpandMore />
+        <span className="space" />
       </button>
       <div className={'list'}>
         <PerfectScrollbar>
@@ -126,7 +129,7 @@ const Dropdown = (props: DropdownProps) => {
                 active={props.selected.includes(choice.id)}
                 key={choice.id}
               >
-                {choice.label} <span className="material-icons">check</span>
+                {choice.label} <MdCheck />
               </ListItem>
             ))}
           </ul>

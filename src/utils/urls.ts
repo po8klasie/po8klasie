@@ -1,15 +1,15 @@
-import { Params, toParams } from './params';
+import { toParams } from './params';
+import {schoolsParamsOverwrites} from "../data/schoolsParamsOverwrites";
 
 export const generateSchoolUrl = (searchData: any) => {
-  console.log(searchData)
   const paramsStr = toParams(
     {
       ...searchData,
-      school_type_generalised: 'szkoła ponadpodstawowa',
+      ...schoolsParamsOverwrites
     },
     'api',
   );
-  console.log(paramsStr)
+
   return `${process.env.REACT_APP_API_URL}/school/?${paramsStr}`;
 };
 

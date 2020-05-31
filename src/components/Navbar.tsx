@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react';
-import Container from './Container';
 import styled from '../styling/styled';
 import { Link } from '@reach/router';
+import Container from './Container';
 import Logo from './Logo';
 
 const Brand = styled(Link)`

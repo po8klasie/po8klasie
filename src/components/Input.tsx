@@ -1,5 +1,5 @@
 import styled from '../styling/styled';
-import React from 'react';
+import React, {HTMLProps, ReactNode} from 'react';
 
 const Input = styled.input`
   padding: 0.5em 0.5em;
@@ -51,8 +51,8 @@ const InputWithAddonWrapper = styled.div<{ addonPosition: 'left' | 'right' }>`
     `}
   }
 `;
-interface InputWithAddonProps extends React.HTMLProps<HTMLInputElement> {
-  addon: React.ReactNode;
+interface InputWithAddonProps extends HTMLProps<HTMLInputElement> {
+  addon: ReactNode;
   addonPosition: 'left' | 'right';
 }
 

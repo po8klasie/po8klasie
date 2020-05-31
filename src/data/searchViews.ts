@@ -1,8 +1,7 @@
-import { FC, ReactNode } from 'react';
-import GridSearchView from '../components/searchViews/Grid';
+import { FC } from 'react';
+import GridSearchView from '../components/search/views/Grid';
 import { School } from '../types';
-import MapSearchView from '../components/searchViews/Map';
-import { FiGrid, FiMap } from 'react-icons/all';
+import MapSearchView from '../components/search/views/Map';
 
 export interface SearchViewProps {
   schools: School[];
@@ -21,8 +20,6 @@ export interface SearchView {
   };
 }
 
-export const DEFAULT_VIEW_ID = 'grid';
-
 export const searchViews: SearchView[] = [
   {
     title: 'Widok listy',
@@ -40,4 +37,8 @@ export const searchViews: SearchView[] = [
   },
 ];
 
-export const DEFAULT_VIEW = searchViews.find(v => v.id === DEFAULT_VIEW_ID) as SearchView;
+export const DEFAULT_VIEW_ID = 'grid';
+
+export const DEFAULT_VIEW = searchViews.find(
+  v => v.id === DEFAULT_VIEW_ID,
+) as SearchView;

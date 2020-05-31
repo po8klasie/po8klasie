@@ -1,13 +1,14 @@
 import React, { FC } from 'react';
-import Container from './Container';
 import styled from '../styling/styled';
 import { Link } from '@reach/router';
+import Container from './Container';
 
 const DataInfo = styled.p`
   @media (max-width: 1000px) {
     text-align: center;
   }
 `;
+
 const FooterWrapper = styled.div`
   margin-top: 10vh;
   padding: 2em 0;

@@ -1,22 +1,15 @@
-import React, { FC, useEffect, useState } from 'react';
-import styled from '../../styling/styled';
-import Dropdown from '../Dropdown';
-import { FilterData, filters } from '../../data/filters';
-import MobileFilters from '../MobileFilters';
-import {
-  SearchControlProps,
-  useSearchControl,
-} from '../../hooks/useSearchControl';
-import { useFilters } from '../../hooks/useFilters';
+import React, { FC, useEffect } from 'react';
+import styled from '../../../styling/styled';
 import { useDispatch, useSelector } from 'react-redux';
-import { getSearchViewById } from '../../utils/searchViews';
-import { fetchSchools } from '../../store/modules/schools';
-import { createSearchControllerConfig } from '../../utils/searchControllers';
-import { DEFAULT_VIEW_ID } from '../../data/searchViews';
-import SearchViewController from './SearchViewController';
-import { transformArr } from '../../utils/params';
-import { orderingTypes } from '../../data/ordering';
-import { areObjectsDifferent } from '../../utils/misc';
+import Dropdown from '../../Dropdown';
+import MobileFilters from '../../MobileFilters';
+import { fetchSchools } from '../../../store/modules/schools';
+import { FilterData, filters } from '../../../data/filters';
+import { useFilters } from '../../../hooks/useFilters';
+import { createSearchControllerConfig } from '../../../utils/searchControllers';
+import { transformArr } from '../../../utils/params';
+import { areObjectsDifferent } from '../../../utils/misc';
+
 const DropdownsWrapper = styled.div`
   margin: 2em 0 0 0;
   display: none;
@@ -47,6 +40,8 @@ const SearchFiltersController: FC = () => {
   useEffect(() => {
     if (areObjectsDifferent(searchData.filters, filtersValues))
       setFiltersValues(searchData.filters);
+
+      // eslint-disable-next-line
   }, [searchData.filters]);
 
   const handleSubmit = (e: any) => {

@@ -1,6 +1,6 @@
+import { useState } from 'react';
 import { FilterData } from '../data/filters';
 import { removeFromArray } from '../utils/misc';
-import { useState } from 'react';
 
 interface UseFiltersOptions {
   defaultValue: Record<string, string[]>;
@@ -39,6 +39,6 @@ export const useFilters = (options: UseFiltersOptions) => {
   return {
     filtersValues,
     createHandler,
-    setFiltersValues
+    setFiltersValues,
   };
 };

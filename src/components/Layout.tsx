@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
+import styled from '../styling/styled';
 import Navbar from './Navbar';
 import Footer from './Footer';
-import styled from '../styling/styled';
 
 const LayoutWrapper = styled.div`
   display: flex;

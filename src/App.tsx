@@ -1,10 +1,12 @@
 import React from 'react';
 import { ThemeProvider } from 'emotion-theming';
+import {Global} from "@emotion/core";
 import theme from './styling/theme';
 import Routes from './Routes';
-import GlobalStyles from './styling/GlobalStyles';
 import configureStore from './store/configureStore';
 import { Provider as StoreProvider } from 'react-redux';
+import {globalStyles} from "./styling/globalStyles";
+
 
 const store = configureStore();
 
@@ -13,7 +15,7 @@ const App: React.FC = () => {
     <>
       <StoreProvider store={store}>
         <ThemeProvider theme={theme}>
-          <GlobalStyles />
+          <Global styles={globalStyles} />
           <Routes />
         </ThemeProvider>
       </StoreProvider>

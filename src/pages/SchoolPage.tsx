@@ -1,30 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Redirect, RouteComponentProps } from '@reach/router';
+import { connect } from 'react-redux';
+import styled from '../styling/styled';
+import L, { LatLngExpression } from 'leaflet';
 import Layout from '../components/Layout';
 import Container from '../components/Container';
-import styled from '../styling/styled';
-import { connect } from 'react-redux';
-import { fetchSchoolDetails } from '../store/modules/schoolDetails';
 import Card from '../components/Card';
+import Map from '../components/Map';
+import { fetchSchoolDetails } from '../store/modules/schoolDetails';
 import { createPlaceholderStyles } from '../utils/loading';
 import { splitArrayInHalf } from '../utils/misc';
-import Map from '../components/Map';
-import 'leaflet/dist/leaflet.css';
-import L, { LatLngExpression } from 'leaflet';
-
-import icon from 'leaflet/dist/images/marker-icon.png';
-import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 import { getSchoolMarker } from '../utils/map';
-const DefaultIcon = L.icon({
-  iconUrl: icon,
-  shadowUrl: iconShadow,
-  iconSize: [25, 41], // size of the icon
-  shadowSize: [41, 41], // size of the shadow
-  iconAnchor: [12.5, 41], // point of the icon which will correspond to marker's location
-  shadowAnchor: [12.5, 41], // the same for the shadow
-  popupAnchor: [0, -43], // point from which the popup should open relative to the iconAnchor
-});
-L.Marker.prototype.options.icon = DefaultIcon;
+
 const Header = styled.div`
   margin-top: 5vh;
   span {
@@ -184,7 +171,7 @@ const transportLayer = L.tileLayer(
   {
     attribution:
       '&copy; <a href="http://www.thunderforest.com/">Thunderforest</a>, &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    apikey: '185ab81cb2d44f7f8e386c5442c705ca',
+    apikey: process.env.REACT_APP_THUNDERFOREST_API_KEY,
     maxZoom: 22,
   } as any,
 );
@@ -239,7 +226,7 @@ const SchoolPage = (props: SchoolPageProps) => {
         .bindPopup(school.school_name)
         .openPopup();
     }
-  }, [school, map.current]);
+  }, [school]);
 
   if (!props.schoolID) return <Redirect to="/" />;
 
@@ -364,7 +351,7 @@ const SchoolPage = (props: SchoolPageProps) => {
                     </div>
                   </ContactGrid>
                   <ActionLinkWrapper>
-                    <a href={school.contact.website} target="_blank">
+                    <a href={school.contact.website} target="_blank" rel="noopener noreferrer">
                       Strona www szkoły
                     </a>
                   </ActionLinkWrapper>

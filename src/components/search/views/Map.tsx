@@ -1,21 +1,20 @@
 import React, { FC, useEffect, useRef, useState } from 'react';
-import { SearchViewProps } from '../../data/searchViews';
-import Map from '../Map';
-import L, { LatLngExpression } from 'leaflet';
-import styled from '../../styling/styled';
+import { Link } from '@reach/router';
+import styled from '../../../styling/styled';
 import { keyframes } from '@emotion/core';
 import { render } from 'react-dom';
 import { useSelector } from 'react-redux';
-import { School } from '../../types';
+import L, { LatLngExpression } from 'leaflet';
+import { School } from '../../../types';
+import Container from '../../Container';
+import Map from '../../Map';
 import {
   getSchoolMarker,
   highSchoolMarkerImage,
   specialSchoolMarkerImage,
   technicalSchoolMarkerImage,
   vocationalSchoolMarkerImage,
-} from '../../utils/map';
-import Container from '../Container';
-import { Link } from '@reach/router';
+} from '../../../utils/map';
 
 const loaderAnimation = keyframes`
     0%, 100% {
@@ -100,7 +99,6 @@ const MapSearchView: FC = () => {
     map.current = _map;
   };
   useEffect(() => {
-    console.log('changed schools', schools);
     setLoading(true);
     if (!map.current || isFetching) return;
 
@@ -108,8 +106,7 @@ const MapSearchView: FC = () => {
       map.current.removeLayer(m);
     });
 
-    schools.map((school: School) => {
-      console.log(school.school_type);
+    schools.forEach((school: School) => {
       if (
         !school.address ||
         !school.address.longitude ||
@@ -136,6 +133,8 @@ const MapSearchView: FC = () => {
       );
     });
     setLoading(false);
+
+    // eslint-disable-next-line
   }, [schools]);
 
   return (
@@ -146,10 +145,7 @@ const MapSearchView: FC = () => {
             ['liceum ogólnokształcące', highSchoolMarkerImage],
             ['technikum', technicalSchoolMarkerImage],
             ['szkoła branżowa', vocationalSchoolMarkerImage],
-            [
-              'szkoła specjalna',
-              specialSchoolMarkerImage,
-            ],
+            ['szkoła specjalna', specialSchoolMarkerImage],
           ].map(([name, imageUrl]) => (
             <div key={name}>
               <img src={imageUrl} alt="" />

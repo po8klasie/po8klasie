@@ -23,9 +23,9 @@ const theme: Theme = {
     text: '#272727',
   },
   fonts: {
-    primary: 'Signika',
-    secondary: 'Roboto Condensed',
+    primary: 'IBM Plex Sans',
+    secondary: 'Open Sans',
   },
 };
-//#BA97FF
+
 export default theme;

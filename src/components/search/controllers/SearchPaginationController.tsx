@@ -1,18 +1,11 @@
-import React, {useEffect, useState} from 'react';
-import styled from '../../styling/styled';
-import { getTotalPages } from '../../utils/pagination';
-import {
-  SearchControlProps,
-  useSearchControl,
-} from '../../hooks/useSearchControl';
-import { School } from '../../types';
-import { useParamsChangeHandler } from '../../hooks/useParamsChangeHandler';
-import {useDispatch, useSelector} from "react-redux";
-import {fetchSchools} from "../../store/modules/schools";
-import {createToParamHandler} from "../../utils/paramHandlers";
-import {createSearchControllerConfig} from "../../utils/searchControllers";
-import {DEFAULT_VIEW, searchViews} from "../../data/searchViews";
-import {getSearchViewById} from "../../utils/searchViews";
+import React, { useEffect, useState } from 'react';
+import styled from '../../../styling/styled';
+import { useDispatch, useSelector } from 'react-redux';
+import {MdNavigateBefore, MdNavigateNext, MdSkipNext, MdSkipPrevious} from "react-icons/md";
+import { fetchSchools } from '../../../store/modules/schools';
+import { getTotalPages } from '../../../utils/pagination';
+import { createSearchControllerConfig } from '../../../utils/searchControllers';
+import { getSearchViewById } from '../../../utils/searchViews';
 
 const PaginationWrapper = styled.div`
   display: flex;
@@ -33,7 +26,11 @@ const PaginationButton = styled.button<any>`
   background: ${props => (props.active ? props.theme.colors.light : 'none')};
   font-weight: ${props => (props.active ? 'bold' : 'normal')};
   outline: none;
-
+  
+  svg {
+    font-size: 24px;
+  }
+  
   &:first-of-type {
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
@@ -47,34 +44,34 @@ const PaginationButton = styled.button<any>`
     padding: 10px 20px;
   }
 `;
-interface SearchPaginationControlProps extends SearchControlProps {
-  count: number;
-  schools: School[][];
-}
 
 const SearchPaginationController = () => {
   const { searchData, count } = useSelector((page: any) => ({
     searchData: page.schools.searchData,
-    count: page.schools.responseData.count
+    count: page.schools.responseData.count,
   }));
-  const [active, setActive] = useState(getSearchViewById(searchData.view)?.layout?.enablePagination);
+  const [active, setActive] = useState(
+    getSearchViewById(searchData.view)?.layout?.enablePagination,
+  );
 
   useEffect(() => {
-    setActive(getSearchViewById(searchData.view)?.layout?.enablePagination)
+    setActive(getSearchViewById(searchData.view)?.layout?.enablePagination);
   }, [searchData.view]);
 
   const { page } = searchData;
-  
+
   const dispatch = useDispatch();
 
   const totalPages = getTotalPages(count);
   const paginate = (e: any, updatedPage: number) => {
-    dispatch(fetchSchools({
-      searchData: {
-        ...searchData,
-        page: updatedPage
-      }
-    }));
+    dispatch(
+      fetchSchools({
+        searchData: {
+          ...searchData,
+          page: updatedPage,
+        },
+      }),
+    );
   };
 
   if (!active) {
@@ -88,14 +85,14 @@ const SearchPaginationController = () => {
           className={'with-icon'}
           onClick={(e: any) => paginate(e, 1)}
         >
-          <span className="material-icons">skip_previous</span>
+          <MdSkipPrevious />
         </PaginationButton>
         <PaginationButton
           className={'with-icon'}
           disabled={page - 1 <= 0}
           onClick={(e: any) => paginate(e, page - 1)}
         >
-          <span className="material-icons">navigate_before</span>
+          <MdNavigateBefore />
         </PaginationButton>
         {page - 2 > 0 && (
           <PaginationButton onClick={(e: any) => paginate(e, page - 2)}>
@@ -123,13 +120,13 @@ const SearchPaginationController = () => {
           disabled={page + 1 > totalPages}
           onClick={(e: any) => paginate(e, page + 1)}
         >
-          <span className="material-icons">navigate_next</span>
+          <MdNavigateNext />
         </PaginationButton>
         <PaginationButton
           className={'with-icon'}
           onClick={(e: any) => paginate(e, totalPages)}
         >
-          <span className="material-icons">skip_next</span>
+          <MdSkipNext />
         </PaginationButton>
       </div>
     </PaginationWrapper>
@@ -138,28 +135,25 @@ const SearchPaginationController = () => {
 
 const searchDataKey = 'page';
 
-export const searchPaginationControllerConfig = createSearchControllerConfig(searchDataKey, {
-  defaultValue: 1,
-  toParamHandler: ({value, key, p }) => {
-    if (
-        typeof value === 'number' &&
-        Number.isInteger(value) &&
-        value > 1
-    )
-      return p.set(key, value as any);
+export const searchPaginationControllerConfig = createSearchControllerConfig(
+  searchDataKey,
+  {
+    defaultValue: 1,
+    toParamHandler: ({ value, key, p }) => {
+      if (typeof value === 'number' && Number.isInteger(value) && value > 1)
+        return p.set(key, value as any);
 
-    if(p.has(key)) p.delete(key)
-  },
-  fromParamHandler: ({p, key}) => {
-    const param = p.has(key) && p.get(key) ? p.get(key) : null;
-    if(!param)
+      if (p.has(key)) p.delete(key);
+    },
+    fromParamHandler: ({ p, key }) => {
+      const param = p.has(key) && p.get(key) ? p.get(key) : null;
+      if (!param) return null;
+
+      if (parseInt(param) && parseInt(param) > 0) return parseInt(param);
+
       return null;
-
-    if(parseInt(param) && parseInt(param) > 0)
-      return parseInt(param);
-
-    return null;
-  }
-});
+    },
+  },
+);
 
 export default SearchPaginationController;

@@ -1,7 +1,7 @@
-import styled from '../styling/styled';
-import Card from './Card';
-import { Link } from '@reach/router';
 import React from 'react';
+import styled from '../styling/styled';
+import { Link } from '@reach/router';
+import Card from './Card';
 
 const Wrapper = styled(Card)`
   .school-type {

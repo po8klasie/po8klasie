@@ -16,12 +16,14 @@ export const removeFromObject = (obj: any, keys: any[]) => {
   });
   return output;
 };
-export const withoutPageAndView = (obj: any) =>
-  removeFromObject(obj, ['view', 'page']);
 
-export const areObjectsDifferentWithout = (a: any, b: any, keysToRemoveBeforeComparing: string[]) => {
+export const areObjectsDifferentWithout = (
+  a: any,
+  b: any,
+  keysToRemoveBeforeComparing: string[],
+) => {
   return areObjectsDifferent(
-      removeFromObject(a, keysToRemoveBeforeComparing),
-      removeFromObject(b, keysToRemoveBeforeComparing),
+    removeFromObject(a, keysToRemoveBeforeComparing),
+    removeFromObject(b, keysToRemoveBeforeComparing),
   );
 };
