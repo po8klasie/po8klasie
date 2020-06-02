@@ -1,15 +1,16 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Redirect, RouteComponentProps } from '@reach/router';
+import { connect } from 'react-redux';
+import styled from '../styling/styled';
+import L, { LatLngExpression } from 'leaflet';
 import Layout from '../components/Layout';
 import Container from '../components/Container';
-import styled from '../styling/styled';
-import { connect } from 'react-redux';
-import { fetchSchoolDetails } from '../store/modules/schoolDetails';
 import Card from '../components/Card';
+import Map from '../components/Map';
+import { fetchSchoolDetails } from '../store/modules/schoolDetails';
 import { createPlaceholderStyles } from '../utils/loading';
 import { splitArrayInHalf } from '../utils/misc';
-
-const GOOGLE_MAPS_KEY = 'AIzaSyCCLfhaD7OtyTnU61UBTFKGaRhYyUz9dSs';
+import { getSchoolMarker } from '../utils/map';
 
 const Header = styled.div`
   margin-top: 5vh;
@@ -126,14 +127,37 @@ const PastProfilesGrid = styled.div`
 const ActionLinkWrapper = styled.div`
   margin-top: 20px;
 `;
-const MapFrame = styled.iframe`
+
+const MapWrapper = styled.div`
   width: 100%;
   border: none;
   height: 40vh;
-  margin-top: 3em;
-  filter: grayscale(1);
 `;
+const SwitchButton = styled.button<{ active: boolean }>`
+  color: ${props => props.theme.colors.primary};
+  font-weight: bold;
+  font-size: 1em;
+  font-family: inherit;
+  background: none;
+  padding: 0;
+  margin: 2em 0;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  position: relative;
 
+  &::after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: ${props => (props.active ? '100%' : 0)};
+    height: 2px;
+    background: ${props => props.theme.colors.primary};
+    transition: 0.2s all;
+  }
+`;
 interface SchoolPageProps extends RouteComponentProps<{ schoolID: string }> {
   schoolDetails: any;
   fetchSchoolDetails: Function;
@@ -142,15 +166,67 @@ interface SchoolPageProps extends RouteComponentProps<{ schoolID: string }> {
 const isObjEmpty = (obj: any) =>
   Object.keys(obj).length === 0 && obj.constructor === Object;
 
+const transportLayer = L.tileLayer(
+  'https://{s}.tile.thunderforest.com/transport/{z}/{x}/{y}.png?apikey={apikey}',
+  {
+    attribution:
+      '&copy; <a href="http://www.thunderforest.com/">Thunderforest</a>, &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    apikey: process.env.REACT_APP_THUNDERFOREST_API_KEY,
+    maxZoom: 22,
+  } as any,
+);
+
 const SchoolPage = (props: SchoolPageProps) => {
   const { school, classes } = props.schoolDetails;
+  const map = useRef<any>(null);
+  const defaultBaseLayer = useRef<any>(null);
+  const marker = useRef<any>(null);
+  const [showPublicTransportRoutes, setShowPublicTransportRoutes] = useState(
+    false,
+  );
 
+  const handleConfig = (_map: any, _defaultBaseLayer: any) => {
+    _map.setView([52.237049, 21.017532], 15);
+    map.current = _map;
+    defaultBaseLayer.current = _defaultBaseLayer;
+  };
+  const changeMapBaseLayer = () => {
+    if (!map.current || !defaultBaseLayer.current) return;
+
+    map.current.removeLayer(
+      showPublicTransportRoutes ? transportLayer : defaultBaseLayer.current,
+    );
+    map.current.addLayer(
+      showPublicTransportRoutes ? defaultBaseLayer.current : transportLayer,
+    );
+    setShowPublicTransportRoutes(!showPublicTransportRoutes);
+  };
   useEffect(() => {
     if (props.schoolID && props.schoolID !== props.schoolDetails.id) {
       props.fetchSchoolDetails(props.schoolID);
     }
     // eslint-disable-next-line
   }, []);
+
+  useEffect(() => {
+    if (map.current && school && school.address) {
+      let coords: LatLngExpression = {
+        lat: school.address.longitude,
+        lng: school.address.latitude,
+      };
+      map.current.setView(coords, 13);
+      if (marker.current) {
+        map.current.removeLayer(marker.current);
+        map.current.setView(coords, 13);
+      }
+      marker.current = L.marker(coords, {
+        icon: getSchoolMarker(school.school_type),
+      })
+        .addTo(map.current)
+        .bindPopup(school.school_name)
+        .openPopup();
+    }
+  }, [school]);
 
   if (!props.schoolID) return <Redirect to="/" />;
 
@@ -174,10 +250,8 @@ const SchoolPage = (props: SchoolPageProps) => {
         <>
           <Container>
             <SchoolDescription>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci
-              corporis dolore eligendi error et magni omnis repellat veniam.
-              Aperiam asperiores ex velit voluptates. Blanditiis dolores
-              excepturi, molestias officia reiciendis soluta!
+              [Opis szkoły: np.] Publiczne liceum ogólnokształcące w Warszawie
+              założone w 1874. Jest najstarszym warszawskim liceum.
             </SchoolDescription>
             <Section>
               <h2>Tegoroczne profile klas</h2>
@@ -187,10 +261,11 @@ const SchoolPage = (props: SchoolPageProps) => {
                   <h4>matematyka, fizyka, chemia</h4>
                   <span>dwa oddziały</span>
                   <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Commodi consectetur debitis delectus harum hic ipsa, iste,
-                    neque nobis nostrum nulla optio placeat ratione, sint sit
-                    tenetur vel voluptatem voluptates. Cupiditate.
+                    [Opis profilu] Lorem ipsum dolor sit amet, consectetur
+                    adipisicing elit. Commodi consectetur debitis delectus harum
+                    hic ipsa, iste, neque nobis nostrum nulla optio placeat
+                    ratione, sint sit tenetur vel voluptatem voluptates.
+                    Cupiditate.
                   </p>
                 </Card>
                 <Card>
@@ -198,10 +273,11 @@ const SchoolPage = (props: SchoolPageProps) => {
                   <h4>matematyka, fizyka, chemia</h4>
                   <span>dwa oddziały</span>
                   <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Commodi consectetur debitis delectus harum hic ipsa, iste,
-                    neque nobis nostrum nulla optio placeat ratione, sint sit
-                    tenetur vel voluptatem voluptates. Cupiditate.
+                    [Opis profilu] Lorem ipsum dolor sit amet, consectetur
+                    adipisicing elit. Commodi consectetur debitis delectus harum
+                    hic ipsa, iste, neque nobis nostrum nulla optio placeat
+                    ratione, sint sit tenetur vel voluptatem voluptates.
+                    Cupiditate.
                   </p>
                 </Card>
                 <Card>
@@ -209,10 +285,11 @@ const SchoolPage = (props: SchoolPageProps) => {
                   <h4>matematyka, fizyka, chemia</h4>
                   <span>dwa oddziały</span>
                   <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Commodi consectetur debitis delectus harum hic ipsa, iste,
-                    neque nobis nostrum nulla optio placeat ratione, sint sit
-                    tenetur vel voluptatem voluptates. Cupiditate.
+                    [Opis profilu] Lorem ipsum dolor sit amet, consectetur
+                    adipisicing elit. Commodi consectetur debitis delectus harum
+                    hic ipsa, iste, neque nobis nostrum nulla optio placeat
+                    ratione, sint sit tenetur vel voluptatem voluptates.
+                    Cupiditate.
                   </p>
                 </Card>
               </SchoolProfiles>
@@ -274,17 +351,27 @@ const SchoolPage = (props: SchoolPageProps) => {
                     </div>
                   </ContactGrid>
                   <ActionLinkWrapper>
-                    <a href={school.contact.website} target="_blank">Strona www szkoły</a>
+                    <a href={school.contact.website} target="_blank" rel="noopener noreferrer">
+                      Strona www szkoły
+                    </a>
                   </ActionLinkWrapper>
                 </>
               )}
             </Section>
           </Container>
-          <MapFrame
-            src={`https://www.google.com/maps/embed/v1/place?q=${school.school_name}&key=${GOOGLE_MAPS_KEY}`}
-          />
         </>
       )}
+      <Container>
+        <SwitchButton
+          onClick={changeMapBaseLayer}
+          active={showPublicTransportRoutes}
+        >
+          Pokaż dojazd komunikacją miejską
+        </SwitchButton>
+      </Container>
+      <MapWrapper>
+        <Map onConfig={handleConfig} />
+      </MapWrapper>
     </Layout>
   );
 };

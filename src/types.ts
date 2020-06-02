@@ -2,7 +2,7 @@ export interface School {
   id: number;
   school_name: string;
   nickname: string | null;
-  school_type: 'liceum ogólnokształcące' | 'technikum';
+  school_type: string;
   school_type_generalised: string;
   student_type: string;
   is_special_needs_school: boolean;
@@ -50,3 +50,5 @@ export interface School {
     };
   };
 }
+
+export type SearchData = Record<string, string | number | any[]>;

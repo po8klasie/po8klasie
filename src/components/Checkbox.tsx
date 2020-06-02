@@ -1,6 +1,5 @@
-import React, { forwardRef, Ref } from 'react';
+import React, { forwardRef, Ref, HTMLProps } from 'react';
 import styled from '../styling/styled';
-import { HTMLProps } from 'react';
 
 const CheckboxInput = styled.input`
   position: absolute; // take it out of document flow
@@ -60,9 +59,11 @@ const CheckboxInput = styled.input`
     transform: rotate(45deg);
   }
 `;
+
 const Checkbox = forwardRef(
   (props: HTMLProps<HTMLInputElement>, ref: Ref<HTMLInputElement>) => (
     <CheckboxInput {...props} type="checkbox" ref={ref} />
   ),
 );
+
 export default Checkbox;

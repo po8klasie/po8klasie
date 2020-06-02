@@ -1,13 +1,14 @@
 import React, { FC } from 'react';
-import Container from './Container';
 import styled from '../styling/styled';
 import { Link } from '@reach/router';
+import Container from './Container';
 
 const DataInfo = styled.p`
   @media (max-width: 1000px) {
     text-align: center;
   }
 `;
+
 const FooterWrapper = styled.div`
   margin-top: 10vh;
   padding: 2em 0;
@@ -62,7 +63,12 @@ const FooterGrid = styled.div`
     p {
       line-height: 1.5em;
       margin-top: 0;
-      text-align: justify;
+      text-align: center;
+
+      @media (min-width: 1001px) {
+        text-align: left;
+      }
+    }
     }
     .logos-wrapper {
       display: grid;
@@ -125,7 +131,7 @@ const Footer: FC = props => (
           <p>
             WarsawLO to open-source'owy projekt civic tech tworzony przez
             wolonatariuszy we współpracy z programem Koduj Dla Polski Fundacji
-            ePaństwo
+            ePaństwo.
           </p>
           <div className="logos-wrapper">
             <a

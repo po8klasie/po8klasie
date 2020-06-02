@@ -1,16 +1,16 @@
-import React, { FC } from 'react';
-import { Global, css } from '@emotion/core';
+import { css } from '@emotion/core';
 import theme from './theme';
+import {setupFonts} from "./fonts";
 
-const GlobalStyles: FC = () => (
-  <Global
-    styles={css`
+export const globalStyles = css`
+    ${setupFonts}
+    
       h1,
       h2,
       h3,
       h4,
       h5 {
-        font-family: IBM Plex Sans;
+        font-family: ${theme.fonts.primary};
         color: ${theme.colors.text};
       }
       html,
@@ -21,15 +21,11 @@ const GlobalStyles: FC = () => (
         height: 100%;
         margin: 0;
         padding: 0;
-        font-family: Open Sans;
+        font-family: ${theme.fonts.secondary};
       }
       a {
         color: ${theme.colors.primary};
         font-weight: bold;
         text-decoration: none;
       }
-    `}
-  />
-);
-
-export default GlobalStyles;
+    `;

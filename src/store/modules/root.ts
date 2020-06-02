@@ -1,14 +1,11 @@
 import { combineEpics } from 'redux-observable';
 import { combineReducers } from 'redux';
-import schools, { fetchSchoolsEpic, SchoolsState } from './schools';
+
+import schools, { fetchSchoolsEpic } from './schools';
 import schoolDetails, {
   fetchSchoolClassesEpic,
   fetchSchoolDetailsEpic,
 } from './schoolDetails';
-
-export type State = {
-  schools: SchoolsState;
-};
 
 export const rootEpic = combineEpics(
   fetchSchoolsEpic,
@@ -20,3 +17,5 @@ export const rootReducer = combineReducers({
   schools,
   schoolDetails,
 });
+
+export type RootState = ReturnType<typeof rootReducer>

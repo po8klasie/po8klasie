@@ -5,7 +5,11 @@
         "tslint-config-prettier",
         "tslint-config-airbnb"
     ],
+    "rulesDirectory": [
+      "tslint-plugin-prettier"
+    ],
     "jsRules": {},
-    "rules": {},
-    "rulesDirectory": []
+    "rules": {
+        "prettier": true
+    }
 }

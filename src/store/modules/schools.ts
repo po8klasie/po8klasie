@@ -1,29 +1,40 @@
 import { ofType, Epic } from 'redux-observable';
-import { map, mergeMap } from 'rxjs/operators';
+import { EMPTY } from 'rxjs';
+import { expand, map, mergeMap } from 'rxjs/operators';
 import { ajax } from 'rxjs/ajax';
-import { School } from '../../types';
+import { searchControllersConfigs } from '../../data/searchControllers';
+import { School, SearchData } from '../../types';
 import { getTotalPages } from '../../utils/pagination';
-import { Params, toParams } from '../../utils/params';
-import { State } from './root';
-import { removeDuplicates } from '../../utils/removeDuplicates';
+import { areObjectsDifferentWithout } from '../../utils/misc';
+import {
+  generateSchoolUrl,
+  getPageNumberFromPaginationUrl,
+} from '../../utils/urls';
+import { getSearchViewById } from '../../utils/searchViews';
+import {RootState} from "./root";
 
 export type SchoolsState = {
-  results: School[];
-  count: number | null;
-  lastFetched: number | null;
-  next: number | null;
-  previous: number | null;
-  params: Params;
-  isFetching: boolean;
-  reachedEnd: boolean;
+  results: School[][];
+  searchData: SearchData;
+  responseData: {
+    count: number | null;
+  };
+  fetchingData: {
+    isFetching: boolean;
+    fetchedAll: boolean;
+  };
 };
 
 const FETCH_SCHOOLS = 'FETCH_SCHOOLS';
 const FETCH_SCHOOLS_SUCCEEDED = 'FETCH_SCHOOLS_SUCCEEDED';
 
+interface FetchSchoolsActionPayload {
+  searchData: SearchData;
+}
+
 interface FetchSchoolsAction {
   type: typeof FETCH_SCHOOLS;
-  payload: Params;
+  payload: FetchSchoolsActionPayload;
 }
 
 interface FetchSchoolsSucceededAction {
@@ -31,7 +42,9 @@ interface FetchSchoolsSucceededAction {
   payload: any;
 }
 
-export const fetchSchools = (payload: Params): FetchSchoolsAction => ({
+export const fetchSchools = (
+  payload: FetchSchoolsActionPayload,
+): FetchSchoolsAction => ({
   type: FETCH_SCHOOLS,
   payload,
 });
@@ -45,38 +58,79 @@ export const fetchSchoolsSucceeded = (
 
 type Actions = FetchSchoolsAction | FetchSchoolsSucceededAction;
 
-const generateSchoolUrl = (params: Params) => {
-  const paramsStr = toParams(
-    {
-      ...params,
-      school_type_generalised: 'szkoła ponadpodstawowa',
-    },
-    'api',
-  );
-  return `${process.env.REACT_APP_API_URL}/school/?${paramsStr}`;
-};
-
-export const fetchSchoolsEpic: Epic<Actions, any, State> = (action$, state$) =>
+export const fetchSchoolsEpic: Epic<Actions, any, RootState> = (action$, state$) =>
   action$.pipe(
     ofType<Actions, any>(FETCH_SCHOOLS),
     mergeMap(action => {
-      const paramsDiff =
-        JSON.stringify(action.payload) !==
-        JSON.stringify(state$.value.schools.params);
+      const {
+        payload: { searchData },
+      } = action;
 
-      return ajax.getJSON<any>(generateSchoolUrl(action.payload)).pipe(
-        map(res => {
-          const lastFetched =
-            !paramsDiff && action.payload.page ? action.payload.page : 1;
+      // return value from state if params hasn't changed
+
+      // console.log(searchDataDidChange)
+      // if (
+      //   !searchDataDidChange &&
+      //   (schools.fetchingData.fetchedAll ||
+      //     (schools.results[searchData.page] &&
+      //       schools.results[searchData.page].length > 0))
+      // )
+      //   return of(fetchSchoolsSucceeded(getPayloadFromState(state$.value)));
+
+      const freshSearchData = areObjectsDifferentWithout(
+        state$.value.schools.searchData,
+        searchData,
+        ['page'],
+      )
+        ? {
+            ...searchData,
+            page: 1,
+          }
+          : searchData;
+      if (state$.value.schools.searchData.view !== searchData.view)
+        freshSearchData.ordering = null;
+
+      const layoutSettings = getSearchViewById(freshSearchData.view).layout;
+      const fetchAll = !layoutSettings || !layoutSettings.enablePagination;
+      const requestUrl = generateSchoolUrl(freshSearchData);
+
+      return ajax.getJSON<any>(requestUrl).pipe(
+        expand(res =>
+          fetchAll && res.next ? ajax.getJSON<any>(res.next) : EMPTY,
+        ),
+        map((res: any) => {
+          const pageNo = getPageNumberFromPaginationUrl(res.previous, res.next);
+          const resultsFromState = state$.value.schools.results;
+          const totalPages = getTotalPages(res.count) + 1;
+          const searchDataDidChange = areObjectsDifferentWithout(
+            state$.value.schools.searchData,
+            searchData,
+            ['page'],
+          );
+
           const results =
-            state$.value.schools.results.length > 0 && paramsDiff
-              ? state$.value.schools.results
-              : new Array(getTotalPages(res.count) + 1).fill([]);
-          results[lastFetched] = removeDuplicates(res.results);
+            resultsFromState.length > 0 && !searchDataDidChange
+              ? resultsFromState
+              : new Array(totalPages).fill([]); // create 2d array
+
+          results[pageNo] = res.results;
+
+          const fetchedAll = fetchAll && pageNo === totalPages - 1;
+          let isFetching = false;
+
+          if (fetchAll && totalPages > 1)
+            isFetching = pageNo !== totalPages - 1;
+
           return fetchSchoolsSucceeded({
-            ...res,
             results,
-            lastFetched,
+            responseData: {
+              count: res.count,
+            },
+            searchData: freshSearchData,
+            fetchingData: {
+              isFetching,
+              fetchedAll,
+            },
           });
         }),
       );
@@ -85,13 +139,19 @@ export const fetchSchoolsEpic: Epic<Actions, any, State> = (action$, state$) =>
 
 const initialState: SchoolsState = {
   results: [],
-  count: null,
-  lastFetched: null,
-  next: null,
-  previous: null,
-  params: {},
-  isFetching: false,
-  reachedEnd: false,
+  searchData: Object.fromEntries(
+    Object.entries(searchControllersConfigs).map(([key, config]) => [
+      key,
+      config.defaultValue,
+    ]),
+  ),
+  responseData: {
+    count: null,
+  },
+  fetchingData: {
+    isFetching: false,
+    fetchedAll: false,
+  },
 };
 
 const schools = (
@@ -102,21 +162,16 @@ const schools = (
     case FETCH_SCHOOLS:
       return {
         ...state,
-        isFetching: true,
-        params: {
-          ...action.payload,
+        fetchingData: {
+          isFetching: false,
+          fetchedAll: false,
         },
       };
 
     case FETCH_SCHOOLS_SUCCEEDED:
       return {
         ...state,
-        isFetching: false,
-        next: action.payload.next,
-        previous: action.payload.previous,
-        count: action.payload.count,
-        lastFetched: action.payload.lastFetched,
-        results: [...action.payload.results],
+        ...action.payload,
       };
 
     default:

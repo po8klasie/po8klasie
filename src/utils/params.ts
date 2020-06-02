@@ -1,46 +1,29 @@
-import { FilterData, filters } from '../data/filters';
+import { searchControllersConfigs } from '../data/searchControllers';
 
 export type Params = Record<string, string | number | any[]>;
+export type ParamsMode = 'api' | 'search';
 
-export const getPayloadFromParams = (searchStr: string) => {
-  const params = new URLSearchParams(searchStr);
-  const payload: any = {};
+export const transformArr = (arr: any[], mode: ParamsMode) =>
+  arr.join(mode === 'search' ? ',' : '|');
 
-  if (params.has('q')) {
-    const query = params.get('q');
-    payload.school_name = query;
-  }
-  if (params.has('page')) {
-    payload.page = params.get('page');
-  }
+export const getSearchDataFromParams = (searchStr: string) => {
+  const p = new URLSearchParams(searchStr);
+  const searchData: any = {};
 
-  filters.forEach((filter: FilterData) => {
-    const param = params.get(filter.fieldId);
-    if (param) {
-      payload[filter.fieldId] = param
-        .split(',')
-        .filter(str => filter.choices.find(c => (c.id = str.toLowerCase())));
-    }
+  Object.entries(searchControllersConfigs).forEach(([key, config]) => {
+    const fromParam = config.fromParamHandler({ key, p });
+    searchData[key] = fromParam ? fromParam : config.defaultValue;
   });
 
-  return payload;
+  return searchData;
 };
 
-export const toParams = (
-  obj: Params,
-  mode: 'search' | 'api',
-  searchStr?: string,
-) => {
+export const toParams = (obj: Params, mode: ParamsMode, searchStr?: string) => {
   const p = new URLSearchParams(searchStr ?? '');
 
   Object.entries(obj).forEach(([key, value]) => {
-    if (
-      key === 'page' &&
-      typeof value === 'number' &&
-      Number.isInteger(value) &&
-      value > 1
-    )
-      return p.set(key, value as any);
+    const config = searchControllersConfigs[key];
+    if (config) return config.toParamHandler({ key, value, mode, p });
 
     if (
       typeof value === 'number' ||
@@ -49,7 +32,7 @@ export const toParams = (
       return p.set(key, value as any);
 
     if (Array.isArray(value) && value.length > 0)
-      return p.set(key, value.join(mode === 'search' ? ',' : '|'));
+      return p.set(key, transformArr(value, mode));
 
     if (p.has(key)) p.delete(key);
   });

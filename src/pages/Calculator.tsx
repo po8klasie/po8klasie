@@ -1,15 +1,13 @@
 import React, { FC, useEffect, useLayoutEffect, useState } from 'react';
-import Layout from '../components/Layout';
-import Container from '../components/Container';
 import { RouteComponentProps } from '@reach/router';
 import styled from '../styling/styled';
+import { useForm } from 'react-hook-form';
+import Layout from '../components/Layout';
+import Container from '../components/Container';
 import Input from '../components/Input';
 import PageTitle from '../components/PageTitle';
-import { useForm } from 'react-hook-form';
-
 import Checkbox from '../components/Checkbox';
 import { examParts, subjects } from '../data/calculator';
-
 import {
   PointsCalculator,
   validators,
@@ -17,6 +15,7 @@ import {
   configs,
   CalculatedPoints,
 } from '@warsawlo/points-calculator';
+
 const { isGradeValid, isExamResultValid } = validators;
 const { initialInputData, initialCalculatedPoints } = initialData;
 const { config2018_2019 } = configs;
