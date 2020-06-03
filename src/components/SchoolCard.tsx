@@ -15,6 +15,10 @@ const Wrapper = styled(Card)`
     margin-bottom: 0;
     font-size: 1.5em;
     color: #272727;
+    & > a {
+      color: #272727;
+      text-decoration: none;
+    }
   }
   .district {
     display: block;
@@ -25,6 +29,7 @@ const Wrapper = styled(Card)`
   }
   .bottom {
     flex-shrink: 0;
+    text-align: right;
   }
   .content {
     flex: 1 0 auto;
@@ -42,7 +47,11 @@ const SchoolCard = (props: SchoolCardProps) => (
       <span className={'school-type'}>
         Szkoła {!props.school.is_public && 'nie'}publiczna
       </span>
-      <h4>{props.school.school_name}</h4>
+      <h4>
+        <Link to={`/school/${props.school.id}`}>
+          {props.school.school_name}
+        </Link>
+      </h4>
       <span className={'district'}>{props.school.address.district}</span>
     </div>
     <div className="bottom">
