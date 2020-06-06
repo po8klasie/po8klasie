@@ -3,6 +3,7 @@ import { Router } from '@reach/router';
 import LandingPage from './pages/LandingPage';
 import SchoolPage from './pages/SchoolPage';
 import SchoolsPage from './pages/SchoolsPage';
+import FavouriteSchoolsPage from './pages/FavouriteSchoolsPage';
 import lazyLoaded from './utils/lazyLoaded';
 
 const Calculator = lazyLoaded(lazy(() => import('./pages/Calculator')));
@@ -26,6 +27,7 @@ const Routes: FC = () => (
     <LandingPage path="/" />
     <SchoolsPage path="/schools" />
     <SchoolPage path="/school/:schoolID" />
+    <FavouriteSchoolsPage path="/favourites" />
     <Calculator path="/calculator" />
 
     <ForDevelopersPage path="/for-developers" />

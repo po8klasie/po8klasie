@@ -3,6 +3,7 @@ import { map, mergeMap } from 'rxjs/operators';
 import { ajax } from 'rxjs/ajax';
 import { of } from 'rxjs';
 import { School } from '../../types';
+import { transformArr } from '../../utils/transformArr';
 
 const FETCH_SCHOOL_DETAILS = 'FETCH_SCHOOL_DETAILS';
 const FETCH_SCHOOL_DETAILS_SUCCEEDED = 'FETCH_SCHOOL_DETAILS_SUCCEEDED';
@@ -10,19 +11,31 @@ const FETCH_SCHOOL_DETAILS_SUCCEEDED = 'FETCH_SCHOOL_DETAILS_SUCCEEDED';
 const FETCH_SCHOOL_CLASSES_SUCCEEDED = 'FETCH_SCHOOL_CLASSES_SUCCEEDED';
 
 type SchoolDetailsState = {
-  school: {} | School;
-  classes: any[];
-  id: number | null;
+  school:
+    | {}
+    | {
+        [key: string]: School;
+      };
+  classes:
+    | {}
+    | {
+        [key: string]: School;
+      };
+  // ids:   id: number | null;
   isFetching: boolean;
 };
 
 interface FetchSchoolDetailsAction {
   type: typeof FETCH_SCHOOL_DETAILS;
-  payload: number;
+  payload: number[];
 }
 interface FetchSchoolDetailsSucceededAction {
   type: typeof FETCH_SCHOOL_DETAILS_SUCCEEDED;
-  payload: School;
+  payload: {
+    [key: string]: {
+      school: School;
+    };
+  };
 }
 
 interface FetchSchoolClassesSucceededAction {
@@ -31,15 +44,17 @@ interface FetchSchoolClassesSucceededAction {
 }
 
 export const fetchSchoolDetails = (
-  payload: number,
+  payload: number[],
 ): FetchSchoolDetailsAction => ({
   type: FETCH_SCHOOL_DETAILS,
   payload,
 });
 
-export const fetchSchoolDetailsSucceeded = (
-  payload: School,
-): FetchSchoolDetailsSucceededAction => ({
+export const fetchSchoolDetailsSucceeded = (payload: {
+  [key: string]: {
+    school: School;
+  };
+}): FetchSchoolDetailsSucceededAction => ({
   type: FETCH_SCHOOL_DETAILS_SUCCEEDED,
   payload,
 });
@@ -68,48 +83,76 @@ const fixBounds = (classes: any[]) =>
     };
   });
 
-export const fetchSchoolDetailsEpic: Epic<
-  Actions,
-  any,
-  SchoolDetailsState
-> = action$ =>
+export const fetchSchoolDetailsEpic: Epic<Actions, any, SchoolDetailsState> = (
+  action$,
+) =>
   action$.pipe(
     ofType<Actions, FetchSchoolDetailsAction>(FETCH_SCHOOL_DETAILS),
 
-    mergeMap(action => {
+    mergeMap((action) => {
+      const params = transformArr(action.payload, 'api');
+
       return ajax
-        .getJSON<any>(
-          `${process.env.REACT_APP_API_URL}/school/?id=${Number(
-            action.payload,
-          ).toString()}`,
-        )
-        .pipe(map(res => fetchSchoolDetailsSucceeded(res.results[0])));
+        .getJSON<any>(`${process.env.REACT_APP_API_URL}/school/?id=${params}`)
+        .pipe(
+          map((res) => {
+            const result = res.results.reduce(
+              (resultsObj: object, schoolResult: School) => {
+                return {
+                  ...resultsObj,
+                  [schoolResult.id]: { ...schoolResult },
+                };
+              },
+              {},
+            );
+            return fetchSchoolDetailsSucceeded(result);
+          }),
+        );
     }),
   );
 
-export const fetchSchoolClassesEpic: Epic<
-  Actions,
-  any,
-  SchoolDetailsState
-> = action$ =>
+export const fetchSchoolClassesEpic: Epic<Actions, any, SchoolDetailsState> = (
+  action$,
+) =>
   action$.pipe(
     ofType<Actions, any>(FETCH_SCHOOL_DETAILS_SUCCEEDED),
     mergeMap((action: any) => {
-      if (!isHighSchool(action.payload))
-        return of(fetchSchoolClassesSucceeded([]));
+      const ids = Object.keys(action.payload).map((key: string) => Number(key));
 
+      const onlyHighSchoolIds = ids.filter(
+        (id: number) =>
+          action.payload[id].school_type === 'liceum ogólnokształcące',
+      );
+      if (!onlyHighSchoolIds.length) return of(fetchSchoolClassesSucceeded({}));
+
+      const params = transformArr(onlyHighSchoolIds, 'api');
       return ajax
         .getJSON<any>(
-          `${process.env.REACT_APP_API_URL}/highschool/class/?school=${action.payload.id}`,
+          `${process.env.REACT_APP_API_URL}/highschool/class/?school=${params}`,
         )
-        .pipe(map(res => fetchSchoolClassesSucceeded(fixBounds(res.results))));
+        .pipe(
+          map((res) => {
+            const allClasses = fixBounds(res.results);
+
+            //tutaj trzeba zrobić filtrowanie klas przez szkoły, kiedy będzie już zwracane ID szkoły; poniższe rozwiązanie zadziała tylko przy jednej szkole
+
+            const result = ids.reduce((resultsObj: object, id: number) => {
+              return {
+                ...resultsObj,
+                [id]: allClasses,
+              };
+            }, {});
+
+            return fetchSchoolClassesSucceeded(result);
+          }),
+        );
     }),
   );
 
 const initialState: SchoolDetailsState = {
   school: {},
-  classes: [],
-  id: null,
+  classes: {},
+  // id: null,
   isFetching: false,
 };
 
@@ -122,7 +165,7 @@ const schools = (
       return {
         ...state,
         isFetching: true,
-        id: action.payload,
+        // id: action.payload,
       };
 
     case FETCH_SCHOOL_DETAILS_SUCCEEDED:

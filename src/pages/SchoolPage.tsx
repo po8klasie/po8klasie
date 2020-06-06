@@ -11,6 +11,11 @@ import { fetchSchoolDetails } from '../store/modules/schoolDetails';
 import { createPlaceholderStyles } from '../utils/loading';
 import { splitArrayInHalf } from '../utils/misc';
 import { getSchoolMarker } from '../utils/map';
+import {
+  getFavSchoolsFromStorage,
+  saveFavSchoolsToStorage,
+} from '../utils/localStorageHelpers';
+
 
 const Header = styled.div`
   margin-top: 5vh;
@@ -32,6 +37,22 @@ const Header = styled.div`
   }
 `;
 const SchoolDescription = styled.p``;
+
+const FavouriteButton = styled.button`
+  border: none;
+  outline: none;
+  background: none;
+  padding: 0;
+  font-family: inherit;
+  font-size: 1.125em;
+  display: flex;
+  align-items: center;
+  margin-top: 2em;
+  cursor: pointer;
+  & img {
+    margin-right: 8px;
+  }
+`;
 
 const Section = styled.section`
   margin-top: 4em;
@@ -134,7 +155,7 @@ const MapWrapper = styled.div`
   height: 40vh;
 `;
 const SwitchButton = styled.button<{ active: boolean }>`
-  color: ${props => props.theme.colors.primary};
+  color: ${(props) => props.theme.colors.primary};
   font-weight: bold;
   font-size: 1em;
   font-family: inherit;
@@ -152,9 +173,9 @@ const SwitchButton = styled.button<{ active: boolean }>`
     position: absolute;
     top: 100%;
     left: 0;
-    width: ${props => (props.active ? '100%' : 0)};
+    width: ${(props) => (props.active ? '100%' : 0)};
     height: 2px;
-    background: ${props => props.theme.colors.primary};
+    background: ${(props) => props.theme.colors.primary};
     transition: 0.2s all;
   }
 `;
@@ -177,13 +198,15 @@ const transportLayer = L.tileLayer(
 );
 
 const SchoolPage = (props: SchoolPageProps) => {
-  const { school, classes } = props.schoolDetails;
+  const { school: schoolAll, classes: classesAll } = props.schoolDetails;
   const map = useRef<any>(null);
   const defaultBaseLayer = useRef<any>(null);
   const marker = useRef<any>(null);
   const [showPublicTransportRoutes, setShowPublicTransportRoutes] = useState(
     false,
   );
+  const favouritesList = getFavSchoolsFromStorage();
+  const [isFavourite, setIsFavourite] = useState(false);
 
   const handleConfig = (_map: any, _defaultBaseLayer: any) => {
     _map.setView([52.237049, 21.017532], 15);
@@ -201,36 +224,54 @@ const SchoolPage = (props: SchoolPageProps) => {
     );
     setShowPublicTransportRoutes(!showPublicTransportRoutes);
   };
+
   useEffect(() => {
-    if (props.schoolID && props.schoolID !== props.schoolDetails.id) {
-      props.fetchSchoolDetails(props.schoolID);
+    if (props.schoolID && !schoolAll.hasOwnProperty(props.schoolID)) {
+      props.fetchSchoolDetails([props.schoolID]);
     }
     // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
-    if (map.current && school && school.address) {
-      let coords: LatLngExpression = {
-        lat: school.address.longitude,
-        lng: school.address.latitude,
-      };
-      map.current.setView(coords, 13);
-      if (marker.current) {
-        map.current.removeLayer(marker.current);
-        map.current.setView(coords, 13);
-      }
-      marker.current = L.marker(coords, {
-        icon: getSchoolMarker(school.school_type),
-      })
-        .addTo(map.current)
-        .bindPopup(school.school_name)
-        .openPopup();
-    }
-  }, [school]);
+    const isSchoolFavourite = favouritesList.includes(props.schoolID);
+    setIsFavourite(isSchoolFavourite);
+  }, [props.schoolID, favouritesList]);
+
+  // useEffect(() => {
+  //   if (map.current && school && school.address) {
+  //     let coords: LatLngExpression = {
+  //       lat: school.address.longitude,
+  //       lng: school.address.latitude,
+  //     };
+  //     map.current.setView(coords, 13);
+  //     if (marker.current) {
+  //       map.current.removeLayer(marker.current);
+  //       map.current.setView(coords, 13);
+  //     }
+  //     marker.current = L.marker(coords, {
+  //       icon: getSchoolMarker(school.school_type),
+  //     })
+  //       .addTo(map.current)
+  //       .bindPopup(school.school_name)
+  //       .openPopup();
+  //   }
+  // }, [school]);
 
   if (!props.schoolID) return <Redirect to="/" />;
 
+  const school = schoolAll[props.schoolID] || {};
+  const classes = schoolAll[props.schoolID] || [];
+
   const isLoading = props.schoolDetails.isFetching || isObjEmpty(school);
+
+  const handleFavourite = () => {
+    const newFavouritesList = isFavourite
+      ? favouritesList.filter((elem: number) => elem !== school.id)
+      : [...favouritesList, school.id];
+
+    saveFavSchoolsToStorage(newFavouritesList);
+    setIsFavourite(!isFavourite);
+  };
 
   return (
     <Layout>
@@ -253,6 +294,25 @@ const SchoolPage = (props: SchoolPageProps) => {
               [Opis szkoły: np.] Publiczne liceum ogólnokształcące w Warszawie
               założone w 1874. Jest najstarszym warszawskim liceum.
             </SchoolDescription>
+            <FavouriteButton onClick={handleFavourite}>
+              {isFavourite ? (
+                <>
+                  <img
+                    src={require('../assets/icons/heart_full.png')}
+                    alt="heart_icon_empty"
+                  />
+                  Dodano do ulubionych
+                </>
+              ) : (
+                <>
+                  <img
+                    src={require('../assets/icons/heart.png')}
+                    alt="heart_icon_full"
+                  />
+                  Dodaj do ulubionych
+                </>
+              )}
+            </FavouriteButton>
             <Section>
               <h2>Tegoroczne profile klas</h2>
               <SchoolProfiles>
@@ -300,32 +360,35 @@ const SchoolPage = (props: SchoolPageProps) => {
               {classes.length > 0 && (
                 <Card>
                   <PastProfilesGrid>
-                    {splitArrayInHalf(classes).map((half: any) => (
-                      <table>
-                        <thead>
-                          <tr>
-                            <th>Klasa z przedmiotami rozszerzonymi</th>
-                            <th>Próg punktowy</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {half.map((c: any) => (
+                    {splitArrayInHalf(classes).map(
+                      (half: any, index: number) => (
+                        <table key={index}>
+                          <thead>
                             <tr>
-                              <td>
-                                {c.subjects.map((s: any) => s.name).join('-')}
-                              </td>
-                              <td>
-                                {c.stats && c.stats[0].points_min > 0 && (
-                                  <>
-                                    <strong>{c.stats[0].points_min}</strong> pkt
-                                  </>
-                                )}
-                              </td>
+                              <th>Klasa z przedmiotami rozszerzonymi</th>
+                              <th>Próg punktowy</th>
                             </tr>
-                          ))}
-                        </tbody>
-                      </table>
-                    ))}
+                          </thead>
+                          <tbody>
+                            {half.map((c: any, index: number) => (
+                              <tr key={index}>
+                                <td>
+                                  {c.subjects.map((s: any) => s.name).join('-')}
+                                </td>
+                                <td>
+                                  {c.stats && c.stats[0].points_min > 0 && (
+                                    <>
+                                      <strong>{c.stats[0].points_min}</strong>{' '}
+                                      pkt
+                                    </>
+                                  )}
+                                </td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      ),
+                    )}
                   </PastProfilesGrid>
                 </Card>
               )}
@@ -351,7 +414,11 @@ const SchoolPage = (props: SchoolPageProps) => {
                     </div>
                   </ContactGrid>
                   <ActionLinkWrapper>
-                    <a href={school.contact.website} target="_blank" rel="noopener noreferrer">
+                    <a
+                      href={school.contact.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       Strona www szkoły
                     </a>
                   </ActionLinkWrapper>

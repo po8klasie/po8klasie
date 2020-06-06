@@ -127,6 +127,9 @@ const Navbar: FC = props => {
               <Link to="/schools">Szkoły</Link>
             </MenuItem>
             <MenuItem>
+              <Link to="/favourites">Ulubione</Link>
+            </MenuItem>
+            <MenuItem>
               <Link to="/calculator">Kalkulator punktów</Link>
             </MenuItem>
           </Menu>

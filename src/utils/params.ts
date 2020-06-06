@@ -1,10 +1,8 @@
 import { searchControllersConfigs } from '../data/searchControllers';
+import { transformArr} from "./transformArr";
 
 export type Params = Record<string, string | number | any[]>;
 export type ParamsMode = 'api' | 'search';
-
-export const transformArr = (arr: any[], mode: ParamsMode) =>
-  arr.join(mode === 'search' ? ',' : '|');
 
 export const getSearchDataFromParams = (searchStr: string) => {
   const p = new URLSearchParams(searchStr);

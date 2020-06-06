@@ -7,7 +7,7 @@ import { fetchSchools } from '../../../store/modules/schools';
 import { FilterData, filters } from '../../../data/filters';
 import { useFilters } from '../../../hooks/useFilters';
 import { createSearchControllerConfig } from '../../../utils/searchControllers';
-import { transformArr } from '../../../utils/params';
+import { transformArr } from '../../../utils/transformArr';
 import { areObjectsDifferent } from '../../../utils/misc';
 
 const DropdownsWrapper = styled.div`
