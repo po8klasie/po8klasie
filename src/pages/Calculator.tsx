@@ -15,6 +15,7 @@ import {
   configs,
   CalculatedPoints,
 } from '@warsawlo/points-calculator';
+import Breadcrumbs from "../components/Breadcrumbs";
 
 const { isGradeValid, isExamResultValid } = validators;
 const { initialInputData, initialCalculatedPoints } = initialData;
@@ -166,6 +167,9 @@ const Calculator: FC<RouteComponentProps> = () => {
   return (
     <Layout>
       <Container>
+        <Breadcrumbs steps={[
+          ['Kalkulator punktów']
+        ]}/>
         <PageTitle>Kalkulator punktów</PageTitle>
         <p>
           Podaj swoje oceny, wyniki z egzaminu ósmoklasisty oraz dodatkowe

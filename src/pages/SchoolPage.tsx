@@ -11,9 +11,10 @@ import { fetchSchoolDetails } from '../store/modules/schoolDetails';
 import { createPlaceholderStyles } from '../utils/loading';
 import { splitArrayInHalf } from '../utils/misc';
 import { getSchoolMarker } from '../utils/map';
+import Breadcrumbs from "../components/Breadcrumbs";
 
 const Header = styled.div`
-  margin-top: 5vh;
+  margin-top: 3vh;
   span {
     text-transform: uppercase;
   }
@@ -235,6 +236,10 @@ const SchoolPage = (props: SchoolPageProps) => {
   return (
     <Layout>
       <Container className={isLoading ? 'loading' : ''}>
+        <Breadcrumbs steps={[
+            ['Wyszukiwarka szkół', '/schools'],
+            [!isLoading ? school.school_name : 'Szkoła']
+        ]}/>
         <Header>
           <span className="public">
             {!isLoading &&
