@@ -14,6 +14,7 @@ const DropdownWrapper = styled.div<{ active: boolean }>`
     z-index: 1;
     position: relative;
     align-items: center;
+    white-space: nowrap;
     padding: 10px;
     background: white;
     border-style: solid;

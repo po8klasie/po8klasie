@@ -11,7 +11,6 @@ import { transformArr } from '../../../utils/params';
 import { areObjectsDifferent } from '../../../utils/misc';
 
 const DropdownsWrapper = styled.div`
-  margin: 2em 0 0 0;
   display: none;
   @media (min-width: 900px) {
     display: flex;

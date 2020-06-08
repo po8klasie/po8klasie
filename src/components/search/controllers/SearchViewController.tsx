@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, {createElement, FC} from 'react';
 import styled from '../../../styling/styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSchools } from '../../../store/modules/schools';
@@ -14,6 +14,13 @@ const Switch = styled.div`
     font-weight: bold;
     font-family: inherit;
     cursor: pointer;
+    font-size: 1em;
+    display: flex;
+    align-items: center;
+    
+    & > *:first-child{
+      margin-right: 5px;
+    }
   }
 `;
 
@@ -41,6 +48,7 @@ const SearchViewController: FC = () => {
         .map(v => {
           return (
             <button onClick={() => changeView(v.id)} key={v.id}>
+              {createElement(v.icon)}
               {v.title}
             </button>
           );

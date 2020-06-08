@@ -16,7 +16,7 @@ import { getSearchDataFromParams, toParams } from '../utils/params';
 import SearchQueryController from '../components/search/controllers/SearchQueryController';
 import SearchPaginationController from '../components/search/controllers/SearchPaginationController';
 import SearchViewController from '../components/search/controllers/SearchViewController';
-import SearchOrderingController from '../components/search/controllers/SearchOrderingController';
+// import SearchOrderingController from '../components/search/controllers/SearchOrderingController';
 import SearchFiltersController from '../components/search/controllers/SearchFiltersController';
 
 // const Count = styled.small`
@@ -26,25 +26,19 @@ import SearchFiltersController from '../components/search/controllers/SearchFilt
 
 const QueryRow = styled.div`
   display: flex;
-  justify-content: space-between;
   align-items: center;
-
-  & > div {
-    display: flex;
-
-    & > div {
-      margin-right: 10px;
-
-      @media (max-width: 690px) {
-        margin: 0 0 10px 0;
-      }
-    }
-    @media (max-width: 690px) {
-      display: block;
+  margin: 20px 0;
+  
+  & > *:first-of-type {
+    margin-right: 20px;
+    width: 100%;
+    min-width: 210px;
+    
+    @media(max-width: 1100px){
       margin-bottom: 10px;
     }
   }
-  @media (max-width: 690px) {
+  @media(max-width: 1100px){
     display: block;
   }
 `;
@@ -73,16 +67,12 @@ const SchoolsPage = (props: any) => {
     <Layout>
       <Container>
         <PageTitle>Znajdź swoją wymarzoną szkołę</PageTitle>
+        <SearchViewController />
         <QueryRow>
-          <div>
-            <div>
-              <SearchQueryController />
-            </div>
-            <SearchOrderingController />
-          </div>
-          <SearchViewController />
+          <SearchQueryController />
+            <SearchFiltersController />
         </QueryRow>
-        <SearchFiltersController />
+
         {/*  /!*{!props.schools.isFetching && <Count>Liczba wyników: {props.schools.count}</Count>}*!/*/}
       </Container>
       {createElement(view.component)}
