@@ -6,6 +6,7 @@ import { fetchSchools } from '../../../store/modules/schools';
 import { getTotalPages } from '../../../utils/pagination';
 import { createSearchControllerConfig } from '../../../utils/searchControllers';
 import { getSearchViewById } from '../../../utils/searchViews';
+import {BsFillSkipEndFill, BsFillSkipStartFill, BsSkipEnd, BsSkipStart} from "react-icons/all";
 
 const PaginationWrapper = styled.div`
   display: flex;
@@ -15,33 +16,31 @@ const PaginationWrapper = styled.div`
     display: inline-flex;
   }
 `;
-const PaginationButton = styled.button<any>`
+const BaseButton = styled.button<any>`
+  cursor: pointer;
+  border: none;
+  background: none;
+  outline: none;
+`;
+
+const PaginationButton = styled(BaseButton)`
+  font-weight: ${props => (props.active ? 'bold' : 'normal')};
+  font-size: 1em;
+  padding: 10px 20px;
+`;
+
+const PaginationSkipButton = styled(BaseButton)`
   display: flex;
   justify-contents: center;
   align-items: center;
+  box-shadow: 0px 3px 13px #00000029;
+  border-radius: 50%;
   padding: 10px;
-  cursor: pointer;
-  border: 1px solid ${props => props.theme.colors.primaryLight};
-  border-left: none;
-  background: ${props => (props.active ? props.theme.colors.light : 'none')};
-  font-weight: ${props => (props.active ? 'bold' : 'normal')};
-  outline: none;
+  margin: 0 20px;
   
-  svg {
-    font-size: 24px;
-  }
-  
-  &:first-of-type {
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
-    border-left: 1px solid ${props => props.theme.colors.primaryLight};
-  }
-  &:last-of-type {
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-  }
-  &:not(.with-icon) {
-    padding: 10px 20px;
+  svg{
+    width: 20px;
+    height: 20px;
   }
 `;
 
@@ -81,19 +80,11 @@ const SearchPaginationController = () => {
   return (
     <PaginationWrapper>
       <div>
-        <PaginationButton
-          className={'with-icon'}
+        <PaginationSkipButton
           onClick={(e: any) => paginate(e, 1)}
         >
-          <MdSkipPrevious />
-        </PaginationButton>
-        <PaginationButton
-          className={'with-icon'}
-          disabled={page - 1 <= 0}
-          onClick={(e: any) => paginate(e, page - 1)}
-        >
-          <MdNavigateBefore />
-        </PaginationButton>
+          <BsSkipStart/>
+        </PaginationSkipButton>
         {page - 2 > 0 && (
           <PaginationButton onClick={(e: any) => paginate(e, page - 2)}>
             {page - 2}
@@ -115,19 +106,11 @@ const SearchPaginationController = () => {
             {page + 2}
           </PaginationButton>
         )}
-        <PaginationButton
-          className={'with-icon'}
-          disabled={page + 1 > totalPages}
-          onClick={(e: any) => paginate(e, page + 1)}
-        >
-          <MdNavigateNext />
-        </PaginationButton>
-        <PaginationButton
-          className={'with-icon'}
+        <PaginationSkipButton
           onClick={(e: any) => paginate(e, totalPages)}
         >
-          <MdSkipNext />
-        </PaginationButton>
+          <BsSkipEnd />
+        </PaginationSkipButton>
       </div>
     </PaginationWrapper>
   );
