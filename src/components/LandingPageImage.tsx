@@ -7,8 +7,8 @@ type LandingPageImageProps = {
 };
 
 const LandingPageImage = styled.div<LandingPageImageProps>`
-  background-image: url("${props => props.bgImage}");
-  background-position: ${props => props.position};
+  background-image: url("${(props) => props.bgImage}");
+  background-position: ${(props) => props.position};
   background-repeat: no-repeat;
   background-size: contain;
   min-height: 300px;

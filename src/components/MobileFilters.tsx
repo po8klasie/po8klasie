@@ -11,14 +11,14 @@ const FiltersButton = styled.button`
   font-size: 1.2em;
 
   span {
-    color: ${props => props.theme.colors.primary};
+    color: ${(props) => props.theme.colors.primary};
     margin-right: 10px;
   }
 `;
 const MobileFiltersModal = styled.div<{ active: boolean }>`
   position: fixed;
   top: 0;
-  left: ${props => (props.active ? '0' : '-100%')};
+  left: ${(props) => (props.active ? '0' : '-100%')};
   width: 100%;
   height: 100%;
   background: white;
@@ -36,7 +36,7 @@ const ModalHeader = styled.div`
     top: 50%;
     left: 20px;
     transform: translateY(-50%);
-    color: ${props => props.theme.colors.primary};
+    color: ${(props) => props.theme.colors.primary};
   }
   .title {
     display: block;
@@ -60,7 +60,7 @@ const List = styled.ul`
 const CheckIcon = styled.span<{ active: boolean }>`
   color: green;
   transition: opacity 0.2s;
-  opacity: ${props => (props.active ? 1 : 0)};
+  opacity: ${(props) => (props.active ? 1 : 0)};
   &::after {
     content: 'check';
   }

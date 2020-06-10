@@ -1,13 +1,13 @@
 import React, { FC, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import styled from "../../../styling/styled";
-import {MdSearch} from "react-icons/md";
+import styled from '../../../styling/styled';
+import { MdSearch } from 'react-icons/md';
 import { fetchSchools } from '../../../store/modules/schools';
 import { InputWithAddon } from '../../Input';
 import { createSearchControllerConfig } from '../../../utils/searchControllers';
 
 const SearchIcon = styled(MdSearch)`
-    font-size: 24px;
+  font-size: 24px;
 `;
 
 const SearchQueryController: FC = () => {

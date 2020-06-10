@@ -21,7 +21,7 @@ import LandingPageImage from '../components/LandingPageImage';
 
 interface LandingPageProps extends RouteComponentProps {}
 
-const LandingPage: FC<LandingPageProps> = props => {
+const LandingPage: FC<LandingPageProps> = (props) => {
   return (
     <Layout>
       <Container>

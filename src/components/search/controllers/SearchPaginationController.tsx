@@ -1,12 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import styled from '../../../styling/styled';
 import { useDispatch, useSelector } from 'react-redux';
-import {MdNavigateBefore, MdNavigateNext, MdSkipNext, MdSkipPrevious} from "react-icons/md";
+import {
+  MdNavigateBefore,
+  MdNavigateNext,
+  MdSkipNext,
+  MdSkipPrevious,
+} from 'react-icons/md';
 import { fetchSchools } from '../../../store/modules/schools';
 import { getTotalPages } from '../../../utils/pagination';
 import { createSearchControllerConfig } from '../../../utils/searchControllers';
 import { getSearchViewById } from '../../../utils/searchViews';
-import {BsFillSkipEndFill, BsFillSkipStartFill, BsSkipEnd, BsSkipStart} from "react-icons/all";
+import {
+  BsFillSkipEndFill,
+  BsFillSkipStartFill,
+  BsSkipEnd,
+  BsSkipStart,
+} from 'react-icons/all';
 
 const PaginationWrapper = styled.div`
   display: flex;
@@ -24,7 +34,7 @@ const BaseButton = styled.button<any>`
 `;
 
 const PaginationButton = styled(BaseButton)`
-  font-weight: ${props => (props.active ? 'bold' : 'normal')};
+  font-weight: ${(props) => (props.active ? 'bold' : 'normal')};
   font-size: 1em;
   padding: 10px 20px;
 `;
@@ -37,8 +47,8 @@ const PaginationSkipButton = styled(BaseButton)`
   border-radius: 50%;
   padding: 10px;
   margin: 0 20px;
-  
-  svg{
+
+  svg {
     width: 20px;
     height: 20px;
   }
@@ -80,10 +90,8 @@ const SearchPaginationController = () => {
   return (
     <PaginationWrapper>
       <div>
-        <PaginationSkipButton
-          onClick={(e: any) => paginate(e, 1)}
-        >
-          <BsSkipStart/>
+        <PaginationSkipButton onClick={(e: any) => paginate(e, 1)}>
+          <BsSkipStart />
         </PaginationSkipButton>
         {page - 2 > 0 && (
           <PaginationButton onClick={(e: any) => paginate(e, page - 2)}>
@@ -106,9 +114,7 @@ const SearchPaginationController = () => {
             {page + 2}
           </PaginationButton>
         )}
-        <PaginationSkipButton
-          onClick={(e: any) => paginate(e, totalPages)}
-        >
+        <PaginationSkipButton onClick={(e: any) => paginate(e, totalPages)}>
           <BsSkipEnd />
         </PaginationSkipButton>
       </div>

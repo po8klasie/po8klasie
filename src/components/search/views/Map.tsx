@@ -44,8 +44,8 @@ const MapWrapper = styled.div<{ loading: boolean }>`
     background: rgba(0, 0, 0, 0.7);
     color: white;
     animation: ${loaderAnimation} 2s infinite;
-    visibility: ${props => (props.loading ? 'visible' : 'hidden')};
-    opacity: ${props => (props.loading ? '1' : '0')};
+    visibility: ${(props) => (props.loading ? 'visible' : 'hidden')};
+    opacity: ${(props) => (props.loading ? '1' : '0')};
     transition: 0.2s all;
     z-index: 100;
   }
@@ -102,7 +102,7 @@ const MapSearchView: FC = () => {
     setLoading(true);
     if (!map.current || isFetching) return;
 
-    markers.current.forEach(m => {
+    markers.current.forEach((m) => {
       map.current.removeLayer(m);
     });
 

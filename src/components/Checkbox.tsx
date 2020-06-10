@@ -21,7 +21,7 @@ const CheckboxInput = styled.input`
     height: 20px;
     background: white;
     border-radius: 6px;
-    border: 1px solid ${props => props.theme.colors.primary};
+    border: 1px solid ${(props) => props.theme.colors.primary};
   }
 
   // Box hover
@@ -47,15 +47,15 @@ const CheckboxInput = styled.input`
     position: absolute;
     left: 6px;
     top: 10px;
-    background: ${props => props.theme.colors.primary};
+    background: ${(props) => props.theme.colors.primary};
     width: 2px;
     height: 2px;
-    box-shadow: 2px 0 0 ${props => props.theme.colors.primary},
-      4px 0 0 ${props => props.theme.colors.primary},
-      4px -2px 0 ${props => props.theme.colors.primary},
-      4px -4px 0 ${props => props.theme.colors.primary},
-      4px -6px 0 ${props => props.theme.colors.primary},
-      4px -8px 0 ${props => props.theme.colors.primary};
+    box-shadow: 2px 0 0 ${(props) => props.theme.colors.primary},
+      4px 0 0 ${(props) => props.theme.colors.primary},
+      4px -2px 0 ${(props) => props.theme.colors.primary},
+      4px -4px 0 ${(props) => props.theme.colors.primary},
+      4px -6px 0 ${(props) => props.theme.colors.primary},
+      4px -8px 0 ${(props) => props.theme.colors.primary};
     transform: rotate(45deg);
   }
 `;

@@ -11,7 +11,7 @@ import { fetchSchoolDetails } from '../store/modules/schoolDetails';
 import { createPlaceholderStyles } from '../utils/loading';
 import { splitArrayInHalf } from '../utils/misc';
 import { getSchoolMarker } from '../utils/map';
-import Breadcrumbs from "../components/Breadcrumbs";
+import Breadcrumbs from '../components/Breadcrumbs';
 
 const Header = styled.div`
   margin-top: 3vh;
@@ -135,7 +135,7 @@ const MapWrapper = styled.div`
   height: 40vh;
 `;
 const SwitchButton = styled.button<{ active: boolean }>`
-  color: ${props => props.theme.colors.primary};
+  color: ${(props) => props.theme.colors.primary};
   font-weight: bold;
   font-size: 1em;
   font-family: inherit;
@@ -153,9 +153,9 @@ const SwitchButton = styled.button<{ active: boolean }>`
     position: absolute;
     top: 100%;
     left: 0;
-    width: ${props => (props.active ? '100%' : 0)};
+    width: ${(props) => (props.active ? '100%' : 0)};
     height: 2px;
-    background: ${props => props.theme.colors.primary};
+    background: ${(props) => props.theme.colors.primary};
     transition: 0.2s all;
   }
 `;
@@ -236,10 +236,12 @@ const SchoolPage = (props: SchoolPageProps) => {
   return (
     <Layout>
       <Container className={isLoading ? 'loading' : ''}>
-        <Breadcrumbs steps={[
+        <Breadcrumbs
+          steps={[
             ['Wyszukiwarka szkół', '/schools'],
-            [!isLoading ? school.school_name : 'Szkoła']
-        ]}/>
+            [!isLoading ? school.school_name : 'Szkoła'],
+          ]}
+        />
         <Header>
           <span className="public">
             {!isLoading &&
@@ -356,7 +358,11 @@ const SchoolPage = (props: SchoolPageProps) => {
                     </div>
                   </ContactGrid>
                   <ActionLinkWrapper>
-                    <a href={school.contact.website} target="_blank" rel="noopener noreferrer">
+                    <a
+                      href={school.contact.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       Strona www szkoły
                     </a>
                   </ActionLinkWrapper>

@@ -16,11 +16,11 @@ const Brand = styled(Link)`
     transform: translateY(-10%);
     margin-right: 0.2em;
     path {
-      fill: ${props => props.theme.colors.primary};
+      fill: ${(props) => props.theme.colors.primary};
     }
   }
   span {
-    color: ${props => props.theme.colors.primary};
+    color: ${(props) => props.theme.colors.primary};
   }
 `;
 const NavWrapper = styled.div`
@@ -69,7 +69,7 @@ const Menu = styled.ul<{ active: boolean }>`
     background: white;
     text-align: center;
     border-bottom: 1px solid black;
-    display: ${props => (props.active ? 'block' : 'none')};
+    display: ${(props) => (props.active ? 'block' : 'none')};
   }
 `;
 const MenuItem = styled.li`
@@ -89,7 +89,7 @@ const MobileBar = styled.div`
   align-items: center;
   justify-content: space-between;
   .material-icons {
-    color: ${props => props.theme.colors.primary};
+    color: ${(props) => props.theme.colors.primary};
     display: none;
 
     @media (max-width: 780px) {
@@ -100,7 +100,7 @@ const MobileBar = styled.div`
     width: 100%;
   }
 `;
-const Navbar: FC = props => {
+const Navbar: FC = (props) => {
   const [isNavOpen, setNavOpen] = useState(false);
   return (
     <NavWrapper>

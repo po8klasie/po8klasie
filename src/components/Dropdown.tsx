@@ -2,7 +2,7 @@ import React from 'react';
 import styled from '../styling/styled';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import 'react-perfect-scrollbar/dist/css/styles.css';
-import {MdCheck, MdExpandMore} from 'react-icons/md';
+import { MdCheck, MdExpandMore } from 'react-icons/md';
 import { Choice } from '../data/filters';
 
 const DropdownWrapper = styled.div<{ active: boolean }>`
@@ -18,14 +18,14 @@ const DropdownWrapper = styled.div<{ active: boolean }>`
     padding: 10px;
     background: white;
     border-style: solid;
-    border-width: ${props => (props.active ? '2' : '1')}px;
-    border-color: ${props => props.theme.colors.dark};
+    border-width: ${(props) => (props.active ? '2' : '1')}px;
+    border-color: ${(props) => props.theme.colors.dark};
     border-radius: 10px;
     font-size: 1em;
     transition: 0.2s all;
 
     & > svg {
-      color: ${props => props.theme.colors.dark};
+      color: ${(props) => props.theme.colors.dark};
       margin-left: 10px;
       font-size: 24px;
       transition: transform 0.2s;
@@ -78,14 +78,14 @@ const DropdownWrapper = styled.div<{ active: boolean }>`
     transform: rotate(-180deg);
   }
   &:hover button {
-    background: ${props => props.theme.colors.light};
+    background: ${(props) => props.theme.colors.light};
   }
 `;
 const ListItem = styled.li<{ active: boolean }>`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: ${props => (props.active ? '#F2F2F2' : '')};
+  background: ${(props) => (props.active ? '#F2F2F2' : '')};
   padding: 10px 20px;
   border-radius: 5px;
   margin: 10px 15px 10px 7px;
@@ -99,7 +99,7 @@ const ListItem = styled.li<{ active: boolean }>`
     margin-left: 10px;
     font-size: 24px;
     transition: opacity 0.2s;
-    opacity: ${props => (props.active ? 1 : 0)};
+    opacity: ${(props) => (props.active ? 1 : 0)};
   }
 `;
 

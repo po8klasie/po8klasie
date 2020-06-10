@@ -1,11 +1,11 @@
 import { toParams } from './params';
-import {schoolsParamsOverwrites} from "../data/schoolsParamsOverwrites";
+import { schoolsParamsOverwrites } from '../data/schoolsParamsOverwrites';
 
 export const generateSchoolUrl = (searchData: any) => {
   const paramsStr = toParams(
     {
       ...searchData,
-      ...schoolsParamsOverwrites
+      ...schoolsParamsOverwrites,
     },
     'api',
   );

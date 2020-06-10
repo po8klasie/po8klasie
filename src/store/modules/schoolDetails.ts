@@ -68,30 +68,26 @@ const fixBounds = (classes: any[]) =>
     };
   });
 
-export const fetchSchoolDetailsEpic: Epic<
-  Actions,
-  any,
-  SchoolDetailsState
-> = action$ =>
+export const fetchSchoolDetailsEpic: Epic<Actions, any, SchoolDetailsState> = (
+  action$,
+) =>
   action$.pipe(
     ofType<Actions, FetchSchoolDetailsAction>(FETCH_SCHOOL_DETAILS),
 
-    mergeMap(action => {
+    mergeMap((action) => {
       return ajax
         .getJSON<any>(
           `${process.env.REACT_APP_API_URL}/school/?id=${Number(
             action.payload,
           ).toString()}`,
         )
-        .pipe(map(res => fetchSchoolDetailsSucceeded(res.results[0])));
+        .pipe(map((res) => fetchSchoolDetailsSucceeded(res.results[0])));
     }),
   );
 
-export const fetchSchoolClassesEpic: Epic<
-  Actions,
-  any,
-  SchoolDetailsState
-> = action$ =>
+export const fetchSchoolClassesEpic: Epic<Actions, any, SchoolDetailsState> = (
+  action$,
+) =>
   action$.pipe(
     ofType<Actions, any>(FETCH_SCHOOL_DETAILS_SUCCEEDED),
     mergeMap((action: any) => {
@@ -102,7 +98,9 @@ export const fetchSchoolClassesEpic: Epic<
         .getJSON<any>(
           `${process.env.REACT_APP_API_URL}/highschool/class/?school=${action.payload.id}`,
         )
-        .pipe(map(res => fetchSchoolClassesSucceeded(fixBounds(res.results))));
+        .pipe(
+          map((res) => fetchSchoolClassesSucceeded(fixBounds(res.results))),
+        );
     }),
   );
 

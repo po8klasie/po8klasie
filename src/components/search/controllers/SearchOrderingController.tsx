@@ -6,7 +6,7 @@ import { orderingTypes } from '../../../data/ordering';
 import { createSearchControllerConfig } from '../../../utils/searchControllers';
 import { getSearchViewById } from '../../../utils/searchViews';
 
-const orderingDropdownChoices = orderingTypes.map(type => ({
+const orderingDropdownChoices = orderingTypes.map((type) => ({
   label: type.title,
   id: type.orderingId,
 }));
@@ -69,7 +69,7 @@ export const searchOrderingControllerConfig = createSearchControllerConfig(
   {
     defaultValue: null,
     toParamHandler: ({ value, key, mode, p }) => {
-      const orderingType = orderingTypes.find(o => o.orderingId === value);
+      const orderingType = orderingTypes.find((o) => o.orderingId === value);
       if (!orderingType || !value) {
         if (p.has(key)) p.delete(key);
         return;
@@ -83,7 +83,7 @@ export const searchOrderingControllerConfig = createSearchControllerConfig(
       if (!param) return null;
 
       const orderingType = orderingTypes.find(
-        t => t.orderingId === param.trim(),
+        (t) => t.orderingId === param.trim(),
       );
       if (orderingType) return orderingType.orderingId;
 

@@ -1,8 +1,4 @@
-import React, {
-  createElement,
-  useEffect,
-  useLayoutEffect,
-} from 'react';
+import React, { createElement, useEffect, useLayoutEffect } from 'react';
 import { RouteComponentProps, navigate } from '@reach/router';
 import { connect, useSelector } from 'react-redux';
 import styled from '../styling/styled';
@@ -28,17 +24,17 @@ const QueryRow = styled.div`
   display: flex;
   align-items: center;
   margin: 20px 0;
-  
+
   & > *:first-of-type {
     margin-right: 20px;
     width: 100%;
     min-width: 210px;
-    
-    @media(max-width: 1100px){
+
+    @media (max-width: 1100px) {
       margin-bottom: 10px;
     }
   }
-  @media(max-width: 1100px){
+  @media (max-width: 1100px) {
     display: block;
   }
 `;
@@ -60,7 +56,7 @@ const SchoolsPage = (props: any) => {
     navigate(`?${params}`);
   }, [searchData]);
   const view =
-    searchViews.find(v => v.id === props.schools.searchData.view) ??
+    searchViews.find((v) => v.id === props.schools.searchData.view) ??
     DEFAULT_VIEW;
 
   return (
@@ -70,7 +66,7 @@ const SchoolsPage = (props: any) => {
         <SearchViewController />
         <QueryRow>
           <SearchQueryController />
-            <SearchFiltersController />
+          <SearchFiltersController />
         </QueryRow>
 
         {/*  /!*{!props.schools.isFetching && <Count>Liczba wyników: {props.schools.count}</Count>}*!/*/}
