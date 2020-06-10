@@ -39,6 +39,10 @@ const ModalHeader = styled.div`
     transform: translateY(-50%);
     font-size: 24px;
     color: ${props => props.theme.colors.primary};
+
+    svg {
+      margin-top: 8px;
+    }
   }
   .title {
     display: block;
