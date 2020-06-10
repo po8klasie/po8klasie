@@ -51,7 +51,7 @@ const ContactGrid = styled.div`
     font-style: normal;
   }
   a {
-    color: black;
+    color: #000;
     font-weight: normal;
   }
   @media (max-width: 600px) {
@@ -106,7 +106,7 @@ const PastProfilesGrid = styled.div`
     text-align: right;
   }
   tbody tr td {
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #000;
   }
   tbody tr:last-of-type td {
     border-bottom: none;
@@ -121,7 +121,7 @@ const PastProfilesGrid = styled.div`
       }
     }
     @media (max-width: 800px) {
-      border-top: 1px solid black;
+      border-top: 1px solid #000;
     }
   }
 `;

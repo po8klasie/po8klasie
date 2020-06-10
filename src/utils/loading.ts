@@ -10,8 +10,8 @@ export const shimmerAnimation = keyframes`
 `;
 export const createPlaceholderStyles = () => css`
   animation: ${shimmerAnimation} 2s linear 0s infinite;
-  background: darkgray;
-  background: linear-gradient(to right, white, #eee 20%, white);
+  background: #A9A9A9;
+  background: linear-gradient(to right, #fff, #eee 20%, #fff);
   background-size: 200% 100%;
   border-radius: 10px;
   display: block;

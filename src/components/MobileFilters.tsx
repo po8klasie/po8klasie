@@ -21,13 +21,13 @@ const MobileFiltersModal = styled.div<{ active: boolean }>`
   left: ${props => (props.active ? '0' : '-100%')};
   width: 100%;
   height: 100%;
-  background: white;
+  background: #fff;
   z-index: 10;
   transition: 0.2s all;
 `;
 const ModalHeader = styled.div`
   padding: 20px;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #000;
   position: relative;
   font-size: 1.2em;
 
@@ -58,7 +58,7 @@ const List = styled.ul`
   }
 `;
 const CheckIcon = styled.span<{ active: boolean }>`
-  color: green;
+  color: #008000;
   transition: opacity 0.2s;
   opacity: ${props => (props.active ? 1 : 0)};
   &::after {

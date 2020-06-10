@@ -42,7 +42,7 @@ const MapWrapper = styled.div<{ loading: boolean }>`
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.7);
-    color: white;
+    color: #fff;
     animation: ${loaderAnimation} 2s infinite;
     visibility: ${props => (props.loading ? 'visible' : 'hidden')};
     opacity: ${props => (props.loading ? '1' : '0')};
@@ -78,7 +78,7 @@ const MarkerKey = styled.div`
   }
 `;
 const PopupLink = styled(Link)`
-  color: black !important;
+  color: #000 !important;
   text-decoration: underline;
   text-align: center;
   font-family: 'Open Sans';

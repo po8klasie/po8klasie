@@ -16,7 +16,7 @@ const JumbotronWrapper = styled.div<JumbotronProps>`
     props.bgPosition
       ? 'linear-gradient(to left, transparent, rgba(0,0,0,0.7))'
       : 'transparent'};
-  color: white;
+  color: #fff;
   position: relative;
   &::after{
     content: '';

@@ -14,7 +14,7 @@ export default (props: IconProps) => {
       ? theme.colors[props.color]
         ? theme.colors[props.color]
         : props.color
-      : 'black'};
+      : '#000'};
   `;
   return <StyledIcon {...props} />;
 };

@@ -29,7 +29,7 @@ const NavWrapper = styled.div`
   left: 0;
   width: 100%;
   z-index: 10;
-  background: white;
+  background: #fff;
   &::after {
     content: '';
     display: block;
@@ -39,13 +39,13 @@ const NavWrapper = styled.div`
     width: 75%;
     transform: translateX(-50%);
     height: 1px;
-    background: black;
+    background: #000;
     @media (max-width: 780px) {
       content: none;
     }
   }
   @media (max-width: 780px) {
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #000;
   }
 `;
 const Nav = styled.nav`
@@ -66,10 +66,10 @@ const Menu = styled.ul<{ active: boolean }>`
     left: 0;
     width: 100%;
     padding-inline-start: 0;
-    background: white;
+    background: #fff;
     text-align: center;
-    border-bottom: 1px solid black;
-    display: ${props => (props.active ? 'block' : 'none')};
+    border-bottom: 1px solid #000;
+    display: ${(props) => (props.active ? 'block' : 'none')};
   }
 `;
 const MenuItem = styled.li`

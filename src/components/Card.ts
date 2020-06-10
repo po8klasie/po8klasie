@@ -4,12 +4,12 @@ const Card = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-  color: black;
+  color: #000;
   text-decoration: none;
   box-shadow: 0px 3px 12px #00000026;
   border-radius: 20px;
   padding: 20px;
-  background: white;
+  background: #fff;
 
   &::after {
     content: '';

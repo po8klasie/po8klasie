@@ -24,7 +24,7 @@ const FooterWrapper = styled.div`
     width: 75%;
     transform: translateX(-50%);
     height: 1px;
-    background: black;
+    background: #000;
     @media (max-width: 780px) {
       width: 100%;
     }

@@ -16,7 +16,7 @@ const DropdownWrapper = styled.div<{ active: boolean }>`
     align-items: center;
     white-space: nowrap;
     padding: 10px;
-    background: white;
+    background: #fff;
     border-style: solid;
     border-width: ${props => (props.active ? '2' : '1')}px;
     border-color: ${props => props.theme.colors.dark};
@@ -46,7 +46,7 @@ const DropdownWrapper = styled.div<{ active: boolean }>`
     top: calc(100% + 10px);
     left: 0;
     min-width: 100%;
-    background: white;
+    background: #fff;
     box-shadow: 0px 3px 6px #00000029;
     border: 1px solid #707070;
     border-radius: 5px;

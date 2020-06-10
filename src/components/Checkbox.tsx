@@ -19,7 +19,7 @@ const CheckboxInput = styled.input`
     vertical-align: text-top;
     width: 20px;
     height: 20px;
-    background: white;
+    background: #fff;
     border-radius: 6px;
     border: 1px solid ${props => props.theme.colors.primary};
   }
