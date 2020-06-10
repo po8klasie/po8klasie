@@ -65,7 +65,7 @@ const MarkerKey = styled.div`
     }
     
     img {
-      width 30.5px;
+      width: 30.5px;
       margin-right: 1em;
     }
     
