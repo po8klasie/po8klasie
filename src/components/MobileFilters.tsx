@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from '../styling/styled';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { Choice, FilterData } from '../data/filters';
+import { MdSettings, MdChevronLeft, MdChevronRight } from "react-icons/md";
 
 const FiltersButton = styled.button`
   border: none;
@@ -10,9 +11,9 @@ const FiltersButton = styled.button`
   align-items: center;
   font-size: 1.2em;
 
-  span {
+  .material-icons {
     color: ${props => props.theme.colors.primary};
-    margin-right: 10px;
+    margin: 4px 10px 0 0;
   }
 `;
 const MobileFiltersModal = styled.div<{ active: boolean }>`
@@ -36,6 +37,7 @@ const ModalHeader = styled.div`
     top: 50%;
     left: 20px;
     transform: translateY(-50%);
+    font-size: 24px;
     color: ${props => props.theme.colors.primary};
   }
   .title {
@@ -55,6 +57,10 @@ const List = styled.ul`
     justify-content: space-between;
     padding: 20px 0;
     border-bottom: 1px solid #cfcfcf;
+
+    .material-icons {
+      font-size: 20px;
+    }
   }
 `;
 const CheckIcon = styled.span<{ active: boolean }>`
@@ -82,12 +88,12 @@ const MobileFilters = (props: any) => {
   return (
     <>
       <FiltersButton type={'button'} onClick={(e: any) => setModalOpen(true)}>
-        <span className="material-icons">settings</span> Filtry
+        <span className="material-icons"><MdSettings /></span> Filtry
       </FiltersButton>
       <MobileFiltersModal active={isModalOpen}>
         <ModalHeader>
           <span className="material-icons" onClick={goBack}>
-            chevron_left
+            <MdChevronLeft />
           </span>
           <span className="title">
             {activeFilterId === null
@@ -106,7 +112,7 @@ const MobileFilters = (props: any) => {
                   }
                 >
                   {filter.title}
-                  <span className="material-icons">chevron_right</span>
+                  <span className="material-icons"><MdChevronRight /></span>
                 </li>
               ))}
             </List>
@@ -126,7 +132,6 @@ const MobileFilters = (props: any) => {
                           choice.id,
                         )
                       }
-                      className={'material-icons'}
                     />
                   </li>
                 );

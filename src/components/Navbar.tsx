@@ -3,6 +3,7 @@ import styled from '../styling/styled';
 import { Link } from '@reach/router';
 import Container from './Container';
 import Logo from './Logo';
+import { MdClose, MdMenu } from "react-icons/md";
 
 const Brand = styled(Link)`
   color: inherit;
@@ -89,6 +90,7 @@ const MobileBar = styled.div`
   align-items: center;
   justify-content: space-between;
   .material-icons {
+    font-size: 30px;
     color: ${props => props.theme.colors.primary};
     display: none;
 
@@ -116,7 +118,7 @@ const Navbar: FC = props => {
               className="material-icons"
               onClick={() => setNavOpen(!isNavOpen)}
             >
-              {isNavOpen ? 'close' : 'menu'}
+              {isNavOpen ? <MdClose /> : <MdMenu />}
             </span>
           </MobileBar>
           <Menu active={isNavOpen}>
