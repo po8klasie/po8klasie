@@ -85,7 +85,7 @@ const FooterGrid = styled.div`
     grid-template-columns: 1fr;
   }
 `;
-const Footer: FC = props => (
+const Footer: FC = () => (
   <FooterWrapper>
     <Container>
       <FooterGrid>

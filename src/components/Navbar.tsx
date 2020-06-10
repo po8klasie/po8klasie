@@ -54,7 +54,6 @@ const Nav = styled.nav`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  }
 `;
 const Menu = styled.ul<{ active: boolean }>`
   display: flex;
@@ -100,7 +99,7 @@ const MobileBar = styled.div`
     width: 100%;
   }
 `;
-const Navbar: FC = props => {
+const Navbar: FC = () => {
   const [isNavOpen, setNavOpen] = useState(false);
   return (
     <NavWrapper>

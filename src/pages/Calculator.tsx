@@ -23,7 +23,7 @@ const { config2018_2019 } = configs;
 
 const InputGrid = styled.div`
   display: inline-grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: repeat(3, auto);
   grid-column-gap: 30px;
   @media (max-width: 400px) {
     grid-column-gap: 15px;

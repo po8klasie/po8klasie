@@ -31,7 +31,7 @@ const PaginationButton = styled(BaseButton)`
 
 const PaginationSkipButton = styled(BaseButton)`
   display: flex;
-  justify-contents: center;
+  justify-content: center;
   align-items: center;
   box-shadow: 0px 3px 13px #00000029;
   border-radius: 50%;

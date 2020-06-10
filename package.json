@@ -51,7 +51,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run prettier:write"
+      "pre-commit": "yarn prettier:write"
     }
   },
   "browserslist": {
