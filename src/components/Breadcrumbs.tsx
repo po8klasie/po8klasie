@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from '../styling/styled';
 import {Link} from "@reach/router";
+import {nanoid} from "nanoid";
 
 const BreadcrumbsList = styled.ul`
     display: block;
@@ -38,7 +39,7 @@ const Breadcrumbs = (props: BreadcrumbsProps) => {
             {
                 steps.map(([label, link]) => {
                     return (
-                        <li>
+                        <li key={nanoid()}>
                             <Link to={link ?? ''}>
                                 {label}
                             </Link>
