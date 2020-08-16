@@ -47,6 +47,11 @@ const QueryRow = styled.div`
   }
 `;
 
+const Count = styled.small`
+  display: block;
+  margin: 1em 0 2em 0;
+`;
+
 const ResultsWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -134,6 +139,7 @@ const SchoolsGridPage = (props: RouteComponentProps) => {
             onFiltersValuesChange={setDropdownFilters}
           />
         </QueryRow>
+        {schools && <Count>Liczba wyników: {count}</Count>}
         <Results
           schools={schools}
           error={error}

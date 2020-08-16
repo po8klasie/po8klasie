@@ -44,7 +44,11 @@ export const useAllSchools = (searchData: any) => {
 
   let fetchedData = null;
 
-  if (data && size && (size > 1 || isTheOnlyRequest))
+  if (
+    data &&
+    size &&
+    (data.length === getTotalPages(data[0].count) || isTheOnlyRequest)
+  )
     fetchedData = data.map((res) => res.results).flat();
 
   return {
