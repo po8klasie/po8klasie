@@ -34,17 +34,21 @@ export const useAllSchools = (searchData: any) => {
 
   const { data, size, setSize, error } = useSWRInfinite(getKey, fetchData);
 
+  const isTheOnlyRequest = data && data[0].count <= PER_PAGE;
+
   useEffect(() => {
-    if (data && size && size === 1 && data[0].count > PER_PAGE && setSize) {
+    if (data && size && setSize && size === 1 && !isTheOnlyRequest) {
       setSize(getTotalPages(data[0].count));
     }
-  }, [data, size, setSize, searchData]);
+  }, [data, size, setSize, isTheOnlyRequest]);
+
+  let fetchedData = null;
+
+  if (data && size && (size > 1 || isTheOnlyRequest))
+    fetchedData = data.map((res) => res.results).flat();
 
   return {
-    data:
-      data && size && (size > 1 || data[0].count <= PER_PAGE)
-        ? data.map((res) => res.results).flat()
-        : [],
+    data: fetchedData,
     error,
   };
 };
