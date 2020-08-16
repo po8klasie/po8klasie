@@ -6,8 +6,6 @@ ENV SOURCE /opt/warsawlo
 RUN mkdir -p $SOURCE
 WORKDIR $SOURCE
 
-ENV REACT_APP_API_URL /api
-
 COPY package.json yarn.lock ./
 
 RUN yarn install --frozen-lockfile
