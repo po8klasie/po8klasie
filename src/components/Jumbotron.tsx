@@ -12,7 +12,7 @@ const JumbotronWrapper = styled.div<JumbotronProps>`
   padding: 2em;
   border-radius: 10px;
   margin-top: 2em;
-  background: ${props =>
+  background: ${(props) =>
     props.bgPosition
       ? 'linear-gradient(to left, transparent, rgba(0,0,0,0.7))'
       : 'transparent'};
@@ -27,9 +27,9 @@ const JumbotronWrapper = styled.div<JumbotronProps>`
     width: 100%;
     height: 100%;
     z-index: -1;
-    background: url("${props => props.bgImage}");
+    background: url("${(props) => props.bgImage}");
     background-size: cover;
-    background-position: ${props => props.bgPosition ?? 'center center'};
+    background-position: ${(props) => props.bgPosition ?? 'center center'};
     border-radius: 10px;
     // opacity: .4;
   }
@@ -46,7 +46,7 @@ const JumbotronContent = styled.div`
   }
 `;
 
-const Jumbotron: FC<JumbotronProps> = props => (
+const Jumbotron: FC<JumbotronProps> = (props) => (
   <JumbotronWrapper bgImage={props.bgImage} bgPosition={props.bgPosition}>
     <JumbotronContent>{props.children}</JumbotronContent>
   </JumbotronWrapper>

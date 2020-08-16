@@ -3,8 +3,8 @@ import styled from '../styling/styled';
 import { Link } from '@reach/router';
 import Container from './Container';
 import Logo from './Logo';
-import {getPathWithPreservedParams} from "../utils/url";
-import { BsX, BsThreeDots } from "react-icons/bs";
+import { getPathWithPreservedParams } from '../utils/url';
+import { BsX, BsThreeDots } from 'react-icons/bs';
 
 const Brand = styled(Link)`
   color: inherit;
@@ -92,12 +92,12 @@ const MobileBar = styled.div`
   .menu-icons {
     color: ${(props) => props.theme.colors.primary};
     display: none;
-    
+
     svg {
       width: 2em;
       height: 2em;
     }
-    
+
     @media (max-width: 780px) {
       display: block;
     }
@@ -113,7 +113,7 @@ const Navbar: FC = () => {
   const getSearchLink = (viewPath: string) => {
     const path = `/schools/${viewPath}`;
     return isSearchPage ? getPathWithPreservedParams(path) : path;
-  }
+  };
 
   return (
     <NavWrapper>
@@ -125,15 +125,8 @@ const Navbar: FC = () => {
               Warsaw
               <span>LO</span>
             </Brand>
-            <span
-              className="menu-icons"
-              onClick={() => setNavOpen(!isNavOpen)}
-            >
-              {isNavOpen ? (
-                  <BsX />
-              ) : (
-                  <BsThreeDots />
-              )}
+            <span className="menu-icons" onClick={() => setNavOpen(!isNavOpen)}>
+              {isNavOpen ? <BsX /> : <BsThreeDots />}
             </span>
           </MobileBar>
           <Menu active={isNavOpen}>

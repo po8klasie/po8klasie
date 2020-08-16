@@ -1,10 +1,10 @@
-import React, {FC} from "react";
-import styled from "../../../styling/styled";
-import {createPlaceholderStyles} from "../../../utils/loading";
-import Card from "../../Card";
-import {splitArrayInHalf} from "../../../utils/misc";
-import Section from "./Section";
-import {nanoid} from "nanoid";
+import React, { FC } from 'react';
+import styled from '../../../styling/styled';
+import { createPlaceholderStyles } from '../../../utils/loading';
+import Card from '../../Card';
+import { splitArrayInHalf } from '../../../utils/misc';
+import Section from './Section';
+import { nanoid } from 'nanoid';
 
 const PastProfilesGrid = styled.div`
   display: grid;
@@ -48,49 +48,47 @@ const PastProfilesGrid = styled.div`
 `;
 
 interface SchoolPastProfilesProps {
-    classes: any
+  classes: any;
 }
 
-const SchoolPastProfiles: FC<SchoolPastProfilesProps> = ({classes}) => {
-    return (
-        <Section>
-            <h2>Progi punktowe 2018</h2>
-            {classes && classes.length > 0 ? (
-                <Card>
-                    <PastProfilesGrid>
-                        {splitArrayInHalf(classes).map((half: any) => (
-                            <table key={nanoid()}>
-                                <thead>
-                                <tr>
-                                    <th>Klasa z przedmiotami rozszerzonymi</th>
-                                    <th>Próg punktowy</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {half.map((c: any) => (
-                                    <tr key={c.subjects.map((s: any) => s.name).join('-')}>
-                                        <td>
-                                            {c.subjects.map((s: any) => s.name).join('-')}
-                                        </td>
-                                        <td>
-                                            {c.stats && c.stats[0].points_min > 0 && (
-                                                <>
-                                                    <strong>{c.stats[0].points_min}</strong> pkt
-                                                </>
-                                            )}
-                                        </td>
-                                    </tr>
-                                ))}
-                                </tbody>
-                            </table>
-                        ))}
-                    </PastProfilesGrid>
-                </Card>
-            ) : (
-                <p>Brak danych</p>
-                )}
-        </Section>
-    )
+const SchoolPastProfiles: FC<SchoolPastProfilesProps> = ({ classes }) => {
+  return (
+    <Section>
+      <h2>Progi punktowe 2018</h2>
+      {classes && classes.length > 0 ? (
+        <Card>
+          <PastProfilesGrid>
+            {splitArrayInHalf(classes).map((half: any) => (
+              <table key={nanoid()}>
+                <thead>
+                  <tr>
+                    <th>Klasa z przedmiotami rozszerzonymi</th>
+                    <th>Próg punktowy</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {half.map((c: any) => (
+                    <tr key={c.subjects.map((s: any) => s.name).join('-')}>
+                      <td>{c.subjects.map((s: any) => s.name).join('-')}</td>
+                      <td>
+                        {c.stats && c.stats[0].points_min > 0 && (
+                          <>
+                            <strong>{c.stats[0].points_min}</strong> pkt
+                          </>
+                        )}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            ))}
+          </PastProfilesGrid>
+        </Card>
+      ) : (
+        <p>Brak danych</p>
+      )}
+    </Section>
+  );
 };
 
 export default SchoolPastProfiles;

@@ -44,8 +44,8 @@ const MapWrapper = styled.div<{ loading: boolean }>`
     background: rgba(0, 0, 0, 0.7);
     color: white;
     animation: ${loaderAnimation} 2s infinite;
-    visibility: ${props => (props.loading ? 'visible' : 'hidden')};
-    opacity: ${props => (props.loading ? '1' : '0')};
+    visibility: ${(props) => (props.loading ? 'visible' : 'hidden')};
+    opacity: ${(props) => (props.loading ? '1' : '0')};
     transition: 0.2s all;
     z-index: 100;
   }
@@ -54,27 +54,27 @@ const MarkerKey = styled.div`
   display: flex;
   justify-content: space-between;
   margin-top: 2em;
-  
+
   div {
     display: flex;
     align-items: center;
     margin: 0 10px;
-    
-    &:first-of-type{
-        margin-left: 10px;
+
+    &:first-of-type {
+      margin-left: 10px;
     }
-    
+
     img {
       width: 30.5px;
       margin-right: 1em;
     }
-    
-    @media(max-width: 900px) {
+
+    @media (max-width: 900px) {
       margin: 20px 10px;
     }
   }
-  @media(max-width: 900px) {
-     display: block;
+  @media (max-width: 900px) {
+    display: block;
   }
 `;
 const PopupLink = styled(Link)`
@@ -102,7 +102,7 @@ const MapSearchView: FC = () => {
     setLoading(true);
     if (!map.current || isFetching) return;
 
-    markers.current.forEach(m => {
+    markers.current.forEach((m) => {
       map.current.removeLayer(m);
     });
 

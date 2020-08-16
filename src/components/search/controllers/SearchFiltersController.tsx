@@ -40,7 +40,7 @@ const SearchFiltersController: FC = () => {
     if (areObjectsDifferent(searchData.filters, filtersValues))
       setFiltersValues(searchData.filters);
 
-      // eslint-disable-next-line
+    // eslint-disable-next-line
   }, [searchData.filters]);
 
   const handleSubmit = (e: any) => {
@@ -93,12 +93,12 @@ export const searchFiltersControllerConfig = createSearchControllerConfig(
   'filters',
   {
     defaultValue: Object.fromEntries(
-      Object.values(filters).map(f => [f[idKey], []]),
+      Object.values(filters).map((f) => [f[idKey], []]),
     ),
     toParamHandler: ({ value, key, mode, p }) => {
       Object.entries(value as Record<string, string[]>).forEach(
         ([filterKey, filterValues]) => {
-          const filter = filters.find(f => f[idKey] === filterKey);
+          const filter = filters.find((f) => f[idKey] === filterKey);
           if (filterValues.length > 0 && filter) {
             p.set(
               mode === 'search' ? filter[idKey] : filter.apiParam,
@@ -117,8 +117,8 @@ export const searchFiltersControllerConfig = createSearchControllerConfig(
         if (param) {
           output[filter[idKey]] = param
             .split(',')
-            .filter(str =>
-              filter.choices.find(c => (c.id = str.toLowerCase())),
+            .filter((str) =>
+              filter.choices.find((c) => (c.id = str.toLowerCase())),
             );
         }
       });

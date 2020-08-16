@@ -2,7 +2,7 @@ import { FC } from 'react';
 import GridSearchView from '../components/search/views/Grid';
 import { School } from '../types';
 import MapSearchView from '../components/search/views/Map';
-import {BsGridFill, BsMap} from "react-icons/all";
+import { BsGridFill, BsMap } from 'react-icons/all';
 
 export interface SearchViewProps {
   schools: School[];
@@ -44,5 +44,5 @@ export const searchViews: SearchView[] = [
 export const DEFAULT_VIEW_ID = 'map';
 
 export const DEFAULT_VIEW = searchViews.find(
-  v => v.id === DEFAULT_VIEW_ID,
+  (v) => v.id === DEFAULT_VIEW_ID,
 ) as SearchView;

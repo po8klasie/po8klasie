@@ -9,10 +9,12 @@ const LayoutWrapper = styled.div`
   width: 100%;
   height: 100%;
 `;
-const Content = styled.div<{flex?: boolean}>`
+const Content = styled.div<{ flex?: boolean }>`
   flex: 1 0 auto;
   margin-top: 8rem;
-  ${props => props.flex && `
+  ${(props) =>
+    props.flex &&
+    `
     display: flex;
     flex-direction: column;
   `}
@@ -22,21 +24,19 @@ const FooterWrapper = styled.div`
 `;
 
 interface LayoutProps {
-    contentFlex?: boolean
-    hideFooter?: boolean
+  contentFlex?: boolean;
+  hideFooter?: boolean;
 }
 
 const Layout: FC<LayoutProps> = ({ contentFlex, hideFooter, children }) => (
   <LayoutWrapper>
     <Navbar />
     <Content flex={contentFlex}>{children}</Content>
-      {
-          !hideFooter && (
-              <FooterWrapper>
-                  <Footer />
-              </FooterWrapper>
-          )
-      }
+    {!hideFooter && (
+      <FooterWrapper>
+        <Footer />
+      </FooterWrapper>
+    )}
   </LayoutWrapper>
 );
 

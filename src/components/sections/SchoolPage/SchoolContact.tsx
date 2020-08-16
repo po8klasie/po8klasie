@@ -1,6 +1,6 @@
-import React, {FC} from "react";
-import styled from "../../../styling/styled";
-import Section from "./Section";
+import React, { FC } from 'react';
+import styled from '../../../styling/styled';
+import Section from './Section';
 
 const ContactGrid = styled.div`
   display: inline-grid;
@@ -26,41 +26,36 @@ const ActionLinkWrapper = styled.div`
 `;
 
 interface SchoolContactProps {
-    contact: any
-    address: any
+  contact: any;
+  address: any;
 }
 
-const SchoolContact: FC<SchoolContactProps> = ({contact, address}) => {
-    return (
-        <Section>
-            <h2>Kontakt</h2>
-            {(!contact || !address) && <p>Brak danych</p>}
-            {contact && (
-                <>
-                    <ContactGrid>
-                        <address>
-                            {address.postcode} {address.city} <br/>
-                            {address.street} {contact.building_nr}
-                        </address>
-                        <div>
-                            <a href={`tel:${contact.phone}`}>
-                                {contact.phone}
-                            </a>{' '}
-                            <br/>
-                            <a href={`tel:${contact.email}`}>
-                                {contact.email}
-                            </a>
-                        </div>
-                    </ContactGrid>
-                    <ActionLinkWrapper>
-                        <a href={contact.website} target="_blank" rel="noopener noreferrer">
-                            Strona www szkoły
-                        </a>
-                    </ActionLinkWrapper>
-                </>
-            )}
-        </Section>
-    )
+const SchoolContact: FC<SchoolContactProps> = ({ contact, address }) => {
+  return (
+    <Section>
+      <h2>Kontakt</h2>
+      {(!contact || !address) && <p>Brak danych</p>}
+      {contact && (
+        <>
+          <ContactGrid>
+            <address>
+              {address.postcode} {address.city} <br />
+              {address.street} {contact.building_nr}
+            </address>
+            <div>
+              <a href={`tel:${contact.phone}`}>{contact.phone}</a> <br />
+              <a href={`tel:${contact.email}`}>{contact.email}</a>
+            </div>
+          </ContactGrid>
+          <ActionLinkWrapper>
+            <a href={contact.website} target="_blank" rel="noopener noreferrer">
+              Strona www szkoły
+            </a>
+          </ActionLinkWrapper>
+        </>
+      )}
+    </Section>
+  );
 };
 
 export default SchoolContact;

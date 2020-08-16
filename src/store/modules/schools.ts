@@ -11,7 +11,7 @@ import {
   getPageNumberFromPaginationUrl,
 } from '../../utils/urls';
 import { getSearchViewById } from '../../utils/searchViews';
-import {RootState} from "./root";
+import { RootState } from './root';
 
 export type SchoolsState = {
   results: School[][];
@@ -58,10 +58,13 @@ export const fetchSchoolsSucceeded = (
 
 type Actions = FetchSchoolsAction | FetchSchoolsSucceededAction;
 
-export const fetchSchoolsEpic: Epic<Actions, any, RootState> = (action$, state$) =>
+export const fetchSchoolsEpic: Epic<Actions, any, RootState> = (
+  action$,
+  state$,
+) =>
   action$.pipe(
     ofType<Actions, any>(FETCH_SCHOOLS),
-    mergeMap(action => {
+    mergeMap((action) => {
       const {
         payload: { searchData },
       } = action;
@@ -86,7 +89,7 @@ export const fetchSchoolsEpic: Epic<Actions, any, RootState> = (action$, state$)
             ...searchData,
             page: 1,
           }
-          : searchData;
+        : searchData;
       if (state$.value.schools.searchData.view !== searchData.view)
         freshSearchData.ordering = null;
 
@@ -95,7 +98,7 @@ export const fetchSchoolsEpic: Epic<Actions, any, RootState> = (action$, state$)
       const requestUrl = generateSchoolUrl(freshSearchData);
 
       return ajax.getJSON<any>(requestUrl).pipe(
-        expand(res =>
+        expand((res) =>
           fetchAll && res.next ? ajax.getJSON<any>(res.next) : EMPTY,
         ),
         map((res: any) => {
