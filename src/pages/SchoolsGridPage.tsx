@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 import { RouteComponentProps } from '@reach/router';
 import Layout from '../components/Layout';
 import Container from '../components/Container';
@@ -23,6 +23,10 @@ import useDeepCompareEffect from 'use-deep-compare-effect';
 import SwitchViewLink from '../components/sections/SchoolsPage/SwitchViewLink';
 import { BsMap } from 'react-icons/bs/index';
 import { PER_PAGE } from '../utils/pagination';
+import {
+  SearchErrorInfo,
+  SearchNotFoundInfo,
+} from '../components/sections/SchoolsPage/SearchInfo';
 
 const QueryRow = styled.div`
   display: flex;
@@ -43,7 +47,7 @@ const QueryRow = styled.div`
   }
 `;
 
-const Results = styled.div`
+const ResultsWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-column-gap: 3em;
@@ -66,6 +70,35 @@ const LoadingCard = styled(Card)`
   }
 `;
 
+const Results: FC<any> = ({ schools, error, page, count, onPageChange }) => {
+  if (error) return <SearchErrorInfo />;
+
+  if (schools && schools.length === 0) return <SearchNotFoundInfo />;
+
+  if (!schools)
+    return (
+      <>
+        <LoadingCard />
+        <LoadingCard />
+        <LoadingCard />
+      </>
+    );
+
+  return (
+    <>
+      <ResultsWrapper>
+        {schools.map((school: School) => (
+          <SchoolCard key={school.id} school={school} />
+        ))}
+        }
+      </ResultsWrapper>
+      {schools.length > PER_PAGE && (
+        <Pagination page={page} count={count} onPageChange={onPageChange} />
+      )}
+    </>
+  );
+};
+
 const SchoolsGridPage = (props: RouteComponentProps) => {
   const currUrl = new URL(window.location.href);
   const p = currUrl.searchParams;
@@ -80,7 +113,7 @@ const SchoolsGridPage = (props: RouteComponentProps) => {
     page,
     ...dropdownFilters,
   };
-  const { data } = useSchools(searchData);
+  const { data, error } = useSchools(searchData);
 
   useDeepCompareEffect(() => {
     currUrl.search = serializeSearchData(searchData, 'search');
@@ -101,20 +134,13 @@ const SchoolsGridPage = (props: RouteComponentProps) => {
             onFiltersValuesChange={setDropdownFilters}
           />
         </QueryRow>
-        <Results>
-          {!schools &&
-            new Array(3).fill(null).map((_, i) => <LoadingCard key={i} />)}
-          {schools &&
-            schools.map((school: School) => (
-              <SchoolCard key={school.id} school={school} />
-            ))}
-        </Results>
-        {schools && schools.length === 0 && (
-          <p>Brak szkół o podanych kryteriach</p>
-        )}
-        {schools && schools.length > PER_PAGE && (
-          <Pagination page={page} count={count} onPageChange={setPage} />
-        )}
+        <Results
+          schools={schools}
+          error={error}
+          page={page}
+          count={count}
+          onPageChange={setPage}
+        />
       </Container>
     </Layout>
   );
