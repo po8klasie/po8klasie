@@ -7,7 +7,7 @@ const CallToActionButton = styled(Link)`
   display: inline-block;
   text-align: center;
   padding: 1rem 1.375rem;
-  background: ${props => props.theme.colors.primary};
+  background: ${(props) => props.theme.colors.primary};
   color: white;
   margin: 1em auto 2em auto;
   font-size: 1.125em;
@@ -15,7 +15,7 @@ const CallToActionButton = styled(Link)`
   border-radius: 10px;
   box-shadow: 0 7px 20px #2d1b5426;
   &:hover {
-    background: ${props => props.theme.colors.primaryLight};
+    background: ${(props) => props.theme.colors.primaryLight};
   }
 `;
 

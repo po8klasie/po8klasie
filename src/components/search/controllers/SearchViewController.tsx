@@ -1,4 +1,4 @@
-import React, {createElement, FC} from 'react';
+import React, { createElement, FC } from 'react';
 import styled from '../../../styling/styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSchools } from '../../../store/modules/schools';
@@ -10,15 +10,15 @@ const Switch = styled.div`
     background: none;
     border: none;
     outline: none;
-    color: ${props => props.theme.colors.primary};
+    color: ${(props) => props.theme.colors.primary};
     font-weight: bold;
     font-family: inherit;
     cursor: pointer;
     font-size: 1em;
     display: flex;
     align-items: center;
-    
-    & > *:first-child{
+
+    & > *:first-child {
       margin-right: 5px;
     }
   }
@@ -44,8 +44,8 @@ const SearchViewController: FC = () => {
   return (
     <Switch>
       {searchViews
-        .filter(v => v.id !== searchData.view)
-        .map(v => {
+        .filter((v) => v.id !== searchData.view)
+        .map((v) => {
           return (
             <button onClick={() => changeView(v.id)} key={v.id}>
               {createElement(v.icon)}
@@ -69,7 +69,7 @@ export const searchViewControllerConfig = createSearchControllerConfig('view', {
     const param = p.has(key) && p.get(key) ? p.get(key) : null;
     if (!param) return null;
 
-    const view = searchViews.find(v => v.id === param.trim());
+    const view = searchViews.find((v) => v.id === param.trim());
     if (view) return view.id;
 
     return null;

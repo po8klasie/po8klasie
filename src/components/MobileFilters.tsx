@@ -3,7 +3,7 @@ import styled from '../styling/styled';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { Choice, FilterData } from '../data/filters';
 import { BsCheck, BsChevronLeft, BsChevronRight } from 'react-icons/bs';
-import { FiFilter } from "react-icons/fi";
+import { FiFilter } from 'react-icons/fi';
 
 const FiltersButton = styled.button`
   border: none;

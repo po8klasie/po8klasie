@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import styled from '../../../styling/styled';
 import { getTotalPages } from '../../../utils/pagination';
-import {BsSkipEnd, BsSkipStart} from "react-icons/all";
+import { BsSkipEnd, BsSkipStart } from 'react-icons/all';
 
 const PaginationWrapper = styled.div`
   display: flex;
@@ -19,7 +19,7 @@ const BaseButton = styled.button<any>`
 `;
 
 const PaginationButton = styled(BaseButton)`
-  font-weight: ${props => (props.active ? 'bold' : 'normal')};
+  font-weight: ${(props) => (props.active ? 'bold' : 'normal')};
   font-size: 1em;
   padding: 10px 20px;
 `;
@@ -32,24 +32,21 @@ const PaginationSkipButton = styled(BaseButton)`
   border-radius: 50%;
   padding: 10px;
   margin: 0 20px;
-  
-  svg{
+
+  svg {
     width: 20px;
     height: 20px;
   }
 `;
 
-const Pagination:FC<any> = ({count, page, onPageChange}) => {
-
+const Pagination: FC<any> = ({ count, page, onPageChange }) => {
   const totalPages = getTotalPages(count);
 
   return (
     <PaginationWrapper>
       <div>
-        <PaginationSkipButton
-          onClick={() => onPageChange(1)}
-        >
-          <BsSkipStart/>
+        <PaginationSkipButton onClick={() => onPageChange(1)}>
+          <BsSkipStart />
         </PaginationSkipButton>
         {page - 2 > 0 && (
           <PaginationButton onClick={() => onPageChange(page - 2)}>
@@ -72,9 +69,7 @@ const Pagination:FC<any> = ({count, page, onPageChange}) => {
             {page + 2}
           </PaginationButton>
         )}
-        <PaginationSkipButton
-          onClick={() => onPageChange(totalPages)}
-        >
+        <PaginationSkipButton onClick={() => onPageChange(totalPages)}>
           <BsSkipEnd />
         </PaginationSkipButton>
       </div>

@@ -18,7 +18,7 @@ ReactDom.render(
   <React.StrictMode>
     <App />
   </React.StrictMode>,
-  rootElement
+  rootElement,
 );
 
 serviceWorker.unregister();
