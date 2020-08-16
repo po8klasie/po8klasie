@@ -72,9 +72,7 @@ const CheckIcon = styled.span<{ active: boolean }>`
 const MobileFilters = (props: any) => {
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
   const getFilterById = (id: string) =>
-    props.filters.find(
-      (f: FilterData) => (f as any)[props.idKey as string] === id,
-    );
+    props.filters.find((f: FilterData) => f.key === id);
   const [activeFilterId, setActiveFilterId] = useState<string | null>(null);
 
   const goBack = () => {
@@ -103,7 +101,7 @@ const MobileFilters = (props: any) => {
             <List>
               {props.filters.map((filter: FilterData) => (
                 <li
-                  key={filter.apiParam}
+                  key={filter.key}
                   onClick={() =>
                     setActiveFilterId((filter as any)[props.idKey])
                   }

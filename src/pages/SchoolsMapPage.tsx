@@ -18,16 +18,13 @@ import { getSchoolMarker } from '../utils/map';
 import useDeepCompareEffect from 'use-deep-compare-effect';
 import { BsGrid, BsX } from 'react-icons/bs/index';
 import SwitchViewLink from '../components/sections/SchoolsPage/SwitchViewLink';
-import {
-  SearchErrorInfo,
-  SearchNotFoundInfo,
-} from '../components/sections/SchoolsPage/SearchInfo';
 import ClipLoader from 'react-spinners/ClipLoader';
 import theme from '../styling/theme';
 import MarkerKey from '../components/sections/SchoolsPage/MarkerKey';
 import 'react-leaflet-fullscreen-control';
 import { getPathWithPreservedParams } from '../utils/url';
-
+import 'leaflet/dist/leaflet.css';
+import { ErrorInfo, NotFoundInfo } from '../components/Info';
 const QueryRow = styled.div`
   display: flex;
   align-items: center;
@@ -243,8 +240,8 @@ const SchoolsMapPage = (props: RouteComponentProps) => {
             })}
         </Map>
         <Overlay active={isOverlayActive}>
-          {!error && schoolsNotFound && <SearchNotFoundInfo />}
-          {error && <SearchErrorInfo />}
+          {!error && schoolsNotFound && <NotFoundInfo />}
+          {error && <ErrorInfo />}
           <ClipLoader
             size={150}
             color={theme.colors.primary}

@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import styled from '../../../styling/styled';
-import { createPlaceholderStyles } from '../../../utils/loading';
 import Card from '../../Card';
 import { splitArrayInHalf } from '../../../utils/misc';
 import Section from './Section';

@@ -89,8 +89,8 @@ export const deserializePage = (p: URLSearchParams) =>
 
 export const deserializeFilters = (p: URLSearchParams, filters: FilterData[]) =>
   filters.reduce((obj: any, filter) => {
-    const value = deserializeSingleSearchData(filter.searchParam, p);
+    const value = deserializeSingleSearchData(filter.key, p);
     if (!value) return obj;
 
-    return { ...obj, [filter.searchParam]: value };
+    return { ...obj, [filter.key]: value };
   }, {});

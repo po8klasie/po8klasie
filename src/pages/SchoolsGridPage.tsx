@@ -23,10 +23,7 @@ import useDeepCompareEffect from 'use-deep-compare-effect';
 import SwitchViewLink from '../components/sections/SchoolsPage/SwitchViewLink';
 import { BsMap } from 'react-icons/bs/index';
 import { PER_PAGE } from '../utils/pagination';
-import {
-  SearchErrorInfo,
-  SearchNotFoundInfo,
-} from '../components/sections/SchoolsPage/SearchInfo';
+import { ErrorInfo, NotFoundInfo } from '../components/Info';
 
 const QueryRow = styled.div`
   display: flex;
@@ -76,9 +73,9 @@ const LoadingCard = styled(Card)`
 `;
 
 const Results: FC<any> = ({ schools, error, page, count, onPageChange }) => {
-  if (error) return <SearchErrorInfo />;
+  if (error) return <ErrorInfo />;
 
-  if (schools && schools.length === 0) return <SearchNotFoundInfo />;
+  if (schools && schools.length === 0) return <NotFoundInfo />;
 
   if (!schools)
     return (
