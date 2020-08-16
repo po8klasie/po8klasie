@@ -15,7 +15,7 @@ import {
   configs,
   CalculatedPoints,
 } from '@warsawlo/points-calculator';
-import Breadcrumbs from "../components/Breadcrumbs";
+import Breadcrumbs from '../components/Breadcrumbs';
 
 const { isGradeValid, isExamResultValid } = validators;
 const { initialInputData, initialCalculatedPoints } = initialData;
@@ -100,13 +100,13 @@ const Result = styled.div`
     font-size: 2em;
 
     span {
-      color: ${props => props.theme.colors.primary};
+      color: ${(props) => props.theme.colors.primary};
     }
   }
   button {
     border: none;
     background: none;
-    color: ${props => props.theme.colors.primary};
+    color: ${(props) => props.theme.colors.primary};
     font-weight: bold;
     cursor: pointer;
   }
@@ -167,9 +167,7 @@ const Calculator: FC<RouteComponentProps> = () => {
   return (
     <Layout>
       <Container>
-        <Breadcrumbs steps={[
-          ['Kalkulator punktów']
-        ]}/>
+        <Breadcrumbs steps={[['Kalkulator punktów']]} />
         <PageTitle>Kalkulator punktów</PageTitle>
         <p>
           Podaj swoje oceny, wyniki z egzaminu ósmoklasisty oraz dodatkowe
@@ -184,7 +182,7 @@ const Calculator: FC<RouteComponentProps> = () => {
             <span className={'value-label'}>Ocena</span>
             <span className={'points-label'}>Liczba punktów</span>
           </div>
-          {subjects.map(subject => (
+          {subjects.map((subject) => (
             <div className="row" key={`${subject.id}`}>
               <span className="title">{subject.label}</span>
               <div className="value">
@@ -210,7 +208,7 @@ const Calculator: FC<RouteComponentProps> = () => {
             <span className={'value-label'}>Wynik (%)</span>
             <span className={'points-label'}>Liczba punktów</span>
           </div>
-          {examParts.map(examPart => (
+          {examParts.map((examPart) => (
             <div className="row" key={examPart.id}>
               <span className="title">{examPart.label}</span>
               <div className="value">

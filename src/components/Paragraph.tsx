@@ -9,8 +9,8 @@ type ParagraphProps = {
 const Paragraph = styled.p<ParagraphProps>`
   font-size: 1.125em;
   line-height: 1.45em;
-  color: ${props => props.theme.colors.text};
-  text-align: ${props => props.textAlign || 'left'};
+  color: ${(props) => props.theme.colors.text};
+  text-align: ${(props) => props.textAlign || 'left'};
   @media (max-width: 880px) {
     text-align: left;
   }

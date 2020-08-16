@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import styled from '../styling/styled';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { Choice, FilterData } from '../data/filters';
+import { BsCheck, BsChevronLeft, BsChevronRight } from 'react-icons/bs';
+import { FiFilter } from 'react-icons/fi';
 
 const FiltersButton = styled.button`
   border: none;
@@ -10,15 +12,15 @@ const FiltersButton = styled.button`
   align-items: center;
   font-size: 1.2em;
 
-  span {
-    color: ${props => props.theme.colors.primary};
+  svg {
+    color: ${(props) => props.theme.colors.primary};
     margin-right: 10px;
   }
 `;
 const MobileFiltersModal = styled.div<{ active: boolean }>`
   position: fixed;
   top: 0;
-  left: ${props => (props.active ? '0' : '-100%')};
+  left: ${(props) => (props.active ? '0' : '-100%')};
   width: 100%;
   height: 100%;
   background: white;
@@ -36,7 +38,7 @@ const ModalHeader = styled.div`
     top: 50%;
     left: 20px;
     transform: translateY(-50%);
-    color: ${props => props.theme.colors.primary};
+    color: ${(props) => props.theme.colors.primary};
   }
   .title {
     display: block;
@@ -60,18 +62,17 @@ const List = styled.ul`
 const CheckIcon = styled.span<{ active: boolean }>`
   color: green;
   transition: opacity 0.2s;
-  opacity: ${props => (props.active ? 1 : 0)};
-  &::after {
-    content: 'check';
+  opacity: ${(props) => (props.active ? 1 : 0)};
+  svg {
+    width: 1.5em;
+    height: 1.5em;
   }
 `;
 
 const MobileFilters = (props: any) => {
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
   const getFilterById = (id: string) =>
-    props.filters.find(
-      (f: FilterData) => (f as any)[props.idKey as string] === id,
-    );
+    props.filters.find((f: FilterData) => f.key === id);
   const [activeFilterId, setActiveFilterId] = useState<string | null>(null);
 
   const goBack = () => {
@@ -82,12 +83,12 @@ const MobileFilters = (props: any) => {
   return (
     <>
       <FiltersButton type={'button'} onClick={(e: any) => setModalOpen(true)}>
-        <span className="material-icons">settings</span> Filtry
+        <FiFilter /> Filtry
       </FiltersButton>
       <MobileFiltersModal active={isModalOpen}>
         <ModalHeader>
           <span className="material-icons" onClick={goBack}>
-            chevron_left
+            <BsChevronLeft />
           </span>
           <span className="title">
             {activeFilterId === null
@@ -100,13 +101,13 @@ const MobileFilters = (props: any) => {
             <List>
               {props.filters.map((filter: FilterData) => (
                 <li
-                  key={filter.apiParam}
+                  key={filter.key}
                   onClick={() =>
                     setActiveFilterId((filter as any)[props.idKey])
                   }
                 >
                   {filter.title}
-                  <span className="material-icons">chevron_right</span>
+                  <BsChevronRight />
                 </li>
               ))}
             </List>
@@ -126,8 +127,9 @@ const MobileFilters = (props: any) => {
                           choice.id,
                         )
                       }
-                      className={'material-icons'}
-                    />
+                    >
+                      <BsCheck />
+                    </CheckIcon>
                   </li>
                 );
               })}

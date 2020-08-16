@@ -11,7 +11,7 @@ export const areObjectsDifferent = (a: any, b: any): boolean =>
 
 export const removeFromObject = (obj: any, keys: any[]) => {
   let output = { ...obj };
-  keys.forEach(key => {
+  keys.forEach((key) => {
     if (key in obj) delete output[key];
   });
   return output;

@@ -3,6 +3,8 @@ import styled from '../styling/styled';
 import { Link } from '@reach/router';
 import Container from './Container';
 import Logo from './Logo';
+import { getPathWithPreservedParams } from '../utils/url';
+import { BsX, BsThreeDots } from 'react-icons/bs';
 
 const Brand = styled(Link)`
   color: inherit;
@@ -16,11 +18,11 @@ const Brand = styled(Link)`
     transform: translateY(-10%);
     margin-right: 0.2em;
     path {
-      fill: ${props => props.theme.colors.primary};
+      fill: ${(props) => props.theme.colors.primary};
     }
   }
   span {
-    color: ${props => props.theme.colors.primary};
+    color: ${(props) => props.theme.colors.primary};
   }
 `;
 const NavWrapper = styled.div`
@@ -28,7 +30,7 @@ const NavWrapper = styled.div`
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 10;
+  z-index: 2000;
   background: white;
   &::after {
     content: '';
@@ -68,7 +70,7 @@ const Menu = styled.ul<{ active: boolean }>`
     background: white;
     text-align: center;
     border-bottom: 1px solid black;
-    display: ${props => (props.active ? 'block' : 'none')};
+    display: ${(props) => (props.active ? 'block' : 'none')};
   }
 `;
 const MenuItem = styled.li`
@@ -87,9 +89,14 @@ const MobileBar = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  .material-icons {
-    color: ${props => props.theme.colors.primary};
+  .menu-icons {
+    color: ${(props) => props.theme.colors.primary};
     display: none;
+
+    svg {
+      width: 2em;
+      height: 2em;
+    }
 
     @media (max-width: 780px) {
       display: block;
@@ -101,6 +108,13 @@ const MobileBar = styled.div`
 `;
 const Navbar: FC = () => {
   const [isNavOpen, setNavOpen] = useState(false);
+
+  const isSearchPage = window.location.pathname.startsWith('/schools');
+  const getSearchLink = (viewPath: string) => {
+    const path = `/schools/${viewPath}`;
+    return isSearchPage ? getPathWithPreservedParams(path) : path;
+  };
+
   return (
     <NavWrapper>
       <Container>
@@ -111,11 +125,8 @@ const Navbar: FC = () => {
               Warsaw
               <span>LO</span>
             </Brand>
-            <span
-              className="material-icons"
-              onClick={() => setNavOpen(!isNavOpen)}
-            >
-              {isNavOpen ? 'close' : 'menu'}
+            <span className="menu-icons" onClick={() => setNavOpen(!isNavOpen)}>
+              {isNavOpen ? <BsX /> : <BsThreeDots />}
             </span>
           </MobileBar>
           <Menu active={isNavOpen}>
@@ -123,7 +134,10 @@ const Navbar: FC = () => {
               <Link to="/">Home</Link>
             </MenuItem>
             <MenuItem>
-              <Link to="/schools">Szkoły</Link>
+              <Link to={getSearchLink('grid')}>Szkoły</Link>
+            </MenuItem>
+            <MenuItem>
+              <Link to={getSearchLink('map')}>Mapa</Link>
             </MenuItem>
             <MenuItem>
               <Link to="/calculator">Kalkulator punktów</Link>
