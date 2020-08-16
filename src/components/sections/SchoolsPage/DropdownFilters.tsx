@@ -18,7 +18,7 @@ const MobileFiltersWrapper = styled.div`
     display: block;
   }
 `;
-const idKey = 'searchParam';
+const idKey = 'key';
 
 const deleteFromObject = (obj: any, keys: string[]) => {
   const clonedObj = { ...obj };
@@ -28,31 +28,31 @@ const deleteFromObject = (obj: any, keys: string[]) => {
 
 const DropdownFilters: FC<any> = ({ onFiltersValuesChange, filtersValues }) => {
   const createHandler = (filterData: FilterData) => (choiceId: string) => {
-    const fieldId = filterData.searchParam;
+    const filterKey = filterData.key;
     const { choices, multiple } = filterData;
-    const valuesForFilter = filtersValues[fieldId]
-      ? filtersValues[fieldId]
+    const valuesForFilter = filtersValues[filterKey]
+      ? filtersValues[filterKey]
       : [];
     if (!valuesForFilter.includes(choiceId)) {
       if (multiple && valuesForFilter.length + 1 === choices.length) {
-        onFiltersValuesChange(deleteFromObject(filtersValues, [fieldId]));
+        onFiltersValuesChange(deleteFromObject(filtersValues, [filterKey]));
         return;
       }
       onFiltersValuesChange({
         ...filtersValues,
-        [fieldId]: multiple ? [...valuesForFilter, choiceId] : [choiceId],
+        [filterKey]: multiple ? [...valuesForFilter, choiceId] : [choiceId],
       });
       return;
     }
     const choicesLeft = removeFromArray(valuesForFilter, choiceId);
 
     if (choicesLeft.length === 0) {
-      onFiltersValuesChange(deleteFromObject(filtersValues, [fieldId]));
+      onFiltersValuesChange(deleteFromObject(filtersValues, [filterKey]));
       return;
     }
     onFiltersValuesChange({
       ...filtersValues,
-      [fieldId]: choicesLeft,
+      [filterKey]: choicesLeft,
     });
   };
 
@@ -65,14 +65,14 @@ const DropdownFilters: FC<any> = ({ onFiltersValuesChange, filtersValues }) => {
           const handleSelect = createHandler(filter);
           return (
             <Dropdown
-              key={filter.apiParam}
+              key={filter.key}
               title={filter.title}
               choices={filter.choices}
               onSelect={handleSelect}
               onSubmit={handleSubmit}
               selected={
-                filtersValues && filtersValues[filter[idKey]]
-                  ? filtersValues[filter[idKey]]
+                filtersValues && filtersValues[filter.key]
+                  ? filtersValues[filter.key]
                   : []
               }
             />

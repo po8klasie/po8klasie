@@ -4,8 +4,7 @@ export type Choice = {
 };
 
 export type FilterData = {
-  searchParam: string; // for frontend eg. /search?searchParam=<value>
-  apiParam: string; // for API
+  key: string; // for frontend eg. /search?key=<value>
   title: string;
   multiple: boolean;
   choices: Choice[];
@@ -13,8 +12,7 @@ export type FilterData = {
 
 export const filters: FilterData[] = [
   {
-    searchParam: 'public',
-    apiParam: 'is_public',
+    key: 'public',
     title: 'Szkoła publiczna',
     multiple: false,
     choices: [
@@ -29,8 +27,7 @@ export const filters: FilterData[] = [
     ],
   },
   {
-    searchParam: 'schoolType',
-    apiParam: 'school_type',
+    key: 'schoolType',
     title: 'Typ szkoły',
     multiple: true,
     choices: [
@@ -49,8 +46,7 @@ export const filters: FilterData[] = [
     ],
   },
   {
-    searchParam: 'extendedSubjects',
-    apiParam: 'highschoolclass__extendedsubject__name',
+    key: 'extendedSubjects',
     title: 'Rozszerzone przedmioty',
     multiple: true,
     choices: [
@@ -93,8 +89,7 @@ export const filters: FilterData[] = [
     ],
   },
   {
-    searchParam: 'district',
-    apiParam: 'address__district',
+    key: 'district',
     title: 'Dzielnica',
     multiple: true,
     choices: [

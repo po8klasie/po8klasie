@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
-import styled from '../../../styling/styled';
+import styled from '../styling/styled';
 
-const SearchInfoWrapper = styled.div`
+const InfoWrapper = styled.div`
   margin-top: 2em;
   .content {
     text-align: center;
@@ -12,31 +12,27 @@ const SearchInfoWrapper = styled.div`
   }
 `;
 
-const SearchInfo: FC<any> = ({ children, imageSrc }) => {
+const Info: FC<any> = ({ children, imageSrc }) => {
   return (
-    <SearchInfoWrapper>
+    <InfoWrapper>
       <div className="content">{children}</div>
       <div className="image-wrapper">
         <img src={imageSrc} alt="" />
       </div>
-    </SearchInfoWrapper>
+    </InfoWrapper>
   );
 };
 
-export const SearchNotFoundInfo = () => (
-  <SearchInfo
-    imageSrc={require('../../../assets/images/SchoolsPage/not-found.png')}
-  >
+export const NotFoundInfo = () => (
+  <Info imageSrc={require('../assets/images/SchoolsPage/not-found.png')}>
     Ups! Brak szkół spełniających podane przez Ciebie wymagania :( <br />
     Zmień kryteria i szukaj jeszcze raz!
-  </SearchInfo>
+  </Info>
 );
 
-export const SearchErrorInfo = () => (
-  <SearchInfo
-    imageSrc={require('../../../assets/images/SchoolsPage/error.png')}
-  >
+export const ErrorInfo = () => (
+  <Info imageSrc={require('../assets/images/SchoolsPage/error.png')}>
     Ups! Wystąpił błąd! <br />
     Spróbuj jeszcze raz :)
-  </SearchInfo>
+  </Info>
 );
