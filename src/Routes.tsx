@@ -1,9 +1,11 @@
 import React, { FC, lazy } from 'react';
-import { Router } from '@reach/router';
+import {Redirect, Router} from '@reach/router';
 import LandingPage from './pages/LandingPage';
 import SchoolPage from './pages/SchoolPage';
 import SchoolsPage from './pages/SchoolsPage';
 import lazyLoaded from './utils/lazyLoaded';
+import SchoolsGridPage from "./pages/SchoolsGridPage";
+import SchoolsMapPage from "./pages/SchoolsMapPage";
 
 const Calculator = lazyLoaded(lazy(() => import('./pages/Calculator')));
 const ForDevelopersPage = lazyLoaded(
@@ -24,7 +26,10 @@ const PrivacyPolicyPage = lazyLoaded(
 const Routes: FC = () => (
   <Router>
     <LandingPage path="/" />
-    <SchoolsPage path="/schools" />
+    <SchoolsPage path="/schools-old" />
+    <Redirect from="/schools" to="/schools/grid" />
+    <SchoolsGridPage path="/schools/grid" />
+    <SchoolsMapPage path="/schools/map" />
     <SchoolPage path="/school/:schoolID" />
     <Calculator path="/calculator" />
 

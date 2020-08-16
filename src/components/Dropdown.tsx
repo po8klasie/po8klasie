@@ -18,6 +18,7 @@ const DropdownWrapper = styled.div<{ active: boolean }>`
     padding: 10px;
     background: white;
     border-style: solid;
+    margin: ${props => (props.active ? '-1px' : '0')};
     border-width: ${props => (props.active ? '2' : '1')}px;
     border-color: ${props => props.theme.colors.dark};
     border-radius: 10px;
@@ -107,14 +108,14 @@ type DropdownProps = {
   title: string;
   choices: Choice[];
   selected: string[];
-  onSubmit: Function;
+  onSubmit?: Function;
   onSelect: any;
 };
 const Dropdown = (props: DropdownProps) => {
   return (
     <DropdownWrapper
       active={props.selected.length !== 0}
-      onMouseLeave={() => props.onSubmit()}
+      onMouseLeave={() => props.onSubmit && props.onSubmit()}
     >
       <button type={'button'}>
         {props.title}
