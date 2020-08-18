@@ -92,7 +92,6 @@ const Results: FC<any> = ({ schools, error, page, count, onPageChange }) => {
         {schools.map((school: School) => (
           <SchoolCard key={school.id} school={school} />
         ))}
-        }
       </ResultsWrapper>
       {schools.length > PER_PAGE && (
         <Pagination page={page} count={count} onPageChange={onPageChange} />
