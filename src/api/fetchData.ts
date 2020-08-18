@@ -1,7 +1,7 @@
+import { environment } from '../environments/environment';
+
 const fetchData = (path: string) => {
-  return fetch(`${process.env.REACT_APP_API_URL}${path}`).then((res) =>
-    res.json(),
-  );
+  return fetch(`${environment.API_URL}${path}`).then((res) => res.json());
 };
 
 export default fetchData;
