@@ -79,11 +79,11 @@ const Results: FC<any> = ({ schools, error, page, count, onPageChange }) => {
 
   if (!schools)
     return (
-      <>
+      <ResultsWrapper>
         <LoadingCard />
         <LoadingCard />
         <LoadingCard />
-      </>
+      </ResultsWrapper>
     );
 
   return (
