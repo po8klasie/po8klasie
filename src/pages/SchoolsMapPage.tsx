@@ -14,7 +14,8 @@ import {
 } from '../utils/search';
 import { filters } from '../data/filters';
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
-import { getSchoolMarker } from '../utils/map';
+import {getSchoolMarker} from '../utils/mapMarkers';
+import {doesSchoolHaveCoords, getSchoolCoords} from '../utils/map';
 import useDeepCompareEffect from 'use-deep-compare-effect';
 import { BsGrid, BsX } from 'react-icons/bs/index';
 import SwitchViewLink from '../components/sections/SchoolsPage/SwitchViewLink';
@@ -25,6 +26,7 @@ import 'react-leaflet-fullscreen-control';
 import { getPathWithPreservedParams } from '../utils/url';
 import 'leaflet/dist/leaflet.css';
 import { ErrorInfo, NotFoundInfo } from '../components/Info';
+import {LatLngExpression} from "leaflet";
 const QueryRow = styled.div`
   display: flex;
   align-items: center;
@@ -154,17 +156,14 @@ const SchoolsMapPage = (props: RouteComponentProps) => {
     setNotListedVisible(true);
     if (schools && schools.length > 0) {
       b = schools.reduce((prev, school) => {
-        if (!school || !school.address || !school.address.latitude) {
+        if (!doesSchoolHaveCoords(school)) {
           setNotListedCount((count) => count + 1);
           return prev;
         }
 
         return [
           ...prev,
-          {
-            lat: school.address.longitude,
-            lng: school.address.latitude,
-          },
+          getSchoolCoords(school) as LatLngExpression,
         ];
       }, []);
     }
@@ -207,17 +206,10 @@ const SchoolsMapPage = (props: RouteComponentProps) => {
           />
           {schools &&
             schools.map((school) => {
-              if (
-                !school.school_type ||
-                !school.address ||
-                !school.address.latitude
-              )
+              if (!doesSchoolHaveCoords(school))
                 return null;
 
-              let coords = {
-                lat: school.address.longitude,
-                lng: school.address.latitude,
-              };
+              let coords = getSchoolCoords(school) as LatLngExpression;
 
               return (
                 <Marker

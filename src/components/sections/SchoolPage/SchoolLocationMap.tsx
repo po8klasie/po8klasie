@@ -1,8 +1,9 @@
 import React, { FC } from 'react';
 import { LatLngExpression } from 'leaflet';
-import { getSchoolMarker } from '../../../utils/map';
+import {getSchoolMarker} from '../../../utils/mapMarkers';
 import styled from '../../../styling/styled';
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
+import {doesSchoolHaveCoords, getSchoolCoords} from "../../../utils/map";
 
 const MapWrapper = styled.div`
   width: 100%;
@@ -24,29 +25,20 @@ interface SchoolLocationMapProps {
   address: any;
 }
 
-const DEFAULT_CENTER = [52.237049, 21.017532] as [number, number];
-const DEFAULT_ZOOM = 15;
+const ZOOM = 15;
 
 const SchoolLocationMap: FC<SchoolLocationMapProps> = ({
   schoolName,
   schoolType,
   address,
 }) => {
-  if (!schoolType || !address || !address.latitude) return null;
+  if (!schoolType || !doesSchoolHaveCoords({address})) return null;
 
-  let coords: LatLngExpression = DEFAULT_CENTER;
-  let zoom = DEFAULT_ZOOM;
-  if (address && address.latitude) {
-    coords = {
-      lat: address.longitude,
-      lng: address.latitude,
-    };
-    zoom = 15;
-  }
+  let coords = getSchoolCoords({address}) as LatLngExpression;
 
   return (
     <MapWrapper>
-      <Map center={coords} zoom={zoom}>
+      <Map center={coords} zoom={ZOOM}>
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'

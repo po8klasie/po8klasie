@@ -5,7 +5,7 @@ import {
   specialSchoolMarkerImage,
   technicalSchoolMarkerImage,
   vocationalSchoolMarkerImage,
-} from '../../../utils/map';
+} from '../../../utils/mapMarkers';
 
 const MarkerKeyWrapper = styled.div`
   display: flex;

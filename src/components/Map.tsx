@@ -4,7 +4,7 @@ import 'leaflet/dist/leaflet.css';
 import 'leaflet-gesture-handling/dist/leaflet-gesture-handling.css';
 import L from 'leaflet';
 import { GestureHandling } from 'leaflet-gesture-handling';
-import { defaultMarker } from '../utils/map';
+import { defaultMarker } from '../utils/mapMarkers';
 
 L.Marker.prototype.options.icon = defaultMarker;
 L.Map.addInitHook('addHandler', 'gestureHandling', GestureHandling);
