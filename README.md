@@ -22,7 +22,7 @@ Please set up below variables to get app running.
 Please set up `REACT_APP_API_URL` environmental variable.
 
 #### Prod
-Follow instructions in [infra repo](https://github.com/WarsawLO/infra) to set up API url and (optionally) Sentry DSN.
+Follow instructions in [infra repo](https://github.com/WarsawLO/infra) to set up API URL and Sentry DSN.
   
 ### Available Scripts  
   
