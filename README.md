@@ -12,15 +12,17 @@
 </p>  
 
 ## Quick start  
-Basically it's nothing more but an website bootstrapped with [Create React App](https://github.com/facebook/create-react-app) (typescript template).
+Basically it's nothing more, but a website bootstrapped with [Create React App](https://github.com/facebook/create-react-app) (typescript template).
 
 Please set up below variables to get app running.
   
-### Environmental variables to set up  
-Variable name | Required | Description  
---- | :-: | ---  
-`REACT_APP_API_URL` | :heavy_check_mark: | API server URL  
-`REACT_APP_SENTRY_DSN` | :x: | Sentry Data Source Name  
+### Environmental variables to set up
+
+#### Dev
+Please set up `REACT_APP_API_URL` environmental variable.
+
+#### Prod
+Follow instructions in [infra repo](https://github.com/WarsawLO/infra) to set up API URL and Sentry DSN.
   
 ### Available Scripts  
   
