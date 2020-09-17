@@ -120,8 +120,7 @@ const Calculator: FC<RouteComponentProps> = () => {
   );
   const { register, watch, reset } = useForm();
   useLayoutEffect(() => {
-    const observable = calc.watch().subscribe(setPoints);
-    return () => observable.unsubscribe();
+    calc.watch(setPoints)
   }, []);
 
   const grades = watch('grades');
