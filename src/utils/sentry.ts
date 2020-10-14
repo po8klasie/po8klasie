@@ -1,14 +1,15 @@
-import * as Sentry from '@sentry/browser';
+import * as Sentry from '@sentry/react';
+import { Integrations } from '@sentry/tracing';
 import { environment, isProduction } from '../environments/environment';
 
-const PUBLIC_SENTRY_DSN_TEMPLATE = '${PUBLIC_SENTRY_DSN}';
-
 export const setupSentry = () => {
-  if (
-    isProduction &&
-    environment.PUBLIC_SENTRY_DSN &&
-    environment.PUBLIC_SENTRY_DSN !== PUBLIC_SENTRY_DSN_TEMPLATE
-  ) {
-    Sentry.init({ dsn: environment.PUBLIC_SENTRY_DSN });
-  }
+  if (isProduction && environment.PUBLIC_SENTRY_DSN)
+    Sentry.init({
+      dsn: environment.PUBLIC_SENTRY_DSN,
+      integrations: [
+        new Integrations.BrowserTracing(),
+      ],
+      tracesSampleRate: 1.0,
+    });
+
 };
