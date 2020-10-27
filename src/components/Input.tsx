@@ -1,25 +1,26 @@
 import styled from '../styling/styled';
-import React, {HTMLProps, ReactNode} from 'react';
+import React, { HTMLProps, ReactNode } from 'react';
 
 const Input = styled.input`
   padding: 0.5em 0.5em;
-  background: ${props => props.theme.colors.light};
+  background: ${(props) => props.theme.colors.light};
   border: 2px solid transparent;
   border-radius: 10px;
   font-size: 1.2em;
   outline: none;
   transition: 0.3s all;
   display: block;
+  width: 100%;
   &:focus {
     border: 2px solid rgb(200, 200, 200);
   }
 `;
 const InputWithAddonWrapper = styled.div<{ addonPosition: 'left' | 'right' }>`
   display: inline-flex;
-  flex-direction: ${props =>
+  flex-direction: ${(props) =>
     props.addonPosition === 'left' ? 'row' : 'row-reverse'};
   input {
-    ${props =>
+    ${(props) =>
       props.addonPosition === 'left'
         ? `
         border-top-left-radius: 0;
@@ -36,10 +37,10 @@ const InputWithAddonWrapper = styled.div<{ addonPosition: 'left' | 'right' }>`
   span.addon {
     display: flex;
     align-items: center;
-    background: ${props => props.theme.colors.light};
-    color: ${props => props.theme.colors.primaryLight};
+    background: ${(props) => props.theme.colors.light};
+    color: ${(props) => props.theme.colors.primaryLight};
     padding: 0.2em 1em;
-    ${props =>
+    ${(props) =>
       props.addonPosition === 'left'
         ? `
     border-top-left-radius: 10px;

@@ -2,9 +2,9 @@ import styled from '../styling/styled';
 
 const DoubleGrid = styled.div<{ reversed?: boolean }>`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, 1fr);
   grid-template-rows: 100px auto;
-  grid-template-areas: ${props =>
+  grid-template-areas: ${(props) =>
     props.reversed
       ? `
       "image title"

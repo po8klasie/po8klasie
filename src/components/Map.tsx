@@ -1,16 +1,13 @@
 import styled from '../styling/styled';
-import React, {
-  FC,
-  forwardRef,
-  Ref,
-  useEffect,
-  useRef,
-} from 'react';
+import React, { FC, forwardRef, Ref, useEffect, useRef } from 'react';
 import 'leaflet/dist/leaflet.css';
+import 'leaflet-gesture-handling/dist/leaflet-gesture-handling.css';
 import L from 'leaflet';
-import { defaultMarker } from '../utils/map';
+import { GestureHandling } from 'leaflet-gesture-handling';
+import { defaultMarker } from '../utils/mapMarkers';
 
 L.Marker.prototype.options.icon = defaultMarker;
+L.Map.addInitHook('addHandler', 'gestureHandling', GestureHandling);
 
 const MapWrapper = styled.div`
   width: 100%;
@@ -33,12 +30,17 @@ interface MapProps {
   onConfig?: Function;
 }
 
-const Map: FC<MapProps> = props => {
+const Map: FC<MapProps> = (props) => {
   const mapEl = useRef<HTMLDivElement>(null);
   const map = useRef<any>(null);
 
   useEffect(() => {
-    map.current = L.map(mapEl.current as HTMLDivElement);
+    map.current = L.map(
+      mapEl.current as HTMLDivElement,
+      {
+        gestureHandling: true,
+      } as any,
+    );
     const defaultTileLayer = L.tileLayer(
       'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
       {

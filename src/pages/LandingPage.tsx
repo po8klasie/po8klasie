@@ -21,7 +21,7 @@ import LandingPageImage from '../components/LandingPageImage';
 
 interface LandingPageProps extends RouteComponentProps {}
 
-const LandingPage: FC<LandingPageProps> = props => {
+const LandingPage: FC<LandingPageProps> = () => {
   return (
     <Layout>
       <Container>
@@ -55,16 +55,16 @@ const LandingPage: FC<LandingPageProps> = props => {
           <Feature>
             <img
               src={require('../assets/images/landingPage/ranking.png')}
-              alt="gwiazdki - oznaczenie rankingu"
+              alt="gwiazdki - oznaczenie opinii"
             />
-            <FeatureTitle>miejsce w rankingu</FeatureTitle>
+            <FeatureTitle>opinie</FeatureTitle>
           </Feature>
           <Feature>
             <img
               src={require('../assets/images/landingPage/lokalizacja.png')}
               alt="znacznik lokalizacji"
             />
-            <FeatureTitle>lokalizacja</FeatureTitle>
+            <FeatureTitle>lokalizacje</FeatureTitle>
           </Feature>
           <Feature>
             <img

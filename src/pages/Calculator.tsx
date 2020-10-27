@@ -15,6 +15,7 @@ import {
   configs,
   CalculatedPoints,
 } from '@warsawlo/points-calculator';
+import Breadcrumbs from '../components/Breadcrumbs';
 
 const { isGradeValid, isExamResultValid } = validators;
 const { initialInputData, initialCalculatedPoints } = initialData;
@@ -22,7 +23,7 @@ const { config2018_2019 } = configs;
 
 const InputGrid = styled.div`
   display: inline-grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: repeat(3, auto);
   grid-column-gap: 30px;
   @media (max-width: 400px) {
     grid-column-gap: 15px;
@@ -99,13 +100,13 @@ const Result = styled.div`
     font-size: 2em;
 
     span {
-      color: ${props => props.theme.colors.primary};
+      color: ${(props) => props.theme.colors.primary};
     }
   }
   button {
     border: none;
     background: none;
-    color: ${props => props.theme.colors.primary};
+    color: ${(props) => props.theme.colors.primary};
     font-weight: bold;
     cursor: pointer;
   }
@@ -119,8 +120,7 @@ const Calculator: FC<RouteComponentProps> = () => {
   );
   const { register, watch, reset } = useForm();
   useLayoutEffect(() => {
-    const observable = calc.watch().subscribe(setPoints);
-    return () => observable.unsubscribe();
+    calc.watch(setPoints)
   }, []);
 
   const grades = watch('grades');
@@ -166,6 +166,7 @@ const Calculator: FC<RouteComponentProps> = () => {
   return (
     <Layout>
       <Container>
+        <Breadcrumbs steps={[['Kalkulator punktów']]} />
         <PageTitle>Kalkulator punktów</PageTitle>
         <p>
           Podaj swoje oceny, wyniki z egzaminu ósmoklasisty oraz dodatkowe
@@ -180,7 +181,7 @@ const Calculator: FC<RouteComponentProps> = () => {
             <span className={'value-label'}>Ocena</span>
             <span className={'points-label'}>Liczba punktów</span>
           </div>
-          {subjects.map(subject => (
+          {subjects.map((subject) => (
             <div className="row" key={`${subject.id}`}>
               <span className="title">{subject.label}</span>
               <div className="value">
@@ -206,7 +207,7 @@ const Calculator: FC<RouteComponentProps> = () => {
             <span className={'value-label'}>Wynik (%)</span>
             <span className={'points-label'}>Liczba punktów</span>
           </div>
-          {examParts.map(examPart => (
+          {examParts.map((examPart) => (
             <div className="row" key={examPart.id}>
               <span className="title">{examPart.label}</span>
               <div className="value">

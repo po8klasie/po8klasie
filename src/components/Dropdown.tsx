@@ -2,29 +2,32 @@ import React from 'react';
 import styled from '../styling/styled';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import 'react-perfect-scrollbar/dist/css/styles.css';
-import {MdCheck, MdExpandMore} from 'react-icons/md';
+import { MdCheck, MdExpandMore } from 'react-icons/md';
 import { Choice } from '../data/filters';
 
 const DropdownWrapper = styled.div<{ active: boolean }>`
   margin-right: 10px;
   position: relative;
   outline: none;
+  z-index: 1001;
   button {
     display: flex;
     z-index: 1;
     position: relative;
     align-items: center;
+    white-space: nowrap;
     padding: 10px;
     background: white;
     border-style: solid;
-    border-width: ${props => (props.active ? '2' : '1')}px;
-    border-color: ${props => props.theme.colors.dark};
+    margin: ${(props) => (props.active ? '-1px' : '0')};
+    border-width: ${(props) => (props.active ? '2' : '1')}px;
+    border-color: ${(props) => props.theme.colors.dark};
     border-radius: 10px;
     font-size: 1em;
     transition: 0.2s all;
 
     & > svg {
-      color: ${props => props.theme.colors.dark};
+      color: ${(props) => props.theme.colors.dark};
       margin-left: 10px;
       font-size: 24px;
       transition: transform 0.2s;
@@ -77,14 +80,14 @@ const DropdownWrapper = styled.div<{ active: boolean }>`
     transform: rotate(-180deg);
   }
   &:hover button {
-    background: ${props => props.theme.colors.light};
+    background: ${(props) => props.theme.colors.light};
   }
 `;
 const ListItem = styled.li<{ active: boolean }>`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: ${props => (props.active ? '#F2F2F2' : '')};
+  background: ${(props) => (props.active ? '#F2F2F2' : '')};
   padding: 10px 20px;
   border-radius: 5px;
   margin: 10px 15px 10px 7px;
@@ -98,7 +101,7 @@ const ListItem = styled.li<{ active: boolean }>`
     margin-left: 10px;
     font-size: 24px;
     transition: opacity 0.2s;
-    opacity: ${props => (props.active ? 1 : 0)};
+    opacity: ${(props) => (props.active ? 1 : 0)};
   }
 `;
 
@@ -106,14 +109,14 @@ type DropdownProps = {
   title: string;
   choices: Choice[];
   selected: string[];
-  onSubmit: Function;
+  onSubmit?: Function;
   onSelect: any;
 };
 const Dropdown = (props: DropdownProps) => {
   return (
     <DropdownWrapper
       active={props.selected.length !== 0}
-      onMouseLeave={() => props.onSubmit()}
+      onMouseLeave={() => props.onSubmit && props.onSubmit()}
     >
       <button type={'button'}>
         {props.title}
