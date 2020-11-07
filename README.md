@@ -1,5 +1,3 @@
-  
-
 <img alt="WarsawLO" src="https://warsawlo.pl/logo/full.png" width="200px" />
 
 # WarsawLO 2.0
