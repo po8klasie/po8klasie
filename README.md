@@ -1,63 +1,65 @@
+<img alt="WarsawLO" src="https://warsawlo.pl/logo/full.png" width="200px" />
 
-<a href="https://warsawlo.pl">  
-    <img alt="WarsawLO" src="https://warsawlo.pl/logo/full.png" style="display: block; width: 200px; margin: auto;" />  
-  </a>  
-<h1 style="text-align: center">  
-  WarsawLO 2.0  
-</h1>  
-<p style="text-align: center">  
-  Ulepszona (i jeszcze nieupubliczniona) wersja najprostszej i najszybszej wyszukiwarki warszawskich szkół średnich  
-   <br />  
-  Improved (and not published yet) version of the simplest and the fastest search engine for Warsaw secondary schools  
-</p>  
+# WarsawLO 2.0
+:poland: Najprostsza i najszybsza wyszukiwarka warszawskich liceów. Teraz w wersji 2.0. <br/>
+Wkrótce produkcyjnie dostępna dla wszystkich!
 
-## Quick start  
-Basically it's nothing more, but a website bootstrapped with [Create React App](https://github.com/facebook/create-react-app) (typescript template).
+:uk: The simplest and fastest search engine for Warsaw high schools. Now in version 2.0. <br />
+Soon available in production for everyone!
 
-Please set up below variables to get app running.
+> *NOTE*: App available at warsawlo.pl is just a prototype and is currently sourced from [warsawlo repo](https://github.com/WarsawLO/warsawlo).
   
-### Environmental variables to set up
-
-#### Dev
-Please set up `REACT_APP_API_URL` environmental variable.
-
-#### Prod
-Follow instructions in [infra repo](https://github.com/WarsawLO/infra) to set up API URL and Sentry DSN.
   
-### Available Scripts  
-  
-In the project directory, you can run:  
-  
-### `yarn start`  
-  
-Runs the app in the development mode.<br />  
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.  
-  
-The page will reload if you make edits.<br />  
-You will also see any lint errors in the console.  
+## Quick start 
 
-### `yarn build`  
+> *NOTE*: This project was bootstrapped using [Create React App](https://github.com/facebook/create-react-app) (typescript template).
+
+1. Clone this repo :arrow_down:
+```shell script  
+git clone https://github.com/WarsawLO/WarsawLO-2.0
+```
+
+2. In root directory of the project, create `.env` file with following content (replacing `<SERVER_URL>` with server where API is hosted) :page_facing_up:
+```
+REACT_APP_API_URL=<SERVER_URL>
+```
+
+3. Install dependencies using [yarn](https://yarnpkg.com/) :package:
+```shell script  
+yarn
+```
+
+4. Run the project :rocket:
+```shell script  
+yarn start
+```
+
+5. Make some changes and submit pull request :tada: <br />
+When doing so, don't hesitate to start your commit message with applicable [gitmoji](https://gitmoji.carloscuesta.me/) :slightly_smiling_face:
+
+
+### What about the back-end?
+If you want to develop front-end only, you are good to go! Just insert URL of the API server in `.env` file.
+
+Docs on how to develop front-end simultaneously with back-end locally coming soon!
+   
+   
+## Production use
+You can find detailed guide of how to set up WarsawLO for production use in our [infra repo](https://github.com/WarsawLO/infra).
+    
+    
+## More resources  
+* To learn more about CRA, go to [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).    
+* To learn React, check out the [React documentation](https://reactjs.org/).  
   
-Builds the app for production to the `build` folder.
-
-It correctly bundles React in production mode and optimizes the build for the best performance.  
-
-The build is minified and the filenames include the hashes.
   
-## More resources
-
-To see more detailed documentation of this project visit [oss.warsawlo.pl](https://oss.warsawlo.pl)  
-
-To learn more about CRA, go to [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).  
-  
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-## Our supporters
-This is a civic tech and open-source project crafted by volunteers in cooperation with Code For Poland program of ePaństwo Foundation.  
-      
-<a href="https://codeforpoland.org">  
-  <img alt="Code For Poland logo" src="https://kodujdlapolski.pl/wp-content/themes/web-kodujdlapolski.pl/images/logo.png" height="70px" style="margin-right: 20px;"/>
-</a> 
-<a href="https://epf.org.pl">
-  <img alt="ePaństwo Foundation" src="https://epf.org.pl/en/wp-content/themes/epf/images/logo-epanstwo.svgz" height="60px" />  
-</a>  
+## Our supporters  
+This is a civic tech and open-source project crafted by volunteers in cooperation with Code For Poland program of ePaństwo Foundation.    
+        
+<a href="https://codeforpoland.org">    
+  <img alt="Code For Poland logo" src="https://kodujdlapolski.pl/wp-content/themes/web-kodujdlapolski.pl/images/logo.png" height="70px"/>  
+</a>
+&nbsp;&nbsp;&nbsp;
+<a href="https://epf.org.pl">  
+  <img alt="ePaństwo Foundation" src="https://epf.org.pl/en/wp-content/themes/epf/images/logo-epanstwo.svgz" height="60px" />    
+</a>
