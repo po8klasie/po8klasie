@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
+import { css } from '@emotion/core';
 import styled from '../../../styling/styled';
 import { createPlaceholderStyles } from '../../../utils/loading';
-import { css } from '@emotion/core';
+import AddRemoveFavourite from './AddRemoveFavourite';
 
 const placeholderStyle = css`
   ${createPlaceholderStyles()}
@@ -33,6 +34,8 @@ interface SchoolHeaderProps {
   district: string;
   description: string;
   isLoading: boolean;
+  isFavourite: boolean;
+  handleFavourite: () => void;
 }
 
 const SchoolHeader: FC<SchoolHeaderProps> = ({
@@ -41,6 +44,8 @@ const SchoolHeader: FC<SchoolHeaderProps> = ({
   district,
   description,
   isLoading,
+  isFavourite,
+  handleFavourite,
 }) => {
   return (
     <HeaderWrapper isLoading={isLoading}>
@@ -53,6 +58,7 @@ const SchoolHeader: FC<SchoolHeaderProps> = ({
         [Opis szkoły: np.] Publiczne liceum ogólnokształcące w Warszawie
         założone w 1874. Jest najstarszym warszawskim liceum.
       </p>
+      <AddRemoveFavourite isFavourite={isFavourite} onClick={handleFavourite} />
     </HeaderWrapper>
   );
 };
