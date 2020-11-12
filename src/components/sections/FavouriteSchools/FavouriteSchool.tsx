@@ -3,7 +3,6 @@ import { Link } from '@reach/router';
 import { useSchoolDetails } from '../../../api/schoolDetails';
 import { useHighSchoolClasses } from '../../../api/highschoolClasses';
 import { nanoid } from 'nanoid';
-import { useFavouriteSchools } from '../../../hooks/useFavouriteSchools';
 import { mockedProfile } from '../../../utils/mockedProfile';
 import RemoveFavButton from './RemoveFavButton';
 import { ErrorInfo } from '../../Info';
@@ -13,12 +12,12 @@ const profiles = Array(3).fill(mockedProfile);
 
 interface FavouriteSchoolProps {
   schoolID: string;
-  updateCallback: () => void;
+  toggleFavourite: (schoolID: string) => void;
 }
 
 const FavouriteSchool: React.FC<FavouriteSchoolProps> = ({
   schoolID,
-  updateCallback,
+  toggleFavourite,
 }) => {
   const { data: school, error: schoolError } = useSchoolDetails(
     Number(schoolID as any),
@@ -28,13 +27,6 @@ const FavouriteSchool: React.FC<FavouriteSchoolProps> = ({
     Number(schoolID as any),
     (school as any)?.school_type,
   );
-
-  const { toggleFavouriteSchool } = useFavouriteSchools(schoolID);
-
-  const handleClick = () => {
-    toggleFavouriteSchool();
-    updateCallback();
-  };
 
   if (schoolError || classesError) {
     return (
@@ -61,7 +53,7 @@ const FavouriteSchool: React.FC<FavouriteSchoolProps> = ({
           </div>
           <div className="top-right">
             <Link to={`/school/${school.id}`}>Zobacz pełny profil szkoły</Link>
-            <RemoveFavButton onClick={handleClick}>
+            <RemoveFavButton onClick={() => toggleFavourite(schoolID)}>
               Usuń z ulubionych
             </RemoveFavButton>
           </div>

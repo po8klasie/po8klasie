@@ -1,26 +1,26 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import {
   getFavSchoolsFromLocalStorage,
   saveFavSchoolsToLocalStorage,
 } from '../utils/localStorageFavSchools';
 
-export const useFavouriteSchools = (schoolID: string | undefined) => {
-  const favouritesList = getFavSchoolsFromLocalStorage();
-  const [isFavourite, setIsFavourite] = useState<boolean>(false);
+export const useFavouriteSchools = () => {
+  const favouriteSchoolsFromStorage = getFavSchoolsFromLocalStorage();
+  const [favouriteSchools, setFavouriteSchools] = useState<string[]>(
+    favouriteSchoolsFromStorage,
+  );
 
-  useEffect(() => {
-    const isSchoolFavourite = favouritesList.includes(schoolID);
-    setIsFavourite(isSchoolFavourite);
-  }, [schoolID, favouritesList]);
+  const isSchoolFavourite = (schoolID: string) =>
+    favouriteSchools.includes(schoolID);
 
-  const toggleFavouriteSchool = () => {
-    const newFavouritesList = isFavourite
-      ? favouritesList.filter((elem: string) => elem !== schoolID)
-      : [...favouritesList, schoolID];
+  const toggleFavouriteSchool = (schoolID: string) => {
+    const newFavouriteSchools = isSchoolFavourite(schoolID)
+      ? favouriteSchools.filter((elem: string) => elem !== schoolID)
+      : [...favouriteSchools, schoolID];
 
-    saveFavSchoolsToLocalStorage(newFavouritesList);
-    setIsFavourite(!isFavourite);
+    saveFavSchoolsToLocalStorage(newFavouriteSchools);
+    setFavouriteSchools(newFavouriteSchools);
   };
 
-  return { isFavourite, toggleFavouriteSchool };
+  return { isSchoolFavourite, toggleFavouriteSchool, favouriteSchools };
 };

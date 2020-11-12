@@ -26,9 +26,7 @@ const SchoolPage = (props: RouteComponentProps<{ schoolID: string }>) => {
     (school as any)?.school_type,
   );
 
-  const { isFavourite, toggleFavouriteSchool } = useFavouriteSchools(
-    props.schoolID,
-  );
+  const { isSchoolFavourite, toggleFavouriteSchool } = useFavouriteSchools();
 
   if (!isSchoolIdValid) return <Redirect to="/" />;
 
@@ -63,8 +61,8 @@ const SchoolPage = (props: RouteComponentProps<{ schoolID: string }>) => {
           description={'some desc'}
           district={school?.address?.district}
           isPublic={school?.is_public}
-          isFavourite={isFavourite}
-          toggleFavourite={toggleFavouriteSchool}
+          isFavourite={isSchoolFavourite(props.schoolID || '')}
+          toggleFavourite={() => toggleFavouriteSchool(props.schoolID || '')}
         />
 
         <SchoolProfiles />
