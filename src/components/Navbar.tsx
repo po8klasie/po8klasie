@@ -140,6 +140,9 @@ const Navbar: FC = () => {
               <Link to={getSearchLink('map')}>Mapa</Link>
             </MenuItem>
             <MenuItem>
+              <Link to="/favourite-schools">Ulubione</Link>
+            </MenuItem>
+            <MenuItem>
               <Link to="/calculator">Kalkulator punktów</Link>
             </MenuItem>
           </Menu>

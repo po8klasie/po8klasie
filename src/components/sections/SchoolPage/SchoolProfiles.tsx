@@ -1,8 +1,9 @@
 import React from 'react';
+import { nanoid } from 'nanoid';
 import Card from '../../Card';
 import Section from './Section';
 import styled from '../../../styling/styled';
-import { nanoid } from 'nanoid';
+import { mockedProfile } from '../../../utils/mockedProfile';
 
 const SchoolProfilesWrapper = styled.div`
   display: grid;
@@ -31,18 +32,6 @@ const SchoolProfilesWrapper = styled.div`
     grid-template-columns: 1fr;
   }
 `;
-
-const mockedProfile = {
-  departmentsNo: 2,
-  extendedSubjects: ['matematyka', 'fizyka', 'chemia'],
-  description: `
-                [Opis profilu] Lorem ipsum dolor sit amet, consectetur
-                adipisicing elit. Commodi consectetur debitis delectus harum
-                hic ipsa, iste, neque nobis nostrum nulla optio placeat
-                ratione, sint sit tenetur vel voluptatem voluptates.
-                Cupiditate.
-        `,
-};
 
 const profiles = Array(3).fill(mockedProfile);
 

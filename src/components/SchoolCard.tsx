@@ -38,9 +38,11 @@ const Wrapper = styled(Card)`
     text-decoration: underline;
   }
 `;
+
 type SchoolCardProps = {
   school: any;
 };
+
 const SchoolCard = (props: SchoolCardProps) => (
   <Wrapper>
     <div className="content">

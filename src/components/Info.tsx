@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import { Link } from '@reach/router';
 import styled from '../styling/styled';
 
 const InfoWrapper = styled.div`
@@ -9,6 +10,9 @@ const InfoWrapper = styled.div`
   .image-wrapper {
     display: flex;
     justify-content: center;
+  }
+  img {
+    max-width: 100%;
   }
 `;
 
@@ -34,5 +38,14 @@ export const ErrorInfo = () => (
   <Info imageSrc={require('../assets/images/SchoolsPage/error.png')}>
     Ups! Wystąpił błąd! <br />
     Spróbuj jeszcze raz :)
+  </Info>
+);
+
+export const NoFavouriteSchoolsInfo = () => (
+  <Info imageSrc={require('../assets/images/favouriteSchools.png')}>
+    Nie masz jeszcze polubionych szkół.
+    <br />
+    <Link to="/schools">Przejdź do wyszukiwania</Link>, aby móc znaleźć swoją
+    przyszłą szkołę!
   </Info>
 );

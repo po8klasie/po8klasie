@@ -6,6 +6,7 @@ import SchoolsPage from './pages/SchoolsPage';
 import lazyLoaded from './utils/lazyLoaded';
 import SchoolsGridPage from './pages/SchoolsGridPage';
 import SchoolsMapPage from './pages/SchoolsMapPage';
+import FavouriteSchoolsPage from './pages/FavouriteSchoolsPage';
 
 const Calculator = lazyLoaded(lazy(() => import('./pages/Calculator')));
 const ForDevelopersPage = lazyLoaded(
@@ -31,6 +32,7 @@ const Routes: FC = () => (
     <SchoolsGridPage path="/schools/grid" />
     <SchoolsMapPage path="/schools/map" />
     <SchoolPage path="/school/:schoolID" />
+    <FavouriteSchoolsPage path="/favourite-schools" />
     <Calculator path="/calculator" />
 
     <ForDevelopersPage path="/for-developers" />

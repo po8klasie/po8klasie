@@ -11,17 +11,22 @@ import SchoolPastProfiles from '../components/sections/SchoolPage/SchoolPastProf
 import SchoolContact from '../components/sections/SchoolPage/SchoolContact';
 import { useHighSchoolClasses } from '../api/highschoolClasses';
 import { ErrorInfo } from '../components/Info';
+import { useFavouriteSchools } from '../hooks/useFavouriteSchools';
 
 const SchoolPage = (props: RouteComponentProps<{ schoolID: string }>) => {
   const isSchoolIdValid =
     props.schoolID && !Number.isNaN(props.schoolID as any);
+
   const { data: school, error: schoolError } = useSchoolDetails(
     parseInt(props.schoolID as any),
   );
+
   const { data: classes, error: classesError } = useHighSchoolClasses(
     parseInt(props.schoolID as any),
     (school as any)?.school_type,
   );
+
+  const { isSchoolFavourite, toggleFavouriteSchool } = useFavouriteSchools();
 
   if (!isSchoolIdValid) return <Redirect to="/" />;
 
@@ -56,6 +61,8 @@ const SchoolPage = (props: RouteComponentProps<{ schoolID: string }>) => {
           description={'some desc'}
           district={school?.address?.district}
           isPublic={school?.is_public}
+          isFavourite={isSchoolFavourite(props.schoolID || '')}
+          toggleFavourite={() => toggleFavouriteSchool(props.schoolID || '')}
         />
 
         <SchoolProfiles />
