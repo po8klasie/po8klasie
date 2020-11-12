@@ -35,7 +35,7 @@ interface SchoolHeaderProps {
   description: string;
   isLoading: boolean;
   isFavourite: boolean;
-  handleFavourite: () => void;
+  toggleFavourite: () => void;
 }
 
 const SchoolHeader: FC<SchoolHeaderProps> = ({
@@ -45,7 +45,7 @@ const SchoolHeader: FC<SchoolHeaderProps> = ({
   description,
   isLoading,
   isFavourite,
-  handleFavourite,
+  toggleFavourite,
 }) => {
   return (
     <HeaderWrapper isLoading={isLoading}>
@@ -58,7 +58,7 @@ const SchoolHeader: FC<SchoolHeaderProps> = ({
         [Opis szkoły: np.] Publiczne liceum ogólnokształcące w Warszawie
         założone w 1874. Jest najstarszym warszawskim liceum.
       </p>
-      <AddRemoveFavourite isFavourite={isFavourite} onClick={handleFavourite} />
+      <AddRemoveFavourite isFavourite={isFavourite} onClick={toggleFavourite} />
     </HeaderWrapper>
   );
 };

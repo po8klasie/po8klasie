@@ -29,10 +29,10 @@ const FavouriteSchool: React.FC<FavouriteSchoolProps> = ({
     (school as any)?.school_type,
   );
 
-  const { handleFavourite } = useFavouriteSchools(schoolID);
+  const { toggleFavouriteSchool } = useFavouriteSchools(schoolID);
 
   const handleClick = () => {
-    handleFavourite();
+    toggleFavouriteSchool();
     updateCallback();
   };
 

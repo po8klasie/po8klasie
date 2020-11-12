@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import {
-  getFavSchoolsFromStorage,
-  saveFavSchoolsToStorage,
+  getFavSchoolsFromLocalStorage,
+  saveFavSchoolsToLocalStorage,
 } from '../utils/localStorageFavSchools';
 
 export const useFavouriteSchools = (schoolID: string | undefined) => {
-  const favouritesList = getFavSchoolsFromStorage();
+  const favouritesList = getFavSchoolsFromLocalStorage();
   const [isFavourite, setIsFavourite] = useState<boolean>(false);
 
   useEffect(() => {
@@ -13,14 +13,14 @@ export const useFavouriteSchools = (schoolID: string | undefined) => {
     setIsFavourite(isSchoolFavourite);
   }, [schoolID, favouritesList]);
 
-  const handleFavourite = () => {
+  const toggleFavouriteSchool = () => {
     const newFavouritesList = isFavourite
       ? favouritesList.filter((elem: string) => elem !== schoolID)
       : [...favouritesList, schoolID];
 
-    saveFavSchoolsToStorage(newFavouritesList);
+    saveFavSchoolsToLocalStorage(newFavouritesList);
     setIsFavourite(!isFavourite);
   };
 
-  return { isFavourite, handleFavourite };
+  return { isFavourite, toggleFavouriteSchool };
 };
