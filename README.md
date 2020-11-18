@@ -37,6 +37,21 @@ yarn start
 5. Make some changes and submit pull request :tada: <br />
 When doing so, don't hesitate to start your commit message with applicable [gitmoji](https://gitmoji.carloscuesta.me/) :slightly_smiling_face:
 
+### Linter & formatter
+Currently, we are in process of setting up [eslint](https://eslint.org) and [prettier](https://prettier.io).
+ 
+Available linter/formatter commands:
+```shell script
+yarn lint:check
+yarn format:check
+ 
+# please don't use commands below for now
+# they modify files across the project
+yarn format:write
+yarn lint:fix
+```
+ 
+> *NOTE*: Please make sure there are no linted/formatted files out of scope of your work before submitting PR
 
 ### What about the back-end?
 If you want to develop front-end only, you are good to go! Just insert URL of the API server in `.env` file.
