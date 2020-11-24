@@ -16,7 +16,7 @@ const JumbotronWrapper = styled.div<JumbotronProps>`
     props.bgPosition ? 'linear-gradient(to left, transparent, rgba(0,0,0,0.7))' : 'transparent'};
   color: white;
   position: relative;
-  &::after{
+  &::after {
     content: '';
     display: block;
     position: absolute;
@@ -25,7 +25,7 @@ const JumbotronWrapper = styled.div<JumbotronProps>`
     width: 100%;
     height: 100%;
     z-index: -1;
-    background: url("${(props) => props.bgImage}");
+    background: url('${(props) => props.bgImage}');
     background-size: cover;
     background-position: ${(props) => props.bgPosition ?? 'center center'};
     border-radius: 10px;
@@ -44,9 +44,9 @@ const JumbotronContent = styled.div`
   }
 `;
 
-const Jumbotron: FC<JumbotronProps> = (props) => (
-  <JumbotronWrapper bgImage={props.bgImage} bgPosition={props.bgPosition}>
-    <JumbotronContent>{props.children}</JumbotronContent>
+const Jumbotron: FC<JumbotronProps> = ({ bgImage, bgPosition, children }) => (
+  <JumbotronWrapper bgImage={bgImage} bgPosition={bgPosition}>
+    <JumbotronContent>{children}</JumbotronContent>
   </JumbotronWrapper>
 );
 

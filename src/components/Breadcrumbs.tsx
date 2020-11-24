@@ -1,7 +1,7 @@
-import React from 'react';
-import styled from '../styling/styled';
+import React, { FC } from 'react';
 import { Link } from '@reach/router';
 import { nanoid } from 'nanoid';
+import styled from '../styling/styled';
 
 const BreadcrumbsList = styled.ul`
   display: block;
@@ -28,11 +28,12 @@ type BreadcrumbsProps = {
   steps: [string, string?][];
 };
 
-const Breadcrumbs = (props: BreadcrumbsProps) => {
-  const steps = [['Strona główna', '/'], ...props.steps];
+const Breadcrumbs: FC<BreadcrumbsProps> = ({ steps }) => {
+  const stepsAll = [['Strona główna', '/'], ...steps];
+
   return (
     <BreadcrumbsList>
-      {steps.map(([label, link]) => {
+      {stepsAll.map(([label, link]) => {
         return (
           <li key={nanoid()}>
             <Link to={link ?? ''}>{label}</Link>

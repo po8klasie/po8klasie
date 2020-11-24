@@ -1,13 +1,6 @@
 import React, { FC, useEffect, useLayoutEffect, useState } from 'react';
 import { RouteComponentProps } from '@reach/router';
-import styled from '../styling/styled';
 import { useForm } from 'react-hook-form';
-import Layout from '../components/Layout';
-import Container from '../components/Container';
-import Input from '../components/Input';
-import PageTitle from '../components/PageTitle';
-import Checkbox from '../components/Checkbox';
-import { examParts, subjects } from '../data/calculator';
 import {
   PointsCalculator,
   validators,
@@ -15,6 +8,13 @@ import {
   configs,
   CalculatedPoints,
 } from '@warsawlo/points-calculator';
+import styled from '../styling/styled';
+import Layout from '../components/Layout';
+import Container from '../components/Container';
+import Input from '../components/Input';
+import PageTitle from '../components/PageTitle';
+import Checkbox from '../components/Checkbox';
+import { examParts, subjects } from '../data/calculator';
 import Breadcrumbs from '../components/Breadcrumbs';
 
 const { isGradeValid, isExamResultValid } = validators;
@@ -174,9 +174,9 @@ const Calculator: FC<RouteComponentProps> = () => {
         <InputGrid>
           <h2>Świadectwo</h2>
           <div className="row header-row">
-            <span className={'title-label'}>Przedmiot</span>
-            <span className={'value-label'}>Ocena</span>
-            <span className={'points-label'}>Liczba punktów</span>
+            <span className="title-label">Przedmiot</span>
+            <span className="value-label">Ocena</span>
+            <span className="points-label">Liczba punktów</span>
           </div>
           {subjects.map((subject) => (
             <div className="row" key={`${subject.id}`}>
@@ -186,7 +186,7 @@ const Calculator: FC<RouteComponentProps> = () => {
                   type="number"
                   min={1}
                   max={6}
-                  placeholder={'Ocena'}
+                  placeholder="Ocena"
                   ref={register}
                   name={`grades[${subject.id}]`}
                 />
@@ -198,9 +198,9 @@ const Calculator: FC<RouteComponentProps> = () => {
           <h2>Egzamin ósmoklasisty</h2>
 
           <div className="row header-row">
-            <span className={'title-label'}>Przedmiot</span>
-            <span className={'value-label'}>Wynik (%)</span>
-            <span className={'points-label'}>Liczba punktów</span>
+            <span className="title-label">Przedmiot</span>
+            <span className="value-label">Wynik (%)</span>
+            <span className="points-label">Liczba punktów</span>
           </div>
           {examParts.map((examPart) => (
             <div className="row" key={examPart.id}>
@@ -210,7 +210,7 @@ const Calculator: FC<RouteComponentProps> = () => {
                   type="number"
                   min={0}
                   max={100}
-                  placeholder={'Wynik'}
+                  placeholder="Wynik"
                   ref={register}
                   name={`examResult[${examPart.id}]`}
                 />
@@ -222,12 +222,12 @@ const Calculator: FC<RouteComponentProps> = () => {
         <h2>Szczególne osiągnięcia</h2>
         <CheckboxFlex>
           <div>
-            <Checkbox ref={register} name={'merit'} id={'xd'} />
+            <Checkbox ref={register} name="merit" id="xd" />
             <label htmlFor="xd">Świadectwo z wyróżnieniem</label>
             <span>{points.merit}</span>
           </div>
           <div>
-            <Checkbox ref={register} name={'activity'} id={'activity'} />
+            <Checkbox ref={register} name="activity" id="activity" />
             <label htmlFor="activity">Aktywność społeczna</label>
             <span>{points.activity}</span>
           </div>

@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import ArticleLayout from '../../components/ArticleLayout';
 
 const GetInvolvedPage: FC = () => (
-  <ArticleLayout title={'Pomóż nam!'}>
+  <ArticleLayout title="Pomóż nam!">
     <p>
       Hej, doceniamy, że chcesz włączyć się w naszą pracę. To wiele znaczy. Możesz pomóc (może nawet
       wszystkim) przyszłym warszawskim licealistom!

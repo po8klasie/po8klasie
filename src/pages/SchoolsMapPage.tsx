@@ -1,5 +1,10 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, FC } from 'react';
 import { Link, RouteComponentProps } from '@reach/router';
+import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
+import useDeepCompareEffect from 'use-deep-compare-effect';
+import { BsGrid, BsX } from 'react-icons/bs/index';
+import ClipLoader from 'react-spinners/ClipLoader';
+import { LatLngExpression } from 'leaflet';
 import Layout from '../components/Layout';
 import Container from '../components/Container';
 import PageTitle from '../components/PageTitle';
@@ -9,20 +14,16 @@ import styled from '../styling/styled';
 import DropdownFilters from '../components/sections/SchoolsPage/DropdownFilters';
 import { deserializeFilters, deserializeQuery, serializeSearchData } from '../utils/search';
 import { filters } from '../data/filters';
-import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
 import { getSchoolMarker } from '../utils/mapMarkers';
 import { doesSchoolHaveCoords, getSchoolCoords } from '../utils/map';
-import useDeepCompareEffect from 'use-deep-compare-effect';
-import { BsGrid, BsX } from 'react-icons/bs/index';
 import SwitchViewLink from '../components/sections/SchoolsPage/SwitchViewLink';
-import ClipLoader from 'react-spinners/ClipLoader';
 import theme from '../styling/theme';
 import MarkerKey from '../components/sections/SchoolsPage/MarkerKey';
 import 'react-leaflet-fullscreen-control';
-import { getPathWithPreservedParams } from '../utils/url';
+import getPathWithPreservedParams from '../utils/url';
 import 'leaflet/dist/leaflet.css';
 import { ErrorInfo, NotFoundInfo } from '../components/Info';
-import { LatLngExpression } from 'leaflet';
+
 const QueryRow = styled.div`
   display: flex;
   align-items: center;
@@ -126,7 +127,7 @@ const CloseNotListedIcon = styled.button`
 const DEFAULT_CENTER = [52.237049, 21.017532] as [number, number];
 const DEFAULT_ZOOM = 15;
 
-const SchoolsMapPage = (props: RouteComponentProps) => {
+const SchoolsMapPage: FC<RouteComponentProps> = () => {
   const currUrl = new URL(window.location.href);
   const p = currUrl.searchParams;
   const [query, setQuery] = useState(deserializeQuery(p));
@@ -170,10 +171,10 @@ const SchoolsMapPage = (props: RouteComponentProps) => {
   const isOverlayActive = isLoading || schoolsNotFound;
 
   return (
-    <Layout hideFooter={true} contentFlex={true}>
+    <Layout hideFooter contentFlex>
       <TopContainer>
         <PageTitle>Znajdź swoją wymarzoną szkołę</PageTitle>
-        <SwitchViewLink label="Widok siatki" icon={BsGrid} viewPath={'grid'} />
+        <SwitchViewLink label="Widok siatki" icon={BsGrid} viewPath="grid" />
         <QueryRow>
           <QueryFilter query={query} onQueryChange={setQuery} />
           <DropdownFilters
@@ -194,7 +195,7 @@ const SchoolsMapPage = (props: RouteComponentProps) => {
             schools.map((school) => {
               if (!doesSchoolHaveCoords(school)) return null;
 
-              let coords = getSchoolCoords(school) as LatLngExpression;
+              const coords = getSchoolCoords(school) as LatLngExpression;
 
               return (
                 <Marker

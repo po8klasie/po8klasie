@@ -1,10 +1,10 @@
 import React, { FC, useState } from 'react';
-import styled from '../styling/styled';
 import { Link } from '@reach/router';
+import { BsX, BsThreeDots } from 'react-icons/bs';
+import styled from '../styling/styled';
 import Container from './Container';
 import Logo from './Logo';
-import { getPathWithPreservedParams } from '../utils/url';
-import { BsX, BsThreeDots } from 'react-icons/bs';
+import getPathWithPreservedParams from '../utils/url';
 
 const Brand = styled(Link)`
   color: inherit;

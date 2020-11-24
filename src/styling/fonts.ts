@@ -1,4 +1,4 @@
-export const setupFonts = `
+const setupFonts = `
     /* ibm-plex-sans-700 - latin-ext_latin */
     @font-face {
         font-family: 'IBM Plex Sans';
@@ -17,3 +17,5 @@ export const setupFonts = `
              url(${require('../assets/fonts/OpenSans-Regular.woff2')}) format('woff2')
     }
 `;
+
+export default setupFonts;

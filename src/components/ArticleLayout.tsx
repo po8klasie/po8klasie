@@ -6,7 +6,7 @@ import Breadcrumbs from './Breadcrumbs';
 
 const ArticleLayout: FC<{ title: string }> = ({ children, title }) => (
   <Layout>
-    <Container narrow={true}>
+    <Container narrow>
       <Breadcrumbs steps={[[title]]} />
       <PageTitle>{title}</PageTitle>
       {children}

@@ -28,9 +28,9 @@ const deleteFromObject = (obj: any, keys: string[]) => {
 
 const DropdownFilters: FC<any> = ({ onFiltersValuesChange, filtersValues }) => {
   const createHandler = (filterData: FilterData) => (choiceId: string) => {
-    const filterKey = filterData.key;
-    const { choices, multiple } = filterData;
-    const valuesForFilter = filtersValues[filterKey] ? filtersValues[filterKey] : [];
+    const { choices, multiple, key: filterKey } = filterData;
+    const valuesForFilter: string[] = filtersValues[filterKey] ? filtersValues[filterKey] : [];
+
     if (!valuesForFilter.includes(choiceId)) {
       if (multiple && valuesForFilter.length + 1 === choices.length) {
         onFiltersValuesChange(deleteFromObject(filtersValues, [filterKey]));
@@ -54,8 +54,6 @@ const DropdownFilters: FC<any> = ({ onFiltersValuesChange, filtersValues }) => {
     });
   };
 
-  const handleSubmit = (e: any) => {};
-
   return (
     <>
       <DropdownsWrapper>
@@ -67,7 +65,6 @@ const DropdownFilters: FC<any> = ({ onFiltersValuesChange, filtersValues }) => {
               title={filter.title}
               choices={filter.choices}
               onSelect={handleSelect}
-              onSubmit={handleSubmit}
               selected={filtersValues && filtersValues[filter.key] ? filtersValues[filter.key] : []}
             />
           );
@@ -77,7 +74,6 @@ const DropdownFilters: FC<any> = ({ onFiltersValuesChange, filtersValues }) => {
         <MobileFilters
           filters={filters}
           createHandler={createHandler}
-          onSubmit={handleSubmit}
           filtersValues={filtersValues}
           idKey={idKey}
         />

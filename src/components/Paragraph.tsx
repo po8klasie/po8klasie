@@ -16,4 +16,4 @@ const Paragraph = styled.p<ParagraphProps>`
   }
 `;
 
-export default (props: ParagraphProps) => <Paragraph {...props} />;
+export default Paragraph;

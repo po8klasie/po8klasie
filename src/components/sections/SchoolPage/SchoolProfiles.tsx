@@ -3,7 +3,7 @@ import { nanoid } from 'nanoid';
 import Card from '../../Card';
 import Section from './Section';
 import styled from '../../../styling/styled';
-import { mockedProfile } from '../../../utils/mockedProfile';
+import mockedProfile from '../../../utils/mockedProfile';
 
 const SchoolProfilesWrapper = styled.div`
   display: grid;

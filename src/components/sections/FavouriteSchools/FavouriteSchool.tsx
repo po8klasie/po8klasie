@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Link } from '@reach/router';
+import { nanoid } from 'nanoid';
 import { useSchoolDetails } from '../../../api/schoolDetails';
 import { useHighSchoolClasses } from '../../../api/highschoolClasses';
-import { nanoid } from 'nanoid';
-import { mockedProfile } from '../../../utils/mockedProfile';
+import mockedProfile from '../../../utils/mockedProfile';
 import RemoveFavButton from './RemoveFavButton';
 import { ErrorInfo } from '../../Info';
 import { FavouriteSchoolWrapper, LoadingCard } from './FavouriteSchoolWrapper';
@@ -15,7 +15,7 @@ interface FavouriteSchoolProps {
   toggleFavourite: (schoolID: string) => void;
 }
 
-const FavouriteSchool: React.FC<FavouriteSchoolProps> = ({ schoolID, toggleFavourite }) => {
+const FavouriteSchool: FC<FavouriteSchoolProps> = ({ schoolID, toggleFavourite }) => {
   const { data: school, error: schoolError } = useSchoolDetails(Number(schoolID as any));
 
   const { data: classes, error: classesError } = useHighSchoolClasses(
@@ -42,7 +42,7 @@ const FavouriteSchool: React.FC<FavouriteSchoolProps> = ({ schoolID, toggleFavou
             <h4>
               <Link to={`/school/${school.id}`}>{school.school_name}</Link>
             </h4>
-            <span className={'district'}>{school.address.district}</span>
+            <span className="district">{school.address.district}</span>
           </div>
           <div className="top-right">
             <Link to={`/school/${school.id}`}>Zobacz pełny profil szkoły</Link>

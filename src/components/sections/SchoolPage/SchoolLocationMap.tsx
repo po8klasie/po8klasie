@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import { LatLngExpression } from 'leaflet';
+import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
 import { getSchoolMarker } from '../../../utils/mapMarkers';
 import styled from '../../../styling/styled';
-import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
 import { doesSchoolHaveCoords, getSchoolCoords } from '../../../utils/map';
 
 const MapWrapper = styled.div`
@@ -30,7 +30,7 @@ const ZOOM = 15;
 const SchoolLocationMap: FC<SchoolLocationMapProps> = ({ schoolName, schoolType, address }) => {
   if (!schoolType || !doesSchoolHaveCoords({ address })) return null;
 
-  let coords = getSchoolCoords({ address }) as LatLngExpression;
+  const coords = getSchoolCoords({ address }) as LatLngExpression;
 
   return (
     <MapWrapper>

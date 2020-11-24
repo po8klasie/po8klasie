@@ -1,5 +1,5 @@
+import React, { HTMLProps, ReactNode, forwardRef } from 'react';
 import styled from '../styling/styled';
-import React, { HTMLProps, ReactNode } from 'react';
 
 const Input = styled.input`
   padding: 0.5em 0.5em;
@@ -56,12 +56,11 @@ interface InputWithAddonProps extends HTMLProps<HTMLInputElement> {
   addonPosition: 'left' | 'right';
 }
 
-export const InputWithAddon = React.forwardRef<HTMLDivElement, InputWithAddonProps>(
-  (props, ref) => (
-    <InputWithAddonWrapper ref={ref} addonPosition={props.addonPosition}>
-      <span className={'addon'}>{props.addon}</span>
-      <Input {...props} size={15} />
-    </InputWithAddonWrapper>
-  ),
-);
+export const InputWithAddon = forwardRef<HTMLDivElement, InputWithAddonProps>((props, ref) => (
+  <InputWithAddonWrapper ref={ref} addonPosition={props.addonPosition}>
+    <span className="addon">{props.addon}</span>
+    {/* eslint-disable-next-line */}
+    <Input {...props} size={15} />
+  </InputWithAddonWrapper>
+));
 export default Input;

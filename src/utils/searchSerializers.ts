@@ -47,5 +47,5 @@ export const pageNumberSerializer: Serializer = ([key, value], p, mode) => {
 
 export const pageNumberDeserializer: Deserializer = (key, p) => {
   const value = basicDeserializer(key, p);
-  return parseInt(value) && value > 1 ? value : null;
+  return parseInt(value, 10) && value > 1 ? value : null;
 };

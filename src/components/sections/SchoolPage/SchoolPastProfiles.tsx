@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
+import { nanoid } from 'nanoid';
 import styled from '../../../styling/styled';
 import Card from '../../Card';
 import { splitArrayInHalf } from '../../../utils/misc';
 import Section from './Section';
-import { nanoid } from 'nanoid';
 
 const PastProfilesGrid = styled.div`
   display: grid;

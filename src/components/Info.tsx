@@ -16,7 +16,11 @@ const InfoWrapper = styled.div`
   }
 `;
 
-const Info: FC<any> = ({ children, imageSrc }) => {
+interface InfoProps {
+  imageSrc: string;
+}
+
+const Info: FC<InfoProps> = ({ children, imageSrc }) => {
   return (
     <InfoWrapper>
       <div className="content">{children}</div>
@@ -27,21 +31,21 @@ const Info: FC<any> = ({ children, imageSrc }) => {
   );
 };
 
-export const NotFoundInfo = () => (
+export const NotFoundInfo: FC = () => (
   <Info imageSrc={require('../assets/images/SchoolsPage/not-found.png')}>
     Ups! Brak szkół spełniających podane przez Ciebie wymagania :( <br />
     Zmień kryteria i szukaj jeszcze raz!
   </Info>
 );
 
-export const ErrorInfo = () => (
+export const ErrorInfo: FC = () => (
   <Info imageSrc={require('../assets/images/SchoolsPage/error.png')}>
     Ups! Wystąpił błąd! <br />
     Spróbuj jeszcze raz :)
   </Info>
 );
 
-export const NoFavouriteSchoolsInfo = () => (
+export const NoFavouriteSchoolsInfo: FC = () => (
   <Info imageSrc={require('../assets/images/favouriteSchools.png')}>
     Nie masz jeszcze polubionych szkół.
     <br />

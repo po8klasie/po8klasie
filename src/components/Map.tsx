@@ -1,9 +1,9 @@
-import styled from '../styling/styled';
 import React, { FC, forwardRef, Ref, useEffect, useRef } from 'react';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-gesture-handling/dist/leaflet-gesture-handling.css';
 import L from 'leaflet';
 import { GestureHandling } from 'leaflet-gesture-handling';
+import styled from '../styling/styled';
 import { defaultMarker } from '../utils/mapMarkers';
 
 L.Marker.prototype.options.icon = defaultMarker;
@@ -30,7 +30,7 @@ interface MapProps {
   onConfig?: Function;
 }
 
-const Map: FC<MapProps> = (props) => {
+const Map: FC<MapProps> = ({ innerRef, onConfig }) => {
   const mapEl = useRef<HTMLDivElement>(null);
   const map = useRef<any>(null);
 
@@ -46,14 +46,14 @@ const Map: FC<MapProps> = (props) => {
       attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
     });
     defaultTileLayer.addTo(map.current);
-    if (props.onConfig) {
-      props.onConfig(map.current, defaultTileLayer);
+    if (onConfig) {
+      onConfig(map.current, defaultTileLayer);
     }
     // eslint-disable-next-line
   }, []);
 
   return (
-    <MapWrapper ref={props.innerRef}>
+    <MapWrapper ref={innerRef}>
       <MapElement ref={mapEl} />
     </MapWrapper>
   );

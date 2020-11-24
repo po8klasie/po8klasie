@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled from '../../../styling/styled';
 import {
   highSchoolMarkerImage,
@@ -35,22 +35,20 @@ const MarkerKeyWrapper = styled.div`
   }
 `;
 
-const MarkerKey = () => {
-  return (
-    <MarkerKeyWrapper>
-      {[
-        ['liceum ogólnokształcące', highSchoolMarkerImage],
-        ['technikum', technicalSchoolMarkerImage],
-        ['szkoła branżowa', vocationalSchoolMarkerImage],
-        ['szkoła specjalna', specialSchoolMarkerImage],
-      ].map(([name, imageUrl]) => (
-        <div key={name}>
-          <img src={imageUrl} alt="" />
-          <span>{name}</span>
-        </div>
-      ))}
-    </MarkerKeyWrapper>
-  );
-};
+const MarkerKey: FC = () => (
+  <MarkerKeyWrapper>
+    {[
+      ['liceum ogólnokształcące', highSchoolMarkerImage],
+      ['technikum', technicalSchoolMarkerImage],
+      ['szkoła branżowa', vocationalSchoolMarkerImage],
+      ['szkoła specjalna', specialSchoolMarkerImage],
+    ].map(([name, imageUrl]) => (
+      <div key={name}>
+        <img src={imageUrl} alt="" />
+        <span>{name}</span>
+      </div>
+    ))}
+  </MarkerKeyWrapper>
+);
 
 export default MarkerKey;

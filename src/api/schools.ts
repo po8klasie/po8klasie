@@ -1,7 +1,7 @@
 import useSWR, { useSWRInfinite } from 'swr';
+import { useEffect } from 'react';
 import fetchData from './fetchData';
 import { serializeSearchData } from '../utils/search';
-import { useEffect } from 'react';
 import { getTotalPages, PER_PAGE } from '../utils/pagination';
 
 export const fetchSchools = (path: string): Promise<{ count: number; schools: any[] }> => {

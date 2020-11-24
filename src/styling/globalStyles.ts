@@ -1,8 +1,8 @@
 import { css } from '@emotion/core';
 import theme from './theme';
-import { setupFonts } from './fonts';
+import setupFonts from './fonts';
 
-export const globalStyles = css`
+const globalStyles = css`
   ${setupFonts}
 
   h1,
@@ -30,3 +30,5 @@ export const globalStyles = css`
     text-decoration: none;
   }
 `;
+
+export default globalStyles;

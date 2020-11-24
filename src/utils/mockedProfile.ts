@@ -1,4 +1,4 @@
-export const mockedProfile = {
+const mockedProfile = {
   departmentsNo: 2,
   extendedSubjects: ['matematyka', 'fizyka', 'chemia'],
   description: `
@@ -9,3 +9,5 @@ export const mockedProfile = {
                 Cupiditate.
         `,
 };
+
+export default mockedProfile;

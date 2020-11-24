@@ -28,15 +28,19 @@ const createMarker = (iconUrl: string) =>
   });
 
 export const highSchoolMarkerImage = require('../assets/icons/markers/marker1.png');
+
 export const highSchoolMarker = createMarker(highSchoolMarkerImage);
 
 export const technicalSchoolMarkerImage = require('../assets/icons/markers/marker3.png');
+
 export const technicalSchoolMarker = createMarker(technicalSchoolMarkerImage);
 
 export const vocationalSchoolMarkerImage = require('../assets/icons/markers/marker2.png');
+
 export const vocationalSchoolMarker = createMarker(vocationalSchoolMarkerImage);
 
 export const specialSchoolMarkerImage = require('../assets/icons/markers/marker4.png');
+
 export const specialSchoolMarker = createMarker(specialSchoolMarkerImage);
 
 export const getSchoolMarker = (schoolType: string) => {

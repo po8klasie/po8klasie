@@ -1,6 +1,6 @@
-import React from 'react';
-import styled from '../styling/styled';
+import React, { FC } from 'react';
 import { Link } from '@reach/router';
+import styled from '../styling/styled';
 import Card from './Card';
 
 const Wrapper = styled(Card)`
@@ -43,17 +43,17 @@ type SchoolCardProps = {
   school: any;
 };
 
-const SchoolCard = (props: SchoolCardProps) => (
+const SchoolCard: FC<SchoolCardProps> = ({ school }) => (
   <Wrapper>
     <div className="content">
-      <span className={'school-type'}>Szkoła {!props.school.is_public && 'nie'}publiczna</span>
+      <span className="school-type">Szkoła {!school.is_public && 'nie'}publiczna</span>
       <h4>
-        <Link to={`/school/${props.school.id}`}>{props.school.school_name}</Link>
+        <Link to={`/school/${school.id}`}>{school.school_name}</Link>
       </h4>
-      <span className={'district'}>{props.school.address.district}</span>
+      <span className="district">{school.address.district}</span>
     </div>
     <div className="bottom">
-      <Link to={`/school/${props.school.id}`}>Więcej</Link>
+      <Link to={`/school/${school.id}`}>Więcej</Link>
     </div>
   </Wrapper>
 );

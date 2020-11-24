@@ -1,10 +1,9 @@
-import React from 'react';
 import styled from '../styling/styled';
 
-type H2Props = {
+interface H2Props {
   textAlign?: 'right' | 'center';
   children: string;
-};
+}
 
 const H2 = styled.h2<H2Props>`
   font-size: 2.5em;
@@ -15,4 +14,4 @@ const H2 = styled.h2<H2Props>`
   }
 `;
 
-export default (props: H2Props) => <H2 {...props} />;
+export default H2;

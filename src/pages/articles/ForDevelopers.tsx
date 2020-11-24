@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import ArticleLayout from '../../components/ArticleLayout';
 
 const ForDevelopersPage: FC = () => (
-  <ArticleLayout title={'Dla deweloperów'}>
+  <ArticleLayout title="Dla deweloperów">
     <p>
       Na stronie{' '}
       <a href="https://oss.warsawlo.pl" target="_blank" rel="noopener noreferrer">

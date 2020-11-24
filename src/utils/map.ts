@@ -1,5 +1,5 @@
-import { School } from '../types';
 import { LatLngExpression } from 'leaflet';
+import { School } from '../types';
 
 type AddressLike = { address: any };
 

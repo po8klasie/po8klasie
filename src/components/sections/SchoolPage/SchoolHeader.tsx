@@ -42,7 +42,7 @@ const SchoolHeader: FC<SchoolHeaderProps> = ({
   isPublic,
   schoolName,
   district,
-  description,
+  // description,
   isLoading,
   isFavourite,
   toggleFavourite,

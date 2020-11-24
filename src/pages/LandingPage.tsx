@@ -19,9 +19,7 @@ import {
 } from '../components/LandingPageSections';
 import LandingPageImage from '../components/LandingPageImage';
 
-interface LandingPageProps extends RouteComponentProps {}
-
-const LandingPage: FC<LandingPageProps> = () => {
+const LandingPage: FC<RouteComponentProps> = () => {
   return (
     <Layout>
       <Container>
@@ -96,7 +94,7 @@ const LandingPage: FC<LandingPageProps> = () => {
           <DoubleGrid reversed>
             <H2 textAlign="right">Nieaktualne dane?</H2>
             <Paragraph textAlign="right">
-              Nobody's perfect...
+              Nobody&apos;s perfect...
               <br />
               Przetwarzając ogromne ilości informacji może wkraść się do danych jakiś błąd. Jeżeli
               natkniesz się na niego, zgłoś to. Nasi moderatorzy zajmą się tym tak szybko, jak tylko
@@ -128,7 +126,7 @@ const LandingPage: FC<LandingPageProps> = () => {
         </LandingPageSectionThree>
 
         <CallToActionContainer>
-          <CallToActionButton to={'/schools'}>Znajdź swoją szkołę już teraz</CallToActionButton>
+          <CallToActionButton to="/schools">Znajdź swoją szkołę już teraz</CallToActionButton>
         </CallToActionContainer>
       </Container>
     </Layout>

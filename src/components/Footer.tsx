@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
-import styled from '../styling/styled';
 import { Link } from '@reach/router';
+import styled from '../styling/styled';
 import Container from './Container';
 
 const DataInfo = styled.p`
@@ -129,15 +129,15 @@ const Footer: FC = () => (
         </div>
         <div className="info-col">
           <p>
-            WarsawLO to open-source'owy projekt civic tech tworzony przez wolonatariuszy we
+            WarsawLO to open-source&apos;owy projekt civic tech tworzony przez wolonatariuszy we
             współpracy z programem Koduj Dla Polski Fundacji ePaństwo.
           </p>
           <div className="logos-wrapper">
             <a href="https://epf.org.pl" rel="noopener noreferrer" target="_blank">
-              <img src={require('../assets/images/epf.png')} alt={'Logo Fundacji ePaństwo'} />
+              <img src={require('../assets/images/epf.png')} alt="Logo Fundacji ePaństwo" />
             </a>
             <a href="https://kodujdlapolski.pl" rel="noopener noreferrer" target="_blank">
-              <img src={require('../assets/images/kdp-logo.png')} alt={'Logo Koduj dla Polski'} />
+              <img src={require('../assets/images/kdp-logo.png')} alt="Logo Koduj dla Polski" />
             </a>
           </div>
         </div>
