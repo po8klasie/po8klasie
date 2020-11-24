@@ -18,6 +18,4 @@ const LandingPageImage = styled.div<LandingPageImageProps>`
   }
 `;
 
-export default (props: LandingPageImageProps) => (
-  <LandingPageImage {...props} />
-);
+export default (props: LandingPageImageProps) => <LandingPageImage {...props} />;

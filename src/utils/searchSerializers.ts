@@ -33,11 +33,7 @@ export const arraySerializer: Serializer = ([key, value], p, mode) => {
 export const arrayDeserializer: Deserializer = (key, p) => {
   const value = p.get(key);
 
-  if (
-    !value ||
-    !Array.isArray(value.split(',')) ||
-    value.split(',').length === 0
-  ) {
+  if (!value || !Array.isArray(value.split(',')) || value.split(',').length === 0) {
     if (p.has(key)) p.delete(key);
     return null;
   }

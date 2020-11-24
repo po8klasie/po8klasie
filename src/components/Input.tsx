@@ -17,8 +17,7 @@ const Input = styled.input`
 `;
 const InputWithAddonWrapper = styled.div<{ addonPosition: 'left' | 'right' }>`
   display: inline-flex;
-  flex-direction: ${(props) =>
-    props.addonPosition === 'left' ? 'row' : 'row-reverse'};
+  flex-direction: ${(props) => (props.addonPosition === 'left' ? 'row' : 'row-reverse')};
   input {
     ${(props) =>
       props.addonPosition === 'left'
@@ -57,13 +56,12 @@ interface InputWithAddonProps extends HTMLProps<HTMLInputElement> {
   addonPosition: 'left' | 'right';
 }
 
-export const InputWithAddon = React.forwardRef<
-  HTMLDivElement,
-  InputWithAddonProps
->((props, ref) => (
-  <InputWithAddonWrapper ref={ref} addonPosition={props.addonPosition}>
-    <span className={'addon'}>{props.addon}</span>
-    <Input {...props} size={15} />
-  </InputWithAddonWrapper>
-));
+export const InputWithAddon = React.forwardRef<HTMLDivElement, InputWithAddonProps>(
+  (props, ref) => (
+    <InputWithAddonWrapper ref={ref} addonPosition={props.addonPosition}>
+      <span className={'addon'}>{props.addon}</span>
+      <Input {...props} size={15} />
+    </InputWithAddonWrapper>
+  ),
+);
 export default Input;

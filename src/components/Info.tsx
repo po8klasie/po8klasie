@@ -45,7 +45,6 @@ export const NoFavouriteSchoolsInfo = () => (
   <Info imageSrc={require('../assets/images/favouriteSchools.png')}>
     Nie masz jeszcze polubionych szkół.
     <br />
-    <Link to="/schools">Przejdź do wyszukiwania</Link>, aby móc znaleźć swoją
-    przyszłą szkołę!
+    <Link to="/schools">Przejdź do wyszukiwania</Link>, aby móc znaleźć swoją przyszłą szkołę!
   </Info>
 );

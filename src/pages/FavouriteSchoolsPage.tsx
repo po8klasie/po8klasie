@@ -18,11 +18,7 @@ const FavouriteSchoolsPage: React.FC<RouteComponentProps> = () => {
         <PageTitle>Ulubione</PageTitle>
         {favouriteSchools.length === 0 && <NoFavouriteSchoolsInfo />}
         {favouriteSchools.map((id: string) => (
-          <FavouriteSchool
-            key={id}
-            schoolID={id}
-            toggleFavourite={toggleFavouriteSchool}
-          />
+          <FavouriteSchool key={id} schoolID={id} toggleFavourite={toggleFavouriteSchool} />
         ))}
       </Container>
     </Layout>

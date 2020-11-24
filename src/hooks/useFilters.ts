@@ -14,9 +14,7 @@ export const useFilters = (options: UseFiltersOptions) => {
   const createHandler = (filterData: FilterData) => (choiceId: string) => {
     const fieldId = (filterData as any)[options.idKey];
     const { choices, multiple } = filterData;
-    const valuesForFilter = filtersValues[fieldId]
-      ? filtersValues[fieldId]
-      : [];
+    const valuesForFilter = filtersValues[fieldId] ? filtersValues[fieldId] : [];
     if (!valuesForFilter.includes(choiceId)) {
       if (multiple && valuesForFilter.length + 1 === choices.length) {
         setFiltersValues({

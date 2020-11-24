@@ -15,13 +15,8 @@ interface FavouriteSchoolProps {
   toggleFavourite: (schoolID: string) => void;
 }
 
-const FavouriteSchool: React.FC<FavouriteSchoolProps> = ({
-  schoolID,
-  toggleFavourite,
-}) => {
-  const { data: school, error: schoolError } = useSchoolDetails(
-    Number(schoolID as any),
-  );
+const FavouriteSchool: React.FC<FavouriteSchoolProps> = ({ schoolID, toggleFavourite }) => {
+  const { data: school, error: schoolError } = useSchoolDetails(Number(schoolID as any));
 
   const { data: classes, error: classesError } = useHighSchoolClasses(
     Number(schoolID as any),
@@ -43,9 +38,7 @@ const FavouriteSchool: React.FC<FavouriteSchoolProps> = ({
       <div className="content">
         <div className="top">
           <div>
-            <span className="school-type">
-              Szkoła {!school.is_public && 'nie'}publiczna
-            </span>
+            <span className="school-type">Szkoła {!school.is_public && 'nie'}publiczna</span>
             <h4>
               <Link to={`/school/${school.id}`}>{school.school_name}</Link>
             </h4>
@@ -78,9 +71,7 @@ const FavouriteSchool: React.FC<FavouriteSchoolProps> = ({
                   <li key={nanoid()}>
                     <span>{c.subjects.map((s: any) => s.name).join('-')}</span>
                     <span className="points">
-                      {c.stats && c.stats[0].points_min > 0 && (
-                        <>{c.stats[0].points_min} pkt</>
-                      )}
+                      {c.stats && c.stats[0].points_min > 0 && <>{c.stats[0].points_min} pkt</>}
                     </span>
                   </li>
                 ))}

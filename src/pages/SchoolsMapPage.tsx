@@ -7,15 +7,11 @@ import QueryFilter from '../components/sections/SchoolsPage/QueryFilter';
 import { useAllSchools } from '../api/schools';
 import styled from '../styling/styled';
 import DropdownFilters from '../components/sections/SchoolsPage/DropdownFilters';
-import {
-  deserializeFilters,
-  deserializeQuery,
-  serializeSearchData,
-} from '../utils/search';
+import { deserializeFilters, deserializeQuery, serializeSearchData } from '../utils/search';
 import { filters } from '../data/filters';
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
-import {getSchoolMarker} from '../utils/mapMarkers';
-import {doesSchoolHaveCoords, getSchoolCoords} from '../utils/map';
+import { getSchoolMarker } from '../utils/mapMarkers';
+import { doesSchoolHaveCoords, getSchoolCoords } from '../utils/map';
 import useDeepCompareEffect from 'use-deep-compare-effect';
 import { BsGrid, BsX } from 'react-icons/bs/index';
 import SwitchViewLink from '../components/sections/SchoolsPage/SwitchViewLink';
@@ -26,7 +22,7 @@ import 'react-leaflet-fullscreen-control';
 import { getPathWithPreservedParams } from '../utils/url';
 import 'leaflet/dist/leaflet.css';
 import { ErrorInfo, NotFoundInfo } from '../components/Info';
-import {LatLngExpression} from "leaflet";
+import { LatLngExpression } from 'leaflet';
 const QueryRow = styled.div`
   display: flex;
   align-items: center;
@@ -134,9 +130,7 @@ const SchoolsMapPage = (props: RouteComponentProps) => {
   const currUrl = new URL(window.location.href);
   const p = currUrl.searchParams;
   const [query, setQuery] = useState(deserializeQuery(p));
-  const [dropdownFilters, setDropdownFilters] = useState(
-    deserializeFilters(p, filters),
-  );
+  const [dropdownFilters, setDropdownFilters] = useState(deserializeFilters(p, filters));
   const [notListedCount, setNotListedCount] = useState(0);
   const [notListedVisible, setNotListedVisible] = useState(true);
   const searchData = {
@@ -161,10 +155,7 @@ const SchoolsMapPage = (props: RouteComponentProps) => {
           return prev;
         }
 
-        return [
-          ...prev,
-          getSchoolCoords(school) as LatLngExpression,
-        ];
+        return [...prev, getSchoolCoords(school) as LatLngExpression];
       }, []);
     }
     if (b.length === 0) return undefined;
@@ -193,12 +184,7 @@ const SchoolsMapPage = (props: RouteComponentProps) => {
         <MarkerKey />
       </TopContainer>
       <MapWrapper>
-        <Map
-          center={DEFAULT_CENTER}
-          zoom={DEFAULT_ZOOM}
-          bounds={bounds}
-          fullscreenControl
-        >
+        <Map center={DEFAULT_CENTER} zoom={DEFAULT_ZOOM} bounds={bounds} fullscreenControl>
           <TileLayer
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -206,8 +192,7 @@ const SchoolsMapPage = (props: RouteComponentProps) => {
           />
           {schools &&
             schools.map((school) => {
-              if (!doesSchoolHaveCoords(school))
-                return null;
+              if (!doesSchoolHaveCoords(school)) return null;
 
               let coords = getSchoolCoords(school) as LatLngExpression;
 
@@ -234,21 +219,14 @@ const SchoolsMapPage = (props: RouteComponentProps) => {
         <Overlay active={isOverlayActive}>
           {!error && schoolsNotFound && <NotFoundInfo />}
           {error && <ErrorInfo />}
-          <ClipLoader
-            size={150}
-            color={theme.colors.primary}
-            loading={!error && isLoading}
-          />
+          <ClipLoader size={150} color={theme.colors.primary} loading={!error && isLoading} />
         </Overlay>
         <NotListedWrapper active={notListedCount > 0 && notListedVisible}>
           <NotListed>
-            Niestety, część szkół z naszej bazy ({notListedCount}) nie jest
-            zaznaczona na mapie. <br />
+            Niestety, część szkół z naszej bazy ({notListedCount}) nie jest zaznaczona na mapie.{' '}
+            <br />
             Aby wyświetlić wszystkie pozycje, przełącz na{' '}
-            <Link to={getPathWithPreservedParams('/schools/grid')}>
-              widok listy
-            </Link>
-            .
+            <Link to={getPathWithPreservedParams('/schools/grid')}>widok listy</Link>.
             <CloseNotListedIcon onClick={() => setNotListedVisible(false)}>
               <BsX />
             </CloseNotListedIcon>

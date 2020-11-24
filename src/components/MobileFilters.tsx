@@ -71,8 +71,7 @@ const CheckIcon = styled.span<{ active: boolean }>`
 
 const MobileFilters = (props: any) => {
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
-  const getFilterById = (id: string) =>
-    props.filters.find((f: FilterData) => f.key === id);
+  const getFilterById = (id: string) => props.filters.find((f: FilterData) => f.key === id);
   const [activeFilterId, setActiveFilterId] = useState<string | null>(null);
 
   const goBack = () => {
@@ -91,9 +90,7 @@ const MobileFilters = (props: any) => {
             <BsChevronLeft />
           </span>
           <span className="title">
-            {activeFilterId === null
-              ? 'Filtry'
-              : getFilterById(activeFilterId).title}
+            {activeFilterId === null ? 'Filtry' : getFilterById(activeFilterId).title}
           </span>
         </ModalHeader>
         <PerfectScrollbar>
@@ -102,9 +99,7 @@ const MobileFilters = (props: any) => {
               {props.filters.map((filter: FilterData) => (
                 <li
                   key={filter.key}
-                  onClick={() =>
-                    setActiveFilterId((filter as any)[props.idKey])
-                  }
+                  onClick={() => setActiveFilterId((filter as any)[props.idKey])}
                 >
                   {filter.title}
                   <BsChevronRight />
@@ -115,17 +110,14 @@ const MobileFilters = (props: any) => {
             <List>
               {getFilterById(activeFilterId).choices.map((choice: Choice) => {
                 const filter = getFilterById(activeFilterId);
-                const handleClick = () =>
-                  props.createHandler(filter)(choice.id);
+                const handleClick = () => props.createHandler(filter)(choice.id);
                 return (
                   <li key={choice.id} onClick={handleClick}>
                     {choice.label}
                     <CheckIcon
                       active={
                         props.filtersValues[filter[props.idKey]] &&
-                        props.filtersValues[filter[props.idKey]].includes(
-                          choice.id,
-                        )
+                        props.filtersValues[filter[props.idKey]].includes(choice.id)
                       }
                     >
                       <BsCheck />

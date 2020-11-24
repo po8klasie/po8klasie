@@ -4,9 +4,7 @@ import { serializeSearchData } from '../utils/search';
 import { useEffect } from 'react';
 import { getTotalPages, PER_PAGE } from '../utils/pagination';
 
-export const fetchSchools = (
-  path: string,
-): Promise<{ count: number; schools: any[] }> => {
+export const fetchSchools = (path: string): Promise<{ count: number; schools: any[] }> => {
   return fetchData(path).then((res) => ({
     count: res.count,
     schools: res.results,
@@ -44,11 +42,7 @@ export const useAllSchools = (searchData: any) => {
 
   let fetchedData = null;
 
-  if (
-    data &&
-    size &&
-    (data.length === getTotalPages(data[0].count) || isTheOnlyRequest)
-  )
+  if (data && size && (data.length === getTotalPages(data[0].count) || isTheOnlyRequest))
     fetchedData = data.map((res) => res.results).flat();
 
   return {

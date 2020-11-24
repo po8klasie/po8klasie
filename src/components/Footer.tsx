@@ -91,8 +91,8 @@ const Footer: FC = () => (
       <FooterGrid>
         <div>
           <DataInfo>
-            Dokładamy wszelkich starań, aby dane były aktualne, ale nie ponosimy
-            odpowiedzialności za ich prawidłowość.
+            Dokładamy wszelkich starań, aby dane były aktualne, ale nie ponosimy odpowiedzialności
+            za ich prawidłowość.
           </DataInfo>
           <div className="sitemap">
             <ul>
@@ -129,30 +129,15 @@ const Footer: FC = () => (
         </div>
         <div className="info-col">
           <p>
-            WarsawLO to open-source'owy projekt civic tech tworzony przez
-            wolonatariuszy we współpracy z programem Koduj Dla Polski Fundacji
-            ePaństwo.
+            WarsawLO to open-source'owy projekt civic tech tworzony przez wolonatariuszy we
+            współpracy z programem Koduj Dla Polski Fundacji ePaństwo.
           </p>
           <div className="logos-wrapper">
-            <a
-              href="https://epf.org.pl"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              <img
-                src={require('../assets/images/epf.png')}
-                alt={'Logo Fundacji ePaństwo'}
-              />
+            <a href="https://epf.org.pl" rel="noopener noreferrer" target="_blank">
+              <img src={require('../assets/images/epf.png')} alt={'Logo Fundacji ePaństwo'} />
             </a>
-            <a
-              href="https://kodujdlapolski.pl"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              <img
-                src={require('../assets/images/kdp-logo.png')}
-                alt={'Logo Koduj dla Polski'}
-              />
+            <a href="https://kodujdlapolski.pl" rel="noopener noreferrer" target="_blank">
+              <img src={require('../assets/images/kdp-logo.png')} alt={'Logo Koduj dla Polski'} />
             </a>
           </div>
         </div>

@@ -4,7 +4,6 @@ import { environment, isProduction } from '../environments/environment';
 export const setupSentry = () => {
   if (isProduction && environment.PUBLIC_SENTRY_DSN)
     Sentry.init({
-      dsn: environment.PUBLIC_SENTRY_DSN
+      dsn: environment.PUBLIC_SENTRY_DSN,
     });
-
 };

@@ -14,8 +14,5 @@ export const getFavSchoolsFromLocalStorage = () => {
 };
 
 export const saveFavSchoolsToLocalStorage = (item: object) => {
-  return localStorage.setItem(
-    FAVOURITES_SCHOOLS_STORAGE_KEY,
-    JSON.stringify(item),
-  );
+  return localStorage.setItem(FAVOURITES_SCHOOLS_STORAGE_KEY, JSON.stringify(item));
 };

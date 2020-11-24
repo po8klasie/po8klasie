@@ -115,12 +115,10 @@ const Result = styled.div`
 const calc = new PointsCalculator(config2018_2019);
 
 const Calculator: FC<RouteComponentProps> = () => {
-  const [points, setPoints] = useState<CalculatedPoints>(
-    initialCalculatedPoints,
-  );
+  const [points, setPoints] = useState<CalculatedPoints>(initialCalculatedPoints);
   const { register, watch, reset } = useForm();
   useLayoutEffect(() => {
-    calc.watch(setPoints)
+    calc.watch(setPoints);
   }, []);
 
   const grades = watch('grades');
@@ -169,9 +167,8 @@ const Calculator: FC<RouteComponentProps> = () => {
         <Breadcrumbs steps={[['Kalkulator punktów']]} />
         <PageTitle>Kalkulator punktów</PageTitle>
         <p>
-          Podaj swoje oceny, wyniki z egzaminu ósmoklasisty oraz dodatkowe
-          osiągnięcia (jeśli takie masz) i oblicz punkty, jakie uzyskasz podczas
-          rekrutacji do szkoły średniej.
+          Podaj swoje oceny, wyniki z egzaminu ósmoklasisty oraz dodatkowe osiągnięcia (jeśli takie
+          masz) i oblicz punkty, jakie uzyskasz podczas rekrutacji do szkoły średniej.
         </p>
 
         <InputGrid>
@@ -194,9 +191,7 @@ const Calculator: FC<RouteComponentProps> = () => {
                   name={`grades[${subject.id}]`}
                 />
               </div>
-              <span className="points">
-                {(points.grades[subject.id] ?? 0).toFixed(2)}
-              </span>
+              <span className="points">{(points.grades[subject.id] ?? 0).toFixed(2)}</span>
             </div>
           ))}
 
@@ -220,9 +215,7 @@ const Calculator: FC<RouteComponentProps> = () => {
                   name={`examResult[${examPart.id}]`}
                 />
               </div>
-              <span className="points">
-                {(points.examResult[examPart.id] ?? 0).toFixed()}
-              </span>
+              <span className="points">{(points.examResult[examPart.id] ?? 0).toFixed()}</span>
             </div>
           ))}
         </InputGrid>

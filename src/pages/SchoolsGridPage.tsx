@@ -105,9 +105,7 @@ const SchoolsGridPage = (props: RouteComponentProps) => {
   const p = currUrl.searchParams;
   const [query, setQuery] = useState(deserializeQuery(p));
   const [page, setPage] = useState(deserializePage(p));
-  const [dropdownFilters, setDropdownFilters] = useState(
-    deserializeFilters(p, filters),
-  );
+  const [dropdownFilters, setDropdownFilters] = useState(deserializeFilters(p, filters));
 
   const searchData = {
     query,
@@ -136,13 +134,7 @@ const SchoolsGridPage = (props: RouteComponentProps) => {
           />
         </QueryRow>
         {schools && <Count>Liczba wyników: {count}</Count>}
-        <Results
-          schools={schools}
-          error={error}
-          page={page}
-          count={count}
-          onPageChange={setPage}
-        />
+        <Results schools={schools} error={error} page={page} count={count} onPageChange={setPage} />
       </Container>
     </Layout>
   );

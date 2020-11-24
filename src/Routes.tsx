@@ -9,21 +9,11 @@ import SchoolsMapPage from './pages/SchoolsMapPage';
 import FavouriteSchoolsPage from './pages/FavouriteSchoolsPage';
 
 const Calculator = lazyLoaded(lazy(() => import('./pages/Calculator')));
-const ForDevelopersPage = lazyLoaded(
-  lazy(() => import('./pages/articles/ForDevelopers')),
-);
-const GetInvolvedPage = lazyLoaded(
-  lazy(() => import('./pages/articles/GetInvolved')),
-);
-const AboutDataPage = lazyLoaded(
-  lazy(() => import('./pages/articles/AboutData')),
-);
-const PrivacySettingsPage = lazyLoaded(
-  lazy(() => import('./pages/articles/PrivacySettings')),
-);
-const PrivacyPolicyPage = lazyLoaded(
-  lazy(() => import('./pages/articles/PrivacyPolicy')),
-);
+const ForDevelopersPage = lazyLoaded(lazy(() => import('./pages/articles/ForDevelopers')));
+const GetInvolvedPage = lazyLoaded(lazy(() => import('./pages/articles/GetInvolved')));
+const AboutDataPage = lazyLoaded(lazy(() => import('./pages/articles/AboutData')));
+const PrivacySettingsPage = lazyLoaded(lazy(() => import('./pages/articles/PrivacySettings')));
+const PrivacyPolicyPage = lazyLoaded(lazy(() => import('./pages/articles/PrivacyPolicy')));
 const Routes: FC = () => (
   <Router>
     <LandingPage path="/" />

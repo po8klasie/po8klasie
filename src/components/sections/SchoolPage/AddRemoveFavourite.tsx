@@ -22,26 +22,17 @@ interface AddRemoveFavouriteProps {
   onClick: () => void;
 }
 
-const AddRemoveFavourite: FC<AddRemoveFavouriteProps> = ({
-  isFavourite,
-  onClick,
-}) => {
+const AddRemoveFavourite: FC<AddRemoveFavouriteProps> = ({ isFavourite, onClick }) => {
   return (
     <StyledButton onClick={onClick}>
       {isFavourite ? (
         <>
-          <img
-            src={require('../../../assets/icons/heart_full.png')}
-            alt="ikona_serce_puste"
-          />
+          <img src={require('../../../assets/icons/heart_full.png')} alt="ikona_serce_puste" />
           Dodano do ulubionych
         </>
       ) : (
         <>
-          <img
-            src={require('../../../assets/icons/heart.png')}
-            alt="ikona_serce_wypełnione"
-          />
+          <img src={require('../../../assets/icons/heart.png')} alt="ikona_serce_wypełnione" />
           Dodaj do ulubionych
         </>
       )}

@@ -41,14 +41,10 @@ const Map: FC<MapProps> = (props) => {
         gestureHandling: true,
       } as any,
     );
-    const defaultTileLayer = L.tileLayer(
-      'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-      {
-        className: 'base-layer',
-        attribution:
-          '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-      },
-    );
+    const defaultTileLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      className: 'base-layer',
+      attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+    });
     defaultTileLayer.addTo(map.current);
     if (props.onConfig) {
       props.onConfig(map.current, defaultTileLayer);

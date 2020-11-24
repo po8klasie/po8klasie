@@ -29,13 +29,11 @@ const LandingPage: FC<LandingPageProps> = () => {
           <div>
             <PageTitle>Wybierz z nami swoją drogę!</PageTitle>
             <Paragraph>
-              Nie wiesz którą szkołę wybrać? Rekrutacja do szkół średnich to
-              poważna sprawa. W tym roku wybór będzie znacznie prostszy. Znajdź
-              szkołę swoich marzeń już za trzecim kliknięciem!
+              Nie wiesz którą szkołę wybrać? Rekrutacja do szkół średnich to poważna sprawa. W tym
+              roku wybór będzie znacznie prostszy. Znajdź szkołę swoich marzeń już za trzecim
+              kliknięciem!
             </Paragraph>
-            <CallToActionButton to="/schools">
-              Przeglądaj szkoły
-            </CallToActionButton>
+            <CallToActionButton to="/schools">Przeglądaj szkoły</CallToActionButton>
           </div>
           <LandingPageImage
             bgImage={require('../assets/images/landingPage/wybierz_z_nami.png')}
@@ -79,14 +77,12 @@ const LandingPage: FC<LandingPageProps> = () => {
           <DoubleGrid>
             <H2>Jak to działa?</H2>
             <Paragraph>
-              Pobieramy dane z różnych źródeł, aby móc przedstawić Ci je w jak
-              najlepszej postaci.
+              Pobieramy dane z różnych źródeł, aby móc przedstawić Ci je w jak najlepszej postaci.
               <br />
-              Korzystamy z danych Urzędu Miasta Warszawy, aby pobrać listę szkół
-              oraz średnie liczby punktów. Na bieżąco łączymy się z wieloma
-              serwisami lokalizacyjnymi, aby dostarczyć Ci informacje o jak
-              najlepszym połączeniu komunikacyjnym z Twoją wymarzoną szkołą. A
-              to wszystko zebrane tylko w jednym miejscu...
+              Korzystamy z danych Urzędu Miasta Warszawy, aby pobrać listę szkół oraz średnie liczby
+              punktów. Na bieżąco łączymy się z wieloma serwisami lokalizacyjnymi, aby dostarczyć Ci
+              informacje o jak najlepszym połączeniu komunikacyjnym z Twoją wymarzoną szkołą. A to
+              wszystko zebrane tylko w jednym miejscu...
             </Paragraph>
 
             <LandingPageImage
@@ -102,9 +98,9 @@ const LandingPage: FC<LandingPageProps> = () => {
             <Paragraph textAlign="right">
               Nobody's perfect...
               <br />
-              Przetwarzając ogromne ilości informacji może wkraść się do danych
-              jakiś błąd. Jeżeli natkniesz się na niego, zgłoś to. Nasi
-              moderatorzy zajmą się tym tak szybko, jak tylko będę mogli.
+              Przetwarzając ogromne ilości informacji może wkraść się do danych jakiś błąd. Jeżeli
+              natkniesz się na niego, zgłoś to. Nasi moderatorzy zajmą się tym tak szybko, jak tylko
+              będę mogli.
             </Paragraph>
             <LandingPageImage
               bgImage={require('../assets/images/landingPage/dane.png')}
@@ -119,11 +115,10 @@ const LandingPage: FC<LandingPageProps> = () => {
             <Paragraph>
               Ten portal tworzy każdy z nas!
               <br />
-              Wybierasz liceum i robisz ogromny research, czy może masz już
-              rekrutację za sobą i wiesz jak to działa? Podziel się swoimi
-              spostrzeżeniami tutaj. Każdego ucznia ostatniej klasy podstawówki
-              czeka to samo. Pomagajmy sobie nawzajem. WarsawLO to portal
-              tworzony przez uczniów dla uczniów.
+              Wybierasz liceum i robisz ogromny research, czy może masz już rekrutację za sobą i
+              wiesz jak to działa? Podziel się swoimi spostrzeżeniami tutaj. Każdego ucznia
+              ostatniej klasy podstawówki czeka to samo. Pomagajmy sobie nawzajem. WarsawLO to
+              portal tworzony przez uczniów dla uczniów.
             </Paragraph>
             <LandingPageImage
               bgImage={require('../assets/images/landingPage/spolecznosc.png')}
@@ -133,9 +128,7 @@ const LandingPage: FC<LandingPageProps> = () => {
         </LandingPageSectionThree>
 
         <CallToActionContainer>
-          <CallToActionButton to={'/schools'}>
-            Znajdź swoją szkołę już teraz
-          </CallToActionButton>
+          <CallToActionButton to={'/schools'}>Znajdź swoją szkołę już teraz</CallToActionButton>
         </CallToActionContainer>
       </Container>
     </Layout>

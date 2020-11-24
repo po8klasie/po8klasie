@@ -30,9 +30,7 @@ const DropdownFilters: FC<any> = ({ onFiltersValuesChange, filtersValues }) => {
   const createHandler = (filterData: FilterData) => (choiceId: string) => {
     const filterKey = filterData.key;
     const { choices, multiple } = filterData;
-    const valuesForFilter = filtersValues[filterKey]
-      ? filtersValues[filterKey]
-      : [];
+    const valuesForFilter = filtersValues[filterKey] ? filtersValues[filterKey] : [];
     if (!valuesForFilter.includes(choiceId)) {
       if (multiple && valuesForFilter.length + 1 === choices.length) {
         onFiltersValuesChange(deleteFromObject(filtersValues, [filterKey]));
@@ -70,11 +68,7 @@ const DropdownFilters: FC<any> = ({ onFiltersValuesChange, filtersValues }) => {
               choices={filter.choices}
               onSelect={handleSelect}
               onSubmit={handleSubmit}
-              selected={
-                filtersValues && filtersValues[filter.key]
-                  ? filtersValues[filter.key]
-                  : []
-              }
+              selected={filtersValues && filtersValues[filter.key] ? filtersValues[filter.key] : []}
             />
           );
         })}

@@ -14,12 +14,9 @@ import { ErrorInfo } from '../components/Info';
 import { useFavouriteSchools } from '../hooks/useFavouriteSchools';
 
 const SchoolPage = (props: RouteComponentProps<{ schoolID: string }>) => {
-  const isSchoolIdValid =
-    props.schoolID && !Number.isNaN(props.schoolID as any);
+  const isSchoolIdValid = props.schoolID && !Number.isNaN(props.schoolID as any);
 
-  const { data: school, error: schoolError } = useSchoolDetails(
-    parseInt(props.schoolID as any),
-  );
+  const { data: school, error: schoolError } = useSchoolDetails(parseInt(props.schoolID as any));
 
   const { data: classes, error: classesError } = useHighSchoolClasses(
     parseInt(props.schoolID as any),
@@ -35,10 +32,7 @@ const SchoolPage = (props: RouteComponentProps<{ schoolID: string }>) => {
       <Layout>
         <Container className={!school ? 'loading' : ''}>
           <Breadcrumbs
-            steps={[
-              ['Wyszukiwarka szkół', '/schools'],
-              [school ? school.school_name : 'Szkoła'],
-            ]}
+            steps={[['Wyszukiwarka szkół', '/schools'], [school ? school.school_name : 'Szkoła']]}
           />
           <ErrorInfo />
         </Container>
@@ -49,10 +43,7 @@ const SchoolPage = (props: RouteComponentProps<{ schoolID: string }>) => {
     <Layout>
       <Container className={!school ? 'loading' : ''}>
         <Breadcrumbs
-          steps={[
-            ['Wyszukiwarka szkół', '/schools'],
-            [school ? school.school_name : 'Szkoła'],
-          ]}
+          steps={[['Wyszukiwarka szkół', '/schools'], [school ? school.school_name : 'Szkoła']]}
         />
 
         <SchoolHeader

@@ -49,25 +49,17 @@ const Pagination: FC<any> = ({ count, page, onPageChange }) => {
           <BsSkipStart />
         </PaginationSkipButton>
         {page - 2 > 0 && (
-          <PaginationButton onClick={() => onPageChange(page - 2)}>
-            {page - 2}
-          </PaginationButton>
+          <PaginationButton onClick={() => onPageChange(page - 2)}>{page - 2}</PaginationButton>
         )}
         {page - 1 > 0 && (
-          <PaginationButton onClick={() => onPageChange(page - 1)}>
-            {page - 1}
-          </PaginationButton>
+          <PaginationButton onClick={() => onPageChange(page - 1)}>{page - 1}</PaginationButton>
         )}
         <PaginationButton active={true}>{page}</PaginationButton>
         {page + 1 < totalPages && (
-          <PaginationButton onClick={() => onPageChange(page + 1)}>
-            {page + 1}
-          </PaginationButton>
+          <PaginationButton onClick={() => onPageChange(page + 1)}>{page + 1}</PaginationButton>
         )}
         {page + 2 < totalPages && (
-          <PaginationButton onClick={() => onPageChange(page + 2)}>
-            {page + 2}
-          </PaginationButton>
+          <PaginationButton onClick={() => onPageChange(page + 2)}>{page + 2}</PaginationButton>
         )}
         <PaginationSkipButton onClick={() => onPageChange(totalPages)}>
           <BsSkipEnd />
