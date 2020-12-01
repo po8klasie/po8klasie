@@ -47,4 +47,4 @@ We couldn't be more thrilled! Write to us, and we'll try to figure out something
 ## Keep in touch :phone:
 Feel free to write to us at info@warsawlo.pl or message us on [Facebook](https://fb.com/WarsawLO) or [Twitter](https://twitter.com/WarsawLO).
 
-We also have Slack. Write to us, and we'll get you in.
+We also have a Slack workspace. Write to us, and we'll get you in.
