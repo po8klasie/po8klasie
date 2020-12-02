@@ -7,6 +7,8 @@ Wkrótce produkcyjnie dostępna dla wszystkich!
 :uk: The simplest and fastest search engine for Warsaw high schools. Now in version 2.0. <br />
 Soon available in production for everyone!
 
+If you want to contribute to WarsawLO, please read our [contribution guide](CONTRIBUTING.md).
+
 > *NOTE*: App available at warsawlo.pl is just a prototype and is currently sourced from [warsawlo repo](https://github.com/WarsawLO/warsawlo).
   
   
@@ -35,7 +37,8 @@ yarn start
 ```
 
 5. Make some changes and submit pull request :tada: <br />
-When doing so, don't hesitate to start your commit message with applicable [gitmoji](https://gitmoji.carloscuesta.me/) :slightly_smiling_face:
+
+> *NOTE:* Before submitting a pull request, please read our [contribution guidelines](CONTRIBUTING.md).
 
 ### Linter & formatter
 Currently, we are in process of setting up [eslint](https://eslint.org) and [prettier](https://prettier.io).
