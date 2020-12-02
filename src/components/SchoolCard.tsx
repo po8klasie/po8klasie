@@ -4,6 +4,7 @@ import { Link } from '@reach/router';
 import Card from './Card';
 
 const Wrapper = styled(Card)`
+  margin-bottom: 3em;
   .school-type {
     display: block;
     font-size: 0.9em;
