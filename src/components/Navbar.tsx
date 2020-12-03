@@ -100,6 +100,10 @@ const MobileBar = styled.div`
 
     @media (max-width: 780px) {
       display: block;
+      outline: none;
+      border: none;
+      background-color: transparent;
+      cursor: pointer;
     }
   }
   @media (max-width: 780px) {
@@ -125,9 +129,9 @@ const Navbar: FC = () => {
               Warsaw
               <span>LO</span>
             </Brand>
-            <span className="menu-icons" onClick={() => setNavOpen(!isNavOpen)}>
+            <button className="menu-icons" onClick={() => setNavOpen(!isNavOpen)} type="button">
               {isNavOpen ? <BsX /> : <BsThreeDots />}
-            </span>
+            </button>
           </MobileBar>
           <Menu active={isNavOpen}>
             <MenuItem>

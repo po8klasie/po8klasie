@@ -42,7 +42,7 @@ export const serializeSearchData = (searchData: Record<string, any>, mode: any) 
       let serializer = basicSerializer;
 
       if (Object.prototype.hasOwnProperty.call(serializerDeserializerOverwrites, key)) {
-        serializer = serializerDeserializerOverwrites[key][0];
+        [serializer] = serializerDeserializerOverwrites[key];
       }
 
       if (mode === 'api' && Object.prototype.hasOwnProperty.call(apiParamKeysOverwrites, key)) {
@@ -58,7 +58,7 @@ export const deserializeSingleSearchData = (key: string, p: URLSearchParams) => 
   let deserializer = basicDeserializer;
 
   if (Object.prototype.hasOwnProperty.call(serializerDeserializerOverwrites, key)) {
-    deserializer = serializerDeserializerOverwrites[key][1];
+    [, deserializer] = serializerDeserializerOverwrites[key];
   }
   return deserializer(key, p);
 };

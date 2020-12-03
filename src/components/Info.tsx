@@ -1,6 +1,9 @@
 import React, { FC } from 'react';
 import { Link } from '@reach/router';
 import styled from '../styling/styled';
+import error_img from '../assets/images/SchoolsPage/error.png';
+import not_found_img from '../assets/images/SchoolsPage/not-found.png';
+import favouriteSchools_img from '../assets/images/favouriteSchools.png';
 
 const InfoWrapper = styled.div`
   margin-top: 2em;
@@ -32,21 +35,21 @@ const Info: FC<InfoProps> = ({ children, imageSrc }) => {
 };
 
 export const NotFoundInfo: FC = () => (
-  <Info imageSrc={require('../assets/images/SchoolsPage/not-found.png')}>
+  <Info imageSrc={not_found_img}>
     Ups! Brak szkół spełniających podane przez Ciebie wymagania :( <br />
     Zmień kryteria i szukaj jeszcze raz!
   </Info>
 );
 
 export const ErrorInfo: FC = () => (
-  <Info imageSrc={require('../assets/images/SchoolsPage/error.png')}>
+  <Info imageSrc={error_img}>
     Ups! Wystąpił błąd! <br />
     Spróbuj jeszcze raz :)
   </Info>
 );
 
 export const NoFavouriteSchoolsInfo: FC = () => (
-  <Info imageSrc={require('../assets/images/favouriteSchools.png')}>
+  <Info imageSrc={favouriteSchools_img}>
     Nie masz jeszcze polubionych szkół.
     <br />
     <Link to="/schools">Przejdź do wyszukiwania</Link>, aby móc znaleźć swoją przyszłą szkołę!

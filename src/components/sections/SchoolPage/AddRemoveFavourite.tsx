@@ -1,5 +1,7 @@
 import React, { FC } from 'react';
 import styled from '../../../styling/styled';
+import heart from '../../../assets/icons/heart.png';
+import heart_full from '../../../assets/icons/heart_full.png';
 
 const StyledButton = styled.button`
   border: none;
@@ -27,12 +29,12 @@ const AddRemoveFavourite: FC<AddRemoveFavouriteProps> = ({ isFavourite, onClick 
     <StyledButton onClick={onClick}>
       {isFavourite ? (
         <>
-          <img src={require('../../../assets/icons/heart_full.png')} alt="ikona_serce_puste" />
+          <img src={heart_full} alt="ikona_serce_puste" />
           Dodano do ulubionych
         </>
       ) : (
         <>
-          <img src={require('../../../assets/icons/heart.png')} alt="ikona_serce_wypełnione" />
+          <img src={heart} alt="ikona_serce_wypełnione" />
           Dodaj do ulubionych
         </>
       )}

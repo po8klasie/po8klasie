@@ -10,7 +10,9 @@ const StyledButton = styled.button`
   background: transparent;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   outline: none;
+  cursor: pointer;
   font-size: 1.2em;
 `;
 
@@ -19,6 +21,12 @@ const FiltersButton = styled(StyledButton)`
     color: ${(props) => props.theme.colors.primary};
     margin-right: 10px;
   }
+`;
+
+const ListButton = styled(StyledButton)`
+  width: 100%;
+  font-size: 1em;
+  padding: 20px 0;
 `;
 
 const MobileFiltersModal = styled.div<{ active: boolean }>`
@@ -59,7 +67,6 @@ const List = styled.ul`
   li {
     display: flex;
     justify-content: space-between;
-    padding: 20px 0;
     border-bottom: 1px solid #cfcfcf;
   }
 `;
@@ -74,19 +81,7 @@ const CheckIcon = styled.span<{ active: boolean }>`
   }
 `;
 
-// interface MobileFiltersProps {
-//   filters: FilterData[];
-//   idKey: string;
-//   createHandler: any;
-//   filtersValues: any;
-// }
-
-const MobileFilters: FC<any> = ({
-  filters,
-  idKey,
-  createHandler,
-  filtersValues,
-}) => {
+const MobileFilters: FC<any> = ({ filters, idKey, createHandler, filtersValues }) => {
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
   const [activeFilterId, setActiveFilterId] = useState<string | null>(null);
 
@@ -118,9 +113,14 @@ const MobileFilters: FC<any> = ({
           {activeFilterId === null ? (
             <List>
               {filters.map((filter: FilterData) => (
-                <li key={filter.key} onClick={() => setActiveFilterId((filter as any)[idKey])}>
+                <li key={filter.key}>
+                  <ListButton
+                    type="button"
+                    onClick={() => setActiveFilterId((filter as any)[idKey])}
+                  >
                     {filter.title}
                     <BsChevronRight />
+                  </ListButton>
                 </li>
               ))}
             </List>
@@ -130,16 +130,18 @@ const MobileFilters: FC<any> = ({
                 const filter = getFilterById(activeFilterId);
                 const handleClick = () => createHandler(filter)(choice.id);
                 return (
-                  <li key={choice.id} onClick={handleClick}>
-                    {choice.label}
-                    <CheckIcon
-                      active={
-                        filtersValues[filter[idKey]] &&
-                        filtersValues[filter[idKey]].includes(choice.id)
-                      }
-                    >
-                      <BsCheck />
-                    </CheckIcon>
+                  <li key={choice.id}>
+                    <ListButton onClick={handleClick}>
+                      {choice.label}
+                      <CheckIcon
+                        active={
+                          filtersValues[filter[idKey]] &&
+                          filtersValues[filter[idKey]].includes(choice.id)
+                        }
+                      >
+                        <BsCheck />
+                      </CheckIcon>
+                    </ListButton>
                   </li>
                 );
               })}

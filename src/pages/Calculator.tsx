@@ -19,7 +19,7 @@ import Breadcrumbs from '../components/Breadcrumbs';
 
 const { isGradeValid, isExamResultValid } = validators;
 const { initialInputData, initialCalculatedPoints } = initialData;
-const { config2018_2019 } = configs;
+const { config2018_2019: CONFIG_2018_2019 } = configs;
 
 const InputGrid = styled.div`
   display: inline-grid;
@@ -112,7 +112,7 @@ const Result = styled.div`
   }
 `;
 
-const calc = new PointsCalculator(config2018_2019);
+const calc = new PointsCalculator(CONFIG_2018_2019);
 
 const Calculator: FC<RouteComponentProps> = () => {
   const [points, setPoints] = useState<CalculatedPoints>(initialCalculatedPoints);
@@ -122,37 +122,59 @@ const Calculator: FC<RouteComponentProps> = () => {
   }, []);
 
   const grades = watch('grades');
+
   useEffect(() => {
-    const gradesData: { [x: string]: number | null } = {};
     if (grades) {
-      for (const [subject, rawGrade] of Object.entries(grades)) {
-        const grade = parseInt(rawGrade as any);
-        gradesData[subject] = isGradeValid(grade) ? grade : null;
-      }
+      const gradesArray: [string, string][] = Object.entries(grades);
+      const gradesData: { [x: string]: number | null } = gradesArray.reduce(
+        (finalObj, subjectAndGrade) => {
+          const [subject, rawGrade] = subjectAndGrade;
+          const gradeHelper = parseInt(rawGrade, 10);
+          const grade = isGradeValid(gradeHelper) ? gradeHelper : null;
+          return {
+            ...finalObj,
+            [subject]: grade,
+          };
+        },
+        {},
+      );
+
       calc.setGrades(gradesData);
     }
     // eslint-disable-next-line
   }, [JSON.stringify(grades)]);
 
   const examResult = watch('examResult');
+
   useEffect(() => {
-    const examData: { [x: string]: number | null } = {};
     if (examResult) {
-      for (const [subject, rawScore] of Object.entries(examResult)) {
-        const score = parseInt(rawScore as any) / 100;
-        examData[subject] = isExamResultValid(score) ? score : null;
-      }
+      const examArray: [string, string][] = Object.entries(examResult);
+      const examData: { [x: string]: number | null } = examArray.reduce(
+        (finalObj, subjectAndScore) => {
+          const [subject, rawScore] = subjectAndScore;
+          const scoreHelper = parseInt(rawScore, 10) / 100;
+          const score = isExamResultValid(scoreHelper) ? scoreHelper : null;
+          return {
+            ...finalObj,
+            [subject]: score,
+          };
+        },
+        {},
+      );
+
       calc.setExamResult(examData);
     }
     // eslint-disable-next-line
   }, [JSON.stringify(examResult)]);
 
   const merit = watch('merit');
+
   useEffect(() => {
     calc.setMerit(merit);
   }, [merit]);
 
   const activity = watch('activity');
+
   useEffect(() => {
     calc.setActivity(activity);
   }, [activity]);
@@ -236,7 +258,9 @@ const Calculator: FC<RouteComponentProps> = () => {
           <h2>
             Suma: <span>{(points.total ?? 0).toFixed()}</span>
           </h2>
-          <button onClick={resetForm}>Resetuj wynik</button>
+          <button type="button" onClick={resetForm}>
+            Resetuj wynik
+          </button>
         </Result>
       </Container>
     </Layout>

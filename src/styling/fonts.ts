@@ -1,3 +1,5 @@
+/* eslint-disable global-require */
+
 const setupFonts = `
     /* ibm-plex-sans-700 - latin-ext_latin */
     @font-face {

@@ -27,7 +27,7 @@ const MapElement = styled.div`
 
 interface MapProps {
   innerRef: Ref<HTMLDivElement>;
-  onConfig?: Function;
+  onConfig?: any;
 }
 
 const Map: FC<MapProps> = ({ innerRef, onConfig }) => {
@@ -59,6 +59,7 @@ const Map: FC<MapProps> = ({ innerRef, onConfig }) => {
   );
 };
 
-export default forwardRef<any, { onConfig?: Function }>((props, ref) => (
+export default forwardRef<any, { onConfig?: any }>((props, ref) => (
+  // eslint-disable-next-line
   <Map {...props} innerRef={ref} />
 ));
