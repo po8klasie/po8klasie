@@ -1,5 +1,6 @@
 export interface School {
   id: number;
+  is_public: boolean;
   school_name: string;
   nickname: string | null;
   school_type: string;

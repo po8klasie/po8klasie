@@ -1,5 +1,7 @@
 import React, { FC } from 'react';
-import styled from '../../../styling/styled';
+import styled from '../styling/styled';
+import FullHeart from '../assets/icons/heart_full.png';
+import EmptyHeart from '../assets/icons/heart.png';
 
 const StyledButton = styled.button`
   border: none;
@@ -22,26 +24,17 @@ interface AddRemoveFavouriteProps {
   onClick: () => void;
 }
 
-const AddRemoveFavourite: FC<AddRemoveFavouriteProps> = ({
-  isFavourite,
-  onClick,
-}) => {
+const AddRemoveFavourite: FC<AddRemoveFavouriteProps> = ({ isFavourite, onClick }) => {
   return (
     <StyledButton onClick={onClick}>
       {isFavourite ? (
         <>
-          <img
-            src={require('../../../assets/icons/heart_full.png')}
-            alt="ikona_serce_puste"
-          />
+          <img src={FullHeart} alt="ikona_serce_wypełnione" />
           Dodano do ulubionych
         </>
       ) : (
         <>
-          <img
-            src={require('../../../assets/icons/heart.png')}
-            alt="ikona_serce_wypełnione"
-          />
+          <img src={EmptyHeart} alt="ikona_serce_puste" />
           Dodaj do ulubionych
         </>
       )}
