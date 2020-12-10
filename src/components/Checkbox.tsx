@@ -61,7 +61,6 @@ const CheckboxInput = styled.input`
 `;
 
 const Checkbox = forwardRef((props: HTMLProps<HTMLInputElement>, ref: Ref<HTMLInputElement>) => (
-  // eslint-disable-next-line
   <CheckboxInput {...props} type="checkbox" ref={ref} />
 ));
 

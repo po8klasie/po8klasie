@@ -8,7 +8,6 @@ import { Choice } from '../data/filters';
 const DropdownWrapper = styled.div<{ active: boolean }>`
   margin-right: 10px;
   position: relative;
-  outline: none;
   z-index: 1001;
   button {
     display: flex;

@@ -2,8 +2,8 @@ import React, { FC } from 'react';
 import { Link } from '@reach/router';
 import styled from '../styling/styled';
 import Container from './Container';
-import epf from '../assets/images/epf.png';
-import kdp_logo from '../assets/images/kdp-logo.png';
+import epfImg from '../assets/images/epf.png';
+import kdpImg from '../assets/images/kdp-logo.png';
 
 const DataInfo = styled.p`
   @media (max-width: 1000px) {
@@ -136,10 +136,10 @@ const Footer: FC = () => (
           </p>
           <div className="logos-wrapper">
             <a href="https://epf.org.pl" rel="noopener noreferrer" target="_blank">
-              <img src={epf} alt="Logo Fundacji ePaństwo" />
+              <img src={epfImg} alt="Logo Fundacji ePaństwo" />
             </a>
             <a href="https://kodujdlapolski.pl" rel="noopener noreferrer" target="_blank">
-              <img src={kdp_logo} alt="Logo Koduj dla Polski" />
+              <img src={kdpImg} alt="Logo Koduj dla Polski" />
             </a>
           </div>
         </div>

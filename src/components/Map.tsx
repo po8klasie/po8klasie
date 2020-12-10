@@ -60,6 +60,5 @@ const Map: FC<MapProps> = ({ innerRef, onConfig }) => {
 };
 
 export default forwardRef<any, { onConfig?: any }>((props, ref) => (
-  // eslint-disable-next-line
   <Map {...props} innerRef={ref} />
 ));

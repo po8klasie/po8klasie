@@ -18,14 +18,14 @@ import {
   LandingPageSectionThree,
 } from '../components/LandingPageSections';
 import LandingPageImage from '../components/LandingPageImage';
-import choose_with_us_img from '../assets/images/landingPage/choose_with_us.png';
-import community_img from '../assets/images/landingPage/community.png';
-import data_img from '../assets/images/landingPage/data.png';
-import how_it_works_img from '../assets/images/landingPage/how_it_works.png';
-import info_img from '../assets/images/landingPage/info.png';
-import location_img from '../assets/images/landingPage/location.png';
-import profiles_img from '../assets/images/landingPage/profiles.png';
-import ranking_img from '../assets/images/landingPage/ranking.png';
+import chooseWithUsImg from '../assets/images/landingPage/choose_with_us.png';
+import communityImg from '../assets/images/landingPage/community.png';
+import dataImg from '../assets/images/landingPage/data.png';
+import howItWorksImg from '../assets/images/landingPage/how_it_works.png';
+import infoImg from '../assets/images/landingPage/info.png';
+import locationImg from '../assets/images/landingPage/location.png';
+import profilesImg from '../assets/images/landingPage/profiles.png';
+import rankingImg from '../assets/images/landingPage/ranking.png';
 
 const LandingPage: FC<RouteComponentProps> = () => {
   return (
@@ -41,25 +41,25 @@ const LandingPage: FC<RouteComponentProps> = () => {
             </Paragraph>
             <CallToActionButton to="/schools">Przeglądaj szkoły</CallToActionButton>
           </div>
-          <LandingPageImage bgImage={choose_with_us_img} position="right" />
+          <LandingPageImage bgImage={chooseWithUsImg} position="right" />
         </LandingMainGrid>
 
         <H2>Dzięki nam szybko sprawdzisz</H2>
         <FeaturesGrid>
           <Feature>
-            <img src={info_img} alt="litera i - symbol informacji" />
+            <img src={infoImg} alt="litera i - symbol informacji" />
             <FeatureTitle>podstawowe informacje</FeatureTitle>
           </Feature>
           <Feature>
-            <img src={ranking_img} alt="gwiazdki - oznaczenie opinii" />
+            <img src={rankingImg} alt="gwiazdki - oznaczenie opinii" />
             <FeatureTitle>opinie</FeatureTitle>
           </Feature>
           <Feature>
-            <img src={location_img} alt="znacznik lokalizacji" />
+            <img src={locationImg} alt="znacznik lokalizacji" />
             <FeatureTitle>lokalizacje</FeatureTitle>
           </Feature>
           <Feature>
-            <img src={profiles_img} alt="książki - symbol profili" />
+            <img src={profilesImg} alt="książki - symbol profili" />
             <FeatureTitle>profile klas</FeatureTitle>
           </Feature>
         </FeaturesGrid>
@@ -76,7 +76,7 @@ const LandingPage: FC<RouteComponentProps> = () => {
               wszystko zebrane tylko w jednym miejscu...
             </Paragraph>
 
-            <LandingPageImage bgImage={how_it_works_img} position="right" />
+            <LandingPageImage bgImage={howItWorksImg} position="right" />
           </DoubleGrid>
         </LandingPageSectionOne>
 
@@ -90,7 +90,7 @@ const LandingPage: FC<RouteComponentProps> = () => {
               natkniesz się na niego, zgłoś to. Nasi moderatorzy zajmą się tym tak szybko, jak tylko
               będę mogli.
             </Paragraph>
-            <LandingPageImage bgImage={data_img} position="left" />
+            <LandingPageImage bgImage={dataImg} position="left" />
           </DoubleGrid>
         </LandingPageSectionTwo>
 
@@ -105,7 +105,7 @@ const LandingPage: FC<RouteComponentProps> = () => {
               ostatniej klasy podstawówki czeka to samo. Pomagajmy sobie nawzajem. WarsawLO to
               portal tworzony przez uczniów dla uczniów.
             </Paragraph>
-            <LandingPageImage bgImage={community_img} position="right" />
+            <LandingPageImage bgImage={communityImg} position="right" />
           </DoubleGrid>
         </LandingPageSectionThree>
 

@@ -7,7 +7,6 @@ const Input = styled.input`
   border: 2px solid transparent;
   border-radius: 10px;
   font-size: 1.2em;
-  outline: none;
   transition: 0.3s all;
   display: block;
   width: 100%;
@@ -59,7 +58,6 @@ interface InputWithAddonProps extends HTMLProps<HTMLInputElement> {
 export const InputWithAddon = forwardRef<HTMLDivElement, InputWithAddonProps>((props, ref) => (
   <InputWithAddonWrapper ref={ref} addonPosition={props.addonPosition}>
     <span className="addon">{props.addon}</span>
-    {/* eslint-disable-next-line */}
     <Input {...props} size={15} />
   </InputWithAddonWrapper>
 ));

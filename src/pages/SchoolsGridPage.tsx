@@ -72,14 +72,6 @@ const LoadingCard = styled(Card)`
   }
 `;
 
-interface ResultsProps {
-  schools: any;
-  error: any;
-  page: number;
-  count: number;
-  onPageChange: (page: number) => void;
-}
-
 const Results: FC<any> = ({ schools, error, page, count, onPageChange }) => {
   if (error) return <ErrorInfo />;
 

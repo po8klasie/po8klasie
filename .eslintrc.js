@@ -42,6 +42,7 @@ module.exports = {
       files: '**/*.tsx',
       rules: {
         'react/prop-types': 'off',
+        'react/jsx-props-no-spreading': 'off',
       },
     },
   ],

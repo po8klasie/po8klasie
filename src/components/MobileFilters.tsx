@@ -11,7 +11,6 @@ const StyledButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  outline: none;
   cursor: pointer;
   font-size: 1.2em;
 `;

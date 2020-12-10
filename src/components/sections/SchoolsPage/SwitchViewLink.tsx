@@ -7,7 +7,6 @@ import getPathWithPreservedParams from '../../../utils/url';
 const SwitchLink = styled(Link)`
   background: none;
   border: none;
-  outline: none;
   color: ${(props) => props.theme.colors.primary};
   font-weight: bold;
   font-family: inherit;

@@ -5,7 +5,6 @@ import heart_full from '../../../assets/icons/heart_full.png';
 
 const StyledButton = styled.button`
   border: none;
-  outline: none;
   background: none;
   padding: 0;
   font-family: inherit;

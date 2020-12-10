@@ -15,7 +15,6 @@ const BaseButton = styled.button`
   cursor: pointer;
   border: none;
   background: none;
-  outline: none;
 `;
 
 const PaginationButton = styled(BaseButton)<{ active?: boolean }>`

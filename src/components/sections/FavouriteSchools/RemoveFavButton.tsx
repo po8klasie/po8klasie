@@ -4,7 +4,6 @@ const RemoveFavButton = styled.button`
   cursor: pointer;
   border: none;
   background: none;
-  outline: none;
   padding: 4px 0;
   font-size: 1em;
   color: ${(props) => props.theme.colors.primary};

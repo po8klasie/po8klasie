@@ -100,7 +100,6 @@ const MobileBar = styled.div`
 
     @media (max-width: 780px) {
       display: block;
-      outline: none;
       border: none;
       background-color: transparent;
       cursor: pointer;
