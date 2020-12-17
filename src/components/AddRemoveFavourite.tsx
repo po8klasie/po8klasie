@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
 import styled from '../styling/styled';
-import FullHeart from '../assets/icons/heart_full.png';
-import EmptyHeart from '../assets/icons/heart.png';
+import fullHeart from '../assets/icons/heart_full.png';
+import emptyHeart from '../assets/icons/heart.png';
 
-const StyledButton = styled.button`
+const StyledButton = styled.button<AddRemoveFavouriteProps>`
   border: none;
   outline: none;
   background: none;
@@ -12,7 +12,7 @@ const StyledButton = styled.button`
   font-size: 1.125em;
   display: flex;
   align-items: center;
-  margin-top: 2em;
+  margin-top: ${(props: AddRemoveFavouriteProps) => (props.isSmallMargin ? '12px' : '2em')};
   cursor: pointer;
   & img {
     margin-right: 8px;
@@ -20,21 +20,27 @@ const StyledButton = styled.button`
 `;
 
 interface AddRemoveFavouriteProps {
-  isFavourite: boolean;
+  // isFavourite is optional for the sake of not providing unnecessary prop to StyledButton
+  isFavourite?: boolean;
   onClick: () => void;
+  isSmallMargin?: boolean;
 }
 
-const AddRemoveFavourite: FC<AddRemoveFavouriteProps> = ({ isFavourite, onClick }) => {
+const AddRemoveFavourite: FC<AddRemoveFavouriteProps> = ({
+  isFavourite,
+  onClick,
+  isSmallMargin,
+}) => {
   return (
-    <StyledButton onClick={onClick}>
+    <StyledButton isSmallMargin={isSmallMargin} onClick={onClick}>
       {isFavourite ? (
         <>
-          <img src={FullHeart} alt="ikona_serce_wypełnione" />
+          <img src={fullHeart} alt="ikona wypełnione serce" />
           Dodano do ulubionych
         </>
       ) : (
         <>
-          <img src={EmptyHeart} alt="ikona_serce_puste" />
+          <img src={emptyHeart} alt="ikona puste serce" />
           Dodaj do ulubionych
         </>
       )}

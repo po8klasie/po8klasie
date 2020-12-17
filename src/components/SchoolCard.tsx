@@ -35,7 +35,7 @@ const Wrapper = styled(Card)`
     text-transform: uppercase;
     margin: 1em 0;
   }
-  .bottom {
+  .side-content {
     flex: 1 0 auto;
     text-align: right;
     display: flex;
@@ -46,14 +46,11 @@ const Wrapper = styled(Card)`
       margin-left: 1em;
     }
   }
-  .content {
+  .main-content {
     flex: 1 0 auto;
     @media (min-width: 1100px) {
       flex: 0 1 720px;
     }
-  }
-  a {
-    text-decoration: underline;
   }
 `;
 
@@ -66,17 +63,18 @@ const SchoolCard: FC<SchoolCardProps> = ({ school: { is_public, id, school_name,
   const schoolId = id.toString();
   return (
     <Wrapper>
-      <div className="content">
+      <div className="main-content">
         <span className="school-type">Szkoła {!is_public && 'nie'}publiczna</span>
         <h4>
           <Link to={`/school/${id}`}>{school_name}</Link>
         </h4>
         <span className="district">{address.district}</span>
       </div>
-      <div className="bottom">
+      <div className="side-content">
         <Link to={`/school/${id}`}>Odwiedź stronę szkoły</Link>
         <AddRemoveFavourite
           isFavourite={isSchoolFavourite(schoolId || '')}
+          isSmallMargin
           onClick={() => toggleFavouriteSchool(schoolId || '')}
         />
       </div>
