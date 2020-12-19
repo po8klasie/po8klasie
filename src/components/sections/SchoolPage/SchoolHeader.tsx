@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { css } from '@emotion/core';
 import styled from '../../../styling/styled';
 import { createPlaceholderStyles } from '../../../utils/loading';
-import AddRemoveFavourite from './AddRemoveFavourite';
+import AddRemoveFavourite from '../../AddRemoveFavourite';
 
 const placeholderStyle = css`
   ${createPlaceholderStyles()}
@@ -49,14 +49,12 @@ const SchoolHeader: FC<SchoolHeaderProps> = ({
 }) => {
   return (
     <HeaderWrapper isLoading={isLoading}>
-      <span className="public">
-        {isPublic ? 'szkoła publiczna' : 'szkoła niepubliczna'}
-      </span>
+      <span className="public">{isPublic ? 'szkoła publiczna' : 'szkoła niepubliczna'}</span>
       <h1>{!isLoading && schoolName}</h1>
       <span className="district">{!isLoading && district}</span>
       <p>
-        [Opis szkoły: np.] Publiczne liceum ogólnokształcące w Warszawie
-        założone w 1874. Jest najstarszym warszawskim liceum.
+        [Opis szkoły: np.] Publiczne liceum ogólnokształcące w Warszawie założone w 1874. Jest
+        najstarszym warszawskim liceum.
       </p>
       <AddRemoveFavourite isFavourite={isFavourite} onClick={toggleFavourite} />
     </HeaderWrapper>

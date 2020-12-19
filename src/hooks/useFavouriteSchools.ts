@@ -6,12 +6,9 @@ import {
 
 export const useFavouriteSchools = () => {
   const favouriteSchoolsFromStorage = getFavSchoolsFromLocalStorage();
-  const [favouriteSchools, setFavouriteSchools] = useState<string[]>(
-    favouriteSchoolsFromStorage,
-  );
+  const [favouriteSchools, setFavouriteSchools] = useState<string[]>(favouriteSchoolsFromStorage);
 
-  const isSchoolFavourite = (schoolID: string) =>
-    favouriteSchools.includes(schoolID);
+  const isSchoolFavourite = (schoolID: string) => favouriteSchools.includes(schoolID);
 
   const toggleFavouriteSchool = (schoolID: string) => {
     const newFavouriteSchools = isSchoolFavourite(schoolID)
