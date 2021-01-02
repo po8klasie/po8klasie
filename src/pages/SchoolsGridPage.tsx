@@ -22,7 +22,6 @@ import {
 import { filters } from '../data/filters';
 import Pagination from '../components/sections/SchoolsPage/Pagination';
 import SwitchViewLink from '../components/sections/SchoolsPage/SwitchViewLink';
-import { PER_PAGE } from '../utils/pagination';
 import { ErrorInfo, NotFoundInfo } from '../components/Info';
 
 const QueryRow = styled.div`
@@ -59,12 +58,13 @@ const LoadingCard = styled(Card)`
   ${createPlaceholderStyles()}
   height: 200px;
   box-shadow: none;
+  margin-bottom: 3em;
   &::after {
     background: #eee;
   }
 `;
 
-const Results: FC<any> = ({ schools, error, page, count, onPageChange }) => {
+const Results: FC<any> = ({ schools, error }) => {
   if (error) return <ErrorInfo />;
 
   if (schools && schools.length === 0) return <NotFoundInfo />;
@@ -79,16 +79,11 @@ const Results: FC<any> = ({ schools, error, page, count, onPageChange }) => {
     );
 
   return (
-    <>
-      <ResultsWrapper>
-        {schools.map((school: School) => (
-          <SchoolCard key={school.id} school={school} />
-        ))}
-      </ResultsWrapper>
-      {schools.length > PER_PAGE && (
-        <Pagination page={page} count={count} onPageChange={onPageChange} />
-      )}
-    </>
+    <ResultsWrapper>
+      {schools.map((school: School) => (
+        <SchoolCard key={school.id} school={school} />
+      ))}
+    </ResultsWrapper>
   );
 };
 
@@ -126,7 +121,8 @@ const SchoolsGridPage: FC<RouteComponentProps> = () => {
           />
         </QueryRow>
         {schools && <Count>Liczba wyników: {count}</Count>}
-        <Results schools={schools} error={error} page={page} count={count} onPageChange={setPage} />
+        <Results schools={schools} error={error} />
+        <Pagination page={page} count={count} onPageChange={setPage} disabled={!schools} />
       </Container>
     </Layout>
   );
