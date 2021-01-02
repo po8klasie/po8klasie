@@ -143,6 +143,9 @@ const Navbar: FC = () => {
               <Link to="/favourite-schools">Ulubione</Link>
             </MenuItem>
             <MenuItem>
+              <Link to="/about-us">O nas</Link>
+            </MenuItem>
+            <MenuItem>
               <Link to="/calculator">Kalkulator punktów</Link>
             </MenuItem>
           </Menu>

@@ -26,15 +26,16 @@ const FooterWrapper = styled.div`
 interface LayoutProps {
   contentFlex?: boolean;
   hideFooter?: boolean;
+  noFooterMargin?: boolean;
 }
 
-const Layout: FC<LayoutProps> = ({ contentFlex, hideFooter, children }) => (
+const Layout: FC<LayoutProps> = ({ contentFlex, hideFooter, noFooterMargin, children }) => (
   <LayoutWrapper>
     <Navbar />
     <Content flex={contentFlex}>{children}</Content>
     {!hideFooter && (
       <FooterWrapper>
-        <Footer />
+        <Footer noFooterMargin={noFooterMargin} />
       </FooterWrapper>
     )}
   </LayoutWrapper>
