@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
-import styled from '../styling/styled';
 import { Link } from '@reach/router';
+import { FaFacebook, FaGithub } from 'react-icons/all';
+import styled from '../styling/styled';
 import Container from './Container';
 
 const DataInfo = styled.p`
@@ -85,6 +86,19 @@ const FooterGrid = styled.div`
     grid-template-columns: 1fr;
   }
 `;
+
+const SocialMediaIcons = styled.div`
+  a {
+    display: inline-block;
+    color: black;
+    margin-right: 1rem;
+  }
+  svg {
+    height: 1.4rem;
+    width: 1.4rem;
+  }
+`;
+
 const Footer: FC = () => (
   <FooterWrapper>
     <Container>
@@ -157,6 +171,14 @@ const Footer: FC = () => (
           </div>
         </div>
       </FooterGrid>
+      <SocialMediaIcons>
+        <a href="https://github.com/WarsawLO" rel="noopener noreferrer" target="_blank">
+          <FaGithub />
+        </a>
+        <a href="https://fb.com/WarsawLO" rel="noopener noreferrer" target="_blank">
+          <FaFacebook />
+        </a>
+      </SocialMediaIcons>
     </Container>
   </FooterWrapper>
 );
