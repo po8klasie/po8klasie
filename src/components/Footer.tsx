@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { Link } from '@reach/router';
+import { FaFacebook, FaGithub } from 'react-icons/fa';
 import styled from '../styling/styled';
 import Container from './Container';
 import epfImg from '../assets/images/epf.png';
@@ -88,6 +89,18 @@ const FooterGrid = styled.div`
   }
 `;
 
+const SocialMediaIcons = styled.div`
+  a {
+    display: inline-block;
+    color: black;
+    margin-right: 1rem;
+  }
+  svg {
+    height: 1.7rem;
+    width: 1.7rem;
+  }
+`;
+
 interface FooterProps {
   noFooterMargin?: boolean;
 }
@@ -149,6 +162,14 @@ const Footer: FC<FooterProps> = ({ noFooterMargin }) => (
           </div>
         </div>
       </FooterGrid>
+      <SocialMediaIcons>
+        <a href="https://github.com/WarsawLO" rel="noopener noreferrer" target="_blank">
+          <FaGithub />
+        </a>
+        <a href="https://fb.com/WarsawLO" rel="noopener noreferrer" target="_blank">
+          <FaFacebook />
+        </a>
+      </SocialMediaIcons>
     </Container>
   </FooterWrapper>
 );
