@@ -122,7 +122,7 @@ const SchoolsGridPage = (props: RouteComponentProps) => {
         </QueryRow>
         {schools && <Count>Liczba wyników: {count}</Count>}
         <Results schools={schools} error={error} />
-        <Pagination page={page} count={count} onPageChange={setPage} disabled={!schools} />
+        <Pagination page={page} count={count} onPageChange={setPage} disabled={!data} />
       </Container>
     </Layout>
   );
