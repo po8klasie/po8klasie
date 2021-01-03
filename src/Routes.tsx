@@ -15,6 +15,8 @@ const AboutDataPage = lazyLoaded(lazy(() => import('./pages/articles/AboutData')
 const PrivacySettingsPage = lazyLoaded(lazy(() => import('./pages/articles/PrivacySettings')));
 const PrivacyPolicyPage = lazyLoaded(lazy(() => import('./pages/articles/PrivacyPolicy')));
 const AboutPage = lazyLoaded(lazy(() => import('./pages/AboutPage')));
+const NotFoundPage = lazyLoaded(lazy(() => import('./pages/NotFoundPage')));
+
 const Routes: FC = () => (
   <Router>
     <LandingPage path="/" />
@@ -33,6 +35,8 @@ const Routes: FC = () => (
 
     <PrivacyPolicyPage path="/privacy-policy" />
     <PrivacySettingsPage path="/privacy-settings" />
+
+    <NotFoundPage default />
   </Router>
 );
 
