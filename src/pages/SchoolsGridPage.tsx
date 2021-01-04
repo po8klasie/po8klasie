@@ -8,10 +8,6 @@ import PageTitle from '../components/PageTitle';
 import QueryFilter from '../components/sections/SchoolsPage/QueryFilter';
 import { useSchools } from '../api/schools';
 import styled from '../styling/styled';
-import Card from '../components/Card';
-import { createPlaceholderStyles } from '../utils/loading';
-import { School } from '../types';
-import SchoolCard from '../components/SchoolCard';
 import DropdownFilters from '../components/sections/SchoolsPage/DropdownFilters';
 import {
   deserializeFilters,
@@ -22,72 +18,15 @@ import {
 import { filters } from '../data/filters';
 import Pagination from '../components/sections/SchoolsPage/Pagination';
 import SwitchViewLink from '../components/sections/SchoolsPage/SwitchViewLink';
-import { ErrorInfo, NotFoundInfo } from '../components/Info';
-
-const QueryRow = styled.div`
-  display: flex;
-  align-items: center;
-  margin: 20px 0;
-
-  & > *:first-of-type {
-    margin-right: 20px;
-    width: 100%;
-    min-width: 210px;
-
-    @media (max-width: 1100px) {
-      margin-bottom: 10px;
-    }
-  }
-  @media (max-width: 1100px) {
-    display: block;
-  }
-`;
+import Results from '../components/sections/SchoolsPage/Results';
+import QueryRow from '../components/QueryRow';
 
 const Count = styled.small`
   display: block;
   margin: 1em 0 2em 0;
 `;
 
-const ResultsWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-top: 2em;
-`;
-
-const LoadingCard = styled(Card)`
-  ${createPlaceholderStyles()}
-  height: 200px;
-  box-shadow: none;
-  margin-bottom: 3em;
-  &::after {
-    background: #eee;
-  }
-`;
-
-const Results: FC<any> = ({ schools, error }) => {
-  if (error) return <ErrorInfo />;
-
-  if (schools && schools.length === 0) return <NotFoundInfo />;
-
-  if (!schools)
-    return (
-      <ResultsWrapper>
-        <LoadingCard />
-        <LoadingCard />
-        <LoadingCard />
-      </ResultsWrapper>
-    );
-
-  return (
-    <ResultsWrapper>
-      {schools.map((school: School) => (
-        <SchoolCard key={school.id} school={school} />
-      ))}
-    </ResultsWrapper>
-  );
-};
-
-const SchoolsGridPage = (props: RouteComponentProps) => {
+const SchoolsGridPage: FC<RouteComponentProps> = () => {
   const currUrl = new URL(window.location.href);
   const p = currUrl.searchParams;
   const [query, setQuery] = useState(deserializeQuery(p));
