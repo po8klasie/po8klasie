@@ -48,7 +48,7 @@ interface PaginationProps {
 const Pagination: FC<PaginationProps> = ({ count, page, onPageChange, disabled }) => {
   const totalPages = getTotalPages(count);
 
-  if (totalPages === 1) return null;
+  if (totalPages === 1 || totalPages === 0) return null;
 
   return (
     <PaginationWrapper>
