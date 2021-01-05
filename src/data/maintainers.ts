@@ -47,8 +47,7 @@ const maintainers: Maintainer[] = [
     role: 'UX/UI Designer',
     image: KarolinaPawlaczykImage,
     links: {
-      linkedin: 'https://linkedin.com/in/micorix',
-      github: 'https://github.com/micorix',
+      linkedin: 'https://www.linkedin.com/in/ka-pawlaczyk/',
     },
   },
   {
