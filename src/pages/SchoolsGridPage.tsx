@@ -50,17 +50,9 @@ const Count = styled.small`
 `;
 
 const ResultsWrapper = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-column-gap: 3em;
-  grid-row-gap: 3em;
+  display: flex;
+  flex-direction: column;
   margin-top: 2em;
-  @media (max-width: 970px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  @media (max-width: 720px) {
-    grid-template-columns: 1fr;
-  }
 `;
 
 const LoadingCard = styled(Card)`

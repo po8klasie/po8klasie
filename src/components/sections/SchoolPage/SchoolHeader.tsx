@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { css } from '@emotion/core';
 import styled from '../../../styling/styled';
 import { createPlaceholderStyles } from '../../../utils/loading';
-import AddRemoveFavourite from './AddRemoveFavourite';
+import AddRemoveFavourite from '../../AddRemoveFavourite';
 
 const placeholderStyle = css`
   ${createPlaceholderStyles()}

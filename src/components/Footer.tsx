@@ -11,8 +11,8 @@ const DataInfo = styled.p`
   }
 `;
 
-const FooterWrapper = styled.div`
-  margin-top: 10vh;
+const FooterWrapper = styled.div<{ noFooterMargin?: boolean}>`
+  margin-top: ${(props) => (props.noFooterMargin ? 0 : '10vh')};
   padding: 2em 0;
   font-size: 1em;
   color: #707070;
@@ -87,8 +87,13 @@ const FooterGrid = styled.div`
     grid-template-columns: 1fr;
   }
 `;
-const Footer: FC = () => (
-  <FooterWrapper>
+
+interface FooterProps {
+  noFooterMargin?: boolean
+}
+
+const Footer: FC<FooterProps> = ({ noFooterMargin }) => (
+  <FooterWrapper noFooterMargin={noFooterMargin}>
     <Container>
       <FooterGrid>
         <div>

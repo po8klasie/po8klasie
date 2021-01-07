@@ -14,6 +14,8 @@ const GetInvolvedPage = lazyLoaded(lazy(() => import('./pages/articles/GetInvolv
 const AboutDataPage = lazyLoaded(lazy(() => import('./pages/articles/AboutData')));
 const PrivacySettingsPage = lazyLoaded(lazy(() => import('./pages/articles/PrivacySettings')));
 const PrivacyPolicyPage = lazyLoaded(lazy(() => import('./pages/articles/PrivacyPolicy')));
+const AboutPage = lazyLoaded(lazy(() => import('./pages/AboutPage')));
+
 const Routes: FC = () => (
   <Router>
     <LandingPage path="/" />
@@ -25,6 +27,7 @@ const Routes: FC = () => (
     <FavouriteSchoolsPage path="/favourite-schools" />
     <Calculator path="/calculator" />
 
+    <AboutPage path="/about-us" />
     <ForDevelopersPage path="/for-developers" />
     <GetInvolvedPage path="/get-involved" />
     <AboutDataPage path="/about-data" />
