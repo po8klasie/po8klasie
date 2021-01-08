@@ -33,8 +33,4 @@ const LandingPageSectionThree = styled(LandingPageSectionOne)`
   }
 `;
 
-export {
-  LandingPageSectionOne,
-  LandingPageSectionTwo,
-  LandingPageSectionThree,
-};
+export { LandingPageSectionOne, LandingPageSectionTwo, LandingPageSectionThree };

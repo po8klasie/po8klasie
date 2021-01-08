@@ -1,10 +1,10 @@
 import React, { FC, useState } from 'react';
-import styled from '../styling/styled';
 import { Link } from '@reach/router';
+import { BsX, BsThreeDots } from 'react-icons/bs';
+import styled from '../styling/styled';
 import Container from './Container';
 import Logo from './Logo';
-import { getPathWithPreservedParams } from '../utils/url';
-import { BsX, BsThreeDots } from 'react-icons/bs';
+import getPathWithPreservedParams from '../utils/url';
 
 const Brand = styled(Link)`
   color: inherit;
@@ -100,6 +100,9 @@ const MobileBar = styled.div`
 
     @media (max-width: 780px) {
       display: block;
+      border: none;
+      background-color: transparent;
+      cursor: pointer;
     }
   }
   @media (max-width: 780px) {
@@ -125,9 +128,9 @@ const Navbar: FC = () => {
               Warsaw
               <span>LO</span>
             </Brand>
-            <span className="menu-icons" onClick={() => setNavOpen(!isNavOpen)}>
+            <button className="menu-icons" onClick={() => setNavOpen(!isNavOpen)} type="button">
               {isNavOpen ? <BsX /> : <BsThreeDots />}
-            </span>
+            </button>
           </MobileBar>
           <Menu active={isNavOpen}>
             <MenuItem>

@@ -1,23 +1,17 @@
-import {School} from "../types";
-import {LatLngExpression} from "leaflet";
+import { LatLngExpression } from 'leaflet';
+import { School } from '../types';
 
-type AddressLike = {address: any};
+type AddressLike = { address: any };
 
 export const doesSchoolHaveCoords = (school: School | AddressLike): boolean => {
-    return (
-        school &&
-        school.address &&
-        school.address.latitude &&
-        school.address.longitude
-    );
-}
+  return school && school.address && school.address.latitude && school.address.longitude;
+};
 
 export const getSchoolCoords = (school: School | AddressLike): LatLngExpression | null => {
-    if(!doesSchoolHaveCoords(school))
-        return null;
+  if (!doesSchoolHaveCoords(school)) return null;
 
-    return  {
-        lat: school.address.latitude,
-        lng: school.address.longitude
-    }
+  return {
+    lat: school.address.latitude,
+    lng: school.address.longitude,
+  };
 };

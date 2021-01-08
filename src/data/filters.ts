@@ -3,8 +3,10 @@ export type Choice = {
   id: string;
 };
 
+export type FilterDataKey = 'public' | 'schoolType' | 'extendedSubjects' | 'district';
+
 export type FilterData = {
-  key: string; // for frontend eg. /search?key=<value>
+  key: FilterDataKey; // for frontend eg. /search?key=<value>
   title: string;
   multiple: boolean;
   choices: Choice[];

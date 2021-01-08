@@ -1,25 +1,36 @@
-import React, { useState } from 'react';
-import styled from '../styling/styled';
+import React, { useState, FC } from 'react';
 import PerfectScrollbar from 'react-perfect-scrollbar';
-import { Choice, FilterData } from '../data/filters';
 import { BsCheck, BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 import { FiFilter } from 'react-icons/fi';
+import { Choice, FilterData } from '../data/filters';
+import styled from '../styling/styled';
 
-const FiltersButton = styled.button`
+const StyledButton = styled.button`
   border: none;
   background: transparent;
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
   font-size: 1.2em;
+`;
 
+const FiltersButton = styled(StyledButton)`
   svg {
     color: ${(props) => props.theme.colors.primary};
     margin-right: 10px;
   }
 `;
+
+const ListButton = styled(StyledButton)`
+  width: 100%;
+  font-size: 1em;
+  padding: 20px 0;
+`;
+
 const MobileFiltersModal = styled.div<{ active: boolean }>`
   position: fixed;
-  top: 0;
+  top: 100px;
   left: ${(props) => (props.active ? '0' : '-100%')};
   width: 100%;
   height: 100%;
@@ -55,10 +66,10 @@ const List = styled.ul`
   li {
     display: flex;
     justify-content: space-between;
-    padding: 20px 0;
     border-bottom: 1px solid #cfcfcf;
   }
 `;
+
 const CheckIcon = styled.span<{ active: boolean }>`
   color: green;
   transition: opacity 0.2s;
@@ -69,45 +80,46 @@ const CheckIcon = styled.span<{ active: boolean }>`
   }
 `;
 
-const MobileFilters = (props: any) => {
+const MobileFilters: FC<any> = ({ filters, idKey, createHandler, filtersValues }) => {
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
-  const getFilterById = (id: string) =>
-    props.filters.find((f: FilterData) => f.key === id);
   const [activeFilterId, setActiveFilterId] = useState<string | null>(null);
 
+  const getFilterById = (id: string) => filters.find((f: FilterData) => f.key === id);
+
   const goBack = () => {
-    if (activeFilterId === null) setModalOpen(false);
-    else setActiveFilterId(null);
+    if (activeFilterId === null) {
+      setModalOpen(false);
+    } else {
+      setActiveFilterId(null);
+    }
   };
 
   return (
     <>
-      <FiltersButton type={'button'} onClick={(e: any) => setModalOpen(true)}>
+      <FiltersButton type="button" onClick={() => setModalOpen(true)}>
         <FiFilter /> Filtry
       </FiltersButton>
       <MobileFiltersModal active={isModalOpen}>
         <ModalHeader>
-          <span className="material-icons" onClick={goBack}>
+          <StyledButton type="button" className="material-icons" onClick={goBack}>
             <BsChevronLeft />
-          </span>
+          </StyledButton>
           <span className="title">
-            {activeFilterId === null
-              ? 'Filtry'
-              : getFilterById(activeFilterId).title}
+            {activeFilterId === null ? 'Filtry' : getFilterById(activeFilterId).title}
           </span>
         </ModalHeader>
         <PerfectScrollbar>
           {activeFilterId === null ? (
             <List>
-              {props.filters.map((filter: FilterData) => (
-                <li
-                  key={filter.key}
-                  onClick={() =>
-                    setActiveFilterId((filter as any)[props.idKey])
-                  }
-                >
-                  {filter.title}
-                  <BsChevronRight />
+              {filters.map((filter: FilterData) => (
+                <li key={filter.key}>
+                  <ListButton
+                    type="button"
+                    onClick={() => setActiveFilterId((filter as any)[idKey])}
+                  >
+                    {filter.title}
+                    <BsChevronRight />
+                  </ListButton>
                 </li>
               ))}
             </List>
@@ -115,21 +127,20 @@ const MobileFilters = (props: any) => {
             <List>
               {getFilterById(activeFilterId).choices.map((choice: Choice) => {
                 const filter = getFilterById(activeFilterId);
-                const handleClick = () =>
-                  props.createHandler(filter)(choice.id);
+                const handleClick = () => createHandler(filter)(choice.id);
                 return (
-                  <li key={choice.id} onClick={handleClick}>
-                    {choice.label}
-                    <CheckIcon
-                      active={
-                        props.filtersValues[filter[props.idKey]] &&
-                        props.filtersValues[filter[props.idKey]].includes(
-                          choice.id,
-                        )
-                      }
-                    >
-                      <BsCheck />
-                    </CheckIcon>
+                  <li key={choice.id}>
+                    <ListButton onClick={handleClick}>
+                      {choice.label}
+                      <CheckIcon
+                        active={
+                          filtersValues[filter[idKey]] &&
+                          filtersValues[filter[idKey]].includes(choice.id)
+                        }
+                      >
+                        <BsCheck />
+                      </CheckIcon>
+                    </ListButton>
                   </li>
                 );
               })}

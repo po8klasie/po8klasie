@@ -8,7 +8,7 @@ export const shimmerAnimation = keyframes`
         background-position: 100% 0;
     }
 `;
-export const createPlaceholderStyles = () => css`
+export const createPlaceholderStyles = (): any => css`
   animation: ${shimmerAnimation} 2s linear 0s infinite;
   background: darkgray;
   background: linear-gradient(to right, white, #eee 20%, white);

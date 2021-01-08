@@ -1,7 +1,9 @@
 import React, { FC } from 'react';
-import styled from '../styling/styled';
 import { Link } from '@reach/router';
+import styled from '../styling/styled';
 import Container from './Container';
+import epfImg from '../assets/images/epf.png';
+import kdpImg from '../assets/images/kdp-logo.png';
 
 const DataInfo = styled.p`
   @media (max-width: 1000px) {
@@ -9,7 +11,7 @@ const DataInfo = styled.p`
   }
 `;
 
-const FooterWrapper = styled.div<{ noFooterMargin?: boolean}>`
+const FooterWrapper = styled.div<{ noFooterMargin?: boolean }>`
   margin-top: ${(props) => (props.noFooterMargin ? 0 : '10vh')};
   padding: 2em 0;
   font-size: 1em;
@@ -87,7 +89,7 @@ const FooterGrid = styled.div`
 `;
 
 interface FooterProps {
-  noFooterMargin?: boolean
+  noFooterMargin?: boolean;
 }
 
 const Footer: FC<FooterProps> = ({ noFooterMargin }) => (
@@ -96,8 +98,8 @@ const Footer: FC<FooterProps> = ({ noFooterMargin }) => (
       <FooterGrid>
         <div>
           <DataInfo>
-            Dokładamy wszelkich starań, aby dane były aktualne, ale nie ponosimy
-            odpowiedzialności za ich prawidłowość.
+            Dokładamy wszelkich starań, aby dane były aktualne, ale nie ponosimy odpowiedzialności
+            za ich prawidłowość.
           </DataInfo>
           <div className="sitemap">
             <ul>
@@ -134,30 +136,15 @@ const Footer: FC<FooterProps> = ({ noFooterMargin }) => (
         </div>
         <div className="info-col">
           <p>
-            WarsawLO to open-source'owy projekt civic tech tworzony przez
-            wolonatariuszy we współpracy z programem Koduj Dla Polski Fundacji
-            ePaństwo.
+            WarsawLO to open-source&apos;owy projekt civic tech tworzony przez wolonatariuszy we
+            współpracy z programem Koduj Dla Polski Fundacji ePaństwo.
           </p>
           <div className="logos-wrapper">
-            <a
-              href="https://epf.org.pl"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              <img
-                src={require('../assets/images/epf.png')}
-                alt={'Logo Fundacji ePaństwo'}
-              />
+            <a href="https://epf.org.pl" rel="noopener noreferrer" target="_blank">
+              <img src={epfImg} alt="Logo Fundacji ePaństwo" />
             </a>
-            <a
-              href="https://kodujdlapolski.pl"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              <img
-                src={require('../assets/images/kdp-logo.png')}
-                alt={'Logo Koduj dla Polski'}
-              />
+            <a href="https://kodujdlapolski.pl" rel="noopener noreferrer" target="_blank">
+              <img src={kdpImg} alt="Logo Koduj dla Polski" />
             </a>
           </div>
         </div>

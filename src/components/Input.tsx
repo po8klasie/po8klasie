@@ -1,5 +1,5 @@
+import React, { HTMLProps, ReactNode, forwardRef } from 'react';
 import styled from '../styling/styled';
-import React, { HTMLProps, ReactNode } from 'react';
 
 const Input = styled.input`
   padding: 0.5em 0.5em;
@@ -7,7 +7,6 @@ const Input = styled.input`
   border: 2px solid transparent;
   border-radius: 10px;
   font-size: 1.2em;
-  outline: none;
   transition: 0.3s all;
   display: block;
   width: 100%;
@@ -17,8 +16,7 @@ const Input = styled.input`
 `;
 const InputWithAddonWrapper = styled.div<{ addonPosition: 'left' | 'right' }>`
   display: inline-flex;
-  flex-direction: ${(props) =>
-    props.addonPosition === 'left' ? 'row' : 'row-reverse'};
+  flex-direction: ${(props) => (props.addonPosition === 'left' ? 'row' : 'row-reverse')};
   input {
     ${(props) =>
       props.addonPosition === 'left'
@@ -57,12 +55,9 @@ interface InputWithAddonProps extends HTMLProps<HTMLInputElement> {
   addonPosition: 'left' | 'right';
 }
 
-export const InputWithAddon = React.forwardRef<
-  HTMLDivElement,
-  InputWithAddonProps
->((props, ref) => (
+export const InputWithAddon = forwardRef<HTMLDivElement, InputWithAddonProps>((props, ref) => (
   <InputWithAddonWrapper ref={ref} addonPosition={props.addonPosition}>
-    <span className={'addon'}>{props.addon}</span>
+    <span className="addon">{props.addon}</span>
     <Input {...props} size={15} />
   </InputWithAddonWrapper>
 ));

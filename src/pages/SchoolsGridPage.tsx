@@ -1,5 +1,7 @@
 import React, { FC, useState } from 'react';
 import { RouteComponentProps } from '@reach/router';
+import useDeepCompareEffect from 'use-deep-compare-effect';
+import { BsMap } from 'react-icons/bs/index';
 import Layout from '../components/Layout';
 import Container from '../components/Container';
 import PageTitle from '../components/PageTitle';
@@ -19,9 +21,7 @@ import {
 } from '../utils/search';
 import { filters } from '../data/filters';
 import Pagination from '../components/sections/SchoolsPage/Pagination';
-import useDeepCompareEffect from 'use-deep-compare-effect';
 import SwitchViewLink from '../components/sections/SchoolsPage/SwitchViewLink';
-import { BsMap } from 'react-icons/bs/index';
 import { PER_PAGE } from '../utils/pagination';
 import { ErrorInfo, NotFoundInfo } from '../components/Info';
 
@@ -92,14 +92,12 @@ const Results: FC<any> = ({ schools, error, page, count, onPageChange }) => {
   );
 };
 
-const SchoolsGridPage = (props: RouteComponentProps) => {
+const SchoolsGridPage: FC<RouteComponentProps> = () => {
   const currUrl = new URL(window.location.href);
   const p = currUrl.searchParams;
   const [query, setQuery] = useState(deserializeQuery(p));
   const [page, setPage] = useState(deserializePage(p));
-  const [dropdownFilters, setDropdownFilters] = useState(
-    deserializeFilters(p, filters),
-  );
+  const [dropdownFilters, setDropdownFilters] = useState(deserializeFilters(p, filters));
 
   const searchData = {
     query,
@@ -119,7 +117,7 @@ const SchoolsGridPage = (props: RouteComponentProps) => {
     <Layout>
       <Container>
         <PageTitle>Znajdź swoją wymarzoną szkołę</PageTitle>
-        <SwitchViewLink label="Widok mapy" icon={BsMap} viewPath={'map'} />
+        <SwitchViewLink label="Widok mapy" icon={BsMap} viewPath="map" />
         <QueryRow>
           <QueryFilter query={query} onQueryChange={setQuery} />
           <DropdownFilters
@@ -128,13 +126,7 @@ const SchoolsGridPage = (props: RouteComponentProps) => {
           />
         </QueryRow>
         {schools && <Count>Liczba wyników: {count}</Count>}
-        <Results
-          schools={schools}
-          error={error}
-          page={page}
-          count={count}
-          onPageChange={setPage}
-        />
+        <Results schools={schools} error={error} page={page} count={count} onPageChange={setPage} />
       </Container>
     </Layout>
   );

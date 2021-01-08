@@ -1,14 +1,13 @@
-import React from 'react';
-import styled from '../styling/styled';
+import React, { FC } from 'react';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import { MdCheck, MdExpandMore } from 'react-icons/md';
+import styled from '../styling/styled';
 import { Choice } from '../data/filters';
 
 const DropdownWrapper = styled.div<{ active: boolean }>`
   margin-right: 10px;
   position: relative;
-  outline: none;
   z-index: 1001;
   button {
     display: flex;
@@ -105,31 +104,29 @@ const ListItem = styled.li<{ active: boolean }>`
   }
 `;
 
-type DropdownProps = {
+interface DropdownProps {
   title: string;
   choices: Choice[];
   selected: string[];
-  onSubmit?: Function;
-  onSelect: any;
-};
-const Dropdown = (props: DropdownProps) => {
+  onSelect: (param: string) => void;
+  onSubmit?: () => void;
+}
+
+const Dropdown: FC<DropdownProps> = ({ title, choices, selected, onSelect, onSubmit }) => {
   return (
-    <DropdownWrapper
-      active={props.selected.length !== 0}
-      onMouseLeave={() => props.onSubmit && props.onSubmit()}
-    >
-      <button type={'button'}>
-        {props.title}
+    <DropdownWrapper active={selected.length !== 0} onMouseLeave={() => onSubmit && onSubmit()}>
+      <button type="button">
+        {title}
         <MdExpandMore />
         <span className="space" />
       </button>
-      <div className={'list'}>
+      <div className="list">
         <PerfectScrollbar>
           <ul>
-            {props.choices.map((choice: Choice) => (
+            {choices.map((choice: Choice) => (
               <ListItem
-                onClick={() => props.onSelect(choice.id)}
-                active={props.selected.includes(choice.id)}
+                onClick={() => onSelect(choice.id)}
+                active={selected.includes(choice.id)}
                 key={choice.id}
               >
                 {choice.label} <MdCheck />

@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
+import { BsSkipEnd, BsSkipStart } from 'react-icons/all';
 import styled from '../../../styling/styled';
 import { getTotalPages } from '../../../utils/pagination';
-import { BsSkipEnd, BsSkipStart } from 'react-icons/all';
 
 const PaginationWrapper = styled.div`
   display: flex;
@@ -11,14 +11,13 @@ const PaginationWrapper = styled.div`
     display: inline-flex;
   }
 `;
-const BaseButton = styled.button<any>`
+const BaseButton = styled.button`
   cursor: pointer;
   border: none;
   background: none;
-  outline: none;
 `;
 
-const PaginationButton = styled(BaseButton)`
+const PaginationButton = styled(BaseButton)<{ active?: boolean }>`
   font-weight: ${(props) => (props.active ? 'bold' : 'normal')};
   font-size: 1em;
   padding: 10px 20px;
@@ -39,7 +38,13 @@ const PaginationSkipButton = styled(BaseButton)`
   }
 `;
 
-const Pagination: FC<any> = ({ count, page, onPageChange }) => {
+interface PaginationProps {
+  count: number;
+  page: number;
+  onPageChange: (page: number) => void;
+}
+
+const Pagination: FC<PaginationProps> = ({ count, page, onPageChange }) => {
   const totalPages = getTotalPages(count);
 
   return (
@@ -49,25 +54,17 @@ const Pagination: FC<any> = ({ count, page, onPageChange }) => {
           <BsSkipStart />
         </PaginationSkipButton>
         {page - 2 > 0 && (
-          <PaginationButton onClick={() => onPageChange(page - 2)}>
-            {page - 2}
-          </PaginationButton>
+          <PaginationButton onClick={() => onPageChange(page - 2)}>{page - 2}</PaginationButton>
         )}
         {page - 1 > 0 && (
-          <PaginationButton onClick={() => onPageChange(page - 1)}>
-            {page - 1}
-          </PaginationButton>
+          <PaginationButton onClick={() => onPageChange(page - 1)}>{page - 1}</PaginationButton>
         )}
-        <PaginationButton active={true}>{page}</PaginationButton>
+        <PaginationButton active>{page}</PaginationButton>
         {page + 1 < totalPages && (
-          <PaginationButton onClick={() => onPageChange(page + 1)}>
-            {page + 1}
-          </PaginationButton>
+          <PaginationButton onClick={() => onPageChange(page + 1)}>{page + 1}</PaginationButton>
         )}
         {page + 2 < totalPages && (
-          <PaginationButton onClick={() => onPageChange(page + 2)}>
-            {page + 2}
-          </PaginationButton>
+          <PaginationButton onClick={() => onPageChange(page + 2)}>{page + 2}</PaginationButton>
         )}
         <PaginationSkipButton onClick={() => onPageChange(totalPages)}>
           <BsSkipEnd />

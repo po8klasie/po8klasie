@@ -1,13 +1,6 @@
 import React, { FC, useEffect, useLayoutEffect, useState } from 'react';
 import { RouteComponentProps } from '@reach/router';
-import styled from '../styling/styled';
 import { useForm } from 'react-hook-form';
-import Layout from '../components/Layout';
-import Container from '../components/Container';
-import Input from '../components/Input';
-import PageTitle from '../components/PageTitle';
-import Checkbox from '../components/Checkbox';
-import { examParts, subjects } from '../data/calculator';
 import {
   PointsCalculator,
   validators,
@@ -15,11 +8,18 @@ import {
   configs,
   CalculatedPoints,
 } from '@warsawlo/points-calculator';
+import styled from '../styling/styled';
+import Layout from '../components/Layout';
+import Container from '../components/Container';
+import Input from '../components/Input';
+import PageTitle from '../components/PageTitle';
+import Checkbox from '../components/Checkbox';
+import { examParts, subjects } from '../data/calculator';
 import Breadcrumbs from '../components/Breadcrumbs';
 
 const { isGradeValid, isExamResultValid } = validators;
 const { initialInputData, initialCalculatedPoints } = initialData;
-const { config2018_2019 } = configs;
+const { config2018_2019: CONFIG_2018_2019 } = configs;
 
 const InputGrid = styled.div`
   display: inline-grid;
@@ -112,49 +112,69 @@ const Result = styled.div`
   }
 `;
 
-const calc = new PointsCalculator(config2018_2019);
+const calc = new PointsCalculator(CONFIG_2018_2019);
 
 const Calculator: FC<RouteComponentProps> = () => {
-  const [points, setPoints] = useState<CalculatedPoints>(
-    initialCalculatedPoints,
-  );
+  const [points, setPoints] = useState<CalculatedPoints>(initialCalculatedPoints);
   const { register, watch, reset } = useForm();
   useLayoutEffect(() => {
-    calc.watch(setPoints)
+    calc.watch(setPoints);
   }, []);
 
   const grades = watch('grades');
+
   useEffect(() => {
-    const gradesData: { [x: string]: number | null } = {};
     if (grades) {
-      for (const [subject, rawGrade] of Object.entries(grades)) {
-        const grade = parseInt(rawGrade as any);
-        gradesData[subject] = isGradeValid(grade) ? grade : null;
-      }
+      const gradesArray: [string, string][] = Object.entries(grades);
+      const gradesData: { [x: string]: number | null } = gradesArray.reduce(
+        (finalObj, subjectAndGrade) => {
+          const [subject, rawGrade] = subjectAndGrade;
+          const gradeHelper = parseInt(rawGrade, 10);
+          const grade = isGradeValid(gradeHelper) ? gradeHelper : null;
+          return {
+            ...finalObj,
+            [subject]: grade,
+          };
+        },
+        {},
+      );
+
       calc.setGrades(gradesData);
     }
     // eslint-disable-next-line
   }, [JSON.stringify(grades)]);
 
   const examResult = watch('examResult');
+
   useEffect(() => {
-    const examData: { [x: string]: number | null } = {};
     if (examResult) {
-      for (const [subject, rawScore] of Object.entries(examResult)) {
-        const score = parseInt(rawScore as any) / 100;
-        examData[subject] = isExamResultValid(score) ? score : null;
-      }
+      const examArray: [string, string][] = Object.entries(examResult);
+      const examData: { [x: string]: number | null } = examArray.reduce(
+        (finalObj, subjectAndScore) => {
+          const [subject, rawScore] = subjectAndScore;
+          const scoreHelper = parseInt(rawScore, 10) / 100;
+          const score = isExamResultValid(scoreHelper) ? scoreHelper : null;
+          return {
+            ...finalObj,
+            [subject]: score,
+          };
+        },
+        {},
+      );
+
       calc.setExamResult(examData);
     }
     // eslint-disable-next-line
   }, [JSON.stringify(examResult)]);
 
   const merit = watch('merit');
+
   useEffect(() => {
     calc.setMerit(merit);
   }, [merit]);
 
   const activity = watch('activity');
+
   useEffect(() => {
     calc.setActivity(activity);
   }, [activity]);
@@ -169,17 +189,16 @@ const Calculator: FC<RouteComponentProps> = () => {
         <Breadcrumbs steps={[['Kalkulator punktów']]} />
         <PageTitle>Kalkulator punktów</PageTitle>
         <p>
-          Podaj swoje oceny, wyniki z egzaminu ósmoklasisty oraz dodatkowe
-          osiągnięcia (jeśli takie masz) i oblicz punkty, jakie uzyskasz podczas
-          rekrutacji do szkoły średniej.
+          Podaj swoje oceny, wyniki z egzaminu ósmoklasisty oraz dodatkowe osiągnięcia (jeśli takie
+          masz) i oblicz punkty, jakie uzyskasz podczas rekrutacji do szkoły średniej.
         </p>
 
         <InputGrid>
           <h2>Świadectwo</h2>
           <div className="row header-row">
-            <span className={'title-label'}>Przedmiot</span>
-            <span className={'value-label'}>Ocena</span>
-            <span className={'points-label'}>Liczba punktów</span>
+            <span className="title-label">Przedmiot</span>
+            <span className="value-label">Ocena</span>
+            <span className="points-label">Liczba punktów</span>
           </div>
           {subjects.map((subject) => (
             <div className="row" key={`${subject.id}`}>
@@ -189,23 +208,21 @@ const Calculator: FC<RouteComponentProps> = () => {
                   type="number"
                   min={1}
                   max={6}
-                  placeholder={'Ocena'}
+                  placeholder="Ocena"
                   ref={register}
                   name={`grades[${subject.id}]`}
                 />
               </div>
-              <span className="points">
-                {(points.grades[subject.id] ?? 0).toFixed(2)}
-              </span>
+              <span className="points">{(points.grades[subject.id] ?? 0).toFixed(2)}</span>
             </div>
           ))}
 
           <h2>Egzamin ósmoklasisty</h2>
 
           <div className="row header-row">
-            <span className={'title-label'}>Przedmiot</span>
-            <span className={'value-label'}>Wynik (%)</span>
-            <span className={'points-label'}>Liczba punktów</span>
+            <span className="title-label">Przedmiot</span>
+            <span className="value-label">Wynik (%)</span>
+            <span className="points-label">Liczba punktów</span>
           </div>
           {examParts.map((examPart) => (
             <div className="row" key={examPart.id}>
@@ -215,26 +232,24 @@ const Calculator: FC<RouteComponentProps> = () => {
                   type="number"
                   min={0}
                   max={100}
-                  placeholder={'Wynik'}
+                  placeholder="Wynik"
                   ref={register}
                   name={`examResult[${examPart.id}]`}
                 />
               </div>
-              <span className="points">
-                {(points.examResult[examPart.id] ?? 0).toFixed()}
-              </span>
+              <span className="points">{(points.examResult[examPart.id] ?? 0).toFixed()}</span>
             </div>
           ))}
         </InputGrid>
         <h2>Szczególne osiągnięcia</h2>
         <CheckboxFlex>
           <div>
-            <Checkbox ref={register} name={'merit'} id={'xd'} />
+            <Checkbox ref={register} name="merit" id="xd" />
             <label htmlFor="xd">Świadectwo z wyróżnieniem</label>
             <span>{points.merit}</span>
           </div>
           <div>
-            <Checkbox ref={register} name={'activity'} id={'activity'} />
+            <Checkbox ref={register} name="activity" id="activity" />
             <label htmlFor="activity">Aktywność społeczna</label>
             <span>{points.activity}</span>
           </div>
@@ -243,7 +258,9 @@ const Calculator: FC<RouteComponentProps> = () => {
           <h2>
             Suma: <span>{(points.total ?? 0).toFixed()}</span>
           </h2>
-          <button onClick={resetForm}>Resetuj wynik</button>
+          <button type="button" onClick={resetForm}>
+            Resetuj wynik
+          </button>
         </Result>
       </Container>
     </Layout>

@@ -1,4 +1,4 @@
-import useSWR from 'swr';
+import useSWR, { responseInterface } from 'swr';
 import fetchData from './fetchData';
 
 const fixBounds = (classes: any[]) =>
@@ -10,18 +10,18 @@ const fixBounds = (classes: any[]) =>
     };
   });
 
-export const fetchHighSchoolClasses = (path: string) => {
+export const fetchHighSchoolClasses = (path: string): Promise<any> => {
   return fetchData(path).then((res) => fixBounds(res.results));
 };
 
 export const useHighSchoolClasses = (
   schoolId: number,
   schoolType = 'liceum ogólnokształcące',
-) => {
+): responseInterface<any, any> => {
   const getPath = () => {
-    if (schoolType === 'liceum ogólnokształcące')
+    if (schoolType === 'liceum ogólnokształcące') {
       return `/highschool/class/?school=${schoolId}`;
-
+    }
     return null;
   };
   return useSWR(getPath, fetchHighSchoolClasses);

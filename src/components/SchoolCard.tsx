@@ -3,7 +3,7 @@ import { Link } from '@reach/router';
 import { School } from '../types';
 import styled from '../styling/styled';
 import Card from './Card';
-import { useFavouriteSchools } from '../hooks/useFavouriteSchools';
+import useFavouriteSchools from '../hooks/useFavouriteSchools';
 import AddRemoveFavourite from './AddRemoveFavourite';
 
 const Wrapper = styled(Card)`

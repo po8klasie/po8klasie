@@ -1,12 +1,12 @@
-type ParamsMode = 'api' | 'search';
+export type ParamsModeType = 'api' | 'search';
 type Serializer = (
   [key, value]: [string, any],
   p: URLSearchParams,
-  mode: ParamsMode,
+  mode: ParamsModeType,
 ) => URLSearchParams;
 type Deserializer = (key: string, p: URLSearchParams) => any;
 
-export const basicSerializer: Serializer = ([key, value], p, mode) => {
+export const basicSerializer: Serializer = ([key, value], p) => {
   p.set(key, value);
 
   if (!value && p.has(key)) p.delete(key);
@@ -33,11 +33,7 @@ export const arraySerializer: Serializer = ([key, value], p, mode) => {
 export const arrayDeserializer: Deserializer = (key, p) => {
   const value = p.get(key);
 
-  if (
-    !value ||
-    !Array.isArray(value.split(',')) ||
-    value.split(',').length === 0
-  ) {
+  if (!value || !Array.isArray(value.split(',')) || value.split(',').length === 0) {
     if (p.has(key)) p.delete(key);
     return null;
   }
@@ -51,5 +47,5 @@ export const pageNumberSerializer: Serializer = ([key, value], p, mode) => {
 
 export const pageNumberDeserializer: Deserializer = (key, p) => {
   const value = basicDeserializer(key, p);
-  return parseInt(value) && value > 1 ? value : null;
+  return parseInt(value, 10) && value > 1 ? value : null;
 };

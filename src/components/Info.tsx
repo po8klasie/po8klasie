@@ -1,6 +1,9 @@
 import React, { FC } from 'react';
 import { Link } from '@reach/router';
 import styled from '../styling/styled';
+import errorImg from '../assets/images/SchoolsPage/error.png';
+import notFoundImg from '../assets/images/SchoolsPage/not-found.png';
+import favouriteSchoolsImg from '../assets/images/favouriteSchools.png';
 
 const InfoWrapper = styled.div`
   margin-top: 2em;
@@ -16,7 +19,11 @@ const InfoWrapper = styled.div`
   }
 `;
 
-const Info: FC<any> = ({ children, imageSrc }) => {
+interface InfoProps {
+  imageSrc: string;
+}
+
+const Info: FC<InfoProps> = ({ children, imageSrc }) => {
   return (
     <InfoWrapper>
       <div className="content">{children}</div>
@@ -27,25 +34,24 @@ const Info: FC<any> = ({ children, imageSrc }) => {
   );
 };
 
-export const NotFoundInfo = () => (
-  <Info imageSrc={require('../assets/images/SchoolsPage/not-found.png')}>
+export const NotFoundInfo: FC = () => (
+  <Info imageSrc={notFoundImg}>
     Ups! Brak szkół spełniających podane przez Ciebie wymagania :( <br />
     Zmień kryteria i szukaj jeszcze raz!
   </Info>
 );
 
-export const ErrorInfo = () => (
-  <Info imageSrc={require('../assets/images/SchoolsPage/error.png')}>
+export const ErrorInfo: FC = () => (
+  <Info imageSrc={errorImg}>
     Ups! Wystąpił błąd! <br />
     Spróbuj jeszcze raz :)
   </Info>
 );
 
-export const NoFavouriteSchoolsInfo = () => (
-  <Info imageSrc={require('../assets/images/favouriteSchools.png')}>
+export const NoFavouriteSchoolsInfo: FC = () => (
+  <Info imageSrc={favouriteSchoolsImg}>
     Nie masz jeszcze polubionych szkół.
     <br />
-    <Link to="/schools">Przejdź do wyszukiwania</Link>, aby móc znaleźć swoją
-    przyszłą szkołę!
+    <Link to="/schools">Przejdź do wyszukiwania</Link>, aby móc znaleźć swoją przyszłą szkołę!
   </Info>
 );

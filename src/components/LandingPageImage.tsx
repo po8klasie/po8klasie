@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from '../styling/styled';
 
 type LandingPageImageProps = {
@@ -7,7 +6,7 @@ type LandingPageImageProps = {
 };
 
 const LandingPageImage = styled.div<LandingPageImageProps>`
-  background-image: url("${(props) => props.bgImage}");
+  background-image: url('${(props) => props.bgImage}');
   background-position: ${(props) => props.position};
   background-repeat: no-repeat;
   background-size: contain;
@@ -18,6 +17,4 @@ const LandingPageImage = styled.div<LandingPageImageProps>`
   }
 `;
 
-export default (props: LandingPageImageProps) => (
-  <LandingPageImage {...props} />
-);
+export default LandingPageImage;

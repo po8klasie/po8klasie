@@ -1,12 +1,12 @@
 import React, { createElement, FC } from 'react';
-import styled from '../../../styling/styled';
 import { Link } from '@reach/router';
-import { getPathWithPreservedParams } from '../../../utils/url';
+import { IconType } from 'react-icons';
+import styled from '../../../styling/styled';
+import getPathWithPreservedParams from '../../../utils/url';
 
 const SwitchLink = styled(Link)`
   background: none;
   border: none;
-  outline: none;
   color: ${(props) => props.theme.colors.primary};
   font-weight: bold;
   font-family: inherit;
@@ -20,13 +20,17 @@ const SwitchLink = styled(Link)`
   }
 `;
 
-const SwitchViewLink: FC<any> = ({ viewPath, label, icon }) => {
-  return (
-    <SwitchLink to={getPathWithPreservedParams(`/schools/${viewPath}`)}>
-      {createElement(icon)}
-      {label}
-    </SwitchLink>
-  );
-};
+interface SwitchViewLinkProps {
+  viewPath: string;
+  label: string;
+  icon: IconType;
+}
+
+const SwitchViewLink: FC<SwitchViewLinkProps> = ({ viewPath, label, icon }) => (
+  <SwitchLink to={getPathWithPreservedParams(`/schools/${viewPath}`)}>
+    {createElement(icon)}
+    {label}
+  </SwitchLink>
+);
 
 export default SwitchViewLink;

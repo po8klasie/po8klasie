@@ -7,16 +7,15 @@ interface UseFiltersOptions {
   idKey: string;
 }
 
-export const useFilters = (options: UseFiltersOptions) => {
+const useFilters = (options: UseFiltersOptions): any => {
   const [filtersValues, setFiltersValues] = useState<Record<string, string[]>>(
     options.defaultValue,
   );
   const createHandler = (filterData: FilterData) => (choiceId: string) => {
     const fieldId = (filterData as any)[options.idKey];
     const { choices, multiple } = filterData;
-    const valuesForFilter = filtersValues[fieldId]
-      ? filtersValues[fieldId]
-      : [];
+    const valuesForFilter = filtersValues[fieldId] ? filtersValues[fieldId] : [];
+
     if (!valuesForFilter.includes(choiceId)) {
       if (multiple && valuesForFilter.length + 1 === choices.length) {
         setFiltersValues({
@@ -36,9 +35,12 @@ export const useFilters = (options: UseFiltersOptions) => {
       [fieldId]: removeFromArray(valuesForFilter, choiceId),
     });
   };
+
   return {
     filtersValues,
     createHandler,
     setFiltersValues,
   };
 };
+
+export default useFilters;

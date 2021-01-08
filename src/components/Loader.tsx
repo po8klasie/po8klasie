@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled from '../styling/styled';
 import Layout from './Layout';
 
@@ -7,8 +7,10 @@ const LoaderInnerWrapper = styled.div`
   font-size: 1.2em;
 `;
 
-export default () => (
+const Loader: FC = () => (
   <Layout>
     <LoaderInnerWrapper>Loading...</LoaderInnerWrapper>
   </Layout>
 );
+
+export default Loader;

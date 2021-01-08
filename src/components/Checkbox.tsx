@@ -60,10 +60,8 @@ const CheckboxInput = styled.input`
   }
 `;
 
-const Checkbox = forwardRef(
-  (props: HTMLProps<HTMLInputElement>, ref: Ref<HTMLInputElement>) => (
-    <CheckboxInput {...props} type="checkbox" ref={ref} />
-  ),
-);
+const Checkbox = forwardRef((props: HTMLProps<HTMLInputElement>, ref: Ref<HTMLInputElement>) => (
+  <CheckboxInput {...props} type="checkbox" ref={ref} />
+));
 
 export default Checkbox;

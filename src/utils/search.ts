@@ -5,6 +5,7 @@ import {
   basicSerializer,
   pageNumberDeserializer,
   pageNumberSerializer,
+  ParamsModeType,
 } from './searchSerializers';
 import { FilterData } from '../data/filters';
 
@@ -31,14 +32,12 @@ export const apiDefaultParams: Record<string, string> = {
 
 export const serializeSearchData = (
   searchData: Record<string, any>,
-  mode: any,
-) => {
+  mode: ParamsModeType,
+): string => {
   const searchParams = new URLSearchParams();
 
   if (mode === 'api') {
-    Object.entries(apiDefaultParams).forEach((entry) =>
-      searchParams.set(...entry),
-    );
+    Object.entries(apiDefaultParams).forEach((entry) => searchParams.set(...entry));
   }
 
   return Object.entries(searchData)
@@ -46,19 +45,11 @@ export const serializeSearchData = (
       let key = _key;
       let serializer = basicSerializer;
 
-      if (
-        Object.prototype.hasOwnProperty.call(
-          serializerDeserializerOverwrites,
-          key,
-        )
-      ) {
-        serializer = serializerDeserializerOverwrites[key][0];
+      if (Object.prototype.hasOwnProperty.call(serializerDeserializerOverwrites, key)) {
+        [serializer] = serializerDeserializerOverwrites[key];
       }
 
-      if (
-        mode === 'api' &&
-        Object.prototype.hasOwnProperty.call(apiParamKeysOverwrites, key)
-      ) {
+      if (mode === 'api' && Object.prototype.hasOwnProperty.call(apiParamKeysOverwrites, key)) {
         key = apiParamKeysOverwrites[key] as string;
       }
 
@@ -67,27 +58,22 @@ export const serializeSearchData = (
     .toString();
 };
 
-export const deserializeSingleSearchData = (
-  key: string,
-  p: URLSearchParams,
-) => {
+export const deserializeSingleSearchData = (key: string, p: URLSearchParams): any => {
   let deserializer = basicDeserializer;
 
-  if (
-    Object.prototype.hasOwnProperty.call(serializerDeserializerOverwrites, key)
-  ) {
-    deserializer = serializerDeserializerOverwrites[key][1];
+  if (Object.prototype.hasOwnProperty.call(serializerDeserializerOverwrites, key)) {
+    [, deserializer] = serializerDeserializerOverwrites[key];
   }
   return deserializer(key, p);
 };
 
-export const deserializeQuery = (p: URLSearchParams) =>
+export const deserializeQuery = (p: URLSearchParams): any =>
   deserializeSingleSearchData('query', p) ?? '';
 
-export const deserializePage = (p: URLSearchParams) =>
+export const deserializePage = (p: URLSearchParams): any =>
   deserializeSingleSearchData('page', p) ?? 1;
 
-export const deserializeFilters = (p: URLSearchParams, filters: FilterData[]) =>
+export const deserializeFilters = (p: URLSearchParams, filters: FilterData[]): any =>
   filters.reduce((obj: any, filter) => {
     const value = deserializeSingleSearchData(filter.key, p);
     if (!value) return obj;

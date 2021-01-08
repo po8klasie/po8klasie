@@ -1,7 +1,8 @@
 import * as Sentry from '@sentry/react';
+
 const FAVOURITES_SCHOOLS_STORAGE_KEY = 'favouriteSchools';
 
-export const getFavSchoolsFromLocalStorage = () => {
+export const getFavSchoolsFromLocalStorage = (): string[] => {
   const dataFromStorage = localStorage.getItem(FAVOURITES_SCHOOLS_STORAGE_KEY);
   if (!dataFromStorage) return [];
   let data = [];
@@ -13,9 +14,6 @@ export const getFavSchoolsFromLocalStorage = () => {
   return data;
 };
 
-export const saveFavSchoolsToLocalStorage = (item: object) => {
-  return localStorage.setItem(
-    FAVOURITES_SCHOOLS_STORAGE_KEY,
-    JSON.stringify(item),
-  );
+export const saveFavSchoolsToLocalStorage = (item: string[]): void => {
+  return localStorage.setItem(FAVOURITES_SCHOOLS_STORAGE_KEY, JSON.stringify(item));
 };

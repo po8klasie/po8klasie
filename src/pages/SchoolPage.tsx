@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Redirect, RouteComponentProps } from '@reach/router';
 import Layout from '../components/Layout';
 import Container from '../components/Container';
@@ -11,18 +11,15 @@ import SchoolPastProfiles from '../components/sections/SchoolPage/SchoolPastProf
 import SchoolContact from '../components/sections/SchoolPage/SchoolContact';
 import { useHighSchoolClasses } from '../api/highschoolClasses';
 import { ErrorInfo } from '../components/Info';
-import { useFavouriteSchools } from '../hooks/useFavouriteSchools';
+import useFavouriteSchools from '../hooks/useFavouriteSchools';
 
-const SchoolPage = (props: RouteComponentProps<{ schoolID: string }>) => {
-  const isSchoolIdValid =
-    props.schoolID && !Number.isNaN(props.schoolID as any);
+const SchoolPage: FC<RouteComponentProps<{ schoolID: string }>> = ({ schoolID }) => {
+  const isSchoolIdValid = schoolID && !Number.isNaN(schoolID as any);
 
-  const { data: school, error: schoolError } = useSchoolDetails(
-    parseInt(props.schoolID as any),
-  );
+  const { data: school, error: schoolError } = useSchoolDetails(parseInt(schoolID as any, 10));
 
   const { data: classes, error: classesError } = useHighSchoolClasses(
-    parseInt(props.schoolID as any),
+    parseInt(schoolID as any, 10),
     (school as any)?.school_type,
   );
 
@@ -35,10 +32,7 @@ const SchoolPage = (props: RouteComponentProps<{ schoolID: string }>) => {
       <Layout>
         <Container className={!school ? 'loading' : ''}>
           <Breadcrumbs
-            steps={[
-              ['Wyszukiwarka szkół', '/schools'],
-              [school ? school.school_name : 'Szkoła'],
-            ]}
+            steps={[['Wyszukiwarka szkół', '/schools'], [school ? school.school_name : 'Szkoła']]}
           />
           <ErrorInfo />
         </Container>
@@ -49,20 +43,17 @@ const SchoolPage = (props: RouteComponentProps<{ schoolID: string }>) => {
     <Layout>
       <Container className={!school ? 'loading' : ''}>
         <Breadcrumbs
-          steps={[
-            ['Wyszukiwarka szkół', '/schools'],
-            [school ? school.school_name : 'Szkoła'],
-          ]}
+          steps={[['Wyszukiwarka szkół', '/schools'], [school ? school.school_name : 'Szkoła']]}
         />
 
         <SchoolHeader
           isLoading={!school}
           schoolName={school?.school_name}
-          description={'some desc'}
+          description="some desc"
           district={school?.address?.district}
           isPublic={school?.is_public}
-          isFavourite={isSchoolFavourite(props.schoolID || '')}
-          toggleFavourite={() => toggleFavouriteSchool(props.schoolID || '')}
+          isFavourite={isSchoolFavourite(schoolID || '')}
+          toggleFavourite={() => toggleFavouriteSchool(schoolID || '')}
         />
 
         <SchoolProfiles />

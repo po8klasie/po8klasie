@@ -3,27 +3,5 @@ export const splitArrayInHalf = <T>(arr: T[]): T[][] => {
   return [arr.slice(0, half), arr.slice(half, arr.length)];
 };
 
-export const removeFromArray = <T extends {}>(arr: T[], element: T) =>
+export const removeFromArray = <T>(arr: T[], element: T): T[] =>
   arr.filter((el: T) => el !== element);
-
-export const areObjectsDifferent = (a: any, b: any): boolean =>
-  JSON.stringify(a) !== JSON.stringify(b);
-
-export const removeFromObject = (obj: any, keys: any[]) => {
-  let output = { ...obj };
-  keys.forEach((key) => {
-    if (key in obj) delete output[key];
-  });
-  return output;
-};
-
-export const areObjectsDifferentWithout = (
-  a: any,
-  b: any,
-  keysToRemoveBeforeComparing: string[],
-) => {
-  return areObjectsDifferent(
-    removeFromObject(a, keysToRemoveBeforeComparing),
-    removeFromObject(b, keysToRemoveBeforeComparing),
-  );
-};
