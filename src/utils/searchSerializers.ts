@@ -1,12 +1,12 @@
-type ParamsMode = 'api' | 'search';
+export type ParamsModeType = 'api' | 'search';
 type Serializer = (
   [key, value]: [string, any],
   p: URLSearchParams,
-  mode: ParamsMode,
+  mode: ParamsModeType,
 ) => URLSearchParams;
 type Deserializer = (key: string, p: URLSearchParams) => any;
 
-export const basicSerializer: Serializer = ([key, value], p, mode) => {
+export const basicSerializer: Serializer = ([key, value], p) => {
   p.set(key, value);
 
   if (!value && p.has(key)) p.delete(key);

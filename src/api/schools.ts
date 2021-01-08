@@ -1,4 +1,4 @@
-import useSWR, { useSWRInfinite } from 'swr';
+import useSWR, { responseInterface, useSWRInfinite } from 'swr';
 import { useEffect } from 'react';
 import fetchData from './fetchData';
 import { serializeSearchData } from '../utils/search';
@@ -11,12 +11,12 @@ export const fetchSchools = (path: string): Promise<{ count: number; schools: an
   }));
 };
 
-export const useSchools = (searchData: any) => {
+export const useSchools = (searchData: Record<string, any>): responseInterface<any, any> => {
   const params = serializeSearchData(searchData, 'api');
   return useSWR(`/school/?${params}`, fetchSchools);
 };
 
-export const useAllSchools = (searchData: any) => {
+export const useAllSchools = (searchData: Record<string, any>): any => {
   const getKey = (pageIndex: number, prevRes: any) => {
     if (prevRes && !prevRes.next) return null;
 

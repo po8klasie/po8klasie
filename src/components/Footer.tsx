@@ -11,7 +11,7 @@ const DataInfo = styled.p`
   }
 `;
 
-const FooterWrapper = styled.div<{ noFooterMargin?: boolean}>`
+const FooterWrapper = styled.div<{ noFooterMargin?: boolean }>`
   margin-top: ${(props) => (props.noFooterMargin ? 0 : '10vh')};
   padding: 2em 0;
   font-size: 1em;
@@ -89,7 +89,7 @@ const FooterGrid = styled.div`
 `;
 
 interface FooterProps {
-  noFooterMargin?: boolean
+  noFooterMargin?: boolean;
 }
 
 const Footer: FC<FooterProps> = ({ noFooterMargin }) => (

@@ -5,6 +5,7 @@ import {
   basicSerializer,
   pageNumberDeserializer,
   pageNumberSerializer,
+  ParamsModeType,
 } from './searchSerializers';
 import { FilterData } from '../data/filters';
 
@@ -29,7 +30,10 @@ export const apiDefaultParams: Record<string, string> = {
   ordering: 'school_name',
 };
 
-export const serializeSearchData = (searchData: Record<string, any>, mode: any) => {
+export const serializeSearchData = (
+  searchData: Record<string, any>,
+  mode: ParamsModeType,
+): string => {
   const searchParams = new URLSearchParams();
 
   if (mode === 'api') {
@@ -54,7 +58,7 @@ export const serializeSearchData = (searchData: Record<string, any>, mode: any) 
     .toString();
 };
 
-export const deserializeSingleSearchData = (key: string, p: URLSearchParams) => {
+export const deserializeSingleSearchData = (key: string, p: URLSearchParams): any => {
   let deserializer = basicDeserializer;
 
   if (Object.prototype.hasOwnProperty.call(serializerDeserializerOverwrites, key)) {
@@ -63,12 +67,13 @@ export const deserializeSingleSearchData = (key: string, p: URLSearchParams) => 
   return deserializer(key, p);
 };
 
-export const deserializeQuery = (p: URLSearchParams) =>
+export const deserializeQuery = (p: URLSearchParams): any =>
   deserializeSingleSearchData('query', p) ?? '';
 
-export const deserializePage = (p: URLSearchParams) => deserializeSingleSearchData('page', p) ?? 1;
+export const deserializePage = (p: URLSearchParams): any =>
+  deserializeSingleSearchData('page', p) ?? 1;
 
-export const deserializeFilters = (p: URLSearchParams, filters: FilterData[]) =>
+export const deserializeFilters = (p: URLSearchParams, filters: FilterData[]): any =>
   filters.reduce((obj: any, filter) => {
     const value = deserializeSingleSearchData(filter.key, p);
     if (!value) return obj;

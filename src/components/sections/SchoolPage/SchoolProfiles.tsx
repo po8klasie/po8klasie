@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { nanoid } from 'nanoid';
 import Card from '../../Card';
 import Section from './Section';
@@ -35,23 +35,21 @@ const SchoolProfilesWrapper = styled.div`
 
 const profiles = Array(3).fill(mockedProfile);
 
-const SchoolProfiles = () => {
-  return (
-    <Section>
-      <SchoolProfilesWrapper>
-        {profiles.map((profile) => {
-          return (
-            <Card key={nanoid()}>
-              <h5>Przedmioty rozszerzone:</h5>
-              <h4>{profile.extendedSubjects.join(', ')}</h4>
-              <span>{profile.departmentsNo} oddziały</span>
-              <p>{profile.description}</p>
-            </Card>
-          );
-        })}
-      </SchoolProfilesWrapper>
-    </Section>
-  );
-};
+const SchoolProfiles: FC = () => (
+  <Section>
+    <SchoolProfilesWrapper>
+      {profiles.map((profile) => {
+        return (
+          <Card key={nanoid()}>
+            <h5>Przedmioty rozszerzone:</h5>
+            <h4>{profile.extendedSubjects.join(', ')}</h4>
+            <span>{profile.departmentsNo} oddziały</span>
+            <p>{profile.description}</p>
+          </Card>
+        );
+      })}
+    </SchoolProfilesWrapper>
+  </Section>
+);
 
 export default SchoolProfiles;

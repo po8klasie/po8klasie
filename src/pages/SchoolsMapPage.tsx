@@ -150,7 +150,7 @@ const SchoolsMapPage: FC<RouteComponentProps> = () => {
     setNotListedCount(0);
     setNotListedVisible(true);
     if (schools && schools.length > 0) {
-      b = schools.reduce((prev, school) => {
+      b = schools.reduce((prev: any, school: any) => {
         if (!doesSchoolHaveCoords(school)) {
           setNotListedCount((count) => count + 1);
           return prev;
@@ -192,7 +192,7 @@ const SchoolsMapPage: FC<RouteComponentProps> = () => {
             className="tile-layer"
           />
           {schools &&
-            schools.map((school) => {
+            schools.map((school: any) => {
               if (!doesSchoolHaveCoords(school)) return null;
 
               const coords = getSchoolCoords(school) as LatLngExpression;

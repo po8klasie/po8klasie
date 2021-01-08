@@ -7,7 +7,7 @@ interface UseFiltersOptions {
   idKey: string;
 }
 
-const useFilters = (options: UseFiltersOptions) => {
+const useFilters = (options: UseFiltersOptions): any => {
   const [filtersValues, setFiltersValues] = useState<Record<string, string[]>>(
     options.defaultValue,
   );
