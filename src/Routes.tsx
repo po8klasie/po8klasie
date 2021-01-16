@@ -35,6 +35,8 @@ const Routes: FC = () => (
 
     <PrivacyPolicyPage path="/privacy-policy" />
     <PrivacySettingsPage path="/privacy-settings" />
+
+    <NotFoundPage default />
   </Router>
 );
 
