@@ -21,12 +21,7 @@ If you want to contribute to WarsawLO, please read our [contribution guide](CONT
 git clone https://github.com/WarsawLO/WarsawLO-2.0
 ```
 
-2. In root directory of the project, create `.env` file with following content (replacing `<SERVER_URL>` with server where API is hosted) :page_facing_up:
-```
-REACT_APP_API_URL=<SERVER_URL>
-```
-
-3. Install dependencies using [yarn](https://yarnpkg.com/) :package:
+2. Install dependencies using [yarn](https://yarnpkg.com/) :package:
 ```shell script  
 yarn
 ```
@@ -36,7 +31,7 @@ yarn
 yarn start
 ```
 
-5. Make some changes and submit pull request :tada: <br />
+Sentry config is located in `src/index.tsx`.
 
 > *NOTE:* Before submitting a pull request, please read our [contribution guidelines](CONTRIBUTING.md).
 
