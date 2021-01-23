@@ -76,7 +76,8 @@ export const deserializePage = (p: URLSearchParams): any =>
 export const deserializeFilters = (p: URLSearchParams, filters: FilterData[]): any =>
   filters.reduce((obj: any, filter) => {
     const value = deserializeSingleSearchData(filter.key, p);
-    if (!value) return obj;
+    const possibleValues = filter.choices.map((choice) => choice.id);
+    if (!value || !possibleValues.includes(value)) return obj;
 
     return { ...obj, [filter.key]: value };
   }, {});
