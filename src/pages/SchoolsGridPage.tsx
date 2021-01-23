@@ -20,6 +20,7 @@ import Pagination from '../components/sections/SchoolsPage/Pagination';
 import SwitchViewLink from '../components/sections/SchoolsPage/SwitchViewLink';
 import Results from '../components/sections/SchoolsPage/Results';
 import QueryRow from '../components/QueryRow';
+import SEO from '../components/SEO';
 
 const Count = styled.small`
   display: block;
@@ -49,6 +50,7 @@ const SchoolsGridPage: FC<RouteComponentProps> = () => {
   const count = data?.count;
   return (
     <Layout>
+      <SEO title="Przeglądaj listę szkół" />
       <Container>
         <PageTitle>Znajdź swoją wymarzoną szkołę</PageTitle>
         <SwitchViewLink label="Widok mapy" icon={BsMap} viewPath="map" />

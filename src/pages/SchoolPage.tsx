@@ -12,6 +12,7 @@ import SchoolContact from '../components/sections/SchoolPage/SchoolContact';
 import { useHighSchoolClasses } from '../api/highschoolClasses';
 import { ErrorInfo } from '../components/Info';
 import useFavouriteSchools from '../hooks/useFavouriteSchools';
+import SEO from '../components/SEO';
 
 const SchoolPage: FC<RouteComponentProps<{ schoolID: string }>> = ({ schoolID }) => {
   const isSchoolIdValid = schoolID && !Number.isNaN(schoolID as any);
@@ -27,13 +28,14 @@ const SchoolPage: FC<RouteComponentProps<{ schoolID: string }>> = ({ schoolID })
 
   if (!isSchoolIdValid) return <Redirect to="/" />;
 
+  const pageTitle = school ? school.school_name : 'Szkoła';
+
   if (schoolError || classesError)
     return (
       <Layout>
+        <SEO title={pageTitle} />
         <Container className={!school ? 'loading' : ''}>
-          <Breadcrumbs
-            steps={[['Wyszukiwarka szkół', '/schools'], [school ? school.school_name : 'Szkoła']]}
-          />
+          <Breadcrumbs steps={[['Wyszukiwarka szkół', '/schools'], [pageTitle]]} />
           <ErrorInfo />
         </Container>
       </Layout>
@@ -41,10 +43,9 @@ const SchoolPage: FC<RouteComponentProps<{ schoolID: string }>> = ({ schoolID })
 
   return (
     <Layout>
+      <SEO title={pageTitle} />
       <Container className={!school ? 'loading' : ''}>
-        <Breadcrumbs
-          steps={[['Wyszukiwarka szkół', '/schools'], [school ? school.school_name : 'Szkoła']]}
-        />
+        <Breadcrumbs steps={[['Wyszukiwarka szkół', '/schools'], [pageTitle]]} />
 
         <SchoolHeader
           isLoading={!school}

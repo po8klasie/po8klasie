@@ -26,10 +26,14 @@ import infoImg from '../assets/images/landingPage/info.png';
 import locationImg from '../assets/images/landingPage/location.png';
 import profilesImg from '../assets/images/landingPage/profiles.png';
 import rankingImg from '../assets/images/landingPage/ranking.png';
+import SEO from '../components/SEO';
+
+const pageTitle = 'Home';
 
 const LandingPage: FC<RouteComponentProps> = () => {
   return (
     <Layout>
+      <SEO title={pageTitle} />
       <Container>
         <LandingMainGrid>
           <div>
