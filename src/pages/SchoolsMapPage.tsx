@@ -23,6 +23,7 @@ import 'react-leaflet-fullscreen-control';
 import getPathWithPreservedParams from '../utils/url';
 import 'leaflet/dist/leaflet.css';
 import { ErrorInfo, NotFoundInfo } from '../components/Info';
+import useBasicPageViewTracker from "../hooks/useBasicPageViewTracker";
 
 const QueryRow = styled.div`
   display: flex;
@@ -128,6 +129,7 @@ const DEFAULT_CENTER = [52.237049, 21.017532] as [number, number];
 const DEFAULT_ZOOM = 15;
 
 const SchoolsMapPage: FC<RouteComponentProps> = () => {
+  useBasicPageViewTracker();
   const currUrl = new URL(window.location.href);
   const p = currUrl.searchParams;
   const [query, setQuery] = useState(deserializeQuery(p));
