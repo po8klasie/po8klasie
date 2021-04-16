@@ -10,6 +10,7 @@ import styled from '../styling/styled';
 import Breadcrumbs from '../components/Breadcrumbs';
 import H2 from '../components/H2';
 import Paragraph from '../components/Paragraph';
+import {useBasicPageViewTracker} from "../utils/analytics";
 
 const Grid = styled.div`
   display: grid;
@@ -133,6 +134,7 @@ const MaintainerCard: FC<MaintainerCardProps> = ({ maintainer }) => {
 };
 
 const AboutPage: FC<RouteComponentProps> = () => {
+  useBasicPageViewTracker();
   return (
     <Layout noFooterMargin>
       <Container>

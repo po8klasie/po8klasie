@@ -16,6 +16,7 @@ import PageTitle from '../components/PageTitle';
 import Checkbox from '../components/Checkbox';
 import { examParts, subjects } from '../data/calculator';
 import Breadcrumbs from '../components/Breadcrumbs';
+import {useBasicPageViewTracker} from "../utils/analytics";
 
 const { isGradeValid, isExamResultValid } = validators;
 const { initialInputData, initialCalculatedPoints } = initialData;
@@ -115,6 +116,7 @@ const Result = styled.div`
 const calc = new PointsCalculator(CONFIG_2018_2019);
 
 const Calculator: FC<RouteComponentProps> = () => {
+  useBasicPageViewTracker();
   const [points, setPoints] = useState<CalculatedPoints>(initialCalculatedPoints);
   const { register, watch, reset } = useForm();
   useLayoutEffect(() => {
