@@ -7,6 +7,7 @@ import handleError from './api/handleError';
 import theme from './styling/theme';
 import Routes from './Routes';
 import globalStyles from './styling/globalStyles';
+import { AnalyticsProvider } from './utils/analytics';
 
 const swrConfig = {
   onError: handleError,
@@ -17,9 +18,11 @@ const App: React.FC = () => {
     <Sentry.ErrorBoundary fallback="An error has occurred">
       <ThemeProvider theme={theme}>
         <Global styles={globalStyles} />
-        <SWRConfig value={swrConfig}>
-          <Routes />
-        </SWRConfig>
+        <AnalyticsProvider>
+          <SWRConfig value={swrConfig}>
+            <Routes />
+          </SWRConfig>
+        </AnalyticsProvider>
       </ThemeProvider>
     </Sentry.ErrorBoundary>
   );

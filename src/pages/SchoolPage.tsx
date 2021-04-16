@@ -1,5 +1,6 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { Redirect, RouteComponentProps } from '@reach/router';
+import { useMatomo } from '@datapunt/matomo-tracker-react';
 import Layout from '../components/Layout';
 import Container from '../components/Container';
 import { useSchoolDetails } from '../api/schoolDetails';
@@ -14,7 +15,8 @@ import { ErrorInfo } from '../components/Info';
 import useFavouriteSchools from '../hooks/useFavouriteSchools';
 
 const SchoolPage: FC<RouteComponentProps<{ schoolID: string }>> = ({ schoolID }) => {
-  const isSchoolIdValid = schoolID && !Number.isNaN(schoolID as any);
+  const { trackPageView } = useMatomo();
+  const isSchoolIdValid = Boolean(schoolID && !Number.isNaN(schoolID as any));
 
   const { data: school, error: schoolError } = useSchoolDetails(parseInt(schoolID as any, 10));
 
@@ -24,6 +26,10 @@ const SchoolPage: FC<RouteComponentProps<{ schoolID: string }>> = ({ schoolID })
   );
 
   const { isSchoolFavourite, toggleFavouriteSchool } = useFavouriteSchools();
+
+  useEffect(() => {
+    if (isSchoolIdValid && school && school.id === schoolID) trackPageView({});
+  }, [schoolID, school, isSchoolIdValid, trackPageView]);
 
   if (!isSchoolIdValid) return <Redirect to="/" />;
 

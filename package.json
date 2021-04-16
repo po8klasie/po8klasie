@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@datapunt/matomo-tracker-react": "^0.4.0",
     "@emotion/core": "^10.0.27",
     "@emotion/styled": "^10.0.27",
     "@reach/router": "^1.2.1",
