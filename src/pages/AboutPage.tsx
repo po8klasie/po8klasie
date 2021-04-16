@@ -10,7 +10,7 @@ import styled from '../styling/styled';
 import Breadcrumbs from '../components/Breadcrumbs';
 import H2 from '../components/H2';
 import Paragraph from '../components/Paragraph';
-import {useBasicPageViewTracker} from "../utils/analytics";
+import useBasicPageViewTracker from "../hooks/useBasicPageViewTracker";
 
 const Grid = styled.div`
   display: grid;

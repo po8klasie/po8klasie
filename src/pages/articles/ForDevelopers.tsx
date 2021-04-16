@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import ArticleLayout from '../../components/ArticleLayout';
-import { useBasicPageViewTracker } from '../../utils/analytics';
+import useBasicPageViewTracker from "../../hooks/useBasicPageViewTracker";
 
 const ForDevelopersPage: FC = () => {
   useBasicPageViewTracker();

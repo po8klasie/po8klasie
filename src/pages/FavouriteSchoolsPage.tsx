@@ -7,7 +7,7 @@ import PageTitle from '../components/PageTitle';
 import FavouriteSchool from '../components/sections/FavouriteSchools/FavouriteSchool';
 import { NoFavouriteSchoolsInfo } from '../components/Info';
 import useFavouriteSchools from '../hooks/useFavouriteSchools';
-import { useBasicPageViewTracker } from '../utils/analytics';
+import useBasicPageViewTracker from "../hooks/useBasicPageViewTracker";
 
 const FavouriteSchoolsPage: FC<RouteComponentProps> = () => {
   const { favouriteSchools, toggleFavouriteSchool } = useFavouriteSchools();
