@@ -1,8 +1,8 @@
 import React, { ChangeEvent, FC, useCallback, useState } from 'react';
 import { MdSearch } from 'react-icons/md';
 import { debounce } from 'lodash';
-import styled from '../../../styling/styled';
-import { InputWithAddon } from '../../Input';
+import styled from '../../../../styling/styled';
+import { InputWithAddon } from '../../../Input';
 
 const SearchIcon = styled(MdSearch)`
   font-size: 24px;

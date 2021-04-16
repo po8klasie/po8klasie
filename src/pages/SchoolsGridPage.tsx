@@ -5,7 +5,7 @@ import { BsMap } from 'react-icons/bs';
 import Layout from '../components/Layout';
 import Container from '../components/Container';
 import PageTitle from '../components/PageTitle';
-import QueryFilter from '../components/sections/SchoolsPage/QueryFilter';
+import QueryFilter from '../components/sections/SchoolsPage/Sidebar/QueryFilter';
 import { useSchools } from '../api/schools';
 import styled from '../styling/styled';
 import DropdownFilters from '../components/sections/SchoolsPage/DropdownFilters';
@@ -20,6 +20,7 @@ import Pagination from '../components/sections/SchoolsPage/Pagination';
 import SwitchViewLink from '../components/sections/SchoolsPage/SwitchViewLink';
 import Results from '../components/sections/SchoolsPage/Results';
 import QueryRow from '../components/QueryRow';
+import Sidebar from '../components/sections/SchoolsPage/Sidebar/Sidebar';
 import useBasicPageViewTracker from "../hooks/useBasicPageViewTracker";
 import SEO from '../components/SEO';
 
@@ -27,6 +28,14 @@ import SEO from '../components/SEO';
 const Count = styled.small`
   display: block;
   margin: 1em 0 2em 0;
+`;
+
+const Flex = styled.div`
+  display: flex;
+`;
+
+const SidebarWrapper = styled.div`
+  width: 25vw;
 `;
 
 const SchoolsGridPage: FC<RouteComponentProps> = () => {
@@ -54,20 +63,27 @@ const SchoolsGridPage: FC<RouteComponentProps> = () => {
   return (
     <Layout>
       <SEO title="Przeglądaj listę szkół" />
-      <Container>
-        <PageTitle>Znajdź swoją wymarzoną szkołę</PageTitle>
-        <SwitchViewLink label="Widok mapy" icon={BsMap} viewPath="map" />
-        <QueryRow>
-          <QueryFilter query={query} onQueryChange={setQuery} />
-          <DropdownFilters
-            filtersValues={dropdownFilters}
-            onFiltersValuesChange={setDropdownFilters}
+      <Flex>
+        <SidebarWrapper>
+          <Sidebar
+              switchViewLinkElement={<SwitchViewLink label="Widok mapy" icon={BsMap} viewPath="map" />}
           />
-        </QueryRow>
-        {schools && <Count>Liczba wyników: {count}</Count>}
-        <Results schools={schools} error={error} />
-        <Pagination page={page} count={count} onPageChange={setPage} disabled={!data} />
-      </Container>
+        </SidebarWrapper>
+        <Container>
+          <PageTitle>Znajdź swoją wymarzoną szkołę</PageTitle>
+
+          <QueryRow>
+            <QueryFilter query={query} onQueryChange={setQuery} />
+            <DropdownFilters
+              filtersValues={dropdownFilters}
+              onFiltersValuesChange={setDropdownFilters}
+            />
+          </QueryRow>
+          {schools && <Count>Liczba wyników: {count}</Count>}
+          <Results schools={schools} error={error} />
+          <Pagination page={page} count={count} onPageChange={setPage} disabled={!data} />
+        </Container>
+      </Flex>
     </Layout>
   );
 };

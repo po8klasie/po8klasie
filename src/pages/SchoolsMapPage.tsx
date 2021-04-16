@@ -8,7 +8,7 @@ import { LatLngExpression } from 'leaflet';
 import Layout from '../components/Layout';
 import Container from '../components/Container';
 import PageTitle from '../components/PageTitle';
-import QueryFilter from '../components/sections/SchoolsPage/QueryFilter';
+import QueryFilter from '../components/sections/SchoolsPage/Sidebar/QueryFilter';
 import { useAllSchools } from '../api/schools';
 import styled from '../styling/styled';
 import DropdownFilters from '../components/sections/SchoolsPage/DropdownFilters';
