@@ -24,3 +24,6 @@ const devEnvironment: Environment = {
 export const isProduction = process.env.NODE_ENV === 'production';
 
 export const environment: Environment = isProduction ? prodEnvironment : devEnvironment;
+
+export const isEnvVarEmpty = (name: keyof Environment): boolean =>
+  !environment[name] || environment[name] === `\${${name}}`;
