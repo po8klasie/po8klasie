@@ -26,7 +26,7 @@ const apiParamKeysOverwrites: Record<string, string> = {
 };
 
 export const apiDefaultParams: Record<string, string> = {
-  school_type_generalised: 'szkoła ponadpodstawowa',
+  school_type: 'liceum ogólnokształcące|technikum|szkoła branżowa I stopnia',
   ordering: 'school_name',
 };
 
