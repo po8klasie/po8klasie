@@ -36,6 +36,14 @@ jobs:
       uses: softprops/turnstyle@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        
+    - name: Clean ssh keys
+      run: |-
+        # https://github.com/kyma-project/test-infra/issues/93#issuecomment-457263589
+        for i in $(gcloud compute os-login ssh-keys list | grep -v FINGERPRINT); do \
+            echo "Removing ssh key"; \
+            gcloud compute os-login ssh-keys remove --key $i || true; \
+        done
 
     - name: Deploy
       run: |-
