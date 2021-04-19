@@ -1,3 +1,5 @@
+import {FC} from "react";
+
 export interface Theme {
   colors: {
     primary: string;

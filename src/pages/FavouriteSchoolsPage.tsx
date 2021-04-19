@@ -7,12 +7,15 @@ import PageTitle from '../components/PageTitle';
 import FavouriteSchool from '../components/sections/FavouriteSchools/FavouriteSchool';
 import { NoFavouriteSchoolsInfo } from '../components/Info';
 import useFavouriteSchools from '../hooks/useFavouriteSchools';
+import useBasicPageViewTracker from "../hooks/useBasicPageViewTracker";
 import SEO from '../components/SEO';
 
 const pageTitle = 'Ulubione szkoły';
 
+
 const FavouriteSchoolsPage: FC<RouteComponentProps> = () => {
   const { favouriteSchools, toggleFavouriteSchool } = useFavouriteSchools();
+  useBasicPageViewTracker();
 
   return (
     <Layout>

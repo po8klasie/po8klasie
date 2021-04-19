@@ -11,6 +11,7 @@ import Breadcrumbs from '../components/Breadcrumbs';
 import H2 from '../components/H2';
 import Paragraph from '../components/Paragraph';
 import SEO from '../components/SEO';
+import useBasicPageViewTracker from "../hooks/useBasicPageViewTracker";
 
 const Grid = styled.div`
   display: grid;
@@ -136,6 +137,7 @@ const MaintainerCard: FC<MaintainerCardProps> = ({ maintainer }) => {
 const pageTitle = 'O nas';
 
 const AboutPage: FC<RouteComponentProps> = () => {
+  useBasicPageViewTracker();
   return (
     <Layout noFooterMargin>
       <SEO title={pageTitle} />

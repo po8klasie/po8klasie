@@ -20,7 +20,9 @@ import Pagination from '../components/sections/SchoolsPage/Pagination';
 import SwitchViewLink from '../components/sections/SchoolsPage/SwitchViewLink';
 import Results from '../components/sections/SchoolsPage/Results';
 import QueryRow from '../components/QueryRow';
+import useBasicPageViewTracker from "../hooks/useBasicPageViewTracker";
 import SEO from '../components/SEO';
+
 
 const Count = styled.small`
   display: block;
@@ -28,6 +30,7 @@ const Count = styled.small`
 `;
 
 const SchoolsGridPage: FC<RouteComponentProps> = () => {
+  useBasicPageViewTracker();
   const currUrl = new URL(window.location.href);
   const p = currUrl.searchParams;
   const [query, setQuery] = useState(deserializeQuery(p));

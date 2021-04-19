@@ -26,11 +26,14 @@ import infoImg from '../assets/images/landingPage/info.png';
 import locationImg from '../assets/images/landingPage/location.png';
 import profilesImg from '../assets/images/landingPage/profiles.png';
 import rankingImg from '../assets/images/landingPage/ranking.png';
+import useBasicPageViewTracker from "../hooks/useBasicPageViewTracker";
 import SEO from '../components/SEO';
 
 const pageTitle = 'Home';
 
+
 const LandingPage: FC<RouteComponentProps> = () => {
+  useBasicPageViewTracker();
   return (
     <Layout>
       <SEO title={pageTitle} />
