@@ -23,6 +23,7 @@ import 'react-leaflet-fullscreen-control';
 import getPathWithPreservedParams from '../utils/url';
 import 'leaflet/dist/leaflet.css';
 import { ErrorInfo, NotFoundInfo } from '../components/Info';
+import SEO from '../components/SEO';
 import useBasicPageViewTracker from "../hooks/useBasicPageViewTracker";
 
 const QueryRow = styled.div`
@@ -174,6 +175,7 @@ const SchoolsMapPage: FC<RouteComponentProps> = () => {
 
   return (
     <Layout hideFooter contentFlex>
+      <SEO title="Przeglądaj szkoły na mapie" />
       <TopContainer>
         <PageTitle>Znajdź swoją wymarzoną szkołę</PageTitle>
         <SwitchViewLink label="Widok siatki" icon={BsGrid} viewPath="grid" />

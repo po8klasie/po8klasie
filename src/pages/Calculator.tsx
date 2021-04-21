@@ -16,6 +16,7 @@ import PageTitle from '../components/PageTitle';
 import Checkbox from '../components/Checkbox';
 import { examParts, subjects } from '../data/calculator';
 import Breadcrumbs from '../components/Breadcrumbs';
+import SEO from '../components/SEO';
 import useBasicPageViewTracker from "../hooks/useBasicPageViewTracker";
 
 const { isGradeValid, isExamResultValid } = validators;
@@ -113,6 +114,8 @@ const Result = styled.div`
   }
 `;
 
+const pageTitle = 'Kalkulator punktów';
+
 const calc = new PointsCalculator(CONFIG_2018_2019);
 
 const Calculator: FC<RouteComponentProps> = () => {
@@ -187,9 +190,10 @@ const Calculator: FC<RouteComponentProps> = () => {
 
   return (
     <Layout>
+      <SEO title={pageTitle} />
       <Container>
-        <Breadcrumbs steps={[['Kalkulator punktów']]} />
-        <PageTitle>Kalkulator punktów</PageTitle>
+        <Breadcrumbs steps={[[pageTitle]]} />
+        <PageTitle>{pageTitle}</PageTitle>
         <p>
           Podaj swoje oceny, wyniki z egzaminu ósmoklasisty oraz dodatkowe osiągnięcia (jeśli takie
           masz) i oblicz punkty, jakie uzyskasz podczas rekrutacji do szkoły średniej.

@@ -10,6 +10,7 @@ import styled from '../styling/styled';
 import Breadcrumbs from '../components/Breadcrumbs';
 import H2 from '../components/H2';
 import Paragraph from '../components/Paragraph';
+import SEO from '../components/SEO';
 import useBasicPageViewTracker from "../hooks/useBasicPageViewTracker";
 
 const Grid = styled.div`
@@ -133,13 +134,16 @@ const MaintainerCard: FC<MaintainerCardProps> = ({ maintainer }) => {
   );
 };
 
+const pageTitle = 'O nas';
+
 const AboutPage: FC<RouteComponentProps> = () => {
   useBasicPageViewTracker();
   return (
     <Layout noFooterMargin>
+      <SEO title={pageTitle} />
       <Container>
-        <Breadcrumbs steps={[['O nas']]} />
-        <PageTitle>O nas</PageTitle>
+        <Breadcrumbs steps={[[pageTitle]]} />
+        <PageTitle>{pageTitle}</PageTitle>
         <Paragraph>
           WarsawLO to przewodnik ucznia, który pomaga mu podczas rekrutacji do szkół średnich.
           Tworzymy aplikację, która będzie wspierać przyszłych uczniów szkół średnich w wyborze
