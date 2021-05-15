@@ -1,38 +1,50 @@
 import React, { FC } from 'react';
-import { Choice, FilterData } from '../../../../data/filters';
+import { FilterKey } from '../../../../data/filters';
 import Chip from '../../../Chip';
-import SidebarSection from "./SidebarSection";
-interface FiltersPreviewProps {
-  filterValues: Record<string, string[]>;
-  filterDefinitions: FilterData[];
-  onSelectChoice: (filterKey: string, choiceId: string) => void;
-  onRemoveChoice: (filterKey: string, choiceId: string) => void;
+import SidebarSection from './SidebarSection';
+import { UseFiltersOutput } from '../../../../hooks/useFilters';
+
+interface ChoiceData {
+  filterKey: FilterKey;
+  filterTitle: string;
+  choiceLabel: string;
+  choiceId: string;
 }
 
-const FiltersPreview: FC<FiltersPreviewProps> = ({
-  filterValues,
-  filterDefinitions,
-  onSelectChoice,
-  onRemoveChoice,
-}) => {
-  const choicesData = Object.entries(filterValues).flatMap(([filterKey, filterValue]) => {
-    const filterDefinition = filterDefinitions.find(({ key }) => key === filterKey) as FilterData;
+const getChoicesData = (filters: UseFiltersOutput) => {
+  let choicesData: ChoiceData[] = [];
+  filters.filtersState.forEach((choiceIds, filterKey) => {
+    const filterDefinition = filters.definitionsUtils.getFilterDefinitionByKey(filterKey);
 
-    return filterValue.map((choiceId) => {
-      const { label: choiceLabel } = filterDefinition.choices.find(
-        ({ id }) => id === choiceId,
-      ) as Choice;
-      return {
-        filterKey,
-        filterTitle: filterDefinition.title,
-        choiceLabel,
-        choiceId,
-      };
-    });
+    choicesData = [
+      ...choicesData,
+      ...filterDefinition.choices
+        .filter(({ id }) => choiceIds.has(id))
+        .map(({ id, label }) => ({
+          filterKey,
+          filterTitle: filterDefinition.title,
+          choiceLabel: label,
+          choiceId: id,
+        })),
+    ];
   });
 
-  if(choicesData.length === 0)
-    return null;
+  return choicesData;
+};
+
+interface FiltersPreviewProps {
+  filters: UseFiltersOutput;
+  onSelectChoice: (filterKey: string, choiceId: string) => void;
+}
+
+const FiltersPreview: FC<FiltersPreviewProps> = ({ filters, onSelectChoice }) => {
+  const choicesData = getChoicesData(filters);
+
+  const onRemoveChoice = (filterKey: FilterKey, choiceId: string) => {
+    filters.setFiltersState(filters.stateUtils.removeFilterChoices(filterKey, choiceId));
+  };
+
+  if (choicesData.length === 0) return null;
 
   return (
     <SidebarSection>

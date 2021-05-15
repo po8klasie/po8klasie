@@ -1,11 +1,13 @@
-import React, { FC, MouseEvent, SyntheticEvent, useEffect, useRef } from 'react';
+import React, { FC, useEffect, useRef } from 'react';
 import { nanoid } from 'nanoid';
 import { BsChevronDown } from 'react-icons/all';
 import styled from '../../../../styling/styled';
-import QueryFilter from './QueryFilter';
-import { Choice as ChoiceDefinition, FilterData, FilterDataKey } from '../../../../data/filters';
-import { removeFromArray } from '../../../../utils/misc';
+import {
+  FilterChoiceDefinition as ChoiceDefinition,
+  FilterDefinition,
+} from '../../../../data/filters';
 import SidebarSection, { SidebarSectionWithoutBorder } from './SidebarSection';
+import { FilterChoiceId } from '../../../../utils/filters';
 
 const Accordion = styled.div``;
 
@@ -32,7 +34,9 @@ const AccordionContent = styled(SidebarSectionWithoutBorder)<{ active: boolean }
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.2s ease-out;
-  ${props => !props.active && `
+  ${(props) =>
+    !props.active &&
+    `
     padding-top: 0;
     padding-bottom: 0;
   `}
@@ -67,46 +71,22 @@ const Choice: FC<ChoiceProps> = ({ choice, active, onChange }) => {
   );
 };
 
-const getSafeValue = (maybeValue: unknown): string[] =>
-  Array.isArray(maybeValue) ? maybeValue : [];
-
-const choiceClickHandlerFactory = (filterProps: FilterProps) => (
-  choiceId: ChoiceDefinition['id'],
-) => () => {
-  const {
-    value,
-    onFilterChange,
-    filterDefinition: { multiple, key, choices },
-  } = filterProps;
-
-  const safeValue = getSafeValue(value);
-
-  const updateChoices = (choicesToUpdate: string[]) => onFilterChange(key, choicesToUpdate);
-
-  if (safeValue.includes(choiceId)) return updateChoices(removeFromArray(safeValue, choiceId));
-
-  if (!multiple) return updateChoices([choiceId]);
-  if(safeValue.length === choices.length - 1) return updateChoices([])
-  return updateChoices([...safeValue, choiceId]);
-};
-
 interface FilterProps {
-  filterDefinition: FilterData;
-  onFilterChange: (filterKey: FilterDataKey, choices: string[]) => void;
+  filterDefinition: FilterDefinition;
+  toggleFilterChoice: (choiceId: FilterChoiceId) => void;
+  isChoiceSelected: (choiceId: FilterChoiceId) => boolean;
   changeFilterVisibility: (visibility: boolean) => void;
   shouldFilterBeVisible: boolean;
-  value: string[];
 }
 
-const Filter: FC<FilterProps> = (props) => {
+const Filter: FC<FilterProps> = ({
+  toggleFilterChoice,
+  isChoiceSelected,
+  changeFilterVisibility,
+  shouldFilterBeVisible,
+  filterDefinition: { title, choices },
+}) => {
   const accordionContentRef = useRef<HTMLDivElement>(null);
-  const createClickHandler = choiceClickHandlerFactory(props);
-  const {
-    value,
-    filterDefinition: { title, choices },
-    changeFilterVisibility,
-    shouldFilterBeVisible,
-  } = props;
 
   const handleToggle = () => changeFilterVisibility(!shouldFilterBeVisible);
 
@@ -130,9 +110,13 @@ const Filter: FC<FilterProps> = (props) => {
       <AccordionContent ref={accordionContentRef} active={shouldFilterBeVisible}>
         {choices.map((choice) => {
           const { id } = choice;
-          const handleClick = createClickHandler(id);
-          const isChoiceActive = getSafeValue(value).includes(id);
-          return <Choice choice={choice} onChange={handleClick} active={isChoiceActive} />;
+          return (
+            <Choice
+              choice={choice}
+              onChange={() => toggleFilterChoice(id)}
+              active={isChoiceSelected(id)}
+            />
+          );
         })}
       </AccordionContent>
     </Accordion>

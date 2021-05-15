@@ -2,7 +2,7 @@ import React, { useState, FC } from 'react';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { BsCheck, BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 import { FiFilter } from 'react-icons/fi';
-import { Choice, FilterData } from '../data/filters';
+import { FilterChoiceDefinition, FilterDefinition } from '../data/filters';
 import styled from '../styling/styled';
 
 const StyledButton = styled.button`
@@ -84,7 +84,7 @@ const MobileFilters: FC<any> = ({ filters, idKey, createHandler, filtersValues }
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
   const [activeFilterId, setActiveFilterId] = useState<string | null>(null);
 
-  const getFilterById = (id: string) => filters.find((f: FilterData) => f.key === id);
+  const getFilterById = (id: string) => filters.find((f: FilterDefinition) => f.key === id);
 
   const goBack = () => {
     if (activeFilterId === null) {
@@ -111,7 +111,7 @@ const MobileFilters: FC<any> = ({ filters, idKey, createHandler, filtersValues }
         <PerfectScrollbar>
           {activeFilterId === null ? (
             <List>
-              {filters.map((filter: FilterData) => (
+              {filters.map((filter: FilterDefinition) => (
                 <li key={filter.key}>
                   <ListButton
                     type="button"
@@ -125,7 +125,7 @@ const MobileFilters: FC<any> = ({ filters, idKey, createHandler, filtersValues }
             </List>
           ) : (
             <List>
-              {getFilterById(activeFilterId).choices.map((choice: Choice) => {
+              {getFilterById(activeFilterId).choices.map((choice: FilterChoiceDefinition) => {
                 const filter = getFilterById(activeFilterId);
                 const handleClick = () => createHandler(filter)(choice.id);
                 return (

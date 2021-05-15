@@ -7,7 +7,8 @@ import {
   pageNumberSerializer,
   ParamsModeType,
 } from './searchSerializers';
-import { FilterData } from '../data/filters';
+import { FilterDefinition } from '../data/filters';
+import { FiltersState } from './filters';
 
 const serializerDeserializerOverwrites: Record<string, any> = {
   page: [pageNumberSerializer, pageNumberDeserializer],
@@ -73,11 +74,17 @@ export const deserializeQuery = (p: URLSearchParams): any =>
 export const deserializePage = (p: URLSearchParams): any =>
   deserializeSingleSearchData('page', p) ?? 1;
 
-export const deserializeFilters = (p: URLSearchParams, filters: FilterData[]): any =>
-  filters.reduce((obj: any, filter) => {
-    const value = deserializeSingleSearchData(filter.key, p);
-    const possibleValues = filter.choices.map((choice) => choice.id);
-    if (!value || !possibleValues.includes(value)) return obj;
+export const deserializeFilters = (
+  p: URLSearchParams,
+  filtersDefinition: FilterDefinition[],
+): FiltersState => {
+  const filtersState = new Map();
+  filtersDefinition.forEach((filterDef) => {
+    const value = deserializeSingleSearchData(filterDef.key, p);
+    const possibleValues = filterDef.choices.map((choice) => choice.id);
+    if (value && value.every((v: string) => possibleValues.includes(v)))
+      filtersState.set(filterDef.key, new Set(value));
+  });
 
-    return { ...obj, [filter.key]: value };
-  }, {});
+  return filtersState;
+};

@@ -1,10 +1,6 @@
 import React, { FC } from 'react';
-import { Link } from '@reach/router';
 import { BsX } from 'react-icons/bs';
 import styled from '../styling/styled';
-import errorImg from '../assets/images/SchoolsPage/error.png';
-import notFoundImg from '../assets/images/SchoolsPage/not-found.png';
-import favouriteSchoolsImg from '../assets/images/favouriteSchools.png';
 
 const ChipWrapper = styled.div`
   display: inline-flex;
