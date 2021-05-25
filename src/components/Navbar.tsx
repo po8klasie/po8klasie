@@ -37,6 +37,7 @@ const NavWrapper = styled.div`
   z-index: 2000;
   background: white;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  height: 6rem;
 `;
 const Nav = styled.nav`
   height: 6em;

@@ -3,7 +3,7 @@ import PerfectScrollbar from 'react-perfect-scrollbar';
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import { MdCheck, MdExpandMore } from 'react-icons/md';
 import styled from '../styling/styled';
-import { Choice } from '../data/filters';
+import { FilterChoiceDefinition } from '../data/filters';
 
 const DropdownWrapper = styled.div<{ active: boolean }>`
   margin-right: 10px;
@@ -106,7 +106,7 @@ const ListItem = styled.li<{ active: boolean }>`
 
 interface DropdownProps {
   title: string;
-  choices: Choice[];
+  choices: FilterChoiceDefinition[];
   selected: string[];
   onSelect: (param: string) => void;
   onSubmit?: () => void;
@@ -123,7 +123,7 @@ const Dropdown: FC<DropdownProps> = ({ title, choices, selected, onSelect, onSub
       <div className="list">
         <PerfectScrollbar>
           <ul>
-            {choices.map((choice: Choice) => (
+            {choices.map((choice: FilterChoiceDefinition) => (
               <ListItem
                 onClick={() => onSelect(choice.id)}
                 active={selected.includes(choice.id)}

@@ -2,58 +2,43 @@ import React, { useMemo, useState, FC } from 'react';
 import { Link, RouteComponentProps } from '@reach/router';
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
 import useDeepCompareEffect from 'use-deep-compare-effect';
-import { BsGrid, BsX } from 'react-icons/bs/index';
+import { BsGrid, BsX } from "react-icons/bs/index";
 import ClipLoader from 'react-spinners/ClipLoader';
 import { LatLngExpression } from 'leaflet';
 import Layout from '../components/Layout';
-import Container from '../components/Container';
-import PageTitle from '../components/PageTitle';
-import QueryFilter from '../components/sections/SchoolsPage/QueryFilter';
-import { useAllSchools } from '../api/schools';
+import { useAllSchools } from "../api/schools";
 import styled from '../styling/styled';
-import DropdownFilters from '../components/sections/SchoolsPage/DropdownFilters';
 import { deserializeFilters, deserializeQuery, serializeSearchData } from '../utils/search';
-import { filters } from '../data/filters';
+import { filters as filtersDefinition } from "../data/filters";
 import { getSchoolMarker } from '../utils/mapMarkers';
 import { doesSchoolHaveCoords, getSchoolCoords } from '../utils/map';
 import SwitchViewLink from '../components/sections/SchoolsPage/SwitchViewLink';
 import theme from '../styling/theme';
-import MarkerKey from '../components/sections/SchoolsPage/MarkerKey';
 import 'react-leaflet-fullscreen-control';
 import getPathWithPreservedParams from '../utils/url';
 import 'leaflet/dist/leaflet.css';
 import { ErrorInfo, NotFoundInfo } from '../components/Info';
 import SEO from '../components/SEO';
 import useBasicPageViewTracker from "../hooks/useBasicPageViewTracker";
+import Sidebar from "../components/sections/SchoolsPage/Sidebar/Sidebar";
+import useFilters from "../hooks/useFilters";
+import { convertFilterStateToObject } from "../utils/filters";
 
-const QueryRow = styled.div`
-  display: flex;
-  align-items: center;
-  margin: 20px 0;
-
-  & > *:first-of-type {
-    margin-right: 20px;
-    width: 100%;
-    min-width: 210px;
-
-    @media (max-width: 1100px) {
-      margin-bottom: 10px;
-    }
-  }
-  @media (max-width: 1100px) {
-    display: block;
-  }
-`;
-
-const TopContainer = styled(Container)`
-  flex: 1 0 auto;
+const SidebarWrapper = styled.div`
+  width: 25vw;
+  height: 100vh;
+  max-width: 400px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
 `;
 
 const MapWrapper = styled.div`
-  width: 100%;
+  width: calc(100% - min(25vw, 400px));
+  margin-left: min(25vw, 400px);
   border: none;
   height: 100%;
-  margin-top: 2em;
   position: relative;
 
   .leaflet-container {
@@ -134,12 +119,12 @@ const SchoolsMapPage: FC<RouteComponentProps> = () => {
   const currUrl = new URL(window.location.href);
   const p = currUrl.searchParams;
   const [query, setQuery] = useState(deserializeQuery(p));
-  const [dropdownFilters, setDropdownFilters] = useState(deserializeFilters(p, filters));
+  const filters = useFilters(filtersDefinition, deserializeFilters(p, filtersDefinition));
   const [notListedCount, setNotListedCount] = useState(0);
   const [notListedVisible, setNotListedVisible] = useState(true);
   const searchData = {
     query,
-    ...dropdownFilters,
+    ...convertFilterStateToObject(filters.filtersState),
   };
   const { data: schools, error } = useAllSchools(searchData);
 
@@ -174,20 +159,18 @@ const SchoolsMapPage: FC<RouteComponentProps> = () => {
   const isOverlayActive = isLoading || schoolsNotFound;
 
   return (
-    <Layout hideFooter contentFlex>
+    <Layout hideFooter wideNavbar noTopMargin contentFlex>
       <SEO title="Przeglądaj szkoły na mapie" />
-      <TopContainer>
-        <PageTitle>Znajdź swoją wymarzoną szkołę</PageTitle>
-        <SwitchViewLink label="Widok siatki" icon={BsGrid} viewPath="grid" />
-        <QueryRow>
-          <QueryFilter query={query} onQueryChange={setQuery} />
-          <DropdownFilters
-            filtersValues={dropdownFilters}
-            onFiltersValuesChange={setDropdownFilters}
-          />
-        </QueryRow>
-        <MarkerKey />
-      </TopContainer>
+      <SidebarWrapper>
+        <Sidebar
+          filters={filters}
+          query={query}
+          onQueryChange={setQuery}
+          switchViewLinkElement={
+            <SwitchViewLink label="Widok listy" icon={BsGrid} viewPath="grid" />
+          }
+        />
+      </SidebarWrapper>
       <MapWrapper>
         <Map center={DEFAULT_CENTER} zoom={DEFAULT_ZOOM} bounds={bounds} fullscreenControl>
           <TileLayer
