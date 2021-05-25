@@ -50,7 +50,7 @@ jobs:
         # https://github.com/kyma-project/test-infra/issues/93#issuecomment-457263589
         for i in $(gcloud compute os-login ssh-keys list --format="table[no-heading](value.fingerprint)"); do
             echo "Removing ssh key" $i;
-            gcloud compute os-login ssh-keys remove --key $i;
+            gcloud compute os-login ssh-keys remove --key $i || true;
         done
 
     - name: Deploy
