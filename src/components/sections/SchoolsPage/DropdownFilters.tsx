@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import styled from '../../../styling/styled';
 import Dropdown from '../../Dropdown';
 import MobileFilters from '../../MobileFilters';
-import { FilterData, filters } from '../../../data/filters';
+import { FilterDefinition, filters } from '../../../data/filters';
 import { removeFromArray } from '../../../utils/misc';
 
 const DropdownsWrapper = styled.div`
@@ -27,7 +27,7 @@ const deleteFromObject = (obj: any, keys: string[]) => {
 };
 
 const DropdownFilters: FC<any> = ({ onFiltersValuesChange, filtersValues }) => {
-  const createHandler = (filterData: FilterData) => (choiceId: string) => {
+  const createHandler = (filterData: FilterDefinition) => (choiceId: string) => {
     const { choices, multiple, key: filterKey } = filterData;
     const valuesForFilter: string[] = filtersValues[filterKey] ? filtersValues[filterKey] : [];
 
@@ -57,7 +57,7 @@ const DropdownFilters: FC<any> = ({ onFiltersValuesChange, filtersValues }) => {
   return (
     <>
       <DropdownsWrapper>
-        {filters.map((filter: FilterData) => {
+        {filters.map((filter: FilterDefinition) => {
           const handleSelect = createHandler(filter);
           return (
             <Dropdown

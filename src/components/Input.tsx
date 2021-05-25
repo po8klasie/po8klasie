@@ -14,6 +14,8 @@ const Input = styled.input`
     border: 2px solid rgb(200, 200, 200);
   }
 `;
+
+// input with addon is styled differently than normal input! (it is used only in query input)
 const InputWithAddonWrapper = styled.div<{ addonPosition: 'left' | 'right' }>`
   display: inline-flex;
   flex-direction: ${(props) => (props.addonPosition === 'left' ? 'row' : 'row-reverse')};
