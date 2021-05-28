@@ -17,7 +17,7 @@ import Checkbox from '../components/Checkbox';
 import { examParts, subjects } from '../data/calculator';
 import Breadcrumbs from '../components/Breadcrumbs';
 import SEO from '../components/SEO';
-import useBasicPageViewTracker from "../hooks/useBasicPageViewTracker";
+import useBasicPageViewTracker from '../hooks/useBasicPageViewTracker';
 
 const { isGradeValid, isExamResultValid } = validators;
 const { initialInputData, initialCalculatedPoints } = initialData;
@@ -33,7 +33,6 @@ const InputGrid = styled.div`
   grid-row-gap: 10px;
   .row {
     display: contents;
-
     * {
       display: flex;
       align-items: center;
@@ -79,7 +78,6 @@ const CheckboxFlex = styled.div`
   display: flex;
   div {
     margin-right: 3em;
-
     label {
       user-select: none;
     }
@@ -100,7 +98,6 @@ const Result = styled.div`
   h2 {
     text-transform: uppercase;
     font-size: 2em;
-
     span {
       color: ${(props) => props.theme.colors.primary};
     }

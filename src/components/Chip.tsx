@@ -4,14 +4,14 @@ import styled from '../styling/styled';
 
 const ChipWrapper = styled.div`
   display: inline-flex;
-  margin-right: .5rem;
+  margin-right: 0.5rem;
   font-size: 1rem;
 `;
 
 const ChipButton = styled.button`
   border: none;
   background: #f2f1f1;
-  padding: .5rem;
+  padding: 0.5rem;
 `;
 
 const LabelButton = styled(ChipButton)`

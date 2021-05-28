@@ -41,7 +41,6 @@ const FooterGrid = styled.div`
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-column-gap: 2em;
-
     @media (max-width: 650px) {
       grid-template-columns: 1fr;
     }
@@ -67,7 +66,6 @@ const FooterGrid = styled.div`
       line-height: 1.5em;
       margin-top: 0;
       text-align: center;
-
       @media (min-width: 1001px) {
         text-align: left;
       }
@@ -78,7 +76,6 @@ const FooterGrid = styled.div`
       grid-template-columns: repeat(2, 1fr);
       grid-column-gap: 4em;
       margin-top: 2em;
-
       img {
         width: 100%;
       }
