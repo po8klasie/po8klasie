@@ -16,7 +16,7 @@ const SidebarInnerWrapper = styled.div`
 
 const Count = styled.small`
   display: block;
-  margin-top: .8rem;
+  margin-top: 0.8rem;
 `;
 
 interface SidebarProps {

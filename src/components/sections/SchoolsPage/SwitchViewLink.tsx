@@ -15,7 +15,7 @@ const SwitchLink = styled(Link)`
   display: flex;
   align-items: center;
 
-  & > *:first-child {
+  & > svg {
     margin-right: 5px;
   }
 `;
