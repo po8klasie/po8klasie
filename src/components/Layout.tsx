@@ -9,9 +9,9 @@ const LayoutWrapper = styled.div`
   width: 100%;
   height: 100%;
 `;
-const Content = styled.div<{ flex?: boolean }>`
+const Content = styled.div<{ flex?: boolean; noTopMargin?: boolean }>`
   flex: 1 0 auto;
-  margin-top: 8rem;
+  margin-top: ${props => props.noTopMargin ? '6rem' : '8rem'};
   ${(props) =>
     props.flex &&
     `
@@ -24,15 +24,24 @@ const FooterWrapper = styled.div`
 `;
 
 interface LayoutProps {
+  wideNavbar?: boolean;
   contentFlex?: boolean;
   hideFooter?: boolean;
   noFooterMargin?: boolean;
+  noTopMargin?: boolean;
 }
 
-const Layout: FC<LayoutProps> = ({ contentFlex, hideFooter, noFooterMargin, children }) => (
+const Layout: FC<LayoutProps> = ({
+  wideNavbar,
+  contentFlex,
+  hideFooter,
+  noFooterMargin,
+  noTopMargin,
+  children,
+}) => (
   <LayoutWrapper>
-    <Navbar />
-    <Content flex={contentFlex}>{children}</Content>
+    <Navbar wide={wideNavbar} />
+    <Content flex={contentFlex} noTopMargin={noTopMargin}>{children}</Content>
     {!hideFooter && (
       <FooterWrapper>
         <Footer noFooterMargin={noFooterMargin} />

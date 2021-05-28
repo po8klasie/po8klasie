@@ -1,108 +1,57 @@
 import React, { FC, useState } from 'react';
 import { RouteComponentProps } from '@reach/router';
 import useDeepCompareEffect from 'use-deep-compare-effect';
-import { BsMap } from 'react-icons/bs/index';
+import { BsMap } from 'react-icons/bs';
 import Layout from '../components/Layout';
 import Container from '../components/Container';
 import PageTitle from '../components/PageTitle';
-import QueryFilter from '../components/sections/SchoolsPage/QueryFilter';
 import { useSchools } from '../api/schools';
 import styled from '../styling/styled';
-import Card from '../components/Card';
-import { createPlaceholderStyles } from '../utils/loading';
-import { School } from '../types';
-import SchoolCard from '../components/SchoolCard';
-import DropdownFilters from '../components/sections/SchoolsPage/DropdownFilters';
 import {
   deserializeFilters,
   deserializePage,
   deserializeQuery,
   serializeSearchData,
 } from '../utils/search';
-import { filters } from '../data/filters';
+import { filters as filtersDefinition } from '../data/filters';
 import Pagination from '../components/sections/SchoolsPage/Pagination';
 import SwitchViewLink from '../components/sections/SchoolsPage/SwitchViewLink';
-import { PER_PAGE } from '../utils/pagination';
-import { ErrorInfo, NotFoundInfo } from '../components/Info';
+import Results from '../components/sections/SchoolsPage/Results';
+import Sidebar from '../components/sections/SchoolsPage/Sidebar/Sidebar';
+import useBasicPageViewTracker from '../hooks/useBasicPageViewTracker';
+import SEO from '../components/SEO';
+import useFilters from '../hooks/useFilters';
+import { convertFilterStateToObject } from '../utils/filters';
 
-const QueryRow = styled.div`
+const Flex = styled.div`
   display: flex;
-  align-items: center;
-  margin: 20px 0;
-
-  & > *:first-of-type {
-    margin-right: 20px;
-    width: 100%;
-    min-width: 210px;
-
-    @media (max-width: 1100px) {
-      margin-bottom: 10px;
-    }
-  }
-  @media (max-width: 1100px) {
-    display: block;
-  }
 `;
 
-const Count = styled.small`
-  display: block;
-  margin: 1em 0 2em 0;
+const SidebarWrapper = styled.div`
+  width: 25vw;
+  height: 100vh;
+  max-width: 400px;
+  position: fixed;
+  top: 0;
+  left: 0;
 `;
 
-const ResultsWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-top: 2em;
+const ContentWrapper = styled(Container)`
+  margin-left: 25vw;
+  padding: 0 4rem 4rem 0;
 `;
-
-const LoadingCard = styled(Card)`
-  ${createPlaceholderStyles()}
-  height: 200px;
-  box-shadow: none;
-  &::after {
-    background: #eee;
-  }
-`;
-
-const Results: FC<any> = ({ schools, error, page, count, onPageChange }) => {
-  if (error) return <ErrorInfo />;
-
-  if (schools && schools.length === 0) return <NotFoundInfo />;
-
-  if (!schools)
-    return (
-      <ResultsWrapper>
-        <LoadingCard />
-        <LoadingCard />
-        <LoadingCard />
-      </ResultsWrapper>
-    );
-
-  return (
-    <>
-      <ResultsWrapper>
-        {schools.map((school: School) => (
-          <SchoolCard key={school.id} school={school} />
-        ))}
-      </ResultsWrapper>
-      {schools.length > PER_PAGE && (
-        <Pagination page={page} count={count} onPageChange={onPageChange} />
-      )}
-    </>
-  );
-};
 
 const SchoolsGridPage: FC<RouteComponentProps> = () => {
+  useBasicPageViewTracker();
   const currUrl = new URL(window.location.href);
   const p = currUrl.searchParams;
   const [query, setQuery] = useState(deserializeQuery(p));
   const [page, setPage] = useState(deserializePage(p));
-  const [dropdownFilters, setDropdownFilters] = useState(deserializeFilters(p, filters));
-
+  const filters = useFilters(filtersDefinition, deserializeFilters(p, filtersDefinition));
   const searchData = {
     query,
     page,
-    ...dropdownFilters,
+    ...convertFilterStateToObject(filters.filtersState),
   };
   const { data, error } = useSchools(searchData);
 
@@ -113,21 +62,28 @@ const SchoolsGridPage: FC<RouteComponentProps> = () => {
 
   const schools = data?.schools;
   const count = data?.count;
+
   return (
-    <Layout>
-      <Container>
-        <PageTitle>Znajdź swoją wymarzoną szkołę</PageTitle>
-        <SwitchViewLink label="Widok mapy" icon={BsMap} viewPath="map" />
-        <QueryRow>
-          <QueryFilter query={query} onQueryChange={setQuery} />
-          <DropdownFilters
-            filtersValues={dropdownFilters}
-            onFiltersValuesChange={setDropdownFilters}
+    <Layout hideFooter wideNavbar>
+      <SEO title="Przeglądaj listę szkół" />
+      <Flex>
+        <SidebarWrapper>
+          <Sidebar
+            filters={filters}
+            query={query}
+            onQueryChange={setQuery}
+            count={count}
+            switchViewLinkElement={
+              <SwitchViewLink label="Widok mapy" icon={BsMap} viewPath="map" />
+            }
           />
-        </QueryRow>
-        {schools && <Count>Liczba wyników: {count}</Count>}
-        <Results schools={schools} error={error} page={page} count={count} onPageChange={setPage} />
-      </Container>
+        </SidebarWrapper>
+        <ContentWrapper>
+          <PageTitle>Znajdź swoją wymarzoną szkołę</PageTitle>
+          <Results schools={schools} error={error} />
+          <Pagination page={page} count={count} onPageChange={setPage} disabled={!data} />
+        </ContentWrapper>
+      </Flex>
     </Layout>
   );
 };

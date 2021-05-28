@@ -6,6 +6,10 @@ import Container from './Container';
 import Logo from './Logo';
 import getPathWithPreservedParams from '../utils/url';
 
+const WideContainer = styled(Container)`
+  width: calc(100% - 5rem);
+`;
+
 const Brand = styled(Link)`
   color: inherit;
   text-decoration: none;
@@ -32,23 +36,8 @@ const NavWrapper = styled.div`
   width: 100%;
   z-index: 2000;
   background: white;
-  &::after {
-    content: '';
-    display: block;
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    width: 75%;
-    transform: translateX(-50%);
-    height: 1px;
-    background: black;
-    @media (max-width: 780px) {
-      content: none;
-    }
-  }
-  @media (max-width: 780px) {
-    border-bottom: 1px solid black;
-  }
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  height: 6rem;
 `;
 const Nav = styled.nav`
   height: 6em;
@@ -92,12 +81,10 @@ const MobileBar = styled.div`
   .menu-icons {
     color: ${(props) => props.theme.colors.primary};
     display: none;
-
     svg {
       width: 2em;
       height: 2em;
     }
-
     @media (max-width: 780px) {
       display: block;
       border: none;
@@ -109,7 +96,12 @@ const MobileBar = styled.div`
     width: 100%;
   }
 `;
-const Navbar: FC = () => {
+
+interface NavbarProps {
+  wide?: boolean;
+}
+
+const Navbar: FC<NavbarProps> = ({ wide }) => {
   const [isNavOpen, setNavOpen] = useState(false);
 
   const isSearchPage = window.location.pathname.startsWith('/schools');
@@ -118,9 +110,20 @@ const Navbar: FC = () => {
     return isSearchPage ? getPathWithPreservedParams(path) : path;
   };
 
+  const menuItems: [string, string][] = [
+    ['Home', '/'],
+    ['Szkoły', getSearchLink('grid')],
+    ['Mapa', getSearchLink('map')],
+    ['Ulubione', '/favourite-schools'],
+    ['O nas', '/about-us'],
+    ['Kalkulator punktów', '/calculator'],
+  ];
+
+  const ContainerComponent = wide ? WideContainer : Container;
+
   return (
     <NavWrapper>
-      <Container>
+      <ContainerComponent>
         <Nav>
           <MobileBar>
             <Brand to="/">
@@ -133,27 +136,14 @@ const Navbar: FC = () => {
             </button>
           </MobileBar>
           <Menu active={isNavOpen}>
-            <MenuItem>
-              <Link to="/">Home</Link>
-            </MenuItem>
-            <MenuItem>
-              <Link to={getSearchLink('grid')}>Szkoły</Link>
-            </MenuItem>
-            <MenuItem>
-              <Link to={getSearchLink('map')}>Mapa</Link>
-            </MenuItem>
-            <MenuItem>
-              <Link to="/favourite-schools">Ulubione</Link>
-            </MenuItem>
-            <MenuItem>
-              <Link to="/about-us">O nas</Link>
-            </MenuItem>
-            <MenuItem>
-              <Link to="/calculator">Kalkulator punktów</Link>
-            </MenuItem>
+            {menuItems.map(([title, link]) => (
+              <MenuItem key={link}>
+                <Link to={link}>{title}</Link>
+              </MenuItem>
+            ))}
           </Menu>
         </Nav>
-      </Container>
+      </ContainerComponent>
     </NavWrapper>
   );
 };

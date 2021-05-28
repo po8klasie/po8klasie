@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { Link } from '@reach/router';
+import { FaFacebook, FaGithub } from 'react-icons/fa';
 import styled from '../styling/styled';
 import Container from './Container';
 import epfImg from '../assets/images/epf.png';
@@ -40,7 +41,6 @@ const FooterGrid = styled.div`
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-column-gap: 2em;
-
     @media (max-width: 650px) {
       grid-template-columns: 1fr;
     }
@@ -66,7 +66,6 @@ const FooterGrid = styled.div`
       line-height: 1.5em;
       margin-top: 0;
       text-align: center;
-
       @media (min-width: 1001px) {
         text-align: left;
       }
@@ -77,7 +76,6 @@ const FooterGrid = styled.div`
       grid-template-columns: repeat(2, 1fr);
       grid-column-gap: 4em;
       margin-top: 2em;
-
       img {
         width: 100%;
       }
@@ -85,6 +83,18 @@ const FooterGrid = styled.div`
   }
   @media (max-width: 1000px) {
     grid-template-columns: 1fr;
+  }
+`;
+
+const SocialMediaIcons = styled.div`
+  a {
+    display: inline-block;
+    color: black;
+    margin-right: 1rem;
+  }
+  svg {
+    height: 1.7rem;
+    width: 1.7rem;
   }
 `;
 
@@ -149,6 +159,14 @@ const Footer: FC<FooterProps> = ({ noFooterMargin }) => (
           </div>
         </div>
       </FooterGrid>
+      <SocialMediaIcons>
+        <a href="https://github.com/WarsawLO" rel="noopener noreferrer" target="_blank">
+          <FaGithub />
+        </a>
+        <a href="https://fb.com/WarsawLO" rel="noopener noreferrer" target="_blank">
+          <FaFacebook />
+        </a>
+      </SocialMediaIcons>
     </Container>
   </FooterWrapper>
 );

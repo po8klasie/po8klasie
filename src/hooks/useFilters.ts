@@ -1,45 +1,32 @@
-import { useState } from 'react';
-import { FilterData } from '../data/filters';
-import { removeFromArray } from '../utils/misc';
+import { useMemo, useState } from 'react';
 
-interface UseFiltersOptions {
-  defaultValue: Record<string, string[]>;
-  idKey: string;
+import { FilterDefinitionsUtils, FiltersState, FiltersStateUtils } from '../utils/filters';
+import { FilterDefinition } from '../data/filters';
+
+export interface UseFiltersOutput {
+  filtersDefinition: FilterDefinition[];
+  filtersState: FiltersState;
+  setFiltersState: (state: FiltersState) => void;
+  stateUtils: FiltersStateUtils;
+  definitionsUtils: FilterDefinitionsUtils;
 }
 
-const useFilters = (options: UseFiltersOptions): any => {
-  const [filtersValues, setFiltersValues] = useState<Record<string, string[]>>(
-    options.defaultValue,
-  );
-  const createHandler = (filterData: FilterData) => (choiceId: string) => {
-    const fieldId = (filterData as any)[options.idKey];
-    const { choices, multiple } = filterData;
-    const valuesForFilter = filtersValues[fieldId] ? filtersValues[fieldId] : [];
-
-    if (!valuesForFilter.includes(choiceId)) {
-      if (multiple && valuesForFilter.length + 1 === choices.length) {
-        setFiltersValues({
-          ...filtersValues,
-          [fieldId]: [],
-        });
-        return;
-      }
-      setFiltersValues({
-        ...filtersValues,
-        [fieldId]: multiple ? [...valuesForFilter, choiceId] : [choiceId],
-      });
-      return;
-    }
-    setFiltersValues({
-      ...filtersValues,
-      [fieldId]: removeFromArray(valuesForFilter, choiceId),
-    });
-  };
+const useFilters = (
+  filtersDefinition: FilterDefinition[],
+  initialFiltersState: FiltersState = new Map(),
+): UseFiltersOutput => {
+  const [filtersState, setFiltersState] = useState<FiltersState>(initialFiltersState);
+  const stateUtils = new FiltersStateUtils(filtersState);
+  const definitionsUtils = useMemo(() => new FilterDefinitionsUtils(filtersDefinition), [
+    filtersDefinition,
+  ]);
 
   return {
-    filtersValues,
-    createHandler,
-    setFiltersValues,
+    filtersDefinition,
+    filtersState,
+    setFiltersState,
+    stateUtils,
+    definitionsUtils,
   };
 };
 

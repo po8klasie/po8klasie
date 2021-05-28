@@ -1,18 +1,18 @@
-export type Choice = {
+export type FilterChoiceDefinition = {
   label: string;
   id: string;
 };
 
-export type FilterDataKey = 'public' | 'schoolType' | 'extendedSubjects' | 'district';
+export type FilterKey = 'public' | 'schoolType' | 'extendedSubjects' | 'district';
 
-export type FilterData = {
-  key: FilterDataKey; // for frontend eg. /search?key=<value>
+export type FilterDefinition = {
+  key: FilterKey; // for frontend eg. /search?key=<value>
   title: string;
   multiple: boolean;
-  choices: Choice[];
+  choices: FilterChoiceDefinition[];
 };
 
-export const filters: FilterData[] = [
+export const filters: FilterDefinition[] = [
   {
     key: 'public',
     title: 'Szkoła publiczna',

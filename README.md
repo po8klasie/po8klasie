@@ -21,10 +21,7 @@ If you want to contribute to WarsawLO, please read our [contribution guide](CONT
 git clone https://github.com/WarsawLO/WarsawLO-2.0
 ```
 
-2. In root directory of the project, create `.env` file with following content (replacing `<SERVER_URL>` with server where API is hosted) :page_facing_up:
-```
-REACT_APP_API_URL=<SERVER_URL>
-```
+2. In root directory of the project, create `.env` file with specified environmental variables ([see below](#env-vars)) :page_facing_up:
 
 3. Install dependencies using [yarn](https://yarnpkg.com/) :package:
 ```shell script  
@@ -39,6 +36,18 @@ yarn start
 5. Make some changes and submit pull request :tada: <br />
 
 > *NOTE:* Before submitting a pull request, please read our [contribution guidelines](CONTRIBUTING.md).
+
+<a name="env-vars"></a>
+### Environmental variables
+
+| Name | Required | Description |
+| - | :-: | - |
+| `API_URL` | :heavy_check_mark: | Url where API is hosted (include a trailing slash) | 
+| `PUBLIC_SENTRY_DSN` | :x: | Sentry DSN. If it's not specified, Sentry Client is not initialized. |
+| `MATOMO_BASE_URL` | :x: | Matomo base url (include a trailing slash). If it's not specified, Matomo Client is not initialized. |
+| `MATOMO_SITE_ID` | :x: | Matomo site ID. If it's not specified, Matomo Client is not initialized. |
+
+> *NOTE:* In development environment prefix each env var name with `REACT_APP_` (eg. `REACT_APP_API_URL`)
 
 ### Linter & formatter
 Currently, we are in process of setting up [eslint](https://eslint.org) and [prettier](https://prettier.io).

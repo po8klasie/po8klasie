@@ -31,7 +31,6 @@ const PaginationSkipButton = styled(BaseButton)`
   border-radius: 50%;
   padding: 10px;
   margin: 0 20px;
-
   svg {
     width: 20px;
     height: 20px;
@@ -42,31 +41,42 @@ interface PaginationProps {
   count: number;
   page: number;
   onPageChange: (page: number) => void;
+  disabled?: boolean;
 }
 
-const Pagination: FC<PaginationProps> = ({ count, page, onPageChange }) => {
+const Pagination: FC<PaginationProps> = ({ count, page, onPageChange, disabled }) => {
   const totalPages = getTotalPages(count);
+
+  if (totalPages === 1 || totalPages === 0) return null;
 
   return (
     <PaginationWrapper>
       <div>
-        <PaginationSkipButton onClick={() => onPageChange(1)}>
+        <PaginationSkipButton onClick={() => onPageChange(1)} disabled={disabled}>
           <BsSkipStart />
         </PaginationSkipButton>
         {page - 2 > 0 && (
-          <PaginationButton onClick={() => onPageChange(page - 2)}>{page - 2}</PaginationButton>
+          <PaginationButton onClick={() => onPageChange(page - 2)} disabled={disabled}>
+            {page - 2}
+          </PaginationButton>
         )}
         {page - 1 > 0 && (
-          <PaginationButton onClick={() => onPageChange(page - 1)}>{page - 1}</PaginationButton>
+          <PaginationButton onClick={() => onPageChange(page - 1)} disabled={disabled}>
+            {page - 1}
+          </PaginationButton>
         )}
         <PaginationButton active>{page}</PaginationButton>
         {page + 1 < totalPages && (
-          <PaginationButton onClick={() => onPageChange(page + 1)}>{page + 1}</PaginationButton>
+          <PaginationButton onClick={() => onPageChange(page + 1)} disabled={disabled}>
+            {page + 1}
+          </PaginationButton>
         )}
         {page + 2 < totalPages && (
-          <PaginationButton onClick={() => onPageChange(page + 2)}>{page + 2}</PaginationButton>
+          <PaginationButton onClick={() => onPageChange(page + 2)} disabled={disabled}>
+            {page + 2}
+          </PaginationButton>
         )}
-        <PaginationSkipButton onClick={() => onPageChange(totalPages)}>
+        <PaginationSkipButton onClick={() => onPageChange(totalPages)} disabled={disabled}>
           <BsSkipEnd />
         </PaginationSkipButton>
       </div>

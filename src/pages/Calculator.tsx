@@ -16,6 +16,8 @@ import PageTitle from '../components/PageTitle';
 import Checkbox from '../components/Checkbox';
 import { examParts, subjects } from '../data/calculator';
 import Breadcrumbs from '../components/Breadcrumbs';
+import SEO from '../components/SEO';
+import useBasicPageViewTracker from "../hooks/useBasicPageViewTracker";
 
 const { isGradeValid, isExamResultValid } = validators;
 const { initialInputData, initialCalculatedPoints } = initialData;
@@ -31,7 +33,6 @@ const InputGrid = styled.div`
   grid-row-gap: 10px;
   .row {
     display: contents;
-
     * {
       display: flex;
       align-items: center;
@@ -77,7 +78,6 @@ const CheckboxFlex = styled.div`
   display: flex;
   div {
     margin-right: 3em;
-
     label {
       user-select: none;
     }
@@ -98,7 +98,6 @@ const Result = styled.div`
   h2 {
     text-transform: uppercase;
     font-size: 2em;
-
     span {
       color: ${(props) => props.theme.colors.primary};
     }
@@ -112,9 +111,12 @@ const Result = styled.div`
   }
 `;
 
+const pageTitle = 'Kalkulator punktów';
+
 const calc = new PointsCalculator(CONFIG_2018_2019);
 
 const Calculator: FC<RouteComponentProps> = () => {
+  useBasicPageViewTracker();
   const [points, setPoints] = useState<CalculatedPoints>(initialCalculatedPoints);
   const { register, watch, reset } = useForm();
   useLayoutEffect(() => {
@@ -185,9 +187,10 @@ const Calculator: FC<RouteComponentProps> = () => {
 
   return (
     <Layout>
+      <SEO title={pageTitle} />
       <Container>
-        <Breadcrumbs steps={[['Kalkulator punktów']]} />
-        <PageTitle>Kalkulator punktów</PageTitle>
+        <Breadcrumbs steps={[[pageTitle]]} />
+        <PageTitle>{pageTitle}</PageTitle>
         <p>
           Podaj swoje oceny, wyniki z egzaminu ósmoklasisty oraz dodatkowe osiągnięcia (jeśli takie
           masz) i oblicz punkty, jakie uzyskasz podczas rekrutacji do szkoły średniej.

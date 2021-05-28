@@ -3,7 +3,7 @@ import PerfectScrollbar from 'react-perfect-scrollbar';
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import { MdCheck, MdExpandMore } from 'react-icons/md';
 import styled from '../styling/styled';
-import { Choice } from '../data/filters';
+import { FilterChoiceDefinition } from '../data/filters';
 
 const DropdownWrapper = styled.div<{ active: boolean }>`
   margin-right: 10px;
@@ -24,7 +24,6 @@ const DropdownWrapper = styled.div<{ active: boolean }>`
     border-radius: 10px;
     font-size: 1em;
     transition: 0.2s all;
-
     & > svg {
       color: ${(props) => props.theme.colors.dark};
       margin-left: 10px;
@@ -32,7 +31,6 @@ const DropdownWrapper = styled.div<{ active: boolean }>`
       transition: transform 0.2s;
     }
   }
-
   .space {
     position: absolute;
     display: none;
@@ -56,7 +54,6 @@ const DropdownWrapper = styled.div<{ active: boolean }>`
     opacity: 0;
     transition: 0.2s all;
     z-index: 1000;
-
     ul {
       margin: 0;
       padding-inline-start: 0;
@@ -106,7 +103,7 @@ const ListItem = styled.li<{ active: boolean }>`
 
 interface DropdownProps {
   title: string;
-  choices: Choice[];
+  choices: FilterChoiceDefinition[];
   selected: string[];
   onSelect: (param: string) => void;
   onSubmit?: () => void;
@@ -123,7 +120,7 @@ const Dropdown: FC<DropdownProps> = ({ title, choices, selected, onSelect, onSub
       <div className="list">
         <PerfectScrollbar>
           <ul>
-            {choices.map((choice: Choice) => (
+            {choices.map((choice: FilterChoiceDefinition) => (
               <ListItem
                 onClick={() => onSelect(choice.id)}
                 active={selected.includes(choice.id)}

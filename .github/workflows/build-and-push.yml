@@ -17,6 +17,19 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2.1.0
+    
+    # We always update prod deployments to the "latest" container tag. GitHub actions do start in the order of merged
+    # commits, but there is no guarantee on docker execution time, We could have a situation where two commits are
+    # merged at the ~same time, but the earlier commit finishes building later than the most recent one, which in turn
+    # means that the "latest" tag won't point to the latest commit.
+    #
+    # There is no builtin way to make one action run at a time, so we use Turnstyle.
+    #
+    # https://github.community/t/is-the-order-of-workflows-by-commit/16982/2
+    - name: Turnstyle
+      uses: softprops/turnstyle@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - uses: docker/build-push-action@v1
       with:
@@ -31,16 +44,19 @@ jobs:
         version: '290.0.1'
         service_account_key: ${{ secrets.GCE_SA_KEY }}
         project_id: ${{ secrets.GCE_PROJECT }}
-
-    - name: Turnstyle
-      uses: softprops/turnstyle@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        
+    - name: Clean ssh keys
+      run: |-
+        # https://github.com/kyma-project/test-infra/issues/93#issuecomment-457263589
+        for i in $(gcloud compute os-login ssh-keys list --format="table[no-heading](value.fingerprint)"); do
+            echo "Removing ssh key" $i;
+            gcloud compute os-login ssh-keys remove --key $i || true;
+        done
 
     - name: Deploy
       run: |-
         gcloud compute ssh --zone ${GCE_INSTANCE_ZONE} ${GCE_INSTANCE} -- \
-          -tt -C "cd /home/mlazowik/infra && bash update-frontend.sh && yes | docker system prune"
+          -tt -C "cd /home/mlazowik/infra/app && bash update-frontend.sh && yes | docker system prune"
 
     - name: Purge cache
       uses: jakejarvis/cloudflare-purge-action@v0.3.0
