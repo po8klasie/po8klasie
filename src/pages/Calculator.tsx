@@ -17,7 +17,7 @@ import Checkbox from '../components/Checkbox';
 import { examParts, subjects } from '../data/calculator';
 import Breadcrumbs from '../components/Breadcrumbs';
 import SEO from '../components/SEO';
-import useBasicPageViewTracker from "../hooks/useBasicPageViewTracker";
+import useBasicPageViewTracker from '../hooks/useBasicPageViewTracker';
 
 const { isGradeValid, isExamResultValid } = validators;
 const { initialInputData, initialCalculatedPoints } = initialData;
