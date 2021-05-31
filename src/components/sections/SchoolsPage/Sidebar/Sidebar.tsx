@@ -11,7 +11,6 @@ const SidebarInnerWrapper = styled.div`
   height: 100%;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   background: white;
-  padding-top: 8rem;
 `;
 
 const Count = styled.small`

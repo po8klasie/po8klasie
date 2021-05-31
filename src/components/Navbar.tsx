@@ -40,7 +40,7 @@ const NavWrapper = styled.div`
   height: 6rem;
 `;
 const Nav = styled.nav`
-  height: 6em;
+  height: 6rem;
   width: 100%;
   display: flex;
   align-items: center;

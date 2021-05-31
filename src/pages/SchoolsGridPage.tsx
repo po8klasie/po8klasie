@@ -4,7 +4,6 @@ import useDeepCompareEffect from 'use-deep-compare-effect';
 import { BsMap } from 'react-icons/bs';
 import Layout from '../components/Layout';
 import Container from '../components/Container';
-import PageTitle from '../components/PageTitle';
 import { useSchools } from '../api/schools';
 import styled from '../styling/styled';
 import {
@@ -58,7 +57,7 @@ const SchoolsGridPage: FC<RouteComponentProps> = () => {
   const count = data?.count;
 
   return (
-    <Layout hideFooter>
+    <Layout hideFooter noTopMargin>
       <SEO title="Przeglądaj listę szkół" />
       <Flex>
         <SidebarWrapper>
@@ -73,7 +72,6 @@ const SchoolsGridPage: FC<RouteComponentProps> = () => {
           />
         </SidebarWrapper>
         <ContentWrapper>
-          <PageTitle>Znajdź swoją wymarzoną szkołę</PageTitle>
           <Results schools={schools} error={error} />
           <Pagination page={page} count={count} onPageChange={setPage} disabled={!data} />
         </ContentWrapper>
