@@ -18,6 +18,7 @@ import Pagination from '../components/sections/SchoolsPage/Pagination';
 import SwitchViewLink from '../components/sections/SchoolsPage/SwitchViewLink';
 import Results from '../components/sections/SchoolsPage/Results';
 import Sidebar from '../components/sections/SchoolsPage/Sidebar/Sidebar';
+import SidebarWrapper from '../components/sections/SchoolsPage/Sidebar/SidebarWrapper';
 import useBasicPageViewTracker from '../hooks/useBasicPageViewTracker';
 import SEO from '../components/SEO';
 import useFilters from '../hooks/useFilters';
@@ -26,19 +27,12 @@ import { convertFilterStateToObject } from '../utils/filters';
 const Flex = styled.div`
   display: flex;
 `;
-
-const SidebarWrapper = styled.div`
-  width: 25vw;
-  height: 100vh;
-  max-width: 400px;
-  position: fixed;
-  top: 0;
-  left: 0;
-`;
-
 const ContentWrapper = styled(Container)`
   margin-left: 25vw;
-  padding: 0 4rem 4rem 0;
+  padding: 0 4rem 4rem;
+  @media (min-width: 1800px) {
+    padding-left: 0;
+  }
 `;
 
 const SchoolsGridPage: FC<RouteComponentProps> = () => {
@@ -64,7 +58,7 @@ const SchoolsGridPage: FC<RouteComponentProps> = () => {
   const count = data?.count;
 
   return (
-    <Layout hideFooter wideNavbar>
+    <Layout hideFooter>
       <SEO title="Przeglądaj listę szkół" />
       <Flex>
         <SidebarWrapper>

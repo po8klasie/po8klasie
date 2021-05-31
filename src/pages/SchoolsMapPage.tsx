@@ -21,18 +21,9 @@ import { ErrorInfo, NotFoundInfo } from '../components/Info';
 import SEO from '../components/SEO';
 import useBasicPageViewTracker from '../hooks/useBasicPageViewTracker';
 import Sidebar from '../components/sections/SchoolsPage/Sidebar/Sidebar';
+import SidebarWrapper from '../components/sections/SchoolsPage/Sidebar/SidebarWrapper';
 import useFilters from '../hooks/useFilters';
 import { convertFilterStateToObject } from '../utils/filters';
-
-const SidebarWrapper = styled.div`
-  width: 25vw;
-  height: 100vh;
-  max-width: 400px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1;
-`;
 
 const MapWrapper = styled.div`
   width: calc(100% - min(25vw, 400px));
@@ -157,7 +148,7 @@ const SchoolsMapPage: FC<RouteComponentProps> = () => {
   const isOverlayActive = isLoading || schoolsNotFound;
 
   return (
-    <Layout hideFooter wideNavbar noTopMargin contentFlex>
+    <Layout hideFooter noTopMargin>
       <SEO title="Przeglądaj szkoły na mapie" />
       <SidebarWrapper>
         <Sidebar

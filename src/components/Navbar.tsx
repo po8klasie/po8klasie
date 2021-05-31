@@ -50,7 +50,7 @@ const Menu = styled.ul<{ active: boolean }>`
   display: flex;
   align-items: center;
   margin: 0;
-  @media (max-width: 780px) {
+  @media (max-width: 1200px) {
     position: absolute;
     top: 100%;
     left: 0;
@@ -85,14 +85,14 @@ const MobileBar = styled.div`
       width: 2em;
       height: 2em;
     }
-    @media (max-width: 780px) {
+    @media (max-width: 1200px) {
       display: block;
       border: none;
       background-color: transparent;
       cursor: pointer;
     }
   }
-  @media (max-width: 780px) {
+  @media (max-width: 1200px) {
     width: 100%;
   }
 `;

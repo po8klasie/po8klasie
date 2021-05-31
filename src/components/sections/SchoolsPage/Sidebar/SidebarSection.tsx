@@ -7,6 +7,7 @@ interface SidebarSectionProps {
 
 const SidebarSection = styled.div<SidebarSectionProps>`
   padding: 1rem;
+  text-align: left;
   border-bottom: 1px solid ${(props) => (props.hideBottomBorder ? 'transparent' : '#C4C4C4')};
 `;
 
