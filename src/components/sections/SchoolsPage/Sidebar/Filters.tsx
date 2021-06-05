@@ -38,6 +38,7 @@ const Filters: FC<FiltersProps> = ({ filters }) => {
 
     return (
       <Filter
+        key={key}
         filterDefinition={filterDefinition}
         isChoiceSelected={isChoiceSelected}
         toggleFilterChoice={toggleFilterChoice}

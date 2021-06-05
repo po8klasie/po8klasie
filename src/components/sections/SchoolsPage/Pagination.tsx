@@ -31,7 +31,6 @@ const PaginationSkipButton = styled(BaseButton)`
   border-radius: 50%;
   padding: 10px;
   margin: 0 20px;
-
   svg {
     width: 20px;
     height: 20px;

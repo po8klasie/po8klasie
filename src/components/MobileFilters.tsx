@@ -43,7 +43,6 @@ const ModalHeader = styled.div`
   border-bottom: 1px solid black;
   position: relative;
   font-size: 1.2em;
-
   .material-icons {
     position: absolute;
     top: 50%;
@@ -62,7 +61,6 @@ const List = styled.ul`
   padding-inline-start: 0;
   width: calc(100% - 40px);
   margin: auto;
-
   li {
     display: flex;
     justify-content: space-between;

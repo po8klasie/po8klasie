@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useMatomo } from '@datapunt/matomo-tracker-react';
 import { TrackPageViewParams } from '@datapunt/matomo-tracker-react/lib/types';
 
-export const useBasicPageViewTracker = (enable = true, params: TrackPageViewParams = {}): void => {
+const useBasicPageViewTracker = (enable = true, params: TrackPageViewParams = {}): void => {
   const { trackPageView } = useMatomo();
   useEffect(
     () => {

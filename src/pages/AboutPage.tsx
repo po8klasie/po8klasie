@@ -11,7 +11,7 @@ import Breadcrumbs from '../components/Breadcrumbs';
 import H2 from '../components/H2';
 import Paragraph from '../components/Paragraph';
 import SEO from '../components/SEO';
-import useBasicPageViewTracker from "../hooks/useBasicPageViewTracker";
+import useBasicPageViewTracker from '../hooks/useBasicPageViewTracker';
 
 const Grid = styled.div`
   display: grid;
@@ -54,6 +54,9 @@ const RolesList = styled.ul`
   padding: 0;
   li {
     display: block;
+    font-size: 1.125em;
+    line-height: 1.45em;
+    color: ${(props) => props.theme.colors.text};
   }
 `;
 
@@ -176,16 +179,18 @@ const AboutPage: FC<RouteComponentProps> = () => {
               Jeśli swoimi umiejętnościami chcesz wesprzeć naszą inicjatywę, napisz na adres{' '}
               <a href="mailto:info@warsawlo.pl">info@warsawlo.pl</a>. Zróbmy razem coś dobrego!
             </Paragraph>
-            <Paragraph>
-              Obecnie szukamy:
+            <div>
+              <Paragraph>Obecnie szukamy:</Paragraph>
               <RolesList>
                 <li>Back-end developer</li>
                 <li>Social media specialist</li>
               </RolesList>
               <br />
-              Jeśli żadna z tych ról nie pasuje do Twoich umiejętności, a chcesz do nas dołączyć,
-              napisz do nas i tak! Razem możemy więcej!
-            </Paragraph>
+              <Paragraph>
+                Jeśli żadna z tych ról nie pasuje do Twoich umiejętności, a chcesz do nas dołączyć,
+                napisz do nas i tak! Razem możemy więcej!
+              </Paragraph>
+            </div>
           </HelpUsGrid>
         </Container>
       </HelpUsSection>

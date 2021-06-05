@@ -81,12 +81,10 @@ const MobileBar = styled.div`
   .menu-icons {
     color: ${(props) => props.theme.colors.primary};
     display: none;
-
     svg {
       width: 2em;
       height: 2em;
     }
-
     @media (max-width: 780px) {
       display: block;
       border: none;

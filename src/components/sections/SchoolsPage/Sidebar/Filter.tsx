@@ -112,6 +112,7 @@ const Filter: FC<FilterProps> = ({
           const { id } = choice;
           return (
             <Choice
+              key={id}
               choice={choice}
               onChange={() => toggleFilterChoice(id)}
               active={isChoiceSelected(id)}

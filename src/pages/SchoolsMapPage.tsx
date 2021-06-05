@@ -2,14 +2,14 @@ import React, { useMemo, useState, FC } from 'react';
 import { Link, RouteComponentProps } from '@reach/router';
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
 import useDeepCompareEffect from 'use-deep-compare-effect';
-import { BsGrid, BsX } from "react-icons/bs/index";
+import { BsGrid, BsX } from 'react-icons/bs/index';
 import ClipLoader from 'react-spinners/ClipLoader';
 import { LatLngExpression } from 'leaflet';
 import Layout from '../components/Layout';
-import { useAllSchools } from "../api/schools";
+import { useAllSchools } from '../api/schools';
 import styled from '../styling/styled';
 import { deserializeFilters, deserializeQuery, serializeSearchData } from '../utils/search';
-import { filters as filtersDefinition } from "../data/filters";
+import { filters as filtersDefinition } from '../data/filters';
 import { getSchoolMarker } from '../utils/mapMarkers';
 import { doesSchoolHaveCoords, getSchoolCoords } from '../utils/map';
 import SwitchViewLink from '../components/sections/SchoolsPage/SwitchViewLink';
@@ -19,10 +19,10 @@ import getPathWithPreservedParams from '../utils/url';
 import 'leaflet/dist/leaflet.css';
 import { ErrorInfo, NotFoundInfo } from '../components/Info';
 import SEO from '../components/SEO';
-import useBasicPageViewTracker from "../hooks/useBasicPageViewTracker";
-import Sidebar from "../components/sections/SchoolsPage/Sidebar/Sidebar";
-import useFilters from "../hooks/useFilters";
-import { convertFilterStateToObject } from "../utils/filters";
+import useBasicPageViewTracker from '../hooks/useBasicPageViewTracker';
+import Sidebar from '../components/sections/SchoolsPage/Sidebar/Sidebar';
+import useFilters from '../hooks/useFilters';
+import { convertFilterStateToObject } from '../utils/filters';
 
 const SidebarWrapper = styled.div`
   width: 25vw;
@@ -40,7 +40,6 @@ const MapWrapper = styled.div`
   border: none;
   height: 100%;
   position: relative;
-
   .leaflet-container {
     height: 100%;
   }
@@ -104,7 +103,6 @@ const CloseNotListedIcon = styled.button`
   padding: 0;
   margin: 0;
   cursor: pointer;
-
   svg {
     width: 1.2em;
     height: 1.2em;
