@@ -3,11 +3,10 @@ import { nanoid } from 'nanoid';
 import Card from '../../Card';
 import Section from './Section';
 import styled from '../../../styling/styled';
-import mockedProfile from '../../../utils/mockedProfile';
 
 const SchoolProfilesWrapper = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   grid-row-gap: 3em;
   grid-column-gap: 4em;
 
@@ -33,23 +32,32 @@ const SchoolProfilesWrapper = styled.div`
   }
 `;
 
-const profiles = Array(3).fill(mockedProfile);
+interface SchoolProfilesProps {
+  currentYearClasses: {
+    name: string;
+    year: number;
+    extendedSubjects: string[];
+  }[];
+}
 
-const SchoolProfiles: FC = () => (
-  <Section>
-    <SchoolProfilesWrapper>
-      {profiles.map((profile) => {
-        return (
-          <Card key={nanoid()}>
-            <h5>Przedmioty rozszerzone:</h5>
-            <h4>{profile.extendedSubjects.join(', ')}</h4>
-            <span>{profile.departmentsNo} oddziały</span>
-            <p>{profile.description}</p>
-          </Card>
-        );
-      })}
-    </SchoolProfilesWrapper>
-  </Section>
-);
+const SchoolProfiles: FC<SchoolProfilesProps> = ({ currentYearClasses }) => {
+  return (
+    <Section>
+      <h2>Tegoroczne profile klas</h2>
+      {currentYearClasses.length === 0 && <p>Brak danych</p>}
+      <SchoolProfilesWrapper>
+        {currentYearClasses.map((profile) => {
+          return (
+            <Card key={nanoid()}>
+              <h4>{profile.extendedSubjects.map((str) => str.toLowerCase()).join(', ')}</h4>
+              <h5>{profile.name}</h5>
+            </Card>
+          );
+        })}
+      </SchoolProfilesWrapper>
+      <strong>[UWAGA! testowe dane. Są z 2020]</strong>
+    </Section>
+  );
+};
 
 export default SchoolProfiles;

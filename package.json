@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@apollo/client": "^3.3.19",
     "@datapunt/matomo-tracker-react": "^0.4.0",
     "@emotion/core": "^10.0.27",
     "@emotion/styled": "^10.0.27",
@@ -26,6 +27,7 @@
     "chart.js": "^2.9.3",
     "chartjs": "^0.3.24",
     "emotion-theming": "^10.0.27",
+    "graphql": "^15.5.0",
     "leaflet": "^1.6.0",
     "leaflet-gesture-handling": "^1.1.8",
     "leaflet.fullscreen": "^1.6.0",
@@ -59,7 +61,8 @@
     "format:check": "prettier --parser typescript --list-different \"**/*.{js,jsx,ts,tsx}\"",
     "format:write": "prettier --parser typescript --write \"**/*.{js,jsx,ts,tsx}\"",
     "lint:check": "eslint --ext .js,.jsx,.ts,.tsx .",
-    "lint:fix": "eslint --fix --ext .js,.jsx,.ts,.tsx ."
+    "lint:fix": "eslint --fix --ext .js,.jsx,.ts,.tsx .",
+    "graphql:codegen": "graphql-codegen --config codegen.yml -r dotenv/config"
   },
   "browserslist": {
     "production": [
@@ -74,6 +77,13 @@
     ]
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "1.21.5",
+    "@graphql-codegen/fragment-matcher": "2.0.1",
+    "@graphql-codegen/introspection": "1.18.2",
+    "@graphql-codegen/typed-document-node": "^1.18.6",
+    "@graphql-codegen/typescript": "1.22.1",
+    "@graphql-codegen/typescript-operations": "^1.18.0",
+    "@graphql-codegen/typescript-react-apollo": "2.2.5",
     "@types/leaflet": "^1.5.12",
     "@types/leaflet.fullscreen": "^1.6.0",
     "@types/lodash": "^4.14.159",

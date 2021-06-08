@@ -1,8 +1,10 @@
 import React, { FC } from 'react';
 import { css } from '@emotion/core';
+import { gql } from '@apollo/client';
 import styled from '../../../styling/styled';
 import { createPlaceholderStyles } from '../../../utils/loading';
 import AddRemoveFavourite from '../../AddRemoveFavourite';
+import { ISchoolHeaderPropsFragment } from '../../../types/graphql';
 
 const placeholderStyle = css`
   ${createPlaceholderStyles()}
@@ -29,9 +31,9 @@ const HeaderWrapper = styled.div<{ isLoading: boolean }>`
 `;
 
 interface SchoolHeaderProps {
-  isPublic: boolean;
-  schoolName: string;
-  district: string;
+  isPublic: ISchoolHeaderPropsFragment['isPublic'];
+  schoolName: ISchoolHeaderPropsFragment['schoolName'];
+  district: ISchoolHeaderPropsFragment['address']['district'];
   description: string;
   isLoading: boolean;
   isFavourite: boolean;
@@ -51,13 +53,19 @@ const SchoolHeader: FC<SchoolHeaderProps> = ({
       <span className="public">{isPublic ? 'szkoła publiczna' : 'szkoła niepubliczna'}</span>
       <h1>{!isLoading && schoolName}</h1>
       <span className="district">{!isLoading && district}</span>
-      <p>
-        [Opis szkoły: np.] Publiczne liceum ogólnokształcące w Warszawie założone w 1874. Jest
-        najstarszym warszawskim liceum.
-      </p>
       <AddRemoveFavourite isFavourite={isFavourite} onClick={toggleFavourite} />
     </HeaderWrapper>
   );
 };
 
 export default SchoolHeader;
+
+export const SCHOOL_HEADER_PROPS_FRAGMENT = gql`
+  fragment SchoolHeaderProps on SchoolNode {
+    isPublic
+    schoolName
+    address {
+      district
+    }
+  }
+`;

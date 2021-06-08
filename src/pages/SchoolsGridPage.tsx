@@ -5,7 +5,6 @@ import { BsMap } from 'react-icons/bs';
 import Layout from '../components/Layout';
 import Container from '../components/Container';
 import PageTitle from '../components/PageTitle';
-import { useSchools } from '../api/schools';
 import styled from '../styling/styled';
 import {
   deserializeFilters,
@@ -22,6 +21,7 @@ import useBasicPageViewTracker from '../hooks/useBasicPageViewTracker';
 import SEO from '../components/SEO';
 import useFilters from '../hooks/useFilters';
 import { convertFilterStateToObject } from '../utils/filters';
+import useSchoolsListing from '../api/schoolsListing';
 
 const Flex = styled.div`
   display: flex;
@@ -48,20 +48,24 @@ const SchoolsGridPage: FC<RouteComponentProps> = () => {
   const [query, setQuery] = useState(deserializeQuery(p));
   const [page, setPage] = useState(deserializePage(p));
   const filters = useFilters(filtersDefinition, deserializeFilters(p, filtersDefinition));
-  const searchData = {
-    query,
-    page,
-    ...convertFilterStateToObject(filters.filtersState),
-  };
-  const { data, error } = useSchools(searchData);
+  const [getSchools, { data, error }] = useSchoolsListing();
+
+  const filtersObj = convertFilterStateToObject(filters.filtersState);
 
   useDeepCompareEffect(() => {
+    // TODO: debounce
+    const searchData = {
+      query,
+      page,
+      ...filtersObj,
+    };
     currUrl.search = serializeSearchData(searchData, 'search');
     window.history.replaceState(null, '', currUrl.toString());
-  }, [currUrl, searchData]);
+    getSchools(query, filters.filtersState, page);
+  }, [query, filtersObj, page]);
 
-  const schools = data?.schools;
-  const count = data?.count;
+  const schools = data?.allSchools;
+  const count = data?.allSchools?.totalCount;
 
   return (
     <Layout hideFooter wideNavbar>

@@ -4,10 +4,10 @@ import { BsChevronDown } from 'react-icons/all';
 import styled from '../../../../styling/styled';
 import {
   FilterChoiceDefinition as ChoiceDefinition,
+  FilterChoiceValue,
   FilterDefinition,
 } from '../../../../data/filters';
 import SidebarSection, { SidebarSectionWithoutBorder } from './SidebarSection';
-import { FilterChoiceId } from '../../../../utils/filters';
 
 const Accordion = styled.div``;
 
@@ -73,8 +73,8 @@ const Choice: FC<ChoiceProps> = ({ choice, active, onChange }) => {
 
 interface FilterProps {
   filterDefinition: FilterDefinition;
-  toggleFilterChoice: (choiceId: FilterChoiceId) => void;
-  isChoiceSelected: (choiceId: FilterChoiceId) => boolean;
+  toggleFilterChoice: (choiceId: FilterChoiceValue) => void;
+  isChoiceSelected: (choiceId: FilterChoiceValue) => boolean;
   changeFilterVisibility: (visibility: boolean) => void;
   shouldFilterBeVisible: boolean;
 }
@@ -109,13 +109,13 @@ const Filter: FC<FilterProps> = ({
       </AccordionTitle>
       <AccordionContent ref={accordionContentRef} active={shouldFilterBeVisible}>
         {choices.map((choice) => {
-          const { id } = choice;
+          const { value } = choice;
           return (
             <Choice
-              key={id}
+              key={value.toString()}
               choice={choice}
-              onChange={() => toggleFilterChoice(id)}
-              active={isChoiceSelected(id)}
+              onChange={() => toggleFilterChoice(value)}
+              active={isChoiceSelected(value)}
             />
           );
         })}

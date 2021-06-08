@@ -3,9 +3,11 @@ import { createPack } from 'react-component-pack';
 import { ErrorBoundary } from '@sentry/react';
 import { ThemeProvider, ThemeProviderProps } from 'emotion-theming';
 import { SWRConfig } from 'swr';
-import { AnalyticsProvider } from './utils/externalServices';
+import { ApolloProvider } from '@apollo/client';
+import { AnalyticsProvider, apolloClient } from './utils/externalServices';
 import theme, { Theme } from './styling/theme';
 import handleError from './api/handleError';
+import { ApolloProviderProps } from "@apollo/client/react/context";
 
 const withProps = <T extends unknown>(Provider: ComponentType<T>, props: T): FC => ({
   children,
@@ -23,6 +25,9 @@ const Providers = createPack(
     value: {
       onError: handleError,
     },
+  }),
+  withProps<any>(ApolloProvider, {
+    client: apolloClient,
   }),
 );
 

@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { FilterKey } from '../../../../data/filters';
+import { FilterChoiceValue, FilterKey } from '../../../../data/filters';
 import Chip from '../../../Chip';
 import SidebarSection from './SidebarSection';
 import { UseFiltersOutput } from '../../../../hooks/useFilters';
@@ -8,23 +8,23 @@ interface ChoiceData {
   filterKey: FilterKey;
   filterTitle: string;
   choiceLabel: string;
-  choiceId: string;
+  choiceValue: FilterChoiceValue;
 }
 
 const getChoicesData = (filters: UseFiltersOutput) => {
   let choicesData: ChoiceData[] = [];
-  filters.filtersState.forEach((choiceIds, filterKey) => {
+  filters.filtersState.forEach((choiceValues, filterKey) => {
     const filterDefinition = filters.definitionsUtils.getFilterDefinitionByKey(filterKey);
 
     choicesData = [
       ...choicesData,
       ...filterDefinition.choices
-        .filter(({ id }) => choiceIds.has(id))
-        .map(({ id, label }) => ({
+        .filter(({ value }) => choiceValues.has(value))
+        .map(({ value, label }) => ({
           filterKey,
           filterTitle: filterDefinition.title,
           choiceLabel: label,
-          choiceId: id,
+          choiceValue: value,
         })),
     ];
   });
@@ -34,26 +34,26 @@ const getChoicesData = (filters: UseFiltersOutput) => {
 
 interface FiltersPreviewProps {
   filters: UseFiltersOutput;
-  onSelectChoice: (filterKey: string, choiceId: string) => void;
+  onSelectChoice: (filterKey: string, choiceValue: FilterChoiceValue) => void;
 }
 
 const FiltersPreview: FC<FiltersPreviewProps> = ({ filters, onSelectChoice }) => {
   const choicesData = getChoicesData(filters);
 
-  const onRemoveChoice = (filterKey: FilterKey, choiceId: string) => {
-    filters.setFiltersState(filters.stateUtils.removeFilterChoices(filterKey, choiceId));
+  const onRemoveChoice = (filterKey: FilterKey, choiceValue: FilterChoiceValue) => {
+    filters.setFiltersState(filters.stateUtils.removeFilterChoices(filterKey, choiceValue));
   };
 
   if (choicesData.length === 0) return null;
 
   return (
     <SidebarSection>
-      {choicesData.map(({ choiceId, choiceLabel, filterKey }) => (
+      {choicesData.map(({ choiceValue, choiceLabel, filterKey }) => (
         <Chip
-          key={choiceId}
+          key={choiceValue.toString()}
           label={choiceLabel}
-          onClick={() => onSelectChoice(filterKey, choiceId)}
-          onRemove={() => onRemoveChoice(filterKey, choiceId)}
+          onClick={() => onSelectChoice(filterKey, choiceValue)}
+          onRemove={() => onRemoveChoice(filterKey, choiceValue)}
         />
       ))}
     </SidebarSection>

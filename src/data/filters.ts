@@ -1,12 +1,16 @@
+export type FilterChoiceValue = string | boolean;
+
 export type FilterChoiceDefinition = {
   label: string;
-  id: string;
+  value: FilterChoiceValue;
 };
 
 export type FilterKey = 'public' | 'schoolType' | 'extendedSubjects' | 'district';
+export type FilterBackendKey = 'isPublic' | 'schoolType' | 'extendedSubjects' | 'districts';
 
 export type FilterDefinition = {
   key: FilterKey; // for frontend eg. /search?key=<value>
+  backendKey: FilterBackendKey;
   title: string;
   multiple: boolean;
   choices: FilterChoiceDefinition[];
@@ -15,156 +19,160 @@ export type FilterDefinition = {
 export const filters: FilterDefinition[] = [
   {
     key: 'public',
+    backendKey: 'isPublic',
     title: 'Szkoła publiczna',
     multiple: false,
     choices: [
       {
-        id: 'True',
+        value: true,
         label: 'tak',
       },
       {
-        id: 'False',
+        value: false,
         label: 'nie',
       },
     ],
   },
   {
     key: 'schoolType',
+    backendKey: 'schoolType',
     title: 'Typ szkoły',
     multiple: true,
     choices: [
       {
-        id: 'liceum ogólnokształcące',
+        value: 'liceum ogólnokształcące',
         label: 'liceum',
       },
       {
-        id: 'technikum',
+        value: 'technikum',
         label: 'technikum',
       },
       {
-        id: 'szkoła branżowa I stopnia',
+        value: 'szkoła branżowa I stopnia',
         label: 'szkoła branżowa',
       },
     ],
   },
   {
     key: 'extendedSubjects',
+    backendKey: 'extendedSubjects',
     title: 'Rozszerzone przedmioty',
     multiple: true,
     choices: [
       {
-        id: 'pol',
+        value: 'pol',
         label: 'język polski',
       },
       {
-        id: 'hist',
+        value: 'hist',
         label: 'historia',
       },
       {
-        id: 'wos',
+        value: 'wos',
         label: 'WOS',
       },
       {
-        id: 'mat',
+        value: 'mat',
         label: 'matematyka',
       },
       {
-        id: 'fiz',
+        value: 'fiz',
         label: 'fizyka',
       },
       {
-        id: 'inf',
+        value: 'inf',
         label: 'informatyka',
       },
       {
-        id: 'chem',
+        value: 'chem',
         label: 'chemia',
       },
       {
-        id: 'biol',
+        value: 'biol',
         label: 'biologia',
       },
       {
-        id: 'geogr',
+        value: 'geogr',
         label: 'geografia',
       },
     ],
   },
   {
     key: 'district',
+    backendKey: 'districts',
     title: 'Dzielnica',
     multiple: true,
     choices: [
       {
-        id: 'Bemowo',
+        value: 'Bemowo',
         label: 'Bemowo',
       },
       {
-        id: 'Białołęka',
+        value: 'Białołęka',
         label: 'Białołęka',
       },
       {
-        id: 'Bielany',
+        value: 'Bielany',
         label: 'Bielany',
       },
       {
-        id: 'Mokotów',
+        value: 'Mokotów',
         label: 'Mokotów',
       },
       {
-        id: 'Ochota',
+        value: 'Ochota',
         label: 'Ochota',
       },
       {
-        id: 'Praga Południe',
+        value: 'Praga Południe',
         label: 'Praga Południe',
       },
       {
-        id: 'Praga Północ',
+        value: 'Praga Północ',
         label: 'Praga Północ',
       },
       {
-        id: 'Rembertów',
+        value: 'Rembertów',
         label: 'Rembertów',
       },
       {
-        id: 'Śródmieście',
+        value: 'Śródmieście',
         label: 'Śródmieście',
       },
       {
-        id: 'Targówek',
+        value: 'Targówek',
         label: 'Targówek',
       },
       {
-        id: 'Ursus',
+        value: 'Ursus',
         label: 'Ursus',
       },
       {
-        id: 'Ursynów',
+        value: 'Ursynów',
         label: 'Ursynów',
       },
       {
-        id: 'Wawer',
+        value: 'Wawer',
         label: 'Wawer',
       },
       {
-        id: 'Wesoła',
+        value: 'Wesoła',
         label: 'Wesoła',
       },
       {
-        id: 'Wilanów',
+        value: 'Wilanów',
         label: 'Wilanów',
       },
       {
-        id: 'Włochy',
+        value: 'Włochy',
         label: 'Włochy',
       },
       {
-        id: 'Wola',
+        value: 'Wola',
         label: 'Wola',
       },
       {
-        id: 'Żoliborz',
+        value: 'Żoliborz',
         label: 'Żoliborz',
       },
     ],

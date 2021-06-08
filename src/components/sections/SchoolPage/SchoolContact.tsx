@@ -1,6 +1,8 @@
 import React, { FC } from 'react';
+import { gql } from '@apollo/client';
 import styled from '../../../styling/styled';
 import Section from './Section';
+import { ISchoolContactPropsFragment } from '../../../types/graphql';
 
 const ContactGrid = styled.div`
   display: inline-grid;
@@ -26,8 +28,8 @@ const ActionLinkWrapper = styled.div`
 `;
 
 interface SchoolContactProps {
-  contact: any;
-  address: any;
+  contact: ISchoolContactPropsFragment['contact'];
+  address: ISchoolContactPropsFragment['address'];
 }
 
 const SchoolContact: FC<SchoolContactProps> = ({ contact, address }) => {
@@ -40,7 +42,7 @@ const SchoolContact: FC<SchoolContactProps> = ({ contact, address }) => {
           <ContactGrid>
             <address>
               {address.postcode} {address.city} <br />
-              {address.street} {contact.building_nr}
+              {address.street} {address.buildingNr}
             </address>
             <div>
               <a href={`tel:${contact.phone}`}>{contact.phone}</a> <br />
@@ -59,3 +61,19 @@ const SchoolContact: FC<SchoolContactProps> = ({ contact, address }) => {
 };
 
 export default SchoolContact;
+
+export const SCHOOL_CONTACT_PROPS_FRAGMENT = gql`
+  fragment SchoolContactProps on SchoolNode {
+    address {
+      postcode
+      city
+      street
+      buildingNr
+    }
+    contact {
+      phone
+      email
+      website
+    }
+  }
+`;

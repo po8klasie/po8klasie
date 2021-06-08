@@ -38,13 +38,15 @@ const PaginationSkipButton = styled(BaseButton)`
 `;
 
 interface PaginationProps {
-  count: number;
+  count?: number | null;
   page: number;
   onPageChange: (page: number) => void;
   disabled?: boolean;
 }
 
 const Pagination: FC<PaginationProps> = ({ count, page, onPageChange, disabled }) => {
+  if (!count) return null;
+
   const totalPages = getTotalPages(count);
 
   if (totalPages === 1 || totalPages === 0) return null;

@@ -4,6 +4,7 @@ import styled from '../../../styling/styled';
 import Card from '../../Card';
 import { splitArrayInHalf } from '../../../utils/misc';
 import Section from './Section';
+import { ParsedClasses } from '../../../utils/schoolClasses';
 
 const PastProfilesGrid = styled.div`
   display: grid;
@@ -23,7 +24,7 @@ const PastProfilesGrid = styled.div`
   }
   td:last-of-type,
   th:last-of-type {
-    text-align: right;
+    text-align: center;
   }
   tbody tr td {
     border-bottom: 1px solid black;
@@ -47,46 +48,69 @@ const PastProfilesGrid = styled.div`
 `;
 
 interface SchoolPastProfilesProps {
-  classes: any;
+  classes: ParsedClasses['pastYears'];
 }
 
 const SchoolPastProfiles: FC<SchoolPastProfilesProps> = ({ classes }) => {
-  return (
-    <Section>
-      <h2>Progi punktowe 2018</h2>
-      {classes && classes.length > 0 ? (
-        <Card>
-          <PastProfilesGrid>
-            {splitArrayInHalf(classes).map((half: any) => (
-              <table key={nanoid()}>
-                <thead>
-                  <tr>
-                    <th>Klasa z przedmiotami rozszerzonymi</th>
-                    <th>Próg punktowy</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {half.map((c: any) => (
-                    <tr key={c.subjects.map((s: any) => s.name).join('-')}>
-                      <td>{c.subjects.map((s: any) => s.name).join('-')}</td>
-                      <td>
-                        {c.stats && c.stats[0].points_min > 0 && (
-                          <>
-                            <strong>{c.stats[0].points_min}</strong> pkt
-                          </>
-                        )}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            ))}
-          </PastProfilesGrid>
-        </Card>
-      ) : (
+  console.log(classes);
+  const sortedClasses = classes ? Object.entries(classes).sort() : [];
+
+  console.log(sortedClasses, splitArrayInHalf(sortedClasses));
+
+  if (sortedClasses.length === 0)
+    return (
+      <Section>
+        <h2>Progi punktowe z poprzednich lat</h2>
         <p>Brak danych</p>
-      )}
-    </Section>
+      </Section>
+    );
+
+  return (
+    <>
+      {sortedClasses.map(([year, profiles]) => (
+        <Section>
+          <h2>Progi punktowe {year}</h2>
+          <Card>
+            <PastProfilesGrid>
+              {splitArrayInHalf(profiles).map((half, i) => {
+                if (i === 0 && half.length === 0) return <td>Brak danych</td>;
+                if (i === 1 && half.length === 0) return null;
+                return (
+                  <table key={nanoid()}>
+                    <thead>
+                      <tr>
+                        <th>Klasa z przedmiotami rozszerzonymi</th>
+                        <th>Próg punktowy</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {half.map((profile) => {
+                        return (
+                          <tr key={nanoid()}>
+                            <td>
+                              {profile.extendedSubjects
+                                .map((str: string) => str.toLowerCase())
+                                .join('-')}
+                            </td>
+                            <td>
+                              {profile.statistics && profile.statistics.pointsMin > 0 && (
+                                <>
+                                  <strong>{profile.statistics.pointsMin}</strong> pkt
+                                </>
+                              )}
+                            </td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                );
+              })}
+            </PastProfilesGrid>
+          </Card>
+        </Section>
+      ))}
+    </>
   );
 };
 

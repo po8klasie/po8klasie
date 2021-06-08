@@ -1,10 +1,11 @@
 import React, { FC } from 'react';
 import { Link } from '@reach/router';
-import { School } from '../types';
+import { gql } from '@apollo/client';
 import styled from '../styling/styled';
 import Card from './Card';
 import useFavouriteSchools from '../hooks/useFavouriteSchools';
 import AddRemoveFavourite from './AddRemoveFavourite';
+import { ISchoolCardPropsFragment } from '../types/graphql';
 
 const Wrapper = styled(Card)`
   margin-bottom: 3em;
@@ -54,24 +55,30 @@ const Wrapper = styled(Card)`
   }
 `;
 
-type SchoolCardProps = {
-  school: School;
-};
+interface SchoolCardProps {
+  school: ISchoolCardPropsFragment;
+}
 
-const SchoolCard: FC<SchoolCardProps> = ({ school: { is_public, id, school_name, address } }) => {
+const SchoolCard: FC<SchoolCardProps> = ({
+  school: {
+    isPublic,
+    schoolId,
+    schoolName,
+    address: { district },
+  },
+}) => {
   const { isSchoolFavourite, toggleFavouriteSchool } = useFavouriteSchools();
-  const schoolId = id.toString();
   return (
     <Wrapper>
       <div className="main-content">
-        <span className="school-type">Szkoła {!is_public && 'nie'}publiczna</span>
+        <span className="school-type">Szkoła {!isPublic && 'nie'}publiczna</span>
         <h4>
-          <Link to={`/school/${id}`}>{school_name}</Link>
+          <Link to={`/school/${schoolId}`}>{schoolName}</Link>
         </h4>
-        <span className="district">{address.district}</span>
+        <span className="district">{district}</span>
       </div>
       <div className="side-content">
-        <Link to={`/school/${id}`}>Odwiedź stronę szkoły</Link>
+        <Link to={`/school/${schoolId}`}>Odwiedź stronę szkoły</Link>
         <AddRemoveFavourite
           isFavourite={isSchoolFavourite(schoolId || '')}
           isSmallMargin
@@ -83,3 +90,14 @@ const SchoolCard: FC<SchoolCardProps> = ({ school: { is_public, id, school_name,
 };
 
 export default SchoolCard;
+
+export const SCHOOL_CARD_PROPS_FRAGMENT = gql`
+  fragment SchoolCardProps on SchoolNode {
+    schoolId
+    schoolName
+    isPublic
+    address {
+      district
+    }
+  }
+`;

@@ -3,6 +3,7 @@ export interface LocalEnvironment {
   REACT_APP_PUBLIC_SENTRY_DSN: string;
   REACT_APP_MATOMO_BASE_URL: string;
   REACT_APP_MATOMO_SITE_ID: string;
+  REACT_APP_GRAPHQL_ENDPOINT: string;
 }
 
 export interface Environment {
@@ -10,6 +11,7 @@ export interface Environment {
   PUBLIC_SENTRY_DSN: string;
   MATOMO_BASE_URL: string;
   MATOMO_SITE_ID: string;
+  GRAPHQL_ENDPOINT: string;
 }
 
 const prodEnvironment: Environment = window.config;
@@ -19,6 +21,7 @@ const devEnvironment: Environment = {
   PUBLIC_SENTRY_DSN: process.env.REACT_APP_API_URL,
   MATOMO_BASE_URL: process.env.REACT_APP_MATOMO_BASE_URL,
   MATOMO_SITE_ID: process.env.REACT_APP_MATOMO_SITE_ID,
+  GRAPHQL_ENDPOINT: process.env.REACT_APP_GRAPHQL_ENDPOINT,
 };
 
 export const isProduction = process.env.NODE_ENV === 'production';

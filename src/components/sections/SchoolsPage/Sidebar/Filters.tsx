@@ -1,12 +1,11 @@
 import React, { FC, useState } from 'react';
 import styled from '../../../../styling/styled';
-import { FilterDefinition } from '../../../../data/filters';
+import { FilterChoiceValue, FilterDefinition } from '../../../../data/filters';
 import Filter from './Filter';
 import { removeFromArray } from '../../../../utils/misc';
 import FiltersPreview from './FiltersPreview';
 import { SidebarSectionWithoutBorder, SidebarTitle } from './SidebarSection';
 import { UseFiltersOutput } from '../../../../hooks/useFilters';
-import { FilterChoiceId } from '../../../../utils/filters';
 
 const FiltersInnerWrapper = styled.div``;
 
@@ -27,11 +26,11 @@ const Filters: FC<FiltersProps> = ({ filters }) => {
 
   const renderFilter = (filterDefinition: FilterDefinition) => {
     const { key } = filterDefinition;
-    const isChoiceSelected = (choiceId: FilterChoiceId) =>
-      filters.stateUtils.isChoiceSelected(key, choiceId);
+    const isChoiceSelected = (choiceValue: FilterChoiceValue) =>
+      filters.stateUtils.isChoiceSelected(key, choiceValue);
 
-    const toggleFilterChoice = (choiceId: FilterChoiceId) =>
-      filters.setFiltersState(filters.stateUtils.toggleFilterChoice(filterDefinition, choiceId));
+    const toggleFilterChoice = (choiceValue: FilterChoiceValue) =>
+      filters.setFiltersState(filters.stateUtils.toggleFilterChoice(filterDefinition, choiceValue));
 
     const shouldFilterBeVisible = visibleFilters.includes(key);
     const changeFilterVisibility = (visibility: boolean) => updateFilterVisibility(key, visibility);
