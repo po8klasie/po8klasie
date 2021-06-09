@@ -19,6 +19,9 @@ export const SidebarTitle = styled.h4<{ noMargin?: boolean }>`
   font-size: 1.4rem;
   padding: 0.2rem 0;
   ${(props) => props.noMargin && 'margin: 0;'}
+  @media (max-width: 780px) {
+    margin-top: 0;
+  }
 `;
 
 export default SidebarSection;

@@ -13,6 +13,8 @@ import { filters as filtersDefinition } from '../data/filters';
 import { getSchoolMarker } from '../utils/mapMarkers';
 import { doesSchoolHaveCoords, getSchoolCoords } from '../utils/map';
 import SwitchViewLink from '../components/sections/SchoolsPage/SwitchViewLink';
+import ToggleFiltersBtn from '../components/sections/SchoolsPage/ToggleFiltersBtn';
+import SchoolsMobileBar from '../components/sections/SchoolsPage/SchoolsMobileBar';
 import theme from '../styling/theme';
 import 'react-leaflet-fullscreen-control';
 import getPathWithPreservedParams from '../utils/url';
@@ -31,6 +33,10 @@ const MapWrapper = styled.div`
   border: none;
   height: 100%;
   position: relative;
+  @media (max-width: 780px) {
+    width: 100%;
+    margin-left: 0;
+  }
   .leaflet-container {
     height: 100%;
   }
@@ -107,6 +113,7 @@ const SchoolsMapPage: FC<RouteComponentProps> = () => {
   useBasicPageViewTracker();
   const currUrl = new URL(window.location.href);
   const p = currUrl.searchParams;
+  const [sidebarIsOpen, setSidebarOpen] = useState(false);
   const [query, setQuery] = useState(deserializeQuery(p));
   const filters = useFilters(filtersDefinition, deserializeFilters(p, filtersDefinition));
   const [notListedCount, setNotListedCount] = useState(0);
@@ -149,12 +156,17 @@ const SchoolsMapPage: FC<RouteComponentProps> = () => {
 
   return (
     <Layout hideFooter noTopMargin>
+      <SchoolsMobileBar>
+        <ToggleFiltersBtn onClick={() => setSidebarOpen(true)} />
+        <SwitchViewLink label="Widok listy" icon={BsGrid} viewPath="grid" />
+      </SchoolsMobileBar>
       <SEO title="Przeglądaj szkoły na mapie" />
-      <SidebarWrapper>
+      <SidebarWrapper isOpenOnMobile={sidebarIsOpen}>
         <Sidebar
           filters={filters}
           query={query}
           onQueryChange={setQuery}
+          closeSidebar={() => setSidebarOpen(false)}
           switchViewLinkElement={
             <SwitchViewLink label="Widok listy" icon={BsGrid} viewPath="grid" />
           }
