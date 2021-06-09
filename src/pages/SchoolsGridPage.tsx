@@ -4,7 +4,6 @@ import useDeepCompareEffect from 'use-deep-compare-effect';
 import { BsMap } from 'react-icons/bs';
 import Layout from '../components/Layout';
 import Container from '../components/Container';
-import PageTitle from '../components/PageTitle';
 import { useSchools } from '../api/schools';
 import styled from '../styling/styled';
 import {
@@ -16,8 +15,11 @@ import {
 import { filters as filtersDefinition } from '../data/filters';
 import Pagination from '../components/sections/SchoolsPage/Pagination';
 import SwitchViewLink from '../components/sections/SchoolsPage/SwitchViewLink';
+import ToggleFiltersBtn from '../components/sections/SchoolsPage/ToggleFiltersBtn';
+import SchoolsMobileBar from '../components/sections/SchoolsPage/SchoolsMobileBar';
 import Results from '../components/sections/SchoolsPage/Results';
 import Sidebar from '../components/sections/SchoolsPage/Sidebar/Sidebar';
+import SidebarWrapper from '../components/sections/SchoolsPage/Sidebar/SidebarWrapper';
 import useBasicPageViewTracker from '../hooks/useBasicPageViewTracker';
 import SEO from '../components/SEO';
 import useFilters from '../hooks/useFilters';
@@ -26,25 +28,20 @@ import { convertFilterStateToObject } from '../utils/filters';
 const Flex = styled.div`
   display: flex;
 `;
-
-const SidebarWrapper = styled.div`
-  width: 25vw;
-  height: 100vh;
-  max-width: 400px;
-  position: fixed;
-  top: 0;
-  left: 0;
-`;
-
 const ContentWrapper = styled(Container)`
   margin-left: 25vw;
-  padding: 0 4rem 4rem 0;
+  padding: 2rem 4rem 4rem;
+  @media (max-width: 780px) {
+    margin: auto;
+    padding: 2rem 1.5rem 4rem;
+  }
 `;
 
 const SchoolsGridPage: FC<RouteComponentProps> = () => {
   useBasicPageViewTracker();
   const currUrl = new URL(window.location.href);
   const p = currUrl.searchParams;
+  const [sidebarIsOpen, setSidebarOpen] = useState(false);
   const [query, setQuery] = useState(deserializeQuery(p));
   const [page, setPage] = useState(deserializePage(p));
   const filters = useFilters(filtersDefinition, deserializeFilters(p, filtersDefinition));
@@ -64,22 +61,26 @@ const SchoolsGridPage: FC<RouteComponentProps> = () => {
   const count = data?.count;
 
   return (
-    <Layout hideFooter wideNavbar>
+    <Layout hideFooter noTopMargin>
       <SEO title="Przeglądaj listę szkół" />
+      <SchoolsMobileBar>
+        <ToggleFiltersBtn onClick={() => setSidebarOpen(true)} />
+        <SwitchViewLink label="Widok mapy" icon={BsMap} viewPath="map" />
+      </SchoolsMobileBar>
       <Flex>
-        <SidebarWrapper>
+        <SidebarWrapper isOpenOnMobile={sidebarIsOpen}>
           <Sidebar
             filters={filters}
             query={query}
             onQueryChange={setQuery}
             count={count}
+            closeSidebar={() => setSidebarOpen(false)}
             switchViewLinkElement={
               <SwitchViewLink label="Widok mapy" icon={BsMap} viewPath="map" />
             }
           />
         </SidebarWrapper>
         <ContentWrapper>
-          <PageTitle>Znajdź swoją wymarzoną szkołę</PageTitle>
           <Results schools={schools} error={error} />
           <Pagination page={page} count={count} onPageChange={setPage} disabled={!data} />
         </ContentWrapper>
