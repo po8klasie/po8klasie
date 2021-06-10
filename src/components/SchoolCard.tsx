@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import { Link } from '@reach/router';
-import { gql } from '@apollo/client';
 import styled from '../styling/styled';
 import Card from './Card';
 import useFavouriteSchools from '../hooks/useFavouriteSchools';
@@ -90,14 +89,3 @@ const SchoolCard: FC<SchoolCardProps> = ({
 };
 
 export default SchoolCard;
-
-export const SCHOOL_CARD_PROPS_FRAGMENT = gql`
-  fragment SchoolCardProps on SchoolNode {
-    schoolId
-    schoolName
-    isPublic
-    address {
-      district
-    }
-  }
-`;

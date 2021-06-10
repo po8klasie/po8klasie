@@ -1,5 +1,4 @@
 import { LatLngExpression } from 'leaflet';
-import { gql } from '@apollo/client';
 import { ISchoolCoordsFragment } from '../types/graphql';
 
 export const doesSchoolHaveCoords = (schoolPicked: ISchoolCoordsFragment): boolean => {
@@ -19,12 +18,3 @@ export const getSchoolCoords = (schoolPicked: ISchoolCoordsFragment): LatLngExpr
     lng: schoolPicked.address.longitude as number,
   };
 };
-
-export const SCHOOL_COORDS_FRAGMENT = gql`
-  fragment SchoolCoords on SchoolNode {
-    address {
-      latitude
-      longitude
-    }
-  }
-`;

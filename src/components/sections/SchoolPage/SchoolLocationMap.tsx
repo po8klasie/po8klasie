@@ -1,10 +1,9 @@
 import React, { FC } from 'react';
 import { LatLngExpression } from 'leaflet';
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
-import { gql } from '@apollo/client';
 import { getSchoolMarker } from '../../../utils/mapMarkers';
 import styled from '../../../styling/styled';
-import { doesSchoolHaveCoords, getSchoolCoords, SCHOOL_COORDS_FRAGMENT } from '../../../utils/map';
+import { doesSchoolHaveCoords, getSchoolCoords } from '../../../utils/map';
 import { ISchoolLocationMapPropsFragment } from '../../../types/graphql';
 
 const MapWrapper = styled.div`
@@ -51,12 +50,3 @@ const SchoolLocationMap: FC<SchoolLocationMapProps> = ({ schoolName, schoolType,
 };
 
 export default SchoolLocationMap;
-
-export const SCHOOL_LOCATION_MAP_PROPS_FRAGMENT = gql`
-  ${SCHOOL_COORDS_FRAGMENT}
-  fragment SchoolLocationMapProps on SchoolNode {
-    schoolName
-    schoolType
-    ...SchoolCoords
-  }
-`;

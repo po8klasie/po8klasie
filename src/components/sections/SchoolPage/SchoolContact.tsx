@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-import { gql } from '@apollo/client';
 import styled from '../../../styling/styled';
 import Section from './Section';
 import { ISchoolContactPropsFragment } from '../../../types/graphql';
@@ -61,19 +60,3 @@ const SchoolContact: FC<SchoolContactProps> = ({ contact, address }) => {
 };
 
 export default SchoolContact;
-
-export const SCHOOL_CONTACT_PROPS_FRAGMENT = gql`
-  fragment SchoolContactProps on SchoolNode {
-    address {
-      postcode
-      city
-      street
-      buildingNr
-    }
-    contact {
-      phone
-      email
-      website
-    }
-  }
-`;

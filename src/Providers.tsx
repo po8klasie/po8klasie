@@ -7,7 +7,6 @@ import { ApolloProvider } from '@apollo/client';
 import { AnalyticsProvider, apolloClient } from './utils/externalServices';
 import theme, { Theme } from './styling/theme';
 import handleError from './api/handleError';
-import { ApolloProviderProps } from "@apollo/client/react/context";
 
 const withProps = <T extends unknown>(Provider: ComponentType<T>, props: T): FC => ({
   children,

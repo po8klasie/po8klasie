@@ -1,63 +1,21 @@
 import React, { FC, useEffect } from 'react';
 import { RouteComponentProps } from '@reach/router';
 import { useMatomo } from '@datapunt/matomo-tracker-react';
-import { gql, useLazyQuery } from '@apollo/client';
+import { useLazyQuery } from '@apollo/client';
 import Layout from '../components/Layout';
 import Container from '../components/Container';
 import Breadcrumbs from '../components/Breadcrumbs';
-import SchoolHeader, {
-  SCHOOL_HEADER_PROPS_FRAGMENT,
-} from '../components/sections/SchoolPage/SchoolHeader';
+import SchoolHeader from '../components/sections/SchoolPage/SchoolHeader';
 import SchoolProfiles from '../components/sections/SchoolPage/SchoolProfiles';
-import SchoolLocationMap, {
-  SCHOOL_LOCATION_MAP_PROPS_FRAGMENT,
-} from '../components/sections/SchoolPage/SchoolLocationMap';
+import SchoolLocationMap from '../components/sections/SchoolPage/SchoolLocationMap';
 import SchoolPastProfiles from '../components/sections/SchoolPage/SchoolPastProfiles';
-import SchoolContact, {
-  SCHOOL_CONTACT_PROPS_FRAGMENT,
-} from '../components/sections/SchoolPage/SchoolContact';
+import SchoolContact from '../components/sections/SchoolPage/SchoolContact';
 import { ErrorInfo } from '../components/Info';
 import useFavouriteSchools from '../hooks/useFavouriteSchools';
 import SEO from '../components/SEO';
 import { ISchoolPageQuery, ISchoolPageQueryVariables } from '../types/graphql';
 import { getParsedClasses } from '../utils/schoolClasses';
-
-const SCHOOL_PAGE_QUERY = gql`
-  ${SCHOOL_HEADER_PROPS_FRAGMENT}
-  ${SCHOOL_CONTACT_PROPS_FRAGMENT}
-  ${SCHOOL_LOCATION_MAP_PROPS_FRAGMENT}
-  fragment SchoolClasses on SchoolNode {
-    classes {
-      edges {
-        node {
-          year
-          name
-          statistics {
-            pointsMin
-          }
-          extendedSubjects {
-            edges {
-              node {
-                name
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-  query SchoolPage($schoolID: String) {
-    school(schoolId: $schoolID) {
-      schoolId
-      schoolName
-      schoolType
-      ...SchoolHeaderProps
-      ...SchoolClasses
-      ...SchoolContactProps
-      ...SchoolLocationMapProps
-    }
-  }
-`;
+import { SCHOOL_PAGE_QUERY } from '../api/graphql/queries';
 
 const SchoolPage: FC<RouteComponentProps<{ schoolID: string }>> = ({ schoolID }) => {
   const { trackPageView } = useMatomo();
@@ -97,7 +55,15 @@ const SchoolPage: FC<RouteComponentProps<{ schoolID: string }>> = ({ schoolID })
         <SEO title="Szkoła" />
         <Container className="loading">
           <Breadcrumbs steps={[['Wyszukiwarka szkół', '/schools'], ['Szkoła']]} />
-          loading
+          <SchoolHeader
+            isLoading
+            description=""
+            schoolName=""
+            district=""
+            isPublic={false}
+            isFavourite={isSchoolFavourite}
+            toggleFavourite={() => null}
+          />
         </Container>
       </Layout>
     );
@@ -113,9 +79,9 @@ const SchoolPage: FC<RouteComponentProps<{ schoolID: string }>> = ({ schoolID })
         <Breadcrumbs steps={[['Wyszukiwarka szkół', '/schools'], [school?.schoolName ?? '']]} />
 
         <SchoolHeader
-          isLoading={!school}
+          isLoading={loading}
           schoolName={school?.schoolName as string}
-          description="some desc"
+          description=""
           district={school?.address?.district ?? ''}
           isPublic={school?.isPublic ?? false}
           isFavourite={isSchoolFavourite(schoolID || '')}

@@ -496,6 +496,42 @@ export type IStatisticsNodeEdge = {
   readonly cursor: Scalars['String'];
 };
 
+export type ISchoolCoordsFragment = { readonly __typename?: 'SchoolNode' } & {
+  readonly address: { readonly __typename?: 'AddressNode' } & Pick<
+    IAddressNode,
+    'latitude' | 'longitude'
+  >;
+};
+
+export type ISchoolCardPropsFragment = { readonly __typename?: 'SchoolNode' } & Pick<
+  ISchoolNode,
+  'schoolId' | 'schoolName' | 'isPublic'
+> & { readonly address: { readonly __typename?: 'AddressNode' } & Pick<IAddressNode, 'district'> };
+
+export type ISchoolHeaderPropsFragment = { readonly __typename?: 'SchoolNode' } & Pick<
+  ISchoolNode,
+  'isPublic' | 'schoolName'
+> & { readonly address: { readonly __typename?: 'AddressNode' } & Pick<IAddressNode, 'district'> };
+
+export type ISchoolLocationMapPropsFragment = { readonly __typename?: 'SchoolNode' } & Pick<
+  ISchoolNode,
+  'schoolName' | 'schoolType'
+> &
+  ISchoolCoordsFragment;
+
+export type ISchoolContactPropsFragment = { readonly __typename?: 'SchoolNode' } & {
+  readonly address: { readonly __typename?: 'AddressNode' } & Pick<
+    IAddressNode,
+    'postcode' | 'city' | 'street' | 'buildingNr'
+  >;
+  readonly contact: Maybe<
+    { readonly __typename?: 'ContactDataNode' } & Pick<
+      IContactDataNode,
+      'phone' | 'email' | 'website'
+    >
+  >;
+};
+
 export type ISchoolListingQueryVariables = Exact<{
   offset: Maybe<Scalars['Int']>;
   first: Maybe<Scalars['Int']>;
@@ -520,60 +556,6 @@ export type ISchoolListingQuery = { readonly __typename?: 'Query' } & {
       }
   >;
 };
-
-export type ISchoolMapInfoQueryVariables = Exact<{
-  offset: Maybe<Scalars['Int']>;
-  first: Maybe<Scalars['Int']>;
-  query: Maybe<Scalars['String']>;
-  isPublic: Maybe<Scalars['Boolean']>;
-  extendedSubjects: Maybe<ReadonlyArray<Maybe<Scalars['String']>> | Maybe<Scalars['String']>>;
-  districts: Maybe<ReadonlyArray<Maybe<Scalars['String']>> | Maybe<Scalars['String']>>;
-}>;
-
-export type ISchoolMapInfoQuery = { readonly __typename?: 'Query' } & {
-  readonly allSchools: Maybe<
-    { readonly __typename?: 'SchoolNodeConnection' } & Pick<ISchoolNodeConnection, 'totalCount'> & {
-        readonly edges: ReadonlyArray<
-          Maybe<
-            { readonly __typename?: 'SchoolNodeEdge' } & {
-              readonly node: Maybe<
-                { readonly __typename?: 'SchoolNode' } & ISchoolCardPropsFragment
-              >;
-            }
-          >
-        >;
-      }
-  >;
-};
-
-export type ISchoolCardPropsFragment = { readonly __typename?: 'SchoolNode' } & Pick<
-  ISchoolNode,
-  'schoolId' | 'schoolName' | 'isPublic'
-> & { readonly address: { readonly __typename?: 'AddressNode' } & Pick<IAddressNode, 'district'> };
-
-export type ISchoolContactPropsFragment = { readonly __typename?: 'SchoolNode' } & {
-  readonly address: { readonly __typename?: 'AddressNode' } & Pick<
-    IAddressNode,
-    'postcode' | 'city' | 'street' | 'buildingNr'
-  >;
-  readonly contact: Maybe<
-    { readonly __typename?: 'ContactDataNode' } & Pick<
-      IContactDataNode,
-      'phone' | 'email' | 'website'
-    >
-  >;
-};
-
-export type ISchoolHeaderPropsFragment = { readonly __typename?: 'SchoolNode' } & Pick<
-  ISchoolNode,
-  'isPublic' | 'schoolName'
-> & { readonly address: { readonly __typename?: 'AddressNode' } & Pick<IAddressNode, 'district'> };
-
-export type ISchoolLocationMapPropsFragment = { readonly __typename?: 'SchoolNode' } & Pick<
-  ISchoolNode,
-  'schoolName' | 'schoolType'
-> &
-  ISchoolCoordsFragment;
 
 export type ISchoolClassesFragment = { readonly __typename?: 'SchoolNode' } & {
   readonly classes: Maybe<
@@ -628,13 +610,6 @@ export type ISchoolPageQuery = { readonly __typename?: 'Query' } & {
       ISchoolClassesFragment &
       ISchoolContactPropsFragment &
       ISchoolLocationMapPropsFragment
-  >;
-};
-
-export type ISchoolCoordsFragment = { readonly __typename?: 'SchoolNode' } & {
-  readonly address: { readonly __typename?: 'AddressNode' } & Pick<
-    IAddressNode,
-    'latitude' | 'longitude'
   >;
 };
 

@@ -52,11 +52,9 @@ interface SchoolPastProfilesProps {
 }
 
 const SchoolPastProfiles: FC<SchoolPastProfilesProps> = ({ classes }) => {
-  console.log(classes);
-  const sortedClasses = classes ? Object.entries(classes).sort() : [];
-
-  console.log(sortedClasses, splitArrayInHalf(sortedClasses));
-
+  const sortedClasses = classes
+    ? Object.entries(classes).sort(([a], [b]) => parseInt(a, 10) - parseInt(b, 10))
+    : [];
   if (sortedClasses.length === 0)
     return (
       <Section>

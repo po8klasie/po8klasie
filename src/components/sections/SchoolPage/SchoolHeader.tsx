@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import { css } from '@emotion/core';
-import { gql } from '@apollo/client';
 import styled from '../../../styling/styled';
 import { createPlaceholderStyles } from '../../../utils/loading';
 import AddRemoveFavourite from '../../AddRemoveFavourite';
@@ -59,13 +58,3 @@ const SchoolHeader: FC<SchoolHeaderProps> = ({
 };
 
 export default SchoolHeader;
-
-export const SCHOOL_HEADER_PROPS_FRAGMENT = gql`
-  fragment SchoolHeaderProps on SchoolNode {
-    isPublic
-    schoolName
-    address {
-      district
-    }
-  }
-`;

@@ -1,39 +1,10 @@
-import { gql, LazyQueryResult, useLazyQuery } from '@apollo/client';
+import { LazyQueryResult, useLazyQuery } from '@apollo/client';
 import { convertFilterStateToGraphQLVariables, FiltersState } from '../utils/filters';
 import { ISchoolListingQuery, ISchoolListingQueryVariables } from '../types/graphql';
-import { SCHOOL_CARD_PROPS_FRAGMENT } from '../components/SchoolCard';
 import { getPaginationOffset, PER_PAGE } from '../utils/pagination';
+import { SCHOOLS_LISTING_QUERY } from './graphql/queries';
 
-const SCHOOLS_LISTING_QUERY = gql`
-  ${SCHOOL_CARD_PROPS_FRAGMENT}
-  query SchoolListing(
-    $offset: Int
-    $first: Int
-    $query: String
-    $isPublic: Boolean
-    $extendedSubjects: [String]
-    $districts: [String]
-  ) {
-    allSchools(
-      orderBy: "schoolName"
-      offset: $offset
-      first: $first
-      query: $query
-      isPublic: $isPublic
-      extendedSubjects: $extendedSubjects
-      districts: $districts
-    ) {
-      totalCount
-      edges {
-        node {
-          ...SchoolCardProps
-        }
-      }
-    }
-  }
-`;
-
-type GetSchoolListingFn = (
+type GetSchoolListingType = (
   query?: string,
   filtersState?: FiltersState,
   pageNo?: number,
@@ -43,14 +14,14 @@ type GetSchoolListingFn = (
 const LARGE_NUMBER = 10 ** 6;
 
 const useSchoolsListing = (): [
-  GetSchoolListingFn,
+  GetSchoolListingType,
   LazyQueryResult<ISchoolListingQuery, ISchoolListingQueryVariables>,
 ] => {
   const [runQuery, info] = useLazyQuery<ISchoolListingQuery, ISchoolListingQueryVariables>(
     SCHOOLS_LISTING_QUERY,
   );
 
-  const getSchoolsListing: GetSchoolListingFn = (
+  const getSchoolsListing: GetSchoolListingType = (
     query = '',
     filtersState = new Map(),
     pageNo = 1,
