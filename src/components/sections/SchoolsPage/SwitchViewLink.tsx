@@ -8,13 +8,12 @@ const SwitchLink = styled(Link)`
   background: none;
   border: none;
   color: ${(props) => props.theme.colors.primary};
-  font-weight: bold;
+  font-size: 1rem;
+  font-weight: 600;
   font-family: inherit;
   cursor: pointer;
-  font-size: 1em;
   display: flex;
   align-items: center;
-
   & > svg {
     margin-right: 5px;
   }
