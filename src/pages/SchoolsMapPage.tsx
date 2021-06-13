@@ -139,10 +139,10 @@ const SchoolsMapPage: FC<RouteComponentProps> = () => {
   const schools = data?.allSchools;
 
   const bounds: LatLngBoundsLiteral | undefined = useMemo(() => {
-    const b: LatLngBoundsLiteral = [];
     setNotListedCount(0);
     setNotListedVisible(true);
     if (schools && schools.edges.length > 0) {
+      const b: LatLngBoundsLiteral = [];
       (schools.edges as { node: ISchoolNode }[]).forEach(({ node }) => {
         if (!node || !doesSchoolHaveCoords(node)) {
           setNotListedCount((count) => count + 1);
@@ -151,11 +151,10 @@ const SchoolsMapPage: FC<RouteComponentProps> = () => {
         const { lat, lng } = getSchoolCoords(node) as LatLngLiteral;
         b.push([lat, lng]);
       }, []);
+      return b.length > 0 ? b : undefined;
     }
 
-    if (b.length === 0) return undefined;
-
-    return b;
+    return undefined;
 
     // eslint-disable-next-line
   }, [JSON.stringify(schools)]);

@@ -43,13 +43,13 @@ export const getParsedClasses = (classes: ISchoolClassesFragment['classes']): Pa
 
     if (year === CURRENT_RECRUITMENT_YEAR) {
       parsedClasses.currentYear.push(parseClassNode(node));
-      return;
-    }
+    } else {
+      if (!(year in parsedClasses.pastYears)) {
+        parsedClasses.pastYears[year] = [];
+      }
 
-    parsedClasses.pastYears[year] = [
-      ...(parsedClasses.pastYears[year] || []),
-      parseClassNode(node),
-    ];
+      parsedClasses.pastYears[year].push(parseClassNode(node));
+    }
   });
 
   return parsedClasses;
