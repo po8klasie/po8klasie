@@ -36,7 +36,7 @@ const parseClassNode = (node: ISchoolClassNode): ParsedClassNode => {
 export const getParsedClasses = (classes: ISchoolClassesFragment['classes']): ParsedClasses => {
   const parsedClasses: ParsedClasses = {
     currentYear: [],
-    pastYears: [],
+    pastYears: {},
   };
   (classes?.edges as { node: ISchoolClassNode }[]).forEach(({ node }) => {
     const year = node.year as number;
