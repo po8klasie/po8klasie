@@ -49,7 +49,7 @@ const SchoolPage: FC<RouteComponentProps<{ schoolID: string }>> = ({ schoolID })
       </Layout>
     );
 
-  if (loading && (!data || !data.school))
+  if (!data || !data.school)
     return (
       <Layout>
         <SEO title="Szkoła" />
