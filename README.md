@@ -43,7 +43,6 @@ yarn start
 | Name | Required | Description |
 | - | :-: | - |
 | `GRAPHQL_ENDPOINT` | :heavy_check_mark: | Url where GraphQL API is hosted (include a trailing slash) |
-| `API_URL` | :heavy_check_mark: | Url where REST API is hosted (include a trailing slash) | 
 | `PUBLIC_SENTRY_DSN` | :x: | Sentry DSN. If it's not specified, Sentry Client is not initialized. |
 | `MATOMO_BASE_URL` | :x: | Matomo base url (include a trailing slash). If it's not specified, Matomo Client is not initialized. |
 | `MATOMO_SITE_ID` | :x: | Matomo site ID. If it's not specified, Matomo Client is not initialized. |
