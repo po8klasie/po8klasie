@@ -99,6 +99,9 @@ export const SCHOOL_PAGE_QUERY = gql`
       schoolId
       schoolName
       schoolType
+      publicInstitutionData {
+        regon
+      }
       ...SchoolHeaderProps
       ...SchoolClasses
       ...SchoolContactProps

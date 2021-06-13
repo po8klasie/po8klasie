@@ -1,5 +1,5 @@
 import React, { FC, useEffect } from 'react';
-import { RouteComponentProps } from '@reach/router';
+import { Redirect, RouteComponentProps } from '@reach/router';
 import { useMatomo } from '@datapunt/matomo-tracker-react';
 import { useLazyQuery } from '@apollo/client';
 import Layout from '../components/Layout';
@@ -16,6 +16,8 @@ import SEO from '../components/SEO';
 import { ISchoolNode, ISchoolPageQuery, ISchoolPageQueryVariables } from '../types/graphql';
 import { getParsedClasses } from '../utils/schoolClasses';
 import { SCHOOL_PAGE_QUERY } from '../api/graphql/queries';
+
+const isRegon = (value: string | undefined) => value && [9, 14].includes(value.length);
 
 const SchoolPage: FC<RouteComponentProps<{ schoolID: string }>> = ({ schoolID }) => {
   const { trackPageView } = useMatomo();
@@ -80,6 +82,9 @@ const SchoolPage: FC<RouteComponentProps<{ schoolID: string }>> = ({ schoolID })
     );
 
   const { school } = data as { school: ISchoolNode };
+
+  if (school.publicInstitutionData && school.publicInstitutionData.regon && isRegon(schoolID))
+    return <Redirect to={`/school/${school.schoolId}`} noThrow />;
 
   const parsedClasses = getParsedClasses(school.classes);
 
