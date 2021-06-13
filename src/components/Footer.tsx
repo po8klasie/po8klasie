@@ -1,14 +1,16 @@
 import React, { FC } from 'react';
 import { Link } from '@reach/router';
-import { FaFacebook, FaGithub } from 'react-icons/fa';
+import { FaFacebook, FaGithub, FaLinkedin } from 'react-icons/fa';
 import styled from '../styling/styled';
 import Container from './Container';
 import epfImg from '../assets/images/epf.png';
 import kdpImg from '../assets/images/kdp-logo.png';
 
 const DataInfo = styled.p`
+  text-align: center;
+  white-space: nowrap;
   @media (max-width: 1000px) {
-    text-align: center;
+    white-space: normal;
   }
 `;
 
@@ -108,8 +110,8 @@ const Footer: FC<FooterProps> = ({ noFooterMargin }) => (
       <FooterGrid>
         <div>
           <DataInfo>
-            Dokładamy wszelkich starań, aby dane były aktualne, ale nie ponosimy odpowiedzialności
-            za ich prawidłowość.
+            Dokładamy wszelkich starań, aby dane były aktualne, <wbr />
+            ale nie ponosimy odpowiedzialności za ich ewentualną nieprawidłowość.
           </DataInfo>
           <div className="sitemap">
             <ul>
@@ -165,6 +167,9 @@ const Footer: FC<FooterProps> = ({ noFooterMargin }) => (
         </a>
         <a href="https://fb.com/WarsawLO" rel="noopener noreferrer" target="_blank">
           <FaFacebook />
+        </a>
+        <a href="https://linkedin.com/in/WarsawLO" rel="noopener noreferrer" target="_blank">
+          <FaLinkedin />
         </a>
       </SocialMediaIcons>
     </Container>
