@@ -519,18 +519,21 @@ export type ISchoolLocationMapPropsFragment = { readonly __typename?: 'SchoolNod
 > &
   ISchoolCoordsFragment;
 
-export type ISchoolContactPropsFragment = { readonly __typename?: 'SchoolNode' } & {
-  readonly address: { readonly __typename?: 'AddressNode' } & Pick<
-    IAddressNode,
-    'postcode' | 'city' | 'street' | 'buildingNr'
-  >;
-  readonly contact: Maybe<
-    { readonly __typename?: 'ContactDataNode' } & Pick<
-      IContactDataNode,
-      'phone' | 'email' | 'website'
-    >
-  >;
-};
+export type ISchoolContactPropsFragment = { readonly __typename?: 'SchoolNode' } & Pick<
+  ISchoolNode,
+  'schoolName'
+> & {
+    readonly address: { readonly __typename?: 'AddressNode' } & Pick<
+      IAddressNode,
+      'postcode' | 'city' | 'street' | 'buildingNr'
+    >;
+    readonly contact: Maybe<
+      { readonly __typename?: 'ContactDataNode' } & Pick<
+        IContactDataNode,
+        'phone' | 'email' | 'website'
+      >
+    >;
+  } & ISchoolCoordsFragment;
 
 export type ISchoolListingQueryVariables = Exact<{
   offset: Maybe<Scalars['Int']>;
@@ -554,6 +557,38 @@ export type ISchoolListingQuery = { readonly __typename?: 'Query' } & {
           >
         >;
       }
+  >;
+};
+
+export type ISchoolsMapQueryVariables = Exact<{
+  first: Maybe<Scalars['Int']>;
+  query: Maybe<Scalars['String']>;
+  isPublic: Maybe<Scalars['Boolean']>;
+  extendedSubjects: Maybe<ReadonlyArray<Maybe<Scalars['String']>> | Maybe<Scalars['String']>>;
+  districts: Maybe<ReadonlyArray<Maybe<Scalars['String']>> | Maybe<Scalars['String']>>;
+}>;
+
+export type ISchoolsMapQuery = { readonly __typename?: 'Query' } & {
+  readonly allSchools: Maybe<
+    { readonly __typename?: 'SchoolNodeConnection' } & {
+      readonly edges: ReadonlyArray<
+        Maybe<
+          { readonly __typename?: 'SchoolNodeEdge' } & {
+            readonly node: Maybe<
+              { readonly __typename?: 'SchoolNode' } & Pick<
+                ISchoolNode,
+                'schoolId' | 'schoolName' | 'schoolType'
+              > & {
+                  readonly address: { readonly __typename?: 'AddressNode' } & Pick<
+                    IAddressNode,
+                    'latitude' | 'longitude' | 'buildingNr' | 'city' | 'postcode' | 'street'
+                  >;
+                }
+            >;
+          }
+        >
+      >;
+    }
   >;
 };
 
@@ -610,6 +645,62 @@ export type ISchoolPageQuery = { readonly __typename?: 'Query' } & {
       ISchoolClassesFragment &
       ISchoolContactPropsFragment &
       ISchoolLocationMapPropsFragment
+  >;
+};
+
+export type IFavouriteSchoolsQueryVariables = Exact<{
+  schoolIDs: Maybe<ReadonlyArray<Maybe<Scalars['String']>> | Maybe<Scalars['String']>>;
+  year: Maybe<Scalars['Float']>;
+  first: Maybe<Scalars['Int']>;
+}>;
+
+export type IFavouriteSchoolsQuery = { readonly __typename?: 'Query' } & {
+  readonly allSchools: Maybe<
+    { readonly __typename?: 'SchoolNodeConnection' } & {
+      readonly edges: ReadonlyArray<
+        Maybe<
+          { readonly __typename?: 'SchoolNodeEdge' } & {
+            readonly node: Maybe<
+              { readonly __typename?: 'SchoolNode' } & {
+                readonly classes: Maybe<
+                  { readonly __typename?: 'SchoolClassNodeConnection' } & {
+                    readonly edges: ReadonlyArray<
+                      Maybe<
+                        { readonly __typename?: 'SchoolClassNodeEdge' } & {
+                          readonly node: Maybe<
+                            { readonly __typename?: 'SchoolClassNode' } & Pick<
+                              ISchoolClassNode,
+                              'name'
+                            > & {
+                                readonly extendedSubjects: Maybe<
+                                  { readonly __typename?: 'ExtendedSubjectNodeConnection' } & {
+                                    readonly edges: ReadonlyArray<
+                                      Maybe<
+                                        { readonly __typename?: 'ExtendedSubjectNodeEdge' } & {
+                                          readonly node: Maybe<
+                                            { readonly __typename?: 'ExtendedSubjectNode' } & Pick<
+                                              IExtendedSubjectNode,
+                                              'name'
+                                            >
+                                          >;
+                                        }
+                                      >
+                                    >;
+                                  }
+                                >;
+                              }
+                          >;
+                        }
+                      >
+                    >;
+                  }
+                >;
+              } & ISchoolCardPropsFragment
+            >;
+          }
+        >
+      >;
+    }
   >;
 };
 

@@ -1,10 +1,14 @@
-import { ISchoolClassesFragment, ISchoolClassNodeConnection } from '../types/graphql';
+import {
+  IExtendedSubjectName,
+  ISchoolClassesFragment,
+  ISchoolClassNodeConnection,
+} from '../types/graphql';
 
-export const CURRENT_RECRUITMENT_YEAR = 2020;
+export const CURRENT_RECRUITMENT_YEAR = 2021;
 
 export interface ParsedClassNode {
   name: string;
-  extendedSubjects: [];
+  extendedSubjects: IExtendedSubjectName[];
   year: number;
   statistics: { pointsMin: number } | null;
 }
@@ -34,7 +38,7 @@ export const getParsedClasses = (classes: ISchoolClassesFragment['classes']): Pa
 
     parsedClasses.pastYears = {
       ...parsedClasses.pastYears,
-      [year]: [...(parsedClasses.currentYear || []), parseClassNode(node)],
+      [year]: [...(parsedClasses.pastYears[year] || []), parseClassNode(node)],
     };
   });
 

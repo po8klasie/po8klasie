@@ -4,40 +4,36 @@ import { ISchoolListingQuery, ISchoolListingQueryVariables } from '../types/grap
 import { getPaginationOffset, PER_PAGE } from '../utils/pagination';
 import { SCHOOLS_LISTING_QUERY } from './graphql/queries';
 
-type GetSchoolListingType = (
+type GetSchoolsListingDataType = (
   query?: string,
   filtersState?: FiltersState,
   pageNo?: number,
-  disablePagination?: boolean,
 ) => void;
 
-const LARGE_NUMBER = 10 ** 6;
-
-const useSchoolsListing = (): [
-  GetSchoolListingType,
+const useSchoolsListingData = (): [
+  GetSchoolsListingDataType,
   LazyQueryResult<ISchoolListingQuery, ISchoolListingQueryVariables>,
 ] => {
   const [runQuery, info] = useLazyQuery<ISchoolListingQuery, ISchoolListingQueryVariables>(
     SCHOOLS_LISTING_QUERY,
   );
 
-  const getSchoolsListing: GetSchoolListingType = (
+  const getSchoolsListingData: GetSchoolsListingDataType = (
     query = '',
     filtersState = new Map(),
     pageNo = 1,
-    disablePagination = false,
   ) => {
     return runQuery({
       variables: {
         query,
-        first: disablePagination ? LARGE_NUMBER : PER_PAGE,
-        offset: disablePagination ? 0 : getPaginationOffset(pageNo),
+        first: PER_PAGE,
+        offset: getPaginationOffset(pageNo),
         ...convertFilterStateToGraphQLVariables(filtersState),
-      } as any,
+      },
     });
   };
 
-  return [getSchoolsListing, info];
+  return [getSchoolsListingData, info];
 };
 
-export default useSchoolsListing;
+export default useSchoolsListingData;

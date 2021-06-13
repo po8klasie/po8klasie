@@ -6,14 +6,14 @@ import Layout from '../components/Layout';
 import Container from '../components/Container';
 import Breadcrumbs from '../components/Breadcrumbs';
 import SchoolHeader from '../components/sections/SchoolPage/SchoolHeader';
-import SchoolProfiles from '../components/sections/SchoolPage/SchoolProfiles';
+import SchoolClasses from '../components/sections/SchoolPage/SchoolClasses';
 import SchoolLocationMap from '../components/sections/SchoolPage/SchoolLocationMap';
-import SchoolPastProfiles from '../components/sections/SchoolPage/SchoolPastProfiles';
+import SchoolClassesFromPastYears from '../components/sections/SchoolPage/SchoolClassesFromPastYears';
 import SchoolContact from '../components/sections/SchoolPage/SchoolContact';
 import { ErrorInfo } from '../components/Info';
 import useFavouriteSchools from '../hooks/useFavouriteSchools';
 import SEO from '../components/SEO';
-import { ISchoolPageQuery, ISchoolPageQueryVariables } from '../types/graphql';
+import { ISchoolNode, ISchoolPageQuery, ISchoolPageQueryVariables } from '../types/graphql';
 import { getParsedClasses } from '../utils/schoolClasses';
 import { SCHOOL_PAGE_QUERY } from '../api/graphql/queries';
 
@@ -49,7 +49,7 @@ const SchoolPage: FC<RouteComponentProps<{ schoolID: string }>> = ({ schoolID })
       </Layout>
     );
 
-  if (loading || !data || !data.school)
+  if (loading && (!data || !data.school))
     return (
       <Layout>
         <SEO title="Szkoła" />
@@ -68,7 +68,18 @@ const SchoolPage: FC<RouteComponentProps<{ schoolID: string }>> = ({ schoolID })
       </Layout>
     );
 
-  const { school } = data;
+  if (error && (!data || !data.school))
+    return (
+      <Layout>
+        <SEO title="Szkoła" />
+        <Container className="loading">
+          <Breadcrumbs steps={[['Wyszukiwarka szkół', '/schools'], ['Szkoła']]} />
+          <ErrorInfo />
+        </Container>
+      </Layout>
+    );
+
+  const { school } = data as { school: ISchoolNode };
 
   const parsedClasses = getParsedClasses(school.classes);
 
@@ -88,9 +99,13 @@ const SchoolPage: FC<RouteComponentProps<{ schoolID: string }>> = ({ schoolID })
           toggleFavourite={() => toggleFavouriteSchool(schoolID || '')}
         />
 
-        <SchoolProfiles currentYearClasses={parsedClasses.currentYear} />
-        <SchoolPastProfiles classes={parsedClasses.pastYears} />
-        <SchoolContact address={school?.address} contact={school?.contact} />
+        <SchoolClasses currentYearClasses={parsedClasses.currentYear} />
+        <SchoolClassesFromPastYears classes={parsedClasses.pastYears} />
+        <SchoolContact
+          schoolName={school?.schoolName}
+          address={school?.address}
+          contact={school?.contact}
+        />
       </Container>
       <SchoolLocationMap
         schoolName={school?.schoolName}

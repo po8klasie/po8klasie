@@ -5,6 +5,7 @@ import {
   FilterKey,
   filters as filterDefinitions,
 } from '../data/filters';
+import { ISchoolListingQueryVariables } from '../types/graphql';
 
 export type FilterChoices = Set<FilterChoiceValue>;
 export type FiltersState = Map<FilterKey, FilterChoices>;
@@ -99,7 +100,7 @@ export const convertFilterStateToObject = (
 
 export const convertFilterStateToGraphQLVariables = (
   filtersState: FiltersState,
-): Record<FilterKey, FilterChoiceValue[] | FilterChoiceValue> => {
+): Omit<ISchoolListingQueryVariables, 'first' | 'offset' | 'query'> => {
   const filterDefinitionUtils = new FilterDefinitionsUtils(filterDefinitions);
   return Object.fromEntries(
     // value is a set. we have to convert it to array

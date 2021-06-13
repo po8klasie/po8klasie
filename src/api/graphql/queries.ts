@@ -35,6 +35,41 @@ export const SCHOOLS_LISTING_QUERY = gql`
   }
 `;
 
+export const SCHOOLS_MAP_QUERY = gql`
+  query SchoolsMap(
+    $first: Int
+    $query: String
+    $isPublic: Boolean
+    $extendedSubjects: [String]
+    $districts: [String]
+  ) {
+    allSchools(
+      first: $first
+      query: $query
+      isPublic: $isPublic
+      extendedSubjects: $extendedSubjects
+      districts: $districts
+    ) {
+      edges {
+        node {
+          schoolId
+          schoolName
+          schoolType
+
+          address {
+            latitude
+            longitude
+            buildingNr
+            city
+            postcode
+            street
+          }
+        }
+      }
+    }
+  }
+`;
+
 export const SCHOOL_PAGE_QUERY = gql`
   ${SCHOOL_HEADER_PROPS_FRAGMENT}
   ${SCHOOL_CONTACT_PROPS_FRAGMENT}
@@ -68,6 +103,33 @@ export const SCHOOL_PAGE_QUERY = gql`
       ...SchoolClasses
       ...SchoolContactProps
       ...SchoolLocationMapProps
+    }
+  }
+`;
+
+export const FAVOURITE_SCHOOLS_QUERY = gql`
+  ${SCHOOL_CARD_PROPS_FRAGMENT}
+  query FavouriteSchools($schoolIDs: [String], $year: Float, $first: Int) {
+    allSchools(schoolIds: $schoolIDs, first: $first) {
+      edges {
+        node {
+          ...SchoolCardProps
+          classes(year: $year) {
+            edges {
+              node {
+                name
+                extendedSubjects {
+                  edges {
+                    node {
+                      name
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 `;

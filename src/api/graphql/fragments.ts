@@ -45,6 +45,7 @@ export const SCHOOL_LOCATION_MAP_PROPS_FRAGMENT = gql`
 
 export const SCHOOL_CONTACT_PROPS_FRAGMENT = gql`
   fragment SchoolContactProps on SchoolNode {
+    schoolName
     address {
       postcode
       city
@@ -56,5 +57,6 @@ export const SCHOOL_CONTACT_PROPS_FRAGMENT = gql`
       email
       website
     }
+    ...SchoolCoords
   }
 `;
