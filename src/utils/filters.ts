@@ -1,7 +1,13 @@
-import { FilterChoiceDefinition, FilterDefinition, FilterKey } from '../data/filters';
+import {
+  FilterChoiceDefinition,
+  FilterChoiceValue,
+  FilterDefinition,
+  FilterKey,
+  filters as filterDefinitions,
+} from '../data/filters';
+import { ISchoolListingQueryVariables } from '../types/graphql';
 
-export type FilterChoiceId = string;
-export type FilterChoices = Set<FilterChoiceId>;
+export type FilterChoices = Set<FilterChoiceValue>;
 export type FiltersState = Map<FilterKey, FilterChoices>;
 
 export class FiltersStateUtils {
@@ -13,15 +19,15 @@ export class FiltersStateUtils {
 
   private getState = (): FiltersState => new Map(this.state); // make a clone
 
-  addFilterChoices = (filterKey: FilterKey, choiceId: FilterChoiceId): FiltersState => {
+  addFilterChoices = (filterKey: FilterKey, choiceValue: FilterChoiceValue): FiltersState => {
     const state = this.getState();
-    return state.set(filterKey, new Set(state.get(filterKey)).add(choiceId));
+    return state.set(filterKey, new Set(state.get(filterKey)).add(choiceValue));
   };
 
-  removeFilterChoices = (filterKey: FilterKey, choiceId: FilterChoiceId): FiltersState => {
+  removeFilterChoices = (filterKey: FilterKey, choiceValue: FilterChoiceValue): FiltersState => {
     const state = this.getState();
     const updatedValues = new Set(state.get(filterKey));
-    updatedValues.delete(choiceId);
+    updatedValues.delete(choiceValue);
 
     if (updatedValues.size > 0) return state.set(filterKey, updatedValues);
 
@@ -29,11 +35,14 @@ export class FiltersStateUtils {
     return state;
   };
 
-  toggleFilterChoice = (filterDefinition: FilterDefinition, choiceId: string): FiltersState => {
+  toggleFilterChoice = (
+    filterDefinition: FilterDefinition,
+    choiceValue: FilterChoiceValue,
+  ): FiltersState => {
     const { key, multiple, choices } = filterDefinition;
 
-    if (this.isChoiceSelected(key, choiceId)) {
-      return this.removeFilterChoices(key, choiceId);
+    if (this.isChoiceSelected(key, choiceValue)) {
+      return this.removeFilterChoices(key, choiceValue);
     }
 
     if (multiple) {
@@ -46,14 +55,16 @@ export class FiltersStateUtils {
         return state;
       }
 
-      return this.addFilterChoices(key, choiceId);
+      return this.addFilterChoices(key, choiceValue);
     }
 
-    return this.getState().set(key, new Set([choiceId]));
+    return this.getState().set(key, new Set([choiceValue]));
   };
 
-  isChoiceSelected = (filterKey: FilterKey, choiceId: string): boolean => {
-    return this.state.has(filterKey) && (this.state.get(filterKey) as FilterChoices).has(choiceId);
+  isChoiceSelected = (filterKey: FilterKey, choiceValue: FilterChoiceValue): boolean => {
+    return (
+      this.state.has(filterKey) && (this.state.get(filterKey) as FilterChoices).has(choiceValue)
+    );
   };
 }
 
@@ -70,19 +81,38 @@ export class FilterDefinitionsUtils {
 
   getChoiceDefinition = (
     filterDefinition: FilterDefinition,
-    choiceId: string,
+    choiceValue: FilterChoiceValue,
   ): FilterChoiceDefinition => {
     return filterDefinition.choices.find(
-      (choiceDefinition) => choiceDefinition.id === choiceId,
+      (choiceDefinition) => choiceDefinition.value === choiceValue,
     ) as FilterChoiceDefinition;
   };
 }
 
 export const convertFilterStateToObject = (
   filtersState: FiltersState,
-): Record<string, string[]> => {
+): Record<string, FilterChoiceValue[]> => {
   return Object.fromEntries(
     // value is a set. we have to convert it to array
     Array.from(filtersState.entries()).map(([key, value]) => [key, Array.from(value)]),
+  );
+};
+
+export const convertFilterStateToGraphQLVariables = (
+  filtersState: FiltersState,
+): Omit<ISchoolListingQueryVariables, 'first' | 'offset' | 'query'> => {
+  const filterDefinitionUtils = new FilterDefinitionsUtils(filterDefinitions);
+  return Object.fromEntries(
+    // value is a set. we have to convert it to array
+    (Array.from(filtersState.entries()) as [FilterKey, FilterChoices][]).map(([key, value]) => {
+      const { backendKey } = filterDefinitionUtils.getFilterDefinitionByKey(key);
+      const variableValue = Array.from(value);
+
+      if (variableValue.length === 0) return [backendKey, null];
+
+      if (variableValue.length === 1) return [backendKey, variableValue[0]];
+
+      return [backendKey as FilterKey, variableValue];
+    }),
   );
 };

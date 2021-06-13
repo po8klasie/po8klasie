@@ -31,7 +31,7 @@ interface SidebarProps {
   filters: UseFiltersOutput;
   query: string;
   onQueryChange: (v: string) => void;
-  count?: number;
+  count?: number | null;
   closeSidebar: () => void;
 }
 
@@ -53,7 +53,7 @@ const Sidebar: FC<SidebarProps> = ({
           <SwitchViewLinkWrapper>{switchViewLinkElement}</SwitchViewLinkWrapper>
           <SidebarTitle>Znajdź wymarzoną szkołę</SidebarTitle>
           <QueryFilter query={query} onQueryChange={onQueryChange} />
-          {typeof count !== 'undefined' && <Count>Liczba wyników: {count}</Count>}
+          {count && <Count>Liczba wyników: {count}</Count>}
         </SidebarSection>
         <Filters filters={filters} />
       </PerfectScrollbar>

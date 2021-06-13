@@ -3,7 +3,8 @@ import { createPack } from 'react-component-pack';
 import { ErrorBoundary } from '@sentry/react';
 import { ThemeProvider, ThemeProviderProps } from 'emotion-theming';
 import { SWRConfig } from 'swr';
-import { AnalyticsProvider } from './utils/externalServices';
+import { ApolloProvider } from '@apollo/client';
+import { AnalyticsProvider, apolloClient } from './utils/externalServices';
 import theme, { Theme } from './styling/theme';
 import handleError from './api/handleError';
 
@@ -23,6 +24,9 @@ const Providers = createPack(
     value: {
       onError: handleError,
     },
+  }),
+  withProps<any>(ApolloProvider, {
+    client: apolloClient,
   }),
 );
 

@@ -1,10 +1,10 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useCallback, useState } from 'react';
 import { RouteComponentProps } from '@reach/router';
 import useDeepCompareEffect from 'use-deep-compare-effect';
 import { BsMap } from 'react-icons/bs';
+import debounce from 'lodash.debounce';
 import Layout from '../components/Layout';
 import Container from '../components/Container';
-import { useSchools } from '../api/schools';
 import styled from '../styling/styled';
 import {
   deserializeFilters,
@@ -24,6 +24,7 @@ import useBasicPageViewTracker from '../hooks/useBasicPageViewTracker';
 import SEO from '../components/SEO';
 import useFilters from '../hooks/useFilters';
 import { convertFilterStateToObject } from '../utils/filters';
+import useSchoolsListingData from '../api/schoolsListingData';
 
 const Flex = styled.div`
   display: flex;
@@ -45,20 +46,27 @@ const SchoolsGridPage: FC<RouteComponentProps> = () => {
   const [query, setQuery] = useState(deserializeQuery(p));
   const [page, setPage] = useState(deserializePage(p));
   const filters = useFilters(filtersDefinition, deserializeFilters(p, filtersDefinition));
-  const searchData = {
-    query,
-    page,
-    ...convertFilterStateToObject(filters.filtersState),
-  };
-  const { data, error } = useSchools(searchData);
+  const [getSchools, { data, error }] = useSchoolsListingData();
+
+  const filtersObj = convertFilterStateToObject(filters.filtersState);
+
+  const delayedGetSchools = useCallback(debounce(getSchools, 300), [getSchools]);
 
   useDeepCompareEffect(() => {
+    const searchData = {
+      query,
+      page,
+      ...filtersObj,
+    };
     currUrl.search = serializeSearchData(searchData, 'search');
     window.history.replaceState(null, '', currUrl.toString());
-  }, [currUrl, searchData]);
+    delayedGetSchools(query, filters.filtersState, page);
 
-  const schools = data?.schools;
-  const count = data?.count;
+    return delayedGetSchools.cancel;
+  }, [query, filtersObj, page, delayedGetSchools]);
+
+  const schools = data?.allSchools;
+  const count = data?.allSchools?.totalCount;
 
   return (
     <Layout hideFooter noTopMargin>

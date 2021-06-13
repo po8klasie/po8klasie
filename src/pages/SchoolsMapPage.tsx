@@ -1,12 +1,12 @@
-import React, { useMemo, useState, FC } from 'react';
+import React, { useMemo, useState, FC, useCallback } from 'react';
 import { Link, RouteComponentProps } from '@reach/router';
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
 import useDeepCompareEffect from 'use-deep-compare-effect';
-import { BsGrid, BsX } from 'react-icons/bs/index';
+import { BsGrid, BsX } from 'react-icons/bs';
 import ClipLoader from 'react-spinners/ClipLoader';
-import { LatLngExpression } from 'leaflet';
+import { LatLngBoundsLiteral, LatLngExpression, LatLngLiteral } from 'leaflet';
+import debounce from 'lodash.debounce';
 import Layout from '../components/Layout';
-import { useAllSchools } from '../api/schools';
 import styled from '../styling/styled';
 import { deserializeFilters, deserializeQuery, serializeSearchData } from '../utils/search';
 import { filters as filtersDefinition } from '../data/filters';
@@ -26,6 +26,8 @@ import Sidebar from '../components/sections/SchoolsPage/Sidebar/Sidebar';
 import SidebarWrapper from '../components/sections/SchoolsPage/Sidebar/SidebarWrapper';
 import useFilters from '../hooks/useFilters';
 import { convertFilterStateToObject } from '../utils/filters';
+import useSchoolsMapData from '../api/schoolsMapData';
+import { ISchoolNode } from '../types/graphql';
 
 const MapWrapper = styled.div`
   width: calc(100% - min(25vw, 400px));
@@ -118,38 +120,46 @@ const SchoolsMapPage: FC<RouteComponentProps> = () => {
   const filters = useFilters(filtersDefinition, deserializeFilters(p, filtersDefinition));
   const [notListedCount, setNotListedCount] = useState(0);
   const [notListedVisible, setNotListedVisible] = useState(true);
-  const searchData = {
-    query,
-    ...convertFilterStateToObject(filters.filtersState),
-  };
-  const { data: schools, error } = useAllSchools(searchData);
+  const [getSchools, { data, error }] = useSchoolsMapData();
+
+  const filtersObj = convertFilterStateToObject(filters.filtersState);
+
+  const delayedGetSchools = useCallback(debounce(getSchools, 300), [getSchools]);
 
   useDeepCompareEffect(() => {
+    const searchData = {
+      query,
+      ...filtersObj,
+    };
     currUrl.search = serializeSearchData(searchData, 'search');
     window.history.replaceState(null, '', currUrl.toString());
-  }, [searchData, currUrl]);
+    delayedGetSchools(query, filters.filtersState);
+  }, [query, filtersObj]);
 
-  const bounds = useMemo(() => {
-    let b = [];
+  const schools = data?.allSchools;
+
+  const bounds: LatLngBoundsLiteral | undefined = useMemo(() => {
     setNotListedCount(0);
     setNotListedVisible(true);
-    if (schools && schools.length > 0) {
-      b = schools.reduce((prev: any, school: any) => {
-        if (!doesSchoolHaveCoords(school)) {
+    if (schools && schools.edges.length > 0) {
+      const b: LatLngBoundsLiteral = [];
+      (schools.edges as { node: ISchoolNode }[]).forEach(({ node }) => {
+        if (!node || !doesSchoolHaveCoords(node)) {
           setNotListedCount((count) => count + 1);
-          return prev;
+          return;
         }
-
-        return [...prev, getSchoolCoords(school) as LatLngExpression];
+        const { lat, lng } = getSchoolCoords(node) as LatLngLiteral;
+        b.push([lat, lng]);
       }, []);
+      return b.length > 0 ? b : undefined;
     }
-    if (b.length === 0) return undefined;
-    return b;
+
+    return undefined;
 
     // eslint-disable-next-line
   }, [JSON.stringify(schools)]);
 
-  const schoolsNotFound = !!(schools && schools.length === 0);
+  const schoolsNotFound = !!(schools && schools.edges.length === 0);
   const isLoading = !schools;
 
   const isOverlayActive = isLoading || schoolsNotFound;
@@ -180,24 +190,24 @@ const SchoolsMapPage: FC<RouteComponentProps> = () => {
             className="tile-layer"
           />
           {schools &&
-            schools.map((school: any) => {
-              if (!doesSchoolHaveCoords(school)) return null;
+            (schools.edges as { node: ISchoolNode }[]).map(({ node }) => {
+              if (!doesSchoolHaveCoords(node)) return null;
 
-              const coords = getSchoolCoords(school) as LatLngExpression;
+              const coords = getSchoolCoords(node) as LatLngExpression;
 
               return (
                 <Marker
                   position={coords}
-                  icon={getSchoolMarker(school.school_type)}
-                  key={school.id}
+                  icon={getSchoolMarker(node.schoolType)}
+                  key={node.schoolId}
                 >
                   <Popup className="school-popup">
-                    <h5>{school.school_name}</h5>
+                    <h5>{node.schoolName}</h5>
                     <address>
-                      {school.address.postalcode} {school.address.city} <br />
-                      {school.address.street} {school.address.building_nr}
+                      {node.address.postcode} {node.address.city} <br />
+                      {node.address.street} {node.address.buildingNr}
                     </address>
-                    <Link to={`/school/${school.id}`} className="link">
+                    <Link to={`/school/${node.schoolId}`} className="link">
                       Więcej
                     </Link>
                   </Popup>

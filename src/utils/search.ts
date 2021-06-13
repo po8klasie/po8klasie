@@ -7,7 +7,7 @@ import {
   pageNumberSerializer,
   ParamsModeType,
 } from './searchSerializers';
-import { FilterDefinition } from '../data/filters';
+import { FilterChoiceValue, FilterDefinition } from '../data/filters';
 import { FiltersState } from './filters';
 
 const serializerDeserializerOverwrites: Record<string, any> = {
@@ -81,8 +81,8 @@ export const deserializeFilters = (
   const filtersState = new Map();
   filtersDefinition.forEach((filterDef) => {
     const value = deserializeSingleSearchData(filterDef.key, p);
-    const possibleValues = filterDef.choices.map((choice) => choice.id);
-    if (value && value.every((v: string) => possibleValues.includes(v)))
+    const possibleValues = filterDef.choices.map((choice) => choice.value);
+    if (value && value.every((v: FilterChoiceValue) => possibleValues.includes(v)))
       filtersState.set(filterDef.key, new Set(value));
   });
 

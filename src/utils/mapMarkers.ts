@@ -5,6 +5,7 @@ import marker1 from '../assets/icons/markers/marker1.png';
 import marker2 from '../assets/icons/markers/marker2.png';
 import marker3 from '../assets/icons/markers/marker3.png';
 import marker4 from '../assets/icons/markers/marker4.png';
+import { ISchoolSchoolType } from '../types/graphql';
 
 export const defaultMarker = L.icon({
   iconUrl: icon,
@@ -50,13 +51,13 @@ const specialSchoolMarker = createMarker(specialSchoolMarkerImage);
 
 export const getSchoolMarker = (schoolType: string): L.Icon<L.IconOptions> => {
   switch (schoolType) {
-    case 'liceum ogólnokształcące':
+    case ISchoolSchoolType.LiceumOgolnoksztalcace:
       return highSchoolMarker;
-    case 'technikum':
+    case ISchoolSchoolType.Technikum:
       return technicalSchoolMarker;
-    case 'szkoła branżowa I stopnia':
+    case ISchoolSchoolType.SzkolaBranzowaIStopnia:
       return vocationalSchoolMarker;
-    case 'szkoła specjalna przysposabiająca do pracy':
+    case ISchoolSchoolType.SzkolaSpecjalnaPrzysposabiajacaDoPracy:
       return specialSchoolMarker;
     default:
       return defaultMarker;

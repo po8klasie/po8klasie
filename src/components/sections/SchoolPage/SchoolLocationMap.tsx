@@ -4,6 +4,7 @@ import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
 import { getSchoolMarker } from '../../../utils/mapMarkers';
 import styled from '../../../styling/styled';
 import { doesSchoolHaveCoords, getSchoolCoords } from '../../../utils/map';
+import { ISchoolLocationMapPropsFragment } from '../../../types/graphql';
 
 const MapWrapper = styled.div`
   width: 100%;
@@ -20,9 +21,9 @@ const MapWrapper = styled.div`
 `;
 
 interface SchoolLocationMapProps {
-  schoolName: string;
-  schoolType: string;
-  address: any;
+  schoolName: ISchoolLocationMapPropsFragment['schoolName'];
+  schoolType: ISchoolLocationMapPropsFragment['schoolType'];
+  address: ISchoolLocationMapPropsFragment['address'];
 }
 
 const ZOOM = 15;

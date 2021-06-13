@@ -1,9 +1,10 @@
 import React, { FC } from 'react';
+import { ApolloError } from '@apollo/client';
 import styled from '../../../styling/styled';
 import { ErrorInfo, NotFoundInfo } from '../../Info';
-import { School } from '../../../types';
 import SchoolCard from '../../SchoolCard';
 import { LoadingCard } from '../FavouriteSchools/FavouriteSchoolWrapper';
+import { ISchoolListingQuery, ISchoolNode } from '../../../types/graphql';
 
 const ResultsWrapper = styled.div`
   display: flex;
@@ -11,10 +12,15 @@ const ResultsWrapper = styled.div`
   margin-top: 2em;
 `;
 
-const Results: FC<any> = ({ schools, error }) => {
+interface ResultsProps {
+  schools?: ISchoolListingQuery['allSchools'];
+  error?: ApolloError;
+}
+
+const Results: FC<ResultsProps> = ({ schools, error }) => {
   if (error) return <ErrorInfo />;
 
-  if (schools && schools.length === 0) return <NotFoundInfo />;
+  if (schools && schools.edges.length === 0) return <NotFoundInfo />;
 
   if (!schools)
     return (
@@ -27,8 +33,8 @@ const Results: FC<any> = ({ schools, error }) => {
 
   return (
     <ResultsWrapper>
-      {schools.map((school: School) => (
-        <SchoolCard key={school.id} school={school} />
+      {(schools.edges as { node: ISchoolNode }[]).map(({ node }) => (
+        <SchoolCard key={node.id} school={node} />
       ))}
     </ResultsWrapper>
   );
