@@ -4,7 +4,7 @@ import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
 import useDeepCompareEffect from 'use-deep-compare-effect';
 import { BsGrid, BsX } from 'react-icons/bs';
 import ClipLoader from 'react-spinners/ClipLoader';
-import { LatLngBoundsLiteral, LatLngExpression, LatLngLiteral, LatLngTuple } from 'leaflet';
+import { LatLngBoundsLiteral, LatLngExpression, LatLngLiteral } from 'leaflet';
 import debounce from 'lodash.debounce';
 import Layout from '../components/Layout';
 import styled from '../styling/styled';
@@ -139,23 +139,18 @@ const SchoolsMapPage: FC<RouteComponentProps> = () => {
   const schools = data?.allSchools;
 
   const bounds: LatLngBoundsLiteral | undefined = useMemo(() => {
-    let b: LatLngBoundsLiteral = [];
+    const b: LatLngBoundsLiteral = [];
     setNotListedCount(0);
     setNotListedVisible(true);
     if (schools && schools.edges.length > 0) {
-      b = (schools.edges as { node: ISchoolNode }[]).reduce<LatLngBoundsLiteral>(
-        (prev, { node }) => {
-          if (!node || !doesSchoolHaveCoords(node)) {
-            setNotListedCount((count) => count + 1);
-            return prev;
-          }
-
-          const { lat, lng } = getSchoolCoords(node) as LatLngLiteral;
-
-          return [...prev, [lat, lng] as LatLngTuple];
-        },
-        [],
-      );
+      (schools.edges as { node: ISchoolNode }[]).forEach(({ node }) => {
+        if (!node || !doesSchoolHaveCoords(node)) {
+          setNotListedCount((count) => count + 1);
+          return;
+        }
+        const { lat, lng } = getSchoolCoords(node) as LatLngLiteral;
+        b.push([lat, lng]);
+      }, []);
     }
 
     if (b.length === 0) return undefined;
