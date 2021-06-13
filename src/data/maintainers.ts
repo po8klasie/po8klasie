@@ -4,6 +4,9 @@ import MichalLazowikImage from '../assets/images/maintainers/Michal-Lazowik.jpg'
 import KarolinaPawlaczykImage from '../assets/images/maintainers/Karolina-Pawlaczyk.jpg';
 import MariaRukatImage from '../assets/images/maintainers/Maria-Rukat.jpg';
 import AnnaKramarskaImage from '../assets/images/maintainers/Anna-Kramarska.png';
+import WojciechSankoImage from '../assets/images/maintainers/Wojciech-Sanko.jpg';
+import AgnieszkaPugacewiczImage from '../assets/images/maintainers/Agnieszka-Pugacewicz.jpg';
+import AgataZbikowskaImage from '../assets/images/maintainers/Agata-Zbikowska.jpg';
 
 export interface Maintainer {
   name: string;
@@ -12,6 +15,7 @@ export interface Maintainer {
   links: {
     linkedin?: string;
     github?: string;
+    website?: string;
   };
 }
 
@@ -26,11 +30,12 @@ const maintainers: Maintainer[] = [
     },
   },
   {
-    name: 'Emilia Grabowska',
-    role: 'UX Researcher / Designer',
-    image: EmiliaGrabowskaImage,
+    name: 'Anna Kramarska',
+    role: 'Back-end Developer',
+    image: AnnaKramarskaImage,
     links: {
-      linkedin: 'https://www.linkedin.com/in/emilia-grabowska-886708166/',
+      linkedin: 'https://www.linkedin.com/in/anna-krmsk/',
+      github: 'https://github.com/annkamsk/',
     },
   },
   {
@@ -55,20 +60,44 @@ const maintainers: Maintainer[] = [
     role: 'Front-end Developer',
     image: MariaRukatImage,
     links: {
-      linkedin: 'https://pl.linkedin.com/in/maria-rukat',
+      linkedin: 'https://linkedin.com/in/maria-rukat',
       github: 'https://github.com/MariaRukat',
+    },
+  },
+  {
+    name: 'Wojciech Sańko',
+    role: 'Rozwój produktu, Partnerstwa',
+    image: WojciechSankoImage,
+    links: {
+      linkedin: 'https://www.linkedin.com/in/wojciech-sa%C5%84ko-7776461b/',
+    },
+  },
+  {
+    name: 'Agnieszka Pugacewicz',
+    role: 'Researcher',
+    image: AgnieszkaPugacewiczImage,
+    links: {
+      linkedin: 'https://linkedin.com/in/agnieszka-pugacewicz/',
+      website: 'https://www.delab.uw.edu.pl/zespol-delab/dr-agnieszka-pugacewicz/',
+    },
+  },
+  {
+    name: 'Agata Żbikowska',
+    role: 'Reseacher',
+    image: AgataZbikowskaImage,
+    links: {
+      website: 'http://iss.uw.edu.pl/agata-zbikowska/',
     },
   },
 ];
 
 export const pastMaintainers: Maintainer[] = [
   {
-    name: 'Anna Kramarska',
-    role: 'Back-end Developer',
-    image: AnnaKramarskaImage,
+    name: 'Emilia Grabowska',
+    role: 'UX Researcher / Designer',
+    image: EmiliaGrabowskaImage,
     links: {
-      linkedin: 'https://www.linkedin.com/in/anna-krmsk/',
-      github: 'https://github.com/annkamsk/',
+      linkedin: 'https://www.linkedin.com/in/emilia-grabowska-886708166/',
     },
   },
 ];
