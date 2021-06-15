@@ -66,7 +66,7 @@ const SchoolPage: FC<RouteComponentProps<{ schoolID: string }>> = ({ schoolID })
             isPublic={false}
             isFavourite={isSchoolFavourite}
             toggleFavourite={() => null}
-          />rel canonical
+          />
         </Container>
       </Layout>
     );
