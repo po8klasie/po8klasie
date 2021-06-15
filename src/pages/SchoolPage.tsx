@@ -2,6 +2,7 @@ import React, { FC, useEffect } from 'react';
 import { Redirect, RouteComponentProps } from '@reach/router';
 import { useMatomo } from '@datapunt/matomo-tracker-react';
 import { useLazyQuery } from '@apollo/client';
+import Helmet from 'react-helmet';
 import Layout from '../components/Layout';
 import Container from '../components/Container';
 import Breadcrumbs from '../components/Breadcrumbs';
@@ -65,7 +66,7 @@ const SchoolPage: FC<RouteComponentProps<{ schoolID: string }>> = ({ schoolID })
             isPublic={false}
             isFavourite={isSchoolFavourite}
             toggleFavourite={() => null}
-          />
+          />rel canonical
         </Container>
       </Layout>
     );
@@ -84,7 +85,14 @@ const SchoolPage: FC<RouteComponentProps<{ schoolID: string }>> = ({ schoolID })
   const { school } = data as { school: ISchoolNode };
 
   if (school.publicInstitutionData && school.publicInstitutionData.regon && isRegon(schoolID))
-    return <Redirect to={`/school/${school.schoolId}`} noThrow />;
+    return (
+      <>
+        <Helmet>
+          <link rel="canonical" href={`${window.location.origin}/school/${school.schoolId}`} />
+        </Helmet>
+        <Redirect to={`/school/${school.schoolId}`} noThrow />;
+      </>
+    );
 
   const parsedClasses = getParsedClasses(school.classes);
 
