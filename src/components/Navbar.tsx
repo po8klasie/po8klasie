@@ -128,8 +128,9 @@ const Navbar: FC<NavbarProps> = ({ wide }) => {
           <MobileBar>
             <Brand to="/">
               <Logo />
-              Warsaw
-              <span>LO</span>
+              po
+              <span>8</span>
+              klasie
             </Brand>
             <button className="menu-icons" onClick={() => setNavOpen(!isNavOpen)} type="button">
               {isNavOpen ? <BsX /> : <BsThreeDots />}

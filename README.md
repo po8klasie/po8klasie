@@ -1,16 +1,14 @@
-<img alt="WarsawLO" src="https://warsawlo.pl/logo/full.png" width="200px" />
+<img alt="po8klasie" src="https://warsawlo.pl/logo/full.png" width="200px" />
 
-# WarsawLO 2.0
-:poland: Najprostsza i najszybsza wyszukiwarka warszawskich liceów. Teraz w wersji 2.0. <br/>
+# po8klasie
+:poland: Prawdopodobnie najprostsza i najszybsza wyszukiwarka warszawskich szkół średnich. <br/>
 Wkrótce produkcyjnie dostępna dla wszystkich!
 
-:uk: The simplest and fastest search engine for Warsaw high schools. Now in version 2.0. <br />
+:uk: Probably the simplest and fastest search engine for Warsaw high schools. <br />
 Soon available in production for everyone!
 
-If you want to contribute to WarsawLO, please read our [contribution guide](CONTRIBUTING.md).
+If you want to contribute to po8klasie, please read our [contribution guide](CONTRIBUTING.md).
 
-> *NOTE*: App available at warsawlo.pl is just a prototype and is currently sourced from [warsawlo repo](https://github.com/WarsawLO/warsawlo).
-  
   
 ## Quick start 
 
@@ -18,7 +16,7 @@ If you want to contribute to WarsawLO, please read our [contribution guide](CONT
 
 1. Clone this repo :arrow_down:
 ```shell script  
-git clone https://github.com/WarsawLO/WarsawLO-2.0
+git clone https://github.com/po8klasie/po8klasie
 ```
 
 2. In root directory of the project, create `.env` file with specified environmental variables ([see below](#env-vars)) :page_facing_up:
@@ -72,7 +70,7 @@ Docs on how to develop front-end simultaneously with back-end locally coming soo
    
    
 ## Production use
-You can find detailed guide of how to set up WarsawLO for production use in our [infra repo](https://github.com/WarsawLO/infra).
+You can find detailed guide of how to set up po8klasie for production use in our [infra repo](https://github.com/po8klasie/infra).
     
     
 ## More resources  

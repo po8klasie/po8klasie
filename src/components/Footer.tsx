@@ -148,7 +148,7 @@ const Footer: FC<FooterProps> = ({ noFooterMargin }) => (
         </div>
         <div className="info-col">
           <p>
-            WarsawLO to open-source&apos;owy projekt civic tech tworzony przez wolonatariuszy we
+            po8klasie to open-source&apos;owy projekt civic tech tworzony przez wolonatariuszy we
             współpracy z programem Koduj Dla Polski Fundacji ePaństwo.
           </p>
           <div className="logos-wrapper">
@@ -162,13 +162,13 @@ const Footer: FC<FooterProps> = ({ noFooterMargin }) => (
         </div>
       </FooterGrid>
       <SocialMediaIcons>
-        <a href="https://github.com/WarsawLO" rel="noopener noreferrer" target="_blank">
+        <a href="https://github.com/po8klasie" rel="noopener noreferrer" target="_blank">
           <FaGithub />
         </a>
-        <a href="https://fb.com/WarsawLO" rel="noopener noreferrer" target="_blank">
+        <a href="https://fb.com/po8klasie" rel="noopener noreferrer" target="_blank">
           <FaFacebook />
         </a>
-        <a href="https://linkedin.com/in/WarsawLO" rel="noopener noreferrer" target="_blank">
+        <a href="https://linkedin.com/company/po8klasie" rel="noopener noreferrer" target="_blank">
           <FaLinkedin />
         </a>
       </SocialMediaIcons>

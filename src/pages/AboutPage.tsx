@@ -172,7 +172,7 @@ const AboutPage: FC<RouteComponentProps> = () => {
         <Breadcrumbs steps={[[pageTitle]]} />
         <PageTitle>{pageTitle}</PageTitle>
         <Paragraph>
-          WarsawLO to przewodnik ucznia, który pomaga mu podczas rekrutacji do szkół średnich.
+          po8klasie to przewodnik ucznia, który pomaga mu podczas rekrutacji do szkół średnich.
           Tworzymy aplikację, która będzie wspierać przyszłych uczniów szkół średnich w wyborze
           dalszej ścieżki edukacji. To baza warszawskich szkół ponadpodstawowych z możliwością
           filtrowania wg różnych kryteriów. Chcemy pokazać, że{' '}
@@ -202,10 +202,10 @@ const AboutPage: FC<RouteComponentProps> = () => {
           <div>
             <ul>
               <li>
-                Wejdź na profil <a href="https://github.com/WarsawLO">WarsawLO na GitHubie</a>
+                Wejdź na <a href="https://github.com/po8klasie">profil po8klasie na GitHubie</a>
               </li>
               <li>Wybierz repozytorium, które Cię interesuje</li>
-              <li>Sprawdź sekcję &quot;Contributors&quot; w panelu po lewej</li>
+              <li>Sprawdź sekcję &quot;Contributors&quot; w panelu po prawej</li>
             </ul>
           </div>
         </ContributorsInfo>
@@ -215,9 +215,9 @@ const AboutPage: FC<RouteComponentProps> = () => {
           <H2>Chcesz pomóc?</H2>
           <HelpUsGrid>
             <Paragraph>
-              WarsawLO to projekt open-source. Cały czas szukamy osób, które chcą do nas dołączyć.
+              po8klasie to projekt open-source. Cały czas szukamy osób, które chcą do nas dołączyć.
               Jeśli swoimi umiejętnościami chcesz wesprzeć naszą inicjatywę, napisz na adres{' '}
-              <a href="mailto:info@warsawlo.pl">info@warsawlo.pl</a>. Zróbmy razem coś dobrego!
+              <a href="mailto:info@po8klasie.pl">info@po8klasie.pl</a>. Zróbmy razem coś dobrego!
             </Paragraph>
             <div>
               <Paragraph>Obecnie szukamy:</Paragraph>

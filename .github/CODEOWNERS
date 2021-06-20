@@ -2,8 +2,8 @@
 # You can find more info here -> https://docs.github.com/en/free-pro-team@latest/github/creating-cloning-and-archiving-repositories/about-code-owners
 
 # These owners will be the default owners for everything in the repo.
-# Unless a later match takes precedence, @WarsawLO/frontend team 
+# Unless a later match takes precedence, @po8klasie/frontend team
 # will be requested for review when someone opens a pull request.
 
-*                    @WarsawLO/frontend
-.github/workflows    @WarsawLO/devops
+*                    @po8klasie/frontend
+.github/workflows    @po8klasie/devops
