@@ -93,8 +93,8 @@ const LandingPage: FC<RouteComponentProps> = () => {
               Nobody&apos;s perfect...
               <br />
               Przetwarzając ogromne ilości informacji może wkraść się do danych jakiś błąd. Jeżeli
-              natkniesz się na niego, zgłoś to. Nasi moderatorzy zajmą się tym tak szybko, jak tylko
-              będę mogli.
+              natkniesz się na niego, zgłoś to. Zajmiemy się tym tak szybko, jak tylko będziemy
+              mogli.
             </Paragraph>
             <LandingPageImage bgImage={dataImg} position="left" />
           </DoubleGrid>
@@ -108,8 +108,7 @@ const LandingPage: FC<RouteComponentProps> = () => {
               <br />
               Wybierasz liceum i robisz ogromny research, czy może masz już rekrutację za sobą i
               wiesz jak to działa? Podziel się swoimi spostrzeżeniami tutaj. Każdego ucznia
-              ostatniej klasy podstawówki czeka to samo. Pomagajmy sobie nawzajem. WarsawLO to
-              portal tworzony przez uczniów dla uczniów.
+              ostatniej klasy podstawówki czeka to samo. Pomagajmy sobie nawzajem.
             </Paragraph>
             <LandingPageImage bgImage={communityImg} position="right" />
           </DoubleGrid>

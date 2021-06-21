@@ -3,10 +3,11 @@ import { Helmet } from 'react-helmet';
 import { useLocation } from '@reach/router';
 
 // when updating, please adjust meta tags in index.html accordingly
-const defaultTitle = 'WarsawLO';
-const titleTemplate = '%s · WarsawLO';
-const defaultDescription = 'Najprostsza i najszybsza wyszukiwarka warszawskich szkół średnich';
-const twitterUsername = 'warsawlo';
+const defaultTitle = 'po8klasie';
+const titleTemplate = '%s · po8klasie';
+const defaultDescription =
+  'Prawdopodobnie najprostsza i najszybsza wyszukiwarka warszawskich szkół średnich';
+const twitterUsername = 'po8klasie';
 
 interface SEOProps {
   title: string;
