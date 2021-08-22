@@ -1,4 +1,3 @@
-/// <reference types="react-scripts" />
 import { Environment, LocalEnvironment } from './environments/environment';
 
 declare global {
@@ -6,7 +5,8 @@ declare global {
     config: Readonly<Environment>;
   }
   namespace NodeJS {
-    // eslint-disable-next-line @typescript-eslint/no-empty-interface
-    interface ProcessEnv extends LocalEnvironment {}
+    interface ProcessEnv extends LocalEnvironment {
+      PUBLIC_URL: string
+    }
   }
 }

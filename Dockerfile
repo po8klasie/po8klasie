@@ -1,6 +1,6 @@
 # JS building stage
 
-FROM node:12-alpine AS js-build
+FROM node:14.17.5-alpine AS js-build
 
 ENV SOURCE /opt/warsawlo
 RUN mkdir -p $SOURCE
@@ -10,16 +10,17 @@ COPY package.json yarn.lock ./
 
 RUN yarn install --frozen-lockfile
 
-COPY tsconfig.json .
-COPY .babelrc .
+COPY tsconfig.json .babelrc ./
+COPY next.config.js next-env.d.ts ./
 COPY public ./public
+COPY pages ./pages
 COPY src ./src
 
-RUN yarn build
+RUN yarn prepare-bundle
 
 # Final image stage
 
-FROM nginx:1.17
+FROM nginx:1.20.1
 
 LABEL maintainer="mlazowik@gmail.com"
 
@@ -34,7 +35,7 @@ WORKDIR $NGINX_ROOT
 
 COPY entrypoint.sh .
 
-COPY --from=js-build /opt/warsawlo/build ./build
+COPY --from=js-build /opt/warsawlo/out ./out
 
 ENTRYPOINT ["/bin/sh", "-c"]
 
