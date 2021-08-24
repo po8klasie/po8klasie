@@ -58,12 +58,12 @@ jobs:
         labels: ${{ steps.meta.outputs.labels }}
         push: true
 
-    - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+    - uses: google-github-actions/setup-gcloud@master
       with:
         version: '290.0.1'
         service_account_key: ${{ secrets.GCE_SA_KEY }}
         project_id: ${{ secrets.GCE_PROJECT }}
-        
+
     - name: Clean ssh keys
       run: |-
         # https://github.com/kyma-project/test-infra/issues/93#issuecomment-457263589
