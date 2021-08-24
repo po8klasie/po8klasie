@@ -1,18 +1,16 @@
 import React from 'react';
-import ReactDom from 'react-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { setupSentry } from './utils/externalServices';
 
 setupSentry();
 
-const rootElement = document.querySelector('#root');
-
-ReactDom.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  rootElement,
-);
+export default function NextIndexWrapper() {
+  return (
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  );
+}
 
 serviceWorker.unregister();
