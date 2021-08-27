@@ -10,8 +10,8 @@ ${GRAPHQL_ENDPOINT}
 ${PUBLIC_SENTRY_DSN}
 ${MATOMO_BASE_URL}
 ${MATOMO_SITE_ID}
-' < /opt/nginx/build/index.html > /opt/nginx/build/index.html.subst
+' < /opt/nginx/out/index.html > /opt/nginx/out/index.html.subst
 
-cp -pf /opt/nginx/build/index.html.subst /opt/nginx/build/index.html
+cp -pf /opt/nginx/out/index.html.subst /opt/nginx/out/index.html
 
 exec nginx -g 'daemon off;'
