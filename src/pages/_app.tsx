@@ -1,6 +1,6 @@
-import { FC } from "react";
-import { AppProps } from "next/app";
-import Head from 'next/head'
+import React, { FC } from 'react';
+import { AppProps } from 'next/app';
+import Head from 'next/head';
 
 const App: FC<AppProps> = ({ Component, pageProps }) => (
   <>
@@ -11,6 +11,6 @@ const App: FC<AppProps> = ({ Component, pageProps }) => (
 
     <Component {...pageProps} />
   </>
-)
+);
 
 export default App;

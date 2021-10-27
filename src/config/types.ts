@@ -13,7 +13,7 @@ export interface AppearanceConfig {
 }
 
 export interface ProjectConfig {
-  projectId: string;
+  projectID: string;
   filters: FiltersConfig;
   appearance: AppearanceConfig;
 }

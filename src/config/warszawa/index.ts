@@ -3,7 +3,7 @@ import filters from './filters';
 import appearance from './appearance';
 
 const projectConfig: ProjectConfig = {
-  projectId: 'WARSZAWA',
+  projectID: 'warszawa',
   filters,
   appearance,
 };

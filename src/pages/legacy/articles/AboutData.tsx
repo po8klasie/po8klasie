@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
-import ArticleLayout from '../../components/ArticleLayout';
-import useBasicPageViewTracker from '../../hooks/useBasicPageViewTracker';
+import ArticleLayout from '../../../components/ArticleLayout';
+import useBasicPageViewTracker from '../../../hooks/useBasicPageViewTracker';
 
 const AboutDataPage: FC = () => {
   useBasicPageViewTracker();

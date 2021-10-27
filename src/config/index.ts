@@ -1,9 +1,17 @@
 import warszawaConfig from './warszawa';
 import { ProjectConfig } from './types';
 
-export const projectConfigs: ProjectConfig[] = [warszawaConfig];
+const projectConfigsList: ProjectConfig[] = [warszawaConfig];
 
-export const getProjectConfig = (): ProjectConfig =>
-  projectConfigs.find(
-    ({ projectId }) => projectId === 'WARSZAWA', // TODO: Use env var
-  ) as ProjectConfig;
+export const projectsIDs = projectConfigsList.map(({ projectID }) => projectID);
+
+export const projectConfigs: Record<string, ProjectConfig> = projectConfigsList.reduce(
+  (acc, projectConfig) => ({
+    ...acc,
+    [projectConfig.projectID]: projectConfig,
+  }),
+  {},
+);
+
+export const getProjectConfig = (projectID: string): ProjectConfig =>
+  projectConfigs[projectID] as ProjectConfig;

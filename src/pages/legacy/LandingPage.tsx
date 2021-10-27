@@ -1,33 +1,33 @@
 import React, { FC } from 'react';
 import { RouteComponentProps } from '@reach/router';
-import Layout from '../components/Layout';
-import Container from '../components/Container';
-import Paragraph from '../components/Paragraph';
-import PageTitle from '../components/PageTitle';
-import H2 from '../components/H2';
-import DoubleGrid from '../components/DoubleGrid';
-import LandingMainGrid from '../components/LandingMainGrid';
-import Feature from '../components/Feature';
-import FeatureTitle from '../components/FeatureTitle';
-import FeaturesGrid from '../components/FeaturesGrid';
-import CallToActionButton from '../components/CallToActionButton';
-import CallToActionContainer from '../components/CallToActionContainer';
+import Layout from '../../components/Layout';
+import Container from '../../components/Container';
+import Paragraph from '../../components/Paragraph';
+import PageTitle from '../../components/PageTitle';
+import H2 from '../../components/H2';
+import DoubleGrid from '../../components/DoubleGrid';
+import LandingMainGrid from '../../components/LandingMainGrid';
+import Feature from '../../components/Feature';
+import FeatureTitle from '../../components/FeatureTitle';
+import FeaturesGrid from '../../components/FeaturesGrid';
+import CallToActionButton from '../../components/CallToActionButton';
+import CallToActionContainer from '../../components/CallToActionContainer';
 import {
   LandingPageSectionOne,
   LandingPageSectionTwo,
   LandingPageSectionThree,
-} from '../components/LandingPageSections';
-import LandingPageImage from '../components/LandingPageImage';
-import chooseWithUsImg from '../assets/images/landingPage/choose_with_us.png';
-import communityImg from '../assets/images/landingPage/community.png';
-import dataImg from '../assets/images/landingPage/data.png';
-import howItWorksImg from '../assets/images/landingPage/how_it_works.png';
-import infoImg from '../assets/images/landingPage/info.png';
-import locationImg from '../assets/images/landingPage/location.png';
-import profilesImg from '../assets/images/landingPage/profiles.png';
-import rankingImg from '../assets/images/landingPage/ranking.png';
-import useBasicPageViewTracker from '../hooks/useBasicPageViewTracker';
-import SEO from '../components/SEO';
+} from '../../components/LandingPageSections';
+import LandingPageImage from '../../components/LandingPageImage';
+import chooseWithUsImg from '../../assets/images/landingPage/choose_with_us.png';
+import communityImg from '../../assets/images/landingPage/community.png';
+import dataImg from '../../assets/images/landingPage/data.png';
+import howItWorksImg from '../../assets/images/landingPage/how_it_works.png';
+import infoImg from '../../assets/images/landingPage/info.png';
+import locationImg from '../../assets/images/landingPage/location.png';
+import profilesImg from '../../assets/images/landingPage/profiles.png';
+import rankingImg from '../../assets/images/landingPage/ranking.png';
+import useBasicPageViewTracker from '../../hooks/useBasicPageViewTracker';
+import SEO from '../../components/SEO';
 
 const pageTitle = 'Home';
 

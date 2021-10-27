@@ -8,16 +8,16 @@ import {
   configs,
   CalculatedPoints,
 } from '@warsawlo/points-calculator';
-import styled from '../styling/styled';
-import Layout from '../components/Layout';
-import Container from '../components/Container';
-import Input from '../components/Input';
-import PageTitle from '../components/PageTitle';
-import Checkbox from '../components/Checkbox';
-import { examParts, subjects } from '../data/calculator';
-import Breadcrumbs from '../components/Breadcrumbs';
-import SEO from '../components/SEO';
-import useBasicPageViewTracker from '../hooks/useBasicPageViewTracker';
+import styled from '../../styling/styled';
+import Layout from '../../components/Layout';
+import Container from '../../components/Container';
+import Input from '../../components/Input';
+import PageTitle from '../../components/PageTitle';
+import Checkbox from '../../components/Checkbox';
+import { examParts, subjects } from '../../data/calculator';
+import Breadcrumbs from '../../components/Breadcrumbs';
+import SEO from '../../components/SEO';
+import useBasicPageViewTracker from '../../hooks/useBasicPageViewTracker';
 
 const { isGradeValid, isExamResultValid } = validators;
 const { initialInputData, initialCalculatedPoints } = initialData;
