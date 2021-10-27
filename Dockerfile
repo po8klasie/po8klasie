@@ -13,7 +13,6 @@ RUN yarn install --frozen-lockfile
 COPY tsconfig.json .babelrc ./
 COPY next.config.js next-env.d.ts ./
 COPY public ./public
-COPY pages ./pages
 COPY src ./src
 
 RUN yarn prepare-bundle
