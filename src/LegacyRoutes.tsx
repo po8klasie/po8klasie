@@ -1,21 +1,21 @@
 import React, { FC, lazy } from 'react';
 import { Redirect, Router } from '@reach/router';
-import LandingPage from './pages/legacy/LandingPage';
-import SchoolPage from './pages/legacy/SchoolPage';
-import SchoolsPage from './pages/legacy/SchoolsPage';
+import LandingPage from './legacyPages/LandingPage';
+import SchoolPage from './legacyPages/SchoolPage';
+import SchoolsPage from './legacyPages/SchoolsPage';
 import lazyLoaded from './utils/lazyLoaded';
-import SchoolsGridPage from './pages/legacy/SchoolsGridPage';
-import SchoolsMapPage from './pages/legacy/SchoolsMapPage';
-import FavouriteSchoolsPage from './pages/legacy/FavouriteSchoolsPage';
+import SchoolsGridPage from './legacyPages/SchoolsGridPage';
+import SchoolsMapPage from './legacyPages/SchoolsMapPage';
+import FavouriteSchoolsPage from './legacyPages/FavouriteSchoolsPage';
 
-const Calculator = lazyLoaded(lazy(() => import('./pages/legacy/Calculator')));
-const ForDevelopersPage = lazyLoaded(lazy(() => import('./pages/legacy/articles/ForDevelopers')));
-const GetInvolvedPage = lazyLoaded(lazy(() => import('./pages/legacy/articles/GetInvolved')));
-const AboutDataPage = lazyLoaded(lazy(() => import('./pages/legacy/articles/AboutData')));
-const PrivacySettingsPage = lazyLoaded(lazy(() => import('./pages/legacy/articles/PrivacySettings')));
-const PrivacyPolicyPage = lazyLoaded(lazy(() => import('./pages/legacy/articles/PrivacyPolicy')));
-const AboutPage = lazyLoaded(lazy(() => import('./pages/legacy/AboutPage')));
-const NotFoundPage = lazyLoaded(lazy(() => import('./pages/legacy/NotFoundPage')));
+const Calculator = lazyLoaded(lazy(() => import('./legacyPages/Calculator')));
+const ForDevelopersPage = lazyLoaded(lazy(() => import('./legacyPages/articles/ForDevelopers')));
+const GetInvolvedPage = lazyLoaded(lazy(() => import('./legacyPages/articles/GetInvolved')));
+const AboutDataPage = lazyLoaded(lazy(() => import('./legacyPages/articles/AboutData')));
+const PrivacySettingsPage = lazyLoaded(lazy(() => import('./legacyPages/articles/PrivacySettings')));
+const PrivacyPolicyPage = lazyLoaded(lazy(() => import('./legacyPages/articles/PrivacyPolicy')));
+const AboutPage = lazyLoaded(lazy(() => import('./legacyPages/AboutPage')));
+const NotFoundPage = lazyLoaded(lazy(() => import('./legacyPages/NotFoundPage')));
 
 const LegacyRoutes: FC = () => (
   <Router>

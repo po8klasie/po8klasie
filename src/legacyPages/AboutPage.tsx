@@ -2,16 +2,16 @@ import React, { createElement, FC } from 'react';
 import { RouteComponentProps } from '@reach/router';
 import { FaGithub, FaGlobe, FaLinkedinIn } from 'react-icons/all';
 import { IconType } from 'react-icons';
-import Layout from '../../components/Layout';
-import Container from '../../components/Container';
-import PageTitle from '../../components/PageTitle';
-import maintainers, { Maintainer, pastMaintainers } from '../../data/maintainers';
-import styled from '../../styling/styled';
-import Breadcrumbs from '../../components/Breadcrumbs';
-import H2 from '../../components/H2';
-import Paragraph from '../../components/Paragraph';
-import SEO from '../../components/SEO';
-import useBasicPageViewTracker from '../../hooks/useBasicPageViewTracker';
+import Layout from '../components/Layout';
+import Container from '../components/Container';
+import PageTitle from '../components/PageTitle';
+import maintainers, { Maintainer, pastMaintainers } from '../data/maintainers';
+import styled from '../styling/styled';
+import Breadcrumbs from '../components/Breadcrumbs';
+import H2 from '../components/H2';
+import Paragraph from '../components/Paragraph';
+import SEO from '../components/SEO';
+import useBasicPageViewTracker from '../hooks/useBasicPageViewTracker';
 
 const Grid = styled.div`
   display: grid;

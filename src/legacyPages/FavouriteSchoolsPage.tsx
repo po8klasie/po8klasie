@@ -1,20 +1,20 @@
 import React, { FC } from 'react';
 import { RouteComponentProps } from '@reach/router';
 import useDeepCompareEffect from 'use-deep-compare-effect';
-import Layout from '../../components/Layout';
-import Container from '../../components/Container';
-import Breadcrumbs from '../../components/Breadcrumbs';
-import PageTitle from '../../components/PageTitle';
+import Layout from '../components/Layout';
+import Container from '../components/Container';
+import Breadcrumbs from '../components/Breadcrumbs';
+import PageTitle from '../components/PageTitle';
 import FavouriteSchool, {
   FavouriteSchoolProps,
-} from '../../components/sections/FavouriteSchools/FavouriteSchool';
-import { ErrorInfo, NoFavouriteSchoolsInfo } from '../../components/Info';
-import useFavouriteSchools from '../../hooks/useFavouriteSchools';
-import useBasicPageViewTracker from '../../hooks/useBasicPageViewTracker';
-import SEO from '../../components/SEO';
-import { IFavouriteSchoolsQuery } from '../../types/graphql';
-import useFavouriteSchoolsData from '../../api/favouriteSchoolsData';
-import { LoadingCard } from '../../components/sections/FavouriteSchools/FavouriteSchoolWrapper';
+} from '../components/sections/FavouriteSchools/FavouriteSchool';
+import { ErrorInfo, NoFavouriteSchoolsInfo } from '../components/Info';
+import useFavouriteSchools from '../hooks/useFavouriteSchools';
+import useBasicPageViewTracker from '../hooks/useBasicPageViewTracker';
+import SEO from '../components/SEO';
+import { IFavouriteSchoolsQuery } from '../types/graphql';
+import useFavouriteSchoolsData from '../api/favouriteSchoolsData';
+import { LoadingCard } from '../components/sections/FavouriteSchools/FavouriteSchoolWrapper';
 
 interface FavouriteSchoolsListingProps {
   schools: IFavouriteSchoolsQuery['allSchools'];

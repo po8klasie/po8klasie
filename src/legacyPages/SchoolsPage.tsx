@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Redirect, RouteComponentProps } from '@reach/router';
-import getPathWithPreservedParams from '../../utils/url';
+import getPathWithPreservedParams from '../utils/url';
 
 const defaultView = 'grid';
 

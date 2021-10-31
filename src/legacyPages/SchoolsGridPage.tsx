@@ -3,28 +3,28 @@ import { RouteComponentProps } from '@reach/router';
 import useDeepCompareEffect from 'use-deep-compare-effect';
 import { BsMap } from 'react-icons/bs';
 import debounce from 'lodash.debounce';
-import Layout from '../../components/Layout';
-import Container from '../../components/Container';
-import styled from '../../styling/styled';
+import Layout from '../components/Layout';
+import Container from '../components/Container';
+import styled from '../styling/styled';
 import {
   deserializeFilters,
   deserializePage,
   deserializeQuery,
   serializeSearchData,
-} from '../../utils/search';
-import { filters as filtersDefinition } from '../../data/filters';
-import Pagination from '../../components/sections/SchoolsPage/Pagination';
-import SwitchViewLink from '../../components/sections/SchoolsPage/SwitchViewLink';
-import ToggleFiltersBtn from '../../components/sections/SchoolsPage/ToggleFiltersBtn';
-import SchoolsMobileBar from '../../components/sections/SchoolsPage/SchoolsMobileBar';
-import Results from '../../components/sections/SchoolsPage/Results';
-import Sidebar from '../../components/sections/SchoolsPage/Sidebar/Sidebar';
-import SidebarWrapper from '../../components/sections/SchoolsPage/Sidebar/SidebarWrapper';
-import useBasicPageViewTracker from '../../hooks/useBasicPageViewTracker';
-import SEO from '../../components/SEO';
-import useFilters from '../../hooks/useFilters';
-import { convertFilterStateToObject } from '../../utils/filters';
-import useSchoolsListingData from '../../api/schoolsListingData';
+} from '../utils/search';
+import { filters as filtersDefinition } from '../data/filters';
+import Pagination from '../components/sections/SchoolsPage/Pagination';
+import SwitchViewLink from '../components/sections/SchoolsPage/SwitchViewLink';
+import ToggleFiltersBtn from '../components/sections/SchoolsPage/ToggleFiltersBtn';
+import SchoolsMobileBar from '../components/sections/SchoolsPage/SchoolsMobileBar';
+import Results from '../components/sections/SchoolsPage/Results';
+import Sidebar from '../components/sections/SchoolsPage/Sidebar/Sidebar';
+import SidebarWrapper from '../components/sections/SchoolsPage/Sidebar/SidebarWrapper';
+import useBasicPageViewTracker from '../hooks/useBasicPageViewTracker';
+import SEO from '../components/SEO';
+import useFilters from '../hooks/useFilters';
+import { convertFilterStateToObject } from '../utils/filters';
+import useSchoolsListingData from '../api/schoolsListingData';
 
 const Flex = styled.div`
   display: flex;
