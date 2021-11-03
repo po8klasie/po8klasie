@@ -1,5 +1,5 @@
 import React from 'react';
-import App from './App';
+import LegacyApp from './LegacyApp';
 import * as serviceWorker from './serviceWorker';
 import { setupSentry } from './utils/externalServices';
 
@@ -8,7 +8,7 @@ setupSentry();
 export default function NextIndexWrapper() {
   return (
     <React.StrictMode>
-      <App />
+      <LegacyApp />
     </React.StrictMode>
   );
 }

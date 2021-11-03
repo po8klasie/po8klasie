@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { BsSkipEnd, BsSkipStart } from 'react-icons/all';
+import { BsSkipEnd, BsSkipStart } from 'react-icons/bs';
 import styled from '../../../styling/styled';
 import { getTotalPages } from '../../../utils/pagination';
 

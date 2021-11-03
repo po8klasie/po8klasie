@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useRef } from 'react';
 import { nanoid } from 'nanoid';
-import { BsChevronDown } from 'react-icons/all';
+import { BsChevronDown } from 'react-icons/bs';
 import styled from '../../../../styling/styled';
 import {
   FilterChoiceDefinition as ChoiceDefinition,

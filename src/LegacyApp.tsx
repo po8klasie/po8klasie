@@ -1,20 +1,20 @@
 import React from 'react';
 import { Global } from '@emotion/core';
 import { useMatomo } from '@datapunt/matomo-tracker-react';
-import Routes from './Routes';
+import LegacyRoutes from './LegacyRoutes';
 import globalStyles from './styling/globalStyles';
 import Providers from './Providers';
 
-const App: React.FC = () => {
+const LegacyApp: React.FC = () => {
   const { enableLinkTracking } = useMatomo();
   enableLinkTracking();
 
   return (
     <Providers>
       <Global styles={globalStyles} />
-      <Routes />
+      <LegacyRoutes />
     </Providers>
   );
 };
 
-export default App;
+export default LegacyApp;
