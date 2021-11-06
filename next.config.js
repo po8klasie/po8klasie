@@ -1,7 +1,6 @@
-
 const nextConfig = {
   env: {
-    PUBLIC_URL: ''
+    PUBLIC_URL: '',
   },
   experimental: {
     craCompat: true,

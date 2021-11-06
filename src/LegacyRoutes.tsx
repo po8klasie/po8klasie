@@ -12,7 +12,9 @@ const Calculator = lazyLoaded(lazy(() => import('./legacyPages/Calculator')));
 const ForDevelopersPage = lazyLoaded(lazy(() => import('./legacyPages/articles/ForDevelopers')));
 const GetInvolvedPage = lazyLoaded(lazy(() => import('./legacyPages/articles/GetInvolved')));
 const AboutDataPage = lazyLoaded(lazy(() => import('./legacyPages/articles/AboutData')));
-const PrivacySettingsPage = lazyLoaded(lazy(() => import('./legacyPages/articles/PrivacySettings')));
+const PrivacySettingsPage = lazyLoaded(
+  lazy(() => import('./legacyPages/articles/PrivacySettings')),
+);
 const PrivacyPolicyPage = lazyLoaded(lazy(() => import('./legacyPages/articles/PrivacyPolicy')));
 const AboutPage = lazyLoaded(lazy(() => import('./legacyPages/AboutPage')));
 const NotFoundPage = lazyLoaded(lazy(() => import('./legacyPages/NotFoundPage')));

@@ -9,11 +9,41 @@ jobs:
     steps:
     - uses: actions/checkout@v2.1.0
 
-    - uses: docker/build-push-action@v1
+      # https://github.com/docker/build-push-action/blob/master/docs/advanced/tags-labels.md
+    - name: Docker meta
+      id: meta
+      uses: crazy-max/ghaction-docker-meta@v2
       with:
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
-        repository: warsawlo/warsawlo-2.0
-        tag_with_ref: true
-        tag_with_sha: true
+        images: |
+          warsawlo/warsawlo-2.0
+        tags: |
+          type=sha
+          type=ref,event=pr
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1
+
+    - name: Build and push
+      uses: docker/build-push-action@v2
+      with:
+        tags: ${{ steps.meta.outputs.tags }}
+        labels: ${{ steps.meta.outputs.labels }}
         push: false
+        load: true
+
+    - name: Get SHA tag
+      id: get-sha-tag
+      uses: actions/github-script@v4
+      env:
+        TAGS: ${{ steps.meta.outputs.tags }}
+      with:
+        script: |
+          const { TAGS } = process.env;
+          const shaTag = TAGS.split('\n').find(tag => tag.includes('sha'));
+          core.setOutput('sha-tag', shaTag);
+
+    - name: Run linters & tests
+      env:
+        COMPOSE_FILE: docker-compose.ci.yml
+        DOCKER_IMAGE: ${{ steps.get-sha-tag.outputs.sha-tag }}
+      run: docker-compose run linter-and-tests
