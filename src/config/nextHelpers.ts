@@ -1,4 +1,4 @@
-import { GetStaticPaths } from 'next';
+import { GetStaticPathsResult } from "next";
 import { ProjectConfig } from './types';
 
 export type GetProjectConfigStaticPropsContext = {
@@ -22,7 +22,7 @@ export const getProjectConfigStaticProps = (projectConfigKeys: (keyof ProjectCon
   };
 };
 
-export const getStaticPathsPerProject: GetStaticPaths = async () => {
+export const getStaticPathsPerProject = async (): Promise<GetStaticPathsResult> => {
   const { projectsIDs } = await import('./index');
   const paths = projectsIDs.map((projectID) => ({
     params: { projectID },
