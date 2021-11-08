@@ -17,6 +17,10 @@ COPY src ./src
 
 RUN yarn prepare-bundle
 
+COPY entrypoint.ci.sh .
+
+ENTRYPOINT ["/bin/sh", "-c"]
+
 # Final image stage
 
 FROM nginx:1.20.1
@@ -33,7 +37,6 @@ RUN mkdir -p $NGINX_ROOT
 WORKDIR $NGINX_ROOT
 
 COPY entrypoint.sh .
-COPY entrypoint.ci.sh .
 
 COPY --from=js-build /opt/warsawlo/out ./out
 
