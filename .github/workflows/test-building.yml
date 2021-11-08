@@ -47,7 +47,7 @@ jobs:
       env:
         COMPOSE_FILE: docker-compose.ci.yml
         DOCKER_IMAGE_FOR_TESTS: ${{ steps.get-sha-tag.outputs.sha-tag }}
-        run: docker-compose up --exit-code-from linter-and-tests
+      run: docker-compose up --exit-code-from linter-and-tests
 
     - name: Setup Docker layers cache
       uses: actions/cache@v2
