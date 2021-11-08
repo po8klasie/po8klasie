@@ -17,6 +17,8 @@ COPY src ./src
 
 RUN yarn prepare-bundle
 
+COPY .prettierrc.js .prettierignore ./
+
 COPY entrypoint.ci.sh .
 
 ENTRYPOINT ["/bin/sh", "-c"]
