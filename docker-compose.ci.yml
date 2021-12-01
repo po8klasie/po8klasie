@@ -1,0 +1,6 @@
+version: "3.7"
+services:
+
+  linter-and-tests:
+    image: ${DOCKER_IMAGE_FOR_TESTS}
+    command: [ "sh /opt/warsawlo/entrypoint.ci.sh" ]

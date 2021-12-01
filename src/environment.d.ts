@@ -6,7 +6,7 @@ declare global {
   }
   namespace NodeJS {
     interface ProcessEnv extends LocalEnvironment {
-      PUBLIC_URL: string
+      PUBLIC_URL: string;
     }
   }
 }
