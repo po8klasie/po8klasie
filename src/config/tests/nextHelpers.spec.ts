@@ -24,7 +24,7 @@ describe('config/nextHelpers', () => {
       const result = await getProjectConfigStaticProps(['appearance'])({
         params: { projectID: 'bar' },
       });
-      
+
       expect(result).toEqual({
         props: {
           PROJECT: {

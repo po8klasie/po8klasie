@@ -1,4 +1,4 @@
-import { GetStaticPathsResult } from "next";
+import { GetStaticPathsResult } from 'next';
 import { ProjectConfig } from './types';
 
 export type GetProjectConfigStaticPropsContext = {

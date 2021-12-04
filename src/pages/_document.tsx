@@ -11,6 +11,7 @@ window.config = {
 `;
 
 class Document extends NextDocument {
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   render() {
     return (
       <Html lang="en">
@@ -21,6 +22,7 @@ class Document extends NextDocument {
           <link rel="icon" href={`${process.env.PUBLIC_URL}/logo.png`} />
           <link rel="apple-touch-icon" href={`${process.env.PUBLIC_URL}/logo.png`} />
           <link rel="manifest" href={`${process.env.PUBLIC_URL}/manifest.json`} />
+          {/* eslint-disable-next-line react/no-danger */}
           <script dangerouslySetInnerHTML={{ __html: configScript }} />
           <noscript>You need to enable JavaScript to run this app.</noscript>
         </Head>
