@@ -3,6 +3,7 @@ import { Link } from '@reach/router';
 import { IconType } from 'react-icons';
 import styled from '../../../styling/styled';
 import getPathWithPreservedParams from '../../../utils/url';
+import { PATH_PREFIX } from "../../../LegacyRoutes";
 
 const SwitchLink = styled(Link)`
   background: none;
@@ -26,7 +27,7 @@ interface SwitchViewLinkProps {
 }
 
 const SwitchViewLink: FC<SwitchViewLinkProps> = ({ viewPath, label, icon }) => (
-  <SwitchLink to={getPathWithPreservedParams(`/schools/${viewPath}`)}>
+  <SwitchLink to={getPathWithPreservedParams(`${PATH_PREFIX}/schools/${viewPath}`)}>
     {createElement(icon)}
     {label}
   </SwitchLink>

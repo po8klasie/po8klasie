@@ -6,7 +6,7 @@
 import dynamic from 'next/dynamic';
 import { FC } from 'react';
 
-const NextIndexWrapper = dynamic(() => import('../index'), { ssr: false });
+const NextIndexWrapper = dynamic(() => import('../../../index'), { ssr: false });
 
 const Page: FC = (props) => <NextIndexWrapper {...props} />;
 
