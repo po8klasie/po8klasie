@@ -5,7 +5,7 @@ import Card from './Card';
 import useFavouriteSchools from '../hooks/useFavouriteSchools';
 import AddRemoveFavourite from './AddRemoveFavourite';
 import { ISchoolCardPropsFragment } from '../types/graphql';
-import { PATH_PREFIX } from "../LegacyRoutes";
+import { PATH_PREFIX } from '../LegacyRoutes';
 
 const Wrapper = styled(Card)`
   margin-bottom: 3em;
