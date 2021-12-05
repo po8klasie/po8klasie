@@ -8,6 +8,7 @@
     "@emotion/core": "^10.0.27",
     "@emotion/styled": "^10.0.27",
     "@reach/router": "^1.2.1",
+    "@sentry/nextjs": "^6.15.0",
     "@sentry/react": "^5.26.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
