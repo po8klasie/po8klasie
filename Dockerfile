@@ -6,6 +6,8 @@ ENV SOURCE /opt/warsawlo
 RUN mkdir -p $SOURCE
 WORKDIR $SOURCE
 
+RUN apk add libtool automake autoconf nasm g++ make libpng-dev
+
 COPY package.json yarn.lock ./
 
 RUN yarn install --frozen-lockfile

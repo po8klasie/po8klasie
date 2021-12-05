@@ -1,8 +1,10 @@
 #!/usr/bin/ash
 
-echo "🚨 Running prettier"
+echo "🚨 Running prettier & eslint"
 
 yarn format:check
+
+yarn lint:website:check
 
 echo "✅ Running tests"
 

@@ -1,4 +1,6 @@
-const nextConfig = {
+const withOptimizedImages = require('next-optimized-images');
+
+const customNextConfig = {
   env: {
     PUBLIC_URL: '',
   },
@@ -10,9 +12,15 @@ const nextConfig = {
   images: {
     disableStaticImages: true,
   },
-  exportPathMap: async () => ({
+  exportPathMap: async (defaultPathMap) => ({
+    ...defaultPathMap,
     '/warszawa/legacy': { page: '/warszawa/legacy/[[...slug]]' },
   }),
+
+  // next-optimized-images options
+  responsive: {
+    adapter: require('responsive-loader/sharp'),
+  },
 };
 
-module.exports = nextConfig;
+module.exports = withOptimizedImages(customNextConfig);

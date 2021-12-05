@@ -1,0 +1,7 @@
+
+.layoutWrapper {
+    --primary-font: 'Jost', sans-serif;
+    --primary: #9D54BF;
+
+    font-family: var(--primary-font);
+}

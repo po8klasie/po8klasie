@@ -36,6 +36,7 @@
     "lodash.debounce": "^4.0.8",
     "nanoid": "^3.1.12",
     "next": "^11.1.0",
+    "normalize.css": "^8.0.1",
     "react": "^17.0.2",
     "react-component-pack": "^1.0.1",
     "react-dom": "^17.0.2",
@@ -46,6 +47,7 @@
     "react-leaflet-fullscreen-control": "^0.0.4",
     "react-paginate": "^6.3.2",
     "react-perfect-scrollbar": "^1.5.8",
+    "react-progressive-graceful-image": "^0.6.14",
     "react-redux": "^7.1.3",
     "react-spinners": "^0.9.0",
     "redux": "^4.0.5",
@@ -67,6 +69,8 @@
     "format:write": "prettier --parser typescript --write \"**/*.{js,jsx,ts,tsx}\"",
     "lint:check": "eslint --ext .js,.jsx,.ts,.tsx .",
     "lint:fix": "eslint --fix --ext .js,.jsx,.ts,.tsx .",
+    "lint:website:check": "eslint --ext .js,.jsx,.ts,.tsx ./src/pages ./src/components/website",
+    "lint:website:fix": "eslint --fix --ext .js,.jsx,.ts,.tsx ./src/pages ./src/components/website",
     "graphql:codegen": "graphql-codegen --config codegen.yml -r dotenv/config"
   },
   "browserslist": {
@@ -100,6 +104,7 @@
     "@typescript-eslint/eslint-plugin": "^4.6.1",
     "@typescript-eslint/parser": "^4.6.1",
     "@wojtekmaj/enzyme-adapter-react-17": "^0.6.3",
+    "autoprefixer": "^10.4.0",
     "enzyme": "^3.11.0",
     "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.2.1",
@@ -111,7 +116,17 @@
     "eslint-plugin-react": "^7.18.3",
     "eslint-plugin-react-hooks": "^4.2.0",
     "identity-obj-proxy": "^3.0.0",
+    "image-trace-loader": "^1.0.2",
+    "imagemin-mozjpeg": "^9.0.0",
+    "imagemin-optipng": "^8.0.0",
     "jest": "^27.3.1",
-    "prettier": "^2.1.2"
+    "lqip-loader": "^2.2.1",
+    "next-optimized-images": "^2.6.2",
+    "postcss": "^8.4.4",
+    "prettier": "^2.1.2",
+    "responsive-loader": "^2.3.0",
+    "sharp": "^0.29.3",
+    "tailwindcss": "^2.2.19",
+    "webp-loader": "^0.6.0"
   }
 }
