@@ -58,13 +58,6 @@ const teamMembers: TeamMember[] = [
     links: [['linkedin', 'https://www.linkedin.com/in/ka-pawlaczyk/']],
   },
   {
-    name: 'Wojciech Sańko',
-    roles: ['Rozwój produktu', 'Partnerstwa'],
-    image: WojciechSankoImg,
-    imagePlaceholder: WojciechSankoImgPlaceholder,
-    links: [['linkedin', 'https://www.linkedin.com/in/wojciech-sa%C5%84ko-7776461b/']],
-  },
-  {
     name: 'Agnieszka Pugacewicz',
     roles: ['Researcher'],
     image: AgnieszkaPugacewiczImg,
@@ -73,6 +66,13 @@ const teamMembers: TeamMember[] = [
       ['linkedin', 'https://linkedin.com/in/agnieszka-pugacewicz/'],
       ['website', 'https://www.delab.uw.edu.pl/zespol-delab/dr-agnieszka-pugacewicz/'],
     ],
+  },
+  {
+    name: 'Wojciech Sańko',
+    roles: ['Rozwój produktu', 'Partnerstwa'],
+    image: WojciechSankoImg,
+    imagePlaceholder: WojciechSankoImgPlaceholder,
+    links: [['linkedin', 'https://www.linkedin.com/in/wojciech-sa%C5%84ko-7776461b/']],
   },
 ];
 

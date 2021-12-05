@@ -7,6 +7,7 @@ module.exports = {
       primaryLight: '#FCF8FE',
       dark: '#222122',
       light: '#DCDCDC',
+      white: '#FFFFFF',
     },
     extend: {
       width: {
