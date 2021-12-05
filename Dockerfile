@@ -16,6 +16,7 @@ COPY tsconfig.json .babelrc ./
 COPY next.config.js next-env.d.ts ./
 COPY public ./public
 COPY src ./src
+COPY sentry.client.config.ts sentry.server.config.ts ./
 
 RUN yarn prepare-bundle
 

@@ -1,5 +1,5 @@
 import * as Sentry from '@sentry/nextjs';
-import { environment, isEnvVarEmpty } from "src/environments/environment";
+import { environment, isEnvVarEmpty } from './src/environments/environment';
 
 const SENTRY_DSN = environment.PUBLIC_SENTRY_DSN;
 
