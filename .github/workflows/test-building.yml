@@ -15,7 +15,7 @@ jobs:
       uses: crazy-max/ghaction-docker-meta@v2
       with:
         images: |
-          warsawlo/warsawlo-2.0
+          ghcr.io/po8klasie/po8klasie
         tags: |
           type=sha
           type=ref,event=pr
@@ -55,3 +55,4 @@ jobs:
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
         push: false
+        cache-from: type=registry,ref=ghcr.io/po8klasie/po8klasie:cache-master
