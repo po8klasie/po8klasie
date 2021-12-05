@@ -22,7 +22,6 @@ class Document extends NextDocument {
           <link rel="apple-touch-icon" href={`${process.env.PUBLIC_URL}/logo.png`} />
           <link rel="manifest" href={`${process.env.PUBLIC_URL}/manifest.json`} />
           <script dangerouslySetInnerHTML={{ __html: configScript }} />
-          <noscript>You need to enable JavaScript to run this app.</noscript>
         </Head>
         <body>
           <Main />
