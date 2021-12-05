@@ -5,7 +5,7 @@ import styled from '../styling/styled';
 import Container from './Container';
 import epfImg from '../assets/images/epf.png';
 import kdpImg from '../assets/images/kdp-logo.png';
-import { PATH_PREFIX } from "../LegacyRoutes";
+import { PATH_PREFIX } from '../LegacyRoutes';
 
 const DataInfo = styled.p`
   text-align: center;
