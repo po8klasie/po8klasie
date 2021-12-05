@@ -5,6 +5,7 @@ import Card from './Card';
 import useFavouriteSchools from '../hooks/useFavouriteSchools';
 import AddRemoveFavourite from './AddRemoveFavourite';
 import { ISchoolCardPropsFragment } from '../types/graphql';
+import { PATH_PREFIX } from "../LegacyRoutes";
 
 const Wrapper = styled(Card)`
   margin-bottom: 3em;
@@ -72,12 +73,12 @@ const SchoolCard: FC<SchoolCardProps> = ({
       <div className="main-content">
         <span className="school-type">Szkoła {!isPublic && 'nie'}publiczna</span>
         <h4>
-          <Link to={`/school/${schoolId}`}>{schoolName}</Link>
+          <Link to={`${PATH_PREFIX}/school/${schoolId}`}>{schoolName}</Link>
         </h4>
         <span className="district">{district}</span>
       </div>
       <div className="side-content">
-        <Link to={`/school/${schoolId}`}>Odwiedź stronę szkoły</Link>
+        <Link to={`${PATH_PREFIX}/school/${schoolId}`}>Odwiedź stronę szkoły</Link>
         <AddRemoveFavourite
           isFavourite={isSchoolFavourite(schoolId || '')}
           isSmallMargin

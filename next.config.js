@@ -11,7 +11,7 @@ const nextConfig = {
     disableStaticImages: true,
   },
   exportPathMap: async () => ({
-    '/': { page: '/[[...slug]]' },
+    '/warszawa/legacy': { page: '/warszawa/legacy/[[...slug]]' },
   }),
 };
 

@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { Link } from '@reach/router';
 import { nanoid } from 'nanoid';
 import styled from '../styling/styled';
+import { PATH_PREFIX } from "../LegacyRoutes";
 
 const BreadcrumbsList = styled.ul`
   display: block;
@@ -29,14 +30,14 @@ type BreadcrumbsProps = {
 };
 
 const Breadcrumbs: FC<BreadcrumbsProps> = ({ steps }) => {
-  const stepsAll = [['Strona główna', '/'], ...steps];
+  const stepsAll = [['Strona główna', PATH_PREFIX], ...steps];
 
   return (
     <BreadcrumbsList>
       {stepsAll.map(([label, link]) => {
         return (
           <li key={nanoid()}>
-            <Link to={link ?? ''}>{label}</Link>
+            <Link to={link ?? PATH_PREFIX}>{label}</Link>
           </li>
         );
       })}
