@@ -1,9 +1,21 @@
-const createImagePath = (filename: string) => `/assets/website/img/team/${filename}`;
+import MichalOreziakImg from '../../../../public/assets/website/img/team/Michal-Oreziak.png';
+import MichalOreziakImgPlaceholder from '../../../../public/assets/website/img/team/Michal-Oreziak.png?lqip';
+import AnnaKramarskaImg from '../../../../public/assets/website/img/team/Anna-Kramarska.png';
+import AnnaKramarskaImgPlaceholder from '../../../../public/assets/website/img/team/Anna-Kramarska.png?lqip';
+import MichalLazowikImg from '../../../../public/assets/website/img/team/Michal-Lazowik.jpg';
+import MichalLazowikImgPlaceholder from '../../../../public/assets/website/img/team/Michal-Lazowik.jpg?lqip';
+import KarolinaPawlaczykImg from '../../../../public/assets/website/img/team/Karolina-Pawlaczyk.jpg';
+import KarolinaPawlaczykImgPlaceholder from '../../../../public/assets/website/img/team/Karolina-Pawlaczyk.jpg?lqip';
+import WojciechSankoImg from '../../../../public/assets/website/img/team/Wojciech-Sanko.jpg';
+import WojciechSankoImgPlaceholder from '../../../../public/assets/website/img/team/Wojciech-Sanko.jpg?lqip';
+import AgnieszkaPugacewiczImg from '../../../../public/assets/website/img/team/Agnieszka-Pugacewicz.jpg';
+import AgnieszkaPugacewiczImgPlaceholder from '../../../../public/assets/website/img/team/Agnieszka-Pugacewicz.jpg?lqip';
 
 export interface TeamMember {
   name: string;
   roles: string[];
   image: string;
+  imagePlaceholder: string;
   links: [string, string][];
 }
 
@@ -11,7 +23,8 @@ const teamMembers: TeamMember[] = [
   {
     name: 'Michał Oręziak',
     roles: ['Koordynator projektu', 'Front-end Developer'],
-    image: createImagePath('Michal-Oreziak.png'),
+    image: MichalOreziakImg,
+    imagePlaceholder: MichalOreziakImgPlaceholder,
     links: [
       ['linkedin', 'https://linkedin.com/in/micorix'],
       ['github', 'https://github.com/micorix'],
@@ -20,7 +33,8 @@ const teamMembers: TeamMember[] = [
   {
     name: 'Anna Kramarska',
     roles: ['Back-end Developer'],
-    image: createImagePath('Anna-Kramarska.png'),
+    image: AnnaKramarskaImg,
+    imagePlaceholder: AnnaKramarskaImgPlaceholder,
     links: [
       ['linkedin', 'https://www.linkedin.com/in/anna-krmsk/'],
       ['github', 'https://github.com/annkamsk/'],
@@ -29,7 +43,8 @@ const teamMembers: TeamMember[] = [
   {
     name: 'Michał Łazowik',
     roles: ['Site Reliability Engineer'],
-    image: createImagePath('Michal-Lazowik.jpg'),
+    image: MichalLazowikImg,
+    imagePlaceholder: MichalLazowikImgPlaceholder,
     links: [
       ['linkedin', 'https://www.linkedin.com/in/michał-ł-017a68172/'],
       ['github', 'https://github.com/mlazowik'],
@@ -38,19 +53,22 @@ const teamMembers: TeamMember[] = [
   {
     name: 'Karolina Pawlaczyk',
     roles: ['UX/UI Designer'],
-    image: createImagePath('Karolina-Pawlaczyk.jpg'),
+    image: KarolinaPawlaczykImg,
+    imagePlaceholder: KarolinaPawlaczykImgPlaceholder,
     links: [['linkedin', 'https://www.linkedin.com/in/ka-pawlaczyk/']],
   },
   {
     name: 'Wojciech Sańko',
     roles: ['Rozwój produktu', 'Partnerstwa'],
-    image: createImagePath('Wojciech-Sanko.jpg'),
+    image: WojciechSankoImg,
+    imagePlaceholder: WojciechSankoImgPlaceholder,
     links: [['linkedin', 'https://www.linkedin.com/in/wojciech-sa%C5%84ko-7776461b/']],
   },
   {
     name: 'Agnieszka Pugacewicz',
     roles: ['Researcher'],
-    image: createImagePath('Agnieszka-Pugacewicz.jpg'),
+    image: AgnieszkaPugacewiczImg,
+    imagePlaceholder: AgnieszkaPugacewiczImgPlaceholder,
     links: [
       ['linkedin', 'https://linkedin.com/in/agnieszka-pugacewicz/'],
       ['website', 'https://www.delab.uw.edu.pl/zespol-delab/dr-agnieszka-pugacewicz/'],

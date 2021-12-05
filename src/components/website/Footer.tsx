@@ -19,6 +19,7 @@ const Footer: FC = () => (
         <div className="grid grid-cols-4 gap-4 text-2xl">
           {socialLinks.map(([link, Icon]) => (
             <a
+              key={link}
               href={link}
               target="_blank"
               rel="noreferrer noopener"

@@ -34,16 +34,7 @@ const SupportUsSection: FC = () => (
         </SupportCard>
         <SupportCard
           title="Patronite"
-          linkElement={
-            <a
-              href="https://patronite.pl/po8klasie"
-              target="_blank"
-              rel="noreferrer noopener"
-              className="underline font-bold text-lg"
-            >
-              Wspieraj nas
-            </a>
-          }
+          linkElement={<span className="text-dark opacity-60 font-bold text-lg">Wkrótce</span>}
         >
           Pracujemy wolontaryjnie. Twoje wsparcie pozwoli nam szybciej wdrożyć wszystkie niesamowite
           możliwości <Brand />.

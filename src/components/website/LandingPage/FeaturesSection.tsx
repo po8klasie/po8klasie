@@ -1,8 +1,19 @@
 import { FC } from 'react';
-import Image from 'next/image';
+import ProgressiveImage from 'react-progressive-graceful-image';
 
-const MockUpImage: FC<{ src: string }> = ({ src }) => (
-  <Image src={src} width={800} height={300} objectFit="contain" />
+import lookupImg from '../../../../public/assets/website/img/features-lookup.png';
+import lookupImgPlaceholder from '../../../../public/assets/website/img/features-lookup.png?lqip';
+import surveyImg from '../../../../public/assets/website/img/features-survey.png';
+import surveyImgPlaceholder from '../../../../public/assets/website/img/features-survey.png?lqip';
+
+const Image: FC<{ src: string; placeholder: string; alt: string }> = ({
+  src: imgSrc,
+  placeholder,
+  alt,
+}) => (
+  <ProgressiveImage src={imgSrc} placeholder={placeholder}>
+    {(src: string) => <img src={src} alt={alt} className="h-96 mx-auto object-contain rounded" />}
+  </ProgressiveImage>
 );
 
 const FeaturesSection: FC = () => (
@@ -21,7 +32,7 @@ const FeaturesSection: FC = () => (
           </div>
         </div>
         <div className="w-full">
-          <MockUpImage src="/assets/website/img/features-lookup.png" />
+          <Image alt="" src={lookupImg} placeholder={lookupImgPlaceholder} />
         </div>
 
         <div className="flex items-center">
@@ -35,7 +46,7 @@ const FeaturesSection: FC = () => (
           </div>
         </div>
         <div className="w-full">
-          <MockUpImage src="/assets/website/img/features-survey.png" />
+          <Image alt="" src={surveyImg} placeholder={surveyImgPlaceholder} />
         </div>
       </div>
     </div>

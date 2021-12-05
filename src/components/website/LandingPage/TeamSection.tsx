@@ -1,5 +1,5 @@
 import { FC, forwardRef, HTMLProps } from 'react';
-import Image from 'next/image';
+import ProgressiveImage from 'react-progressive-graceful-image';
 import { IconType } from 'react-icons';
 import { FaGithub, FaGlobe, FaLinkedinIn } from 'react-icons/fa';
 import teamMembers, { TeamMember } from '../data/team';
@@ -25,24 +25,35 @@ const SocialLink = forwardRef<
 });
 
 const TeamMemberCard: FC<{ teamMember: TeamMember; alignToRight?: boolean }> = ({
-  teamMember: { image, name, roles, links },
+  teamMember: { image, imagePlaceholder, name, roles, links },
 }) => (
   <div className="flex justify-center">
     <div className="flex flex-col justify-between" style={{ width: IMAGE_SIZE + 50 }}>
       <div>
         <div>
-          <Image src={image} width={150} height={150} objectFit="cover" className="rounded" />
+          <ProgressiveImage src={image} placeholder={imagePlaceholder}>
+            {(src: string) => (
+              <img
+                src={src}
+                alt={name}
+                className="object-cover rounded"
+                style={{ width: IMAGE_SIZE, height: IMAGE_SIZE }}
+              />
+            )}
+          </ProgressiveImage>
         </div>
         <span className="block text-lg font-bold mt-1">{name}</span>
         <span className="block uppercase text-md mt-1">
           {roles.map((role) => (
-            <span className="block">{role}</span>
+            <span key={role} className="block">
+              {role}
+            </span>
           ))}
         </span>
       </div>
       <div className="flex mt-2">
         {links.map((link) => (
-          <div className="mx-2 first:ml-0 text-lg">
+          <div key={link[1]} className="mx-2 first:ml-0 text-lg">
             <SocialLink link={link} />
           </div>
         ))}
@@ -57,7 +68,7 @@ const TeamSection: FC = () => (
       <h2 className="text-center text-3xl font-bold">Wolontariusze, którzy tworzą ten projekt</h2>
       <div className="mt-20 grid gap-x-20 gap-y-14 sm:grid-cols-2 xl:grid-cols-3">
         {teamMembers.map((teamMember) => (
-          <TeamMemberCard teamMember={teamMember} />
+          <TeamMemberCard key={teamMember.name} teamMember={teamMember} />
         ))}
       </div>
     </div>

@@ -1,11 +1,18 @@
 import { FC } from 'react';
-import Image from 'next/image';
+import ProgressiveImage from 'react-progressive-graceful-image';
 import Brand from '../Brand';
+
+import heroGradientsImg from '../../../../public/assets/website/img/hero-gradients.png';
+import heroGradientsImgPlaceholder from '../../../../public/assets/website/img/hero-gradients.png?lqip';
 
 const HeroSection: FC = () => (
   <div className="pt-64 pb-32 relative">
     <div className="absolute top-0 left-0 w-full h-full -z-1">
-      <Image src="/assets/website/img/hero-gradients.png" objectFit="fill" layout="fill" />
+      <ProgressiveImage src={heroGradientsImg} placeholder={heroGradientsImgPlaceholder}>
+        {(src: string) => (
+          <img src={src} alt="" className="absolute top-0 left-0 w-full h-full -z-1" />
+        )}
+      </ProgressiveImage>
     </div>
     <div className="sm:w-narrowContainer w-container mx-auto text-center">
       <h1 className="text-4xl md:text-5xl font-bold leading-relaxed">

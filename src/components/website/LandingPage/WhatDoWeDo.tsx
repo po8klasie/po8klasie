@@ -1,8 +1,21 @@
 import { FC } from 'react';
-import Image from 'next/image';
+import ProgressiveImage from 'react-progressive-graceful-image';
 
-const MockUpImage: FC<{ src: string }> = ({ src }) => (
-  <Image src={src} width={800} height={300} objectFit="contain" />
+import searchMockUpImg from '../../../../public/assets/website/img/search-mockup.png';
+import searchMockUpImgPlaceholder from '../../../../public/assets/website/img/search-mockup.png?lqip';
+import comparisonMockUpImg from '../../../../public/assets/website/img/comparison-mockup.png';
+import comparisonMockUpImgPlaceholder from '../../../../public/assets/website/img/comparison-mockup.png?lqip';
+import schoolViewMockUpImg from '../../../../public/assets/website/img/school-view-mockup.png';
+import schoolViewMockUpImgPlaceholder from '../../../../public/assets/website/img/school-view-mockup.png?lqip';
+
+const MockUpImage: FC<{ src: string; placeholder: string; alt: string }> = ({
+  src: imgSrc,
+  placeholder,
+  alt,
+}) => (
+  <ProgressiveImage src={imgSrc} placeholder={placeholder}>
+    {(src: string) => <img src={src} alt={alt} className="h-96 mx-auto object-contain rounded" />}
+  </ProgressiveImage>
 );
 
 const WhatDoWeDo: FC = () => (
@@ -18,11 +31,19 @@ const WhatDoWeDo: FC = () => (
           </p>
         </div>
         <div className="w-full">
-          <MockUpImage src="/assets/website/img/search-mockup.png" />
+          <MockUpImage
+            alt="Zrzut ekranu wyszukiwarki"
+            src={searchMockUpImg}
+            placeholder={searchMockUpImgPlaceholder}
+          />
         </div>
 
         <div className="w-full">
-          <MockUpImage src="/assets/website/img/comparison-mockup.png" />
+          <MockUpImage
+            alt="Zrzut ekranu porównywarki szkół"
+            src={comparisonMockUpImg}
+            placeholder={comparisonMockUpImgPlaceholder}
+          />
         </div>
         <div className="flex items-center">
           <p className="text-lg">
@@ -40,7 +61,11 @@ const WhatDoWeDo: FC = () => (
           </p>
         </div>
         <div className="w-full">
-          <MockUpImage src="/assets/website/img/comparison-mockup.png" />
+          <MockUpImage
+            alt="Zrzut ekranu widoku szkoły"
+            src={schoolViewMockUpImg}
+            placeholder={schoolViewMockUpImgPlaceholder}
+          />
         </div>
       </div>
     </div>
