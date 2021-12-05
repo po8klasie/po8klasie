@@ -58,6 +58,7 @@ jobs:
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
         push: true
+        cache-from: type=registry,ref=ghcr.io/po8klasie/po8klasie:cache-master
         cache-to: type=registry,ref=ghcr.io/po8klasie/po8klasie:cache-master
 
     - uses: google-github-actions/setup-gcloud@master
