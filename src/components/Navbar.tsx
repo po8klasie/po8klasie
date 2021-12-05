@@ -5,6 +5,7 @@ import styled from '../styling/styled';
 import Container from './Container';
 import Logo from './Logo';
 import getPathWithPreservedParams from '../utils/url';
+import { PATH_PREFIX } from "../LegacyRoutes";
 
 const WideContainer = styled(Container)`
   width: calc(100% - 5rem);
@@ -104,19 +105,19 @@ interface NavbarProps {
 const Navbar: FC<NavbarProps> = ({ wide }) => {
   const [isNavOpen, setNavOpen] = useState(false);
 
-  const isSearchPage = window.location.pathname.startsWith('/schools');
+  const isSearchPage = window.location.pathname.startsWith(`${PATH_PREFIX}/schools`);
   const getSearchLink = (viewPath: string) => {
-    const path = `/schools/${viewPath}`;
+    const path = `${PATH_PREFIX}/schools/${viewPath}`;
     return isSearchPage ? getPathWithPreservedParams(path) : path;
   };
 
   const menuItems: [string, string][] = [
-    ['Home', '/'],
+    ['Home', PATH_PREFIX],
     ['Szkoły', getSearchLink('grid')],
     ['Mapa', getSearchLink('map')],
-    ['Ulubione', '/favourite-schools'],
-    ['O nas', '/about-us'],
-    ['Kalkulator punktów', '/calculator'],
+    ['Ulubione', `${PATH_PREFIX}/favourite-schools`],
+    ['O nas', `${PATH_PREFIX}/about-us`],
+    ['Kalkulator punktów', `${PATH_PREFIX}/calculator`],
   ];
 
   const ContainerComponent = wide ? WideContainer : Container;

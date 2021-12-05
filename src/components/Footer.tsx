@@ -5,6 +5,7 @@ import styled from '../styling/styled';
 import Container from './Container';
 import epfImg from '../assets/images/epf.png';
 import kdpImg from '../assets/images/kdp-logo.png';
+import { PATH_PREFIX } from "../LegacyRoutes";
 
 const DataInfo = styled.p`
   text-align: center;
@@ -116,32 +117,32 @@ const Footer: FC<FooterProps> = ({ noFooterMargin }) => (
           <div className="sitemap">
             <ul>
               <li>
-                <Link to="/">Strona główna</Link>
+                <Link to={PATH_PREFIX}>Strona główna</Link>
               </li>
               <li>
-                <Link to="/schools">Wyszukiwarka szkół</Link>
+                <Link to={`${PATH_PREFIX}/schools`}>Wyszukiwarka szkół</Link>
               </li>
               <li>
-                <Link to="/calculator">Kalkulator punktów</Link>
-              </li>
-            </ul>
-            <ul>
-              <li>
-                <Link to="/about-data">O naszych danych</Link>
-              </li>
-              <li>
-                <Link to="/get-involved">Pomóż nam!</Link>
-              </li>
-              <li>
-                <Link to="/for-developers">Dla deweloperów</Link>
+                <Link to={`${PATH_PREFIX}/calculator`}>Kalkulator punktów</Link>
               </li>
             </ul>
             <ul>
               <li>
-                <Link to="/privacy-policy">Polityka prywatności</Link>
+                <Link to={`${PATH_PREFIX}/about-data`}>O naszych danych</Link>
               </li>
               <li>
-                <Link to="/privacy-settings">Ustawienia prywatności</Link>
+                <Link to={`${PATH_PREFIX}/get-involved`}>Pomóż nam!</Link>
+              </li>
+              <li>
+                <Link to={`${PATH_PREFIX}/for-developers`}>Dla deweloperów</Link>
+              </li>
+            </ul>
+            <ul>
+              <li>
+                <Link to={`${PATH_PREFIX}/privacy-policy`}>Polityka prywatności</Link>
+              </li>
+              <li>
+                <Link to={`${PATH_PREFIX}/privacy-settings`}>Ustawienia prywatności</Link>
               </li>
             </ul>
           </div>

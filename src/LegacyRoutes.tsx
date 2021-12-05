@@ -19,24 +19,26 @@ const PrivacyPolicyPage = lazyLoaded(lazy(() => import('./legacyPages/articles/P
 const AboutPage = lazyLoaded(lazy(() => import('./legacyPages/AboutPage')));
 const NotFoundPage = lazyLoaded(lazy(() => import('./legacyPages/NotFoundPage')));
 
+export const PATH_PREFIX = '/warszawa/legacy';
+
 const LegacyRoutes: FC = () => (
   <Router>
-    <LandingPage path="/" />
-    <SchoolsPage path="/schools-old" />
-    <Redirect from="/schools" to="/schools/grid" />
-    <SchoolsGridPage path="/schools/grid" />
-    <SchoolsMapPage path="/schools/map" />
-    <SchoolPage path="/school/:schoolID" />
-    <FavouriteSchoolsPage path="/favourite-schools" />
-    <Calculator path="/calculator" />
+    <LandingPage path={PATH_PREFIX} />
+    <SchoolsPage path={`${PATH_PREFIX}/schools-old`} />
+    <Redirect from={`${PATH_PREFIX}/schools`} to={`${PATH_PREFIX}/schools/grid`} />
+    <SchoolsGridPage path={`${PATH_PREFIX}/schools/grid`} />
+    <SchoolsMapPage path={`${PATH_PREFIX}/schools/map`} />
+    <SchoolPage path={`${PATH_PREFIX}/school/:schoolID`} />
+    <FavouriteSchoolsPage path={`${PATH_PREFIX}/favourite-schools`} />
+    <Calculator path={`${PATH_PREFIX}/calculator`} />
 
-    <AboutPage path="/about-us" />
-    <ForDevelopersPage path="/for-developers" />
-    <GetInvolvedPage path="/get-involved" />
-    <AboutDataPage path="/about-data" />
+    <AboutPage path={`${PATH_PREFIX}/about-us`} />
+    <ForDevelopersPage path={`${PATH_PREFIX}/for-developers`} />
+    <GetInvolvedPage path={`${PATH_PREFIX}/get-involved`} />
+    <AboutDataPage path={`${PATH_PREFIX}/about-data`} />
 
-    <PrivacyPolicyPage path="/privacy-policy" />
-    <PrivacySettingsPage path="/privacy-settings" />
+    <PrivacyPolicyPage path={`${PATH_PREFIX}/privacy-policy`} />
+    <PrivacySettingsPage path={`${PATH_PREFIX}/privacy-settings`} />
 
     <NotFoundPage default />
   </Router>

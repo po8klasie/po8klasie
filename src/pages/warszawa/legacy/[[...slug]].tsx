@@ -4,10 +4,15 @@
 // with SSR from window.SOME_VAR usage, if this is not used
 // next/dynamic can be removed to take advantage of SSR/prerendering
 import dynamic from 'next/dynamic';
-import { FC } from 'react';
+import React, { FC } from 'react';
 
-const NextIndexWrapper = dynamic(() => import('../index'), { ssr: false });
+const NextIndexWrapper = dynamic(() => import('../../../index'), { ssr: false });
 
-const Page: FC = (props) => <NextIndexWrapper {...props} />;
+const Page: FC = (props) => (
+ <>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <NextIndexWrapper {...props} />
+ </>
+);
 
 export default Page;

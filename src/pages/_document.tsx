@@ -24,7 +24,6 @@ class Document extends NextDocument {
           <link rel="manifest" href={`${process.env.PUBLIC_URL}/manifest.json`} />
           {/* eslint-disable-next-line react/no-danger */}
           <script dangerouslySetInnerHTML={{ __html: configScript }} />
-          <noscript>You need to enable JavaScript to run this app.</noscript>
         </Head>
         <body>
           <Main />
