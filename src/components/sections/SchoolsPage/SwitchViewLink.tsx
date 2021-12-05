@@ -3,7 +3,7 @@ import { Link } from '@reach/router';
 import { IconType } from 'react-icons';
 import styled from '../../../styling/styled';
 import getPathWithPreservedParams from '../../../utils/url';
-import { PATH_PREFIX } from "../../../LegacyRoutes";
+import { PATH_PREFIX } from '../../../LegacyRoutes';
 
 const SwitchLink = styled(Link)`
   background: none;
