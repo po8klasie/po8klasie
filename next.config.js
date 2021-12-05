@@ -1,3 +1,4 @@
+const { withSentryConfig } = require("@sentry/nextjs");
 const withOptimizedImages = require('next-optimized-images');
 
 const customNextConfig = {
@@ -21,6 +22,13 @@ const customNextConfig = {
   responsive: {
     adapter: require('responsive-loader/sharp'),
   },
+  // sentry options
+  sentry: {
+    disableServerWebpackPlugin: true,
+    disableClientWebpackPlugin: true,
+  },
 };
 
-module.exports = withOptimizedImages(customNextConfig);
+module.exports = withSentryConfig(
+  withOptimizedImages(customNextConfig)
+);
