@@ -1,6 +1,6 @@
 import { FC, MouseEvent as ReactMouseEvent, useEffect, useState } from 'react';
 import Brand from './Brand';
-import { roundedLinkClassName } from './LandingPage/RoundedExternalLink';
+import { roundedLinkClassName } from './RoundedExternalLink';
 
 const getScrollToSectionProps = (to: string) => ({
   href: to === 'top' ? '#' : `${to}`,

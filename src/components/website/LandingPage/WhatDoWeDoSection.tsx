@@ -18,7 +18,7 @@ const MockUpImage: FC<{ src: string; placeholder: string; alt: string }> = ({
   </ProgressiveImage>
 );
 
-const WhatDoWeDo: FC = () => (
+const WhatDoWeDoSection: FC = () => (
   <div className="mt-32">
     <h2 className="text-center text-3xl font-bold">Co tworzymy?</h2>
     <div className="w-4/5 mx-auto mt-20">
@@ -72,4 +72,4 @@ const WhatDoWeDo: FC = () => (
   </div>
 );
 
-export default WhatDoWeDo;
+export default WhatDoWeDoSection;

@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { FaFacebookF, FaFacebookMessenger } from 'react-icons/fa';
 import { BsEnvelope } from 'react-icons/bs';
-import RoundedExternalLink from './RoundedExternalLink';
+import RoundedExternalLink from '../RoundedExternalLink';
 
 const ContactUsSection: FC = () => (
   <div className="my-32">

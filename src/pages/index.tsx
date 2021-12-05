@@ -3,11 +3,11 @@ import Head from 'next/head';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import 'tailwindcss/tailwind.css';
 
-import HeroSection from '../components/website/LandingPage/HeroSection';
 import Layout from '../components/website/Layout';
+import HeroSection from '../components/website/LandingPage/HeroSection';
 import PartnersSection from '../components/website/LandingPage/PartnersSection';
 import ContactUsSection from '../components/website/LandingPage/ContactUsSection';
-import WhatDoWeDo from '../components/website/LandingPage/WhatDoWeDo';
+import WhatDoWeDoSection from '../components/website/LandingPage/WhatDoWeDoSection';
 import CivicTechSection from '../components/website/LandingPage/CivicTechSection';
 import FeaturesSection from '../components/website/LandingPage/FeaturesSection';
 import TeamSection from '../components/website/LandingPage/TeamSection';
@@ -25,7 +25,7 @@ const LandingPage: FC = () => {
         />
       </Head>
       <HeroSection />
-      <WhatDoWeDo />
+      <WhatDoWeDoSection />
       <CivicTechSection />
       <FeaturesSection />
       <OurStorySection />
