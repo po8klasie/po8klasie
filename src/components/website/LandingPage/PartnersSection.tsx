@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import ProgressiveImage from 'react-progressive-graceful-image';
-import surveyLabImg from '../../../../public/assets/website/img/partners/SurveyLab-logo.png';
-import surveyLabImgPlaceholder from '../../../../public/assets/website/img/partners/SurveyLab-logo.png?lqip';
+import surveyLabImg from '../../../assets/website/img/partners/SurveyLab-logo.png';
+import surveyLabImgPlaceholder from '../../../assets/website/img/partners/SurveyLab-logo.png?lqip';
 
 const partnersList = [
   {

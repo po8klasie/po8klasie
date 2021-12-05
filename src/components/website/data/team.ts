@@ -1,15 +1,15 @@
-import MichalOreziakImg from '../../../../public/assets/website/img/team/Michal-Oreziak.png';
-import MichalOreziakImgPlaceholder from '../../../../public/assets/website/img/team/Michal-Oreziak.png?lqip';
-import AnnaKramarskaImg from '../../../../public/assets/website/img/team/Anna-Kramarska.png';
-import AnnaKramarskaImgPlaceholder from '../../../../public/assets/website/img/team/Anna-Kramarska.png?lqip';
-import MichalLazowikImg from '../../../../public/assets/website/img/team/Michal-Lazowik.jpg';
-import MichalLazowikImgPlaceholder from '../../../../public/assets/website/img/team/Michal-Lazowik.jpg?lqip';
-import KarolinaPawlaczykImg from '../../../../public/assets/website/img/team/Karolina-Pawlaczyk.jpg';
-import KarolinaPawlaczykImgPlaceholder from '../../../../public/assets/website/img/team/Karolina-Pawlaczyk.jpg?lqip';
-import WojciechSankoImg from '../../../../public/assets/website/img/team/Wojciech-Sanko.jpg';
-import WojciechSankoImgPlaceholder from '../../../../public/assets/website/img/team/Wojciech-Sanko.jpg?lqip';
-import AgnieszkaPugacewiczImg from '../../../../public/assets/website/img/team/Agnieszka-Pugacewicz.jpg';
-import AgnieszkaPugacewiczImgPlaceholder from '../../../../public/assets/website/img/team/Agnieszka-Pugacewicz.jpg?lqip';
+import MichalOreziakImg from '../../../assets/website/img/team/Michal-Oreziak.png';
+import MichalOreziakImgPlaceholder from '../../../assets/website/img/team/Michal-Oreziak.png?lqip';
+import AnnaKramarskaImg from '../../../assets/website/img/team/Anna-Kramarska.png';
+import AnnaKramarskaImgPlaceholder from '../../../assets/website/img/team/Anna-Kramarska.png?lqip';
+import MichalLazowikImg from '../../../assets/website/img/team/Michal-Lazowik.jpg';
+import MichalLazowikImgPlaceholder from '../../../assets/website/img/team/Michal-Lazowik.jpg?lqip';
+import KarolinaPawlaczykImg from '../../../assets/website/img/team/Karolina-Pawlaczyk.jpg';
+import KarolinaPawlaczykImgPlaceholder from '../../../assets/website/img/team/Karolina-Pawlaczyk.jpg?lqip';
+import WojciechSankoImg from '../../../assets/website/img/team/Wojciech-Sanko.jpg';
+import WojciechSankoImgPlaceholder from '../../../assets/website/img/team/Wojciech-Sanko.jpg?lqip';
+import AgnieszkaPugacewiczImg from '../../../assets/website/img/team/Agnieszka-Pugacewicz.jpg';
+import AgnieszkaPugacewiczImgPlaceholder from '../../../assets/website/img/team/Agnieszka-Pugacewicz.jpg?lqip';
 
 export interface TeamMember {
   name: string;

@@ -1,10 +1,10 @@
 import { FC } from 'react';
 import ProgressiveImage from 'react-progressive-graceful-image';
 
-import lookupImg from '../../../../public/assets/website/img/features-lookup.png';
-import lookupImgPlaceholder from '../../../../public/assets/website/img/features-lookup.png?lqip';
-import surveyImg from '../../../../public/assets/website/img/features-survey.png';
-import surveyImgPlaceholder from '../../../../public/assets/website/img/features-survey.png?lqip';
+import lookupImg from '../../../assets/website/img/features-lookup.png';
+import lookupImgPlaceholder from '../../../assets/website/img/features-lookup.png?lqip';
+import surveyImg from '../../../assets/website/img/features-survey.png';
+import surveyImgPlaceholder from '../../../assets/website/img/features-survey.png?lqip';
 
 const Image: FC<{ src: string; placeholder: string; alt: string }> = ({
   src: imgSrc,

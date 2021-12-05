@@ -2,8 +2,8 @@ import { FC } from 'react';
 import ProgressiveImage from 'react-progressive-graceful-image';
 import Brand from '../Brand';
 
-import heroGradientsImg from '../../../../public/assets/website/img/hero-gradients.png';
-import heroGradientsImgPlaceholder from '../../../../public/assets/website/img/hero-gradients.png?lqip';
+import heroGradientsImg from '../../../assets/website/img/hero-gradients.png';
+import heroGradientsImgPlaceholder from '../../../assets/website/img/hero-gradients.png?lqip';
 
 const HeroSection: FC = () => (
   <div className="pt-64 pb-32 relative">

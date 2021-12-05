@@ -1,12 +1,12 @@
 import { FC } from 'react';
 import ProgressiveImage from 'react-progressive-graceful-image';
 
-import searchMockUpImg from '../../../../public/assets/website/img/search-mockup.png';
-import searchMockUpImgPlaceholder from '../../../../public/assets/website/img/search-mockup.png?lqip';
-import comparisonMockUpImg from '../../../../public/assets/website/img/comparison-mockup.png';
-import comparisonMockUpImgPlaceholder from '../../../../public/assets/website/img/comparison-mockup.png?lqip';
-import schoolViewMockUpImg from '../../../../public/assets/website/img/school-view-mockup.png';
-import schoolViewMockUpImgPlaceholder from '../../../../public/assets/website/img/school-view-mockup.png?lqip';
+import searchMockUpImg from '../../../assets/website/img/search-mockup.png';
+import searchMockUpImgPlaceholder from '../../../assets/website/img/search-mockup.png?lqip';
+import comparisonMockUpImg from '../../../assets/website/img/comparison-mockup.png';
+import comparisonMockUpImgPlaceholder from '../../../assets/website/img/comparison-mockup.png?lqip';
+import schoolViewMockUpImg from '../../../assets/website/img/school-view-mockup.png';
+import schoolViewMockUpImgPlaceholder from '../../../assets/website/img/school-view-mockup.png?lqip';
 
 const MockUpImage: FC<{ src: string; placeholder: string; alt: string }> = ({
   src: imgSrc,

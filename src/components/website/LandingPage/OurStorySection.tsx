@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import ProgressiveImage from 'react-progressive-graceful-image';
-import ourStoryImg from '../../../../public/assets/website/img/our-story.png';
-import ourStoryImgPlaceholder from '../../../../public/assets/website/img/our-story.png?lqip';
+import ourStoryImg from '../../../assets/website/img/our-story.png';
+import ourStoryImgPlaceholder from '../../../assets/website/img/our-story.png?lqip';
 
 const OurStorySection: FC = () => (
   <div className="mt-32 pt-32 pb-20 bg-primaryLight">
