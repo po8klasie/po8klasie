@@ -7,7 +7,7 @@ const CivicTechSection: FC = () => (
       <h2 className="text-center text-3xl font-bold">Technologia obywatelska</h2>
       <p className="mt-10 text-center text-lg">
         <Brand /> tworzymy jako projekt <strong>civic-tech</strong>. W języku polskim, tłumaczymy to
-        jako “technologie obywatelskie”. Oznacza to, iż najważniejsze dla nas rozwiązanie problemu
+        jako “technologie obywatelskie”. Oznacza to, iż najważniejsze jest dla nas rozwiązanie problemu,
         czyli ułatwienie młodzieży wybóru szkoły.
       </p>
     </div>
