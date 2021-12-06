@@ -1,10 +1,14 @@
 import { FC } from 'react';
 import ProgressiveImage from 'react-progressive-graceful-image';
+import RoundedExternalLink from '../RoundedExternalLink';
+import { FaWpforms } from 'react-icons/fa';
 
 import lookupImg from '../../../assets/website/img/features-lookup.png';
 import lookupImgPlaceholder from '../../../assets/website/img/features-lookup.png?lqip';
 import surveyImg from '../../../assets/website/img/features-survey.png';
 import surveyImgPlaceholder from '../../../assets/website/img/features-survey.png?lqip';
+
+const SURVEY_LINK = 'https://here4.pl/wybor-ankieta-12'
 
 const Image: FC<{ src: string; placeholder: string; alt: string }> = ({
   src: imgSrc,
@@ -43,6 +47,12 @@ const FeaturesSection: FC = () => (
               wsparciu badaczy i aktywistów NGO dbamy o to, aby samorządy udostępniały właśnie te
               dane, których kandydaci najbardziej potrzebują.
             </p>
+            <RoundedExternalLink
+              href={SURVEY_LINK}
+              icon={FaWpforms}
+              className="inline-flex mt-10">
+              Weź udział w badaniu
+            </RoundedExternalLink>
           </div>
         </div>
         <div className="w-full">
