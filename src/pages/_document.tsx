@@ -1,7 +1,5 @@
 import React from 'react';
 import NextDocument, { Html, Head, Main, NextScript } from 'next/document';
-import { init as initMatomo } from "@socialgouv/matomo-next";
-import { environment, isEnvVarEmpty } from "../environments/environment";
 
 const configScript = `
 window.config = {
@@ -13,13 +11,6 @@ window.config = {
 `;
 
 class Document extends NextDocument {
-  componentDidMount() {
-    if(!isEnvVarEmpty('MATOMO_BASE_URL') && !isEnvVarEmpty('MATOMO_SITE_ID'))
-      initMatomo({
-        url: environment.MATOMO_BASE_URL,
-        siteId: environment.MATOMO_SITE_ID,
-      });
-  }
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   render() {
     return (
