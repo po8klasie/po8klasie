@@ -26,9 +26,18 @@ const PartnersSection: FC = () => (
       <h4 className="uppercase font-lighter text-center text-lg">Partnerzy</h4>
       <div className="mt-10 flex justify-center">
         {partnersList.map(({ name, image, imagePlaceholder, href }) => (
-          <a key={href} href={href} target="_blank" rel="noreferrer noopener" title={name} className="block ml-4 first:ml-0">
+          <a
+            key={href}
+            href={href}
+            target="_blank"
+            rel="noreferrer noopener"
+            title={name}
+            className="block ml-4 first:ml-0"
+          >
             <ProgressiveImage src={image} placeholder={imagePlaceholder}>
-              {(src: string) => <img src={src} alt={name} className="h-24 object-contain rounded" />}
+              {(src: string) => (
+                <img src={src} alt={name} className="h-24 object-contain rounded" />
+              )}
             </ProgressiveImage>
           </a>
         ))}

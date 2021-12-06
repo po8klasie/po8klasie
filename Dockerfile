@@ -17,6 +17,7 @@ COPY next.config.js next-env.d.ts ./
 COPY postcss.config.js tailwind.config.js ./
 COPY public ./public
 COPY src ./src
+COPY sentry.client.config.ts sentry.server.config.ts ./
 
 RUN yarn prepare-bundle
 
