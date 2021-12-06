@@ -44,7 +44,7 @@ const SupportUsSection: FC = () => (
           linkElement={<span className="text-dark opacity-60 font-bold text-lg">Wkrótce</span>}
         >
           Jeśli ciekawi Cię techniczna strona naszego projektu, zerknij na nasz{' '}
-          <a className="underline" href="https://github.com/po8klasie">
+          <a className="underline" href="https://github.com/po8klasie" target="_blank" rel="noreferrer noopener">
             profil na GitHubie
           </a>
           . Będziesz mógł wspierać nas też przez GitHub Sponsors.
