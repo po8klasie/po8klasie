@@ -5,7 +5,7 @@ import styled from '../styling/styled';
 import Container from './Container';
 import Logo from './Logo';
 import getPathWithPreservedParams from '../utils/url';
-import { PATH_PREFIX } from "../LegacyRoutes";
+import { PATH_PREFIX } from '../LegacyRoutes';
 
 const WideContainer = styled(Container)`
   width: calc(100% - 5rem);

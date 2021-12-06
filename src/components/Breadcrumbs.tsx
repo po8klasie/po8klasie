@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { Link } from '@reach/router';
 import { nanoid } from 'nanoid';
 import styled from '../styling/styled';
-import { PATH_PREFIX } from "../LegacyRoutes";
+import { PATH_PREFIX } from '../LegacyRoutes';
 
 const BreadcrumbsList = styled.ul`
   display: block;

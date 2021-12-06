@@ -4,7 +4,7 @@ import styled from '../styling/styled';
 import errorImg from '../assets/images/SchoolsPage/error.png';
 import notFoundImg from '../assets/images/SchoolsPage/not-found.png';
 import favouriteSchoolsImg from '../assets/images/favouriteSchools.png';
-import { PATH_PREFIX } from "../LegacyRoutes";
+import { PATH_PREFIX } from '../LegacyRoutes';
 
 const InfoWrapper = styled.div`
   margin-top: 2em;
@@ -53,6 +53,7 @@ export const NoFavouriteSchoolsInfo: FC = () => (
   <Info imageSrc={favouriteSchoolsImg}>
     Nie masz jeszcze polubionych szkół.
     <br />
-    <Link to={`${PATH_PREFIX}/schools`}>Przejdź do wyszukiwania</Link>, aby móc znaleźć swoją przyszłą szkołę!
+    <Link to={`${PATH_PREFIX}/schools`}>Przejdź do wyszukiwania</Link>, aby móc znaleźć swoją
+    przyszłą szkołę!
   </Info>
 );

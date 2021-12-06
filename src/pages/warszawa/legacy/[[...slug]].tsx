@@ -9,10 +9,10 @@ import React, { FC } from 'react';
 const NextIndexWrapper = dynamic(() => import('../../../index'), { ssr: false });
 
 const Page: FC = (props) => (
- <>
-  <noscript>You need to enable JavaScript to run this app.</noscript>
-  <NextIndexWrapper {...props} />
- </>
+  <>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <NextIndexWrapper {...props} />
+  </>
 );
 
 export default Page;
