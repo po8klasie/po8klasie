@@ -31,6 +31,7 @@ jobs:
         push: false
         load: true
         target: js-build
+        cache-from: type=registry,ref=ghcr.io/po8klasie/po8klasie:cache-master
 
     - name: Get SHA tag
       id: get-sha-tag
@@ -55,4 +56,3 @@ jobs:
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
         push: false
-        cache-from: type=registry,ref=ghcr.io/po8klasie/po8klasie:cache-master
