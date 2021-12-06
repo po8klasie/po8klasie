@@ -8,10 +8,10 @@ import heroGradientsImgPlaceholder from '../../../assets/website/img/hero-gradie
 const HeroSection: FC = () => (
   <div className="pt-64 pb-32 relative">
     <ProgressiveImage src={heroGradientsImg} placeholder={heroGradientsImgPlaceholder}>
-        {(src: string) => (
-          <img src={src} alt="" className="absolute top-0 left-0 md:w-full md:h-full -z-1" />
-        )}
-      </ProgressiveImage>
+      {(src: string) => (
+        <img src={src} alt="" className="absolute top-0 left-0 md:w-full md:h-full -z-1" />
+      )}
+    </ProgressiveImage>
     <div className="sm:w-narrowContainer w-container mx-auto text-center">
       <h1 className="text-4xl md:text-5xl font-bold leading-relaxed">
         <Brand /> pomaga Ci wybrać szkołę średnią

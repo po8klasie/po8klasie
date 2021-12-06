@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { FaFacebookF, FaFacebookMessenger, FaWpforms } from 'react-icons/fa';
+import { FaFacebookF, FaFacebookMessenger } from 'react-icons/fa';
 import { BsEnvelope } from 'react-icons/bs';
 import RoundedExternalLink from '../RoundedExternalLink';
 
@@ -10,8 +10,8 @@ const ContactUsSection: FC = () => (
       <div className="mt-10 flex justify-center flex-wrap">
         <div className="mt-10 md:mt-0">
           <RoundedExternalLink href="mailto:info@po8klasie.pl" icon={BsEnvelope}>
-          info@po8klasie.pl
-        </RoundedExternalLink>
+            info@po8klasie.pl
+          </RoundedExternalLink>
         </div>
         <div className="mt-10 md:mt-0 mx-10">
           <RoundedExternalLink href="https://m.me/po8klasie" icon={FaFacebookMessenger}>

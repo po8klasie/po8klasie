@@ -4,19 +4,21 @@ import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import 'normalize.css';
 
-const NextMatomoInitalizer = dynamic(() => import('../components/NextMatomoInitializer'), { ssr: false });
+const NextMatomoInitalizer = dynamic(() => import('../components/NextMatomoInitializer'), {
+  ssr: false,
+});
 
 const App: FC<AppProps> = ({ Component, pageProps }) => {
   return (
-  <>
-    <Head>
-      <title>po8klasie</title>
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
-    </Head>
-    <NextMatomoInitalizer />
-    <Component {...pageProps} />
-  </>
-);
-}
+    <>
+      <Head>
+        <title>po8klasie</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
+      <NextMatomoInitalizer />
+      <Component {...pageProps} />
+    </>
+  );
+};
 
 export default App;

@@ -1,4 +1,4 @@
-const { withSentryConfig } = require("@sentry/nextjs");
+const { withSentryConfig } = require('@sentry/nextjs');
 const withOptimizedImages = require('next-optimized-images');
 
 const customNextConfig = {
@@ -29,6 +29,4 @@ const customNextConfig = {
   },
 };
 
-module.exports = withSentryConfig(
-  withOptimizedImages(customNextConfig)
-);
+module.exports = withSentryConfig(withOptimizedImages(customNextConfig));
