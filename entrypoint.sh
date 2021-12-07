@@ -13,8 +13,8 @@ ${GRAPHQL_ENDPOINT}
 ${PUBLIC_SENTRY_DSN}
 ${MATOMO_BASE_URL}
 ${MATOMO_SITE_ID}
-' < /opt/nginx/out/index.html > /opt/nginx/out/index.html.subst
+' < /opt/nginx/out/warszawa/legacy.html > /opt/nginx/out/warszawa/legacy.html.subst
 
-cp -pf /opt/nginx/out/index.html.subst /opt/nginx/out/index.html
+cp -pf /opt/nginx/out/warszawa/legacy.html.subst /opt/nginx/out/warszawa/legacy.html
 
 exec nginx -g 'daemon off;'
