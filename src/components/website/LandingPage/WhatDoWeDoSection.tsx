@@ -48,15 +48,15 @@ const WhatDoWeDoSection: FC = () => (
         <div className="flex items-center">
           <p className="text-lg">
             W wygodny sposób wyszukasz interesujące szkoły według wybranych przez Ciebie kryteriów.
-            Na profilu każdej szkoły znajdziesz wszystkie najważniejsze informacje. Porównasz
-            szkoły ze sobą — prosto i łatwo, bez ręcznego robienia zestawienia.
+            Na profilu każdej szkoły znajdziesz wszystkie najważniejsze informacje. Porównasz szkoły
+            ze sobą — prosto i łatwo, bez ręcznego robienia zestawienia.
           </p>
         </div>
 
         <div className="flex items-center">
           <p className="text-lg">
-            Już nie ma potrzeby przeglądania wielu stron szkół, czy rankingów.
-            Porównasz szkoły nawet względem czasu dotarcia, niebezpiecznych miejsc po drodze, jak i poziomu
+            Już nie ma potrzeby przeglądania wielu stron szkół, czy rankingów. Porównasz szkoły
+            nawet względem czasu dotarcia, niebezpiecznych miejsc po drodze, jak i poziomu
             zanieczyszczenia smogiem!
           </p>
         </div>
