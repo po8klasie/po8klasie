@@ -45,7 +45,7 @@ const Navbar: FC = () => {
           {...getScrollToSectionProps('support-us')}
           className={['font-bold', roundedLinkClassName].join(' ')}
         >
-          Wesprzyj nas
+          Wesprzyj projekt
         </a>
       </div>
     </div>
