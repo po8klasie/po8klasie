@@ -17,10 +17,10 @@ const HeroSection: FC = () => (
         <Brand /> pomaga Ci wybrać szkołę średnią
       </h1>
       <h2 className="text-3xl mt-16">
-        Wierzymy, że wybór szkoły średniej nie powinien ograniczać się do kryterium punktowego.
+        Wierzymy, że wybór szkoły średniej nie powinien ograniczać się do kryterium punktowego
       </h2>
       <h3 className="text-xl mt-16">
-        Łączymy dane z różnych źródeł, aby wesprzeć młodzież i rodziców w wyborze szkoły średniej.
+        Łączymy dane z różnych źródeł, aby wesprzeć młodzież i rodziców w wyborze szkoły średniej
       </h3>
     </div>
   </div>
