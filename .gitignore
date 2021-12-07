@@ -34,3 +34,5 @@ yarn-error.log*
 .vercel
 
 docker-compose.local.yml
+# Sentry
+.sentryclirc
