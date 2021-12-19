@@ -127,7 +127,7 @@ const Navbar: FC<NavbarProps> = ({ wide }) => {
       <ContainerComponent>
         <Nav>
           <MobileBar>
-            <Brand to="/">
+            <Brand to={PATH_PREFIX}>
               <Logo />
               po
               <span>8</span>
