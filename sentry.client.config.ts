@@ -1,10 +1,15 @@
 import * as Sentry from '@sentry/nextjs';
+import { Integrations as TracingIntegrations } from '@sentry/tracing';
 import { environment, isEnvVarEmpty } from './src/environments/environment';
 
-const SENTRY_DSN = environment.PUBLIC_SENTRY_DSN;
+if (!isEnvVarEmpty('PUBLIC_SENTRY_DSN')) {
+  const { APP_ENVIRONMENT, APP_RELEASE, PUBLIC_SENTRY_DSN } = environment;
 
-if (!isEnvVarEmpty('PUBLIC_SENTRY_DSN'))
   Sentry.init({
-    dsn: SENTRY_DSN,
+    dsn: PUBLIC_SENTRY_DSN,
+    release: APP_RELEASE,
+    environment: APP_ENVIRONMENT,
+    integrations: [new TracingIntegrations.BrowserTracing()],
     tracesSampleRate: 1.0,
   });
+}

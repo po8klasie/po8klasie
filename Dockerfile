@@ -46,6 +46,6 @@ COPY entrypoint.sh .
 
 COPY --from=js-build /opt/warsawlo/out ./out
 
-ENTRYPOINT ["/bin/sh", "-c"]
+ENTRYPOINT ["/bin/bash", "-c"]
 
-CMD ["sh /opt/nginx/entrypoint.sh"]
+CMD ["bash /opt/nginx/entrypoint.sh"]
