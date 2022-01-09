@@ -4,7 +4,7 @@ echo "🚨 Running prettier & eslint"
 
 yarn format:check
 
-yarn lint:website:check
+yarn lint:v2:check
 
 echo "✅ Running tests"
 

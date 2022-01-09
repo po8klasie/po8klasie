@@ -1,13 +1,22 @@
+const colors = require('tailwindcss/colors');
+
 module.exports = {
-  purge: ['./src/components/website/**/*.{js,ts,jsx,tsx}'],
+  purge: ['./src/components/**/*.{js,ts,jsx,tsx}'],
   darkMode: false, // or 'media' or 'class'
   theme: {
     colors: {
       primary: '#9D54BF',
+      primaryBg: '#F5E8FC',
       primaryLight: '#FCF8FE',
       dark: '#222122',
+      gray: '#626262',
       light: '#DCDCDC',
       white: '#FFFFFF',
+      // appBg: '#E2E5E6',
+      red: {
+        "500": "red"
+      },
+      lighten: '#E2E5E6'
     },
     extend: {
       width: {
@@ -24,5 +33,7 @@ module.exports = {
       margin: ['first'],
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/forms'),
+  ]
 };

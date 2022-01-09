@@ -3,6 +3,9 @@ import { AppProps } from 'next/app';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import 'normalize.css';
+import '../styling/global.css';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import 'tailwindcss/tailwind.css';
 
 const NextMatomoInitalizer = dynamic(() => import('../components/NextMatomoInitializer'), {
   ssr: false,

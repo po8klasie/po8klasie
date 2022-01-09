@@ -23,7 +23,11 @@ const getScrollToSectionProps = (to: string) => ({
 
 const bgStyles = 'bg-opacity-70 backdrop-filter backdrop-blur-2xl bg-white border-b border-light';
 
-const Navbar: FC = () => {
+interface NavbarProps {
+  navbarWrapperClassName: string;
+}
+
+const Navbar: FC<NavbarProps> = ({ navbarWrapperClassName }) => {
   const [shouldNavbarHaveBackground, setShouldNavbarHaveBackground] = useState(false);
   useEffect(() => {
     const handleScroll = () => setShouldNavbarHaveBackground(window.scrollY > 10);
@@ -33,9 +37,9 @@ const Navbar: FC = () => {
 
   return (
     <div
-      className={`fixed top-0 left-0 w-full py-10 z-10 transition duration-100 ${
+      className={`fixed top-0 left-0 w-full z-10 transition duration-100 ${
         shouldNavbarHaveBackground && bgStyles
-      }`}
+      } ${navbarWrapperClassName ?? ''}`}
     >
       <div className="w-container mx-auto flex justify-between items-center">
         <a {...getScrollToSectionProps('top')}>

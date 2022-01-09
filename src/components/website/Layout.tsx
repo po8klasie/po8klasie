@@ -5,7 +5,7 @@ import styles from './styles/Layout.module.css';
 
 const Layout: FC = ({ children }) => (
   <div className={styles.layoutWrapper}>
-    <Navbar />
+    <Navbar navbarWrapperClassName="py-10" />
     {children}
     <Footer />
   </div>
