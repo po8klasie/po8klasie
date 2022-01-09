@@ -212,8 +212,7 @@ const Calculator: FC<RouteComponentProps> = () => {
                   min={1}
                   max={6}
                   placeholder="Ocena"
-                  ref={register}
-                  name={`grades[${subject.id}]`}
+                  {...register(`grades.${subject.id}`)}
                 />
               </div>
               <span className="points">{(points.grades[subject.id] ?? 0).toFixed(2)}</span>
@@ -236,8 +235,7 @@ const Calculator: FC<RouteComponentProps> = () => {
                   min={0}
                   max={100}
                   placeholder="Wynik"
-                  ref={register}
-                  name={`examResult[${examPart.id}]`}
+                  {...register(`examResult.${examPart.id}`)}
                 />
               </div>
               <span className="points">{(points.examResult[examPart.id] ?? 0).toFixed()}</span>
@@ -247,12 +245,12 @@ const Calculator: FC<RouteComponentProps> = () => {
         <h2>Szczególne osiągnięcia</h2>
         <CheckboxFlex>
           <div>
-            <Checkbox ref={register} name="merit" id="xd" />
+            <Checkbox id="xd" {...register('merit')} />
             <label htmlFor="xd">Świadectwo z wyróżnieniem</label>
             <span>{points.merit}</span>
           </div>
           <div>
-            <Checkbox ref={register} name="activity" id="activity" />
+            <Checkbox id="activity" {...register('activity')} />
             <label htmlFor="activity">Aktywność społeczna</label>
             <span>{points.activity}</span>
           </div>
