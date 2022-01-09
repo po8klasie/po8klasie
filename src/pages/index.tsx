@@ -1,7 +1,5 @@
 import React, { FC } from 'react';
 import Head from 'next/head';
-// eslint-disable-next-line import/no-extraneous-dependencies
-import 'tailwindcss/tailwind.css';
 
 import Layout from '../components/website/Layout';
 import HeroSection from '../components/website/LandingPage/HeroSection';
@@ -19,10 +17,6 @@ const LandingPage: FC = () => {
     <Layout>
       <Head>
         <title>po8klasie - wyszukiwarka szkół średnich</title>
-        <link
-          href="https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap"
-          rel="stylesheet"
-        />
       </Head>
       <HeroSection />
       <WhatDoWeDoSection />
