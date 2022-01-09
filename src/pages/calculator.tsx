@@ -1,5 +1,7 @@
 import React, { FC } from 'react';
 import Head from 'next/head';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import 'tailwindcss/tailwind.css';
 
 import { AiOutlineWarning } from 'react-icons/ai';
 import AppLayout from '../components/app/AppLayout';
