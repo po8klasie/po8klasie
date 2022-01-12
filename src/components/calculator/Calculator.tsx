@@ -25,7 +25,7 @@ export const normalizeInputObject = (obj: Record<string, any>): Record<string, a
     .pickBy(_.isObject)
     .mapValues(normalizeInputObject)
     .assign(_.omitBy(obj, _.isObject))
-    .omitBy((value) => value === 0 || Number.isNaN(value) || value === "")
+    .omitBy((value) => value === 0 || Number.isNaN(value) || value === '')
     .value();
 };
 
@@ -41,7 +41,7 @@ const Calculator: FC = () => {
       setPoints(calc.points);
     });
     return () => subscription.unsubscribe();
-  }, [formMethods.watch]);
+  }, [formMethods]);
 
   return (
     <div className="lg:flex mt-4">
