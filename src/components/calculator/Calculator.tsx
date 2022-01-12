@@ -20,12 +20,12 @@ const calc = new PointsCalculator(CONFIG_2018_2019);
 
 // based on https://stackoverflow.com/a/48584441
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const removeZerosAndNaNsFromObj = (obj: Record<string, any>): Record<string, any> => {
+export const normalizeInputObject = (obj: Record<string, any>): Record<string, any> => {
   return _(obj)
     .pickBy(_.isObject)
-    .mapValues(removeZerosAndNaNsFromObj)
+    .mapValues(normalizeInputObject)
     .assign(_.omitBy(obj, _.isObject))
-    .omitBy((value) => value === 0 || Number.isNaN(value))
+    .omitBy((value) => value === 0 || Number.isNaN(value) || value === "")
     .value();
 };
 
@@ -34,14 +34,14 @@ const Calculator: FC = () => {
   const formMethods = useForm({
     defaultValues: initialInputData,
   });
-  const allFieldsWatcher = formMethods.watch();
-  const valuesStringified = JSON.stringify(allFieldsWatcher);
 
   useEffect(() => {
-    calc.setData(removeZerosAndNaNsFromObj(allFieldsWatcher));
-    setPoints(calc.points);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [valuesStringified]); // useDeepCompareEffect doesn't work properly
+    const subscription = formMethods.watch((values) => {
+      calc.setData(normalizeInputObject(values));
+      setPoints(calc.points);
+    });
+    return () => subscription.unsubscribe();
+  }, [formMethods.watch]);
 
   return (
     <div className="lg:flex mt-4">
