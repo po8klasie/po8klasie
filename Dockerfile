@@ -22,6 +22,8 @@ COPY sentry.client.config.ts sentry.server.config.ts ./
 RUN yarn prepare-bundle
 
 COPY .prettierrc.js .prettierignore ./
+COPY .eslintrc.js .eslintignore ./
+COPY jest.config.js ./
 
 COPY entrypoint.ci.sh .
 

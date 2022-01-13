@@ -24,6 +24,10 @@ class Document extends NextDocument {
           <link rel="manifest" href={`${process.env.PUBLIC_URL}/manifest.json`} />
           {/* eslint-disable-next-line react/no-danger */}
           <script dangerouslySetInnerHTML={{ __html: configScript }} />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap"
+            rel="stylesheet"
+          />
         </Head>
         <body>
           <Main />

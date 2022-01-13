@@ -19,10 +19,6 @@ const LandingPage: FC = () => {
     <Layout>
       <Head>
         <title>po8klasie - wyszukiwarka szkół średnich</title>
-        <link
-          href="https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap"
-          rel="stylesheet"
-        />
       </Head>
       <HeroSection />
       <WhatDoWeDoSection />
