@@ -16,7 +16,7 @@ export const GradeInput: FC<CalculatorInputProps> = ({ inputId, ...props }) => {
     e.preventDefault();
     if (['Backspace', 'Delete'].includes(e.key)) {
       setInternalValue('');
-      setValue(0);
+      setValue(null);
       return;
     }
     if (e.key.length > 1) return;
@@ -26,16 +26,17 @@ export const GradeInput: FC<CalculatorInputProps> = ({ inputId, ...props }) => {
     const parsedKey = parseInt(e.key, 10);
     if (isGradeValid(parsedKey)) setValue(parsedKey);
     else {
-      setValue(0);
+      setValue(null);
       setError(inputId, { message: 'Invalid value' });
     }
   };
 
-  const inputProps = {
+  const inputProps: Partial<HTMLProps<HTMLInputElement>> = {
     ...props,
     ...r,
     placeholder: '5',
     'aria-label': 'Ocena',
+    inputMode: 'numeric',
     value: internalValue,
     onKeyDown: handleKeyDown,
   };
@@ -59,7 +60,7 @@ export const ExamResultInput: FC<CalculatorInputProps> = ({ inputId, ...props })
     if (isExamResultValid(score)) {
       setValue(score);
     } else {
-      setValue(0);
+      setValue(null);
       setError(inputId, { message: 'Invalid value' });
     }
   };
@@ -69,6 +70,7 @@ export const ExamResultInput: FC<CalculatorInputProps> = ({ inputId, ...props })
       {...props}
       onChange={handleChange}
       value={internalValue}
+      inputMode="numeric"
       maxLength={3}
       placeholder="%"
       data-testid="input"
