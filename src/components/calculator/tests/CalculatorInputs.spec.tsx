@@ -44,18 +44,18 @@ describe('components/calculator/CalculatorInputs', () => {
       expect(input).toHaveValue('');
     });
 
-    it(`calls setValue with arg 0 on Backspace`, () => {
+    it(`calls setValue with arg null on Backspace`, () => {
       const wrapper = render(<GradeInput inputId="foo" />);
       const input = wrapper.getByTestId('input');
       fireEvent.keyDown(input, { key: 'Backspace' });
-      expect(useFormContextMockedReturn.setValue).toHaveBeenCalledWith('foo', 0);
+      expect(useFormContextMockedReturn.setValue).toHaveBeenCalledWith('foo', null);
     });
 
-    it(`calls setValue with arg 0 on Delete`, () => {
+    it(`calls setValue with arg null on Delete`, () => {
       const wrapper = render(<GradeInput inputId="foo" />);
       const input = wrapper.getByTestId('input');
       fireEvent.keyDown(input, { key: 'Delete' });
-      expect(useFormContextMockedReturn.setValue).toHaveBeenCalledWith('foo', 0);
+      expect(useFormContextMockedReturn.setValue).toHaveBeenCalledWith('foo', null);
     });
 
     it(`preserves value when key different than 1..6, Delete, Backspace was pressed`, () => {
@@ -73,11 +73,11 @@ describe('components/calculator/CalculatorInputs', () => {
       expect(useFormContextMockedReturn.setValue).not.toHaveBeenCalled();
     });
 
-    it(`calls setValue with arg 0 when invalid value was entered`, () => {
+    it(`calls setValue with arg null when invalid value was entered`, () => {
       const wrapper = render(<GradeInput inputId="bar" />);
       const input = wrapper.getByTestId('input');
       fireEvent.keyDown(input, { key: 'g' });
-      expect(useFormContextMockedReturn.setValue).toHaveBeenCalledWith('bar', 0);
+      expect(useFormContextMockedReturn.setValue).toHaveBeenCalledWith('bar', null);
     });
 
     it(`calls setError when invalid value was entered`, () => {
@@ -129,11 +129,11 @@ describe('components/calculator/CalculatorInputs', () => {
       fireEvent.change(input, { target: { value: '87' } });
       expect(useFormContextMockedReturn.setValue).toHaveBeenCalledWith('fizz', 0.87);
     });
-    it(`calls setValue with arg 0 when value is invalid`, () => {
+    it(`calls setValue with arg null when value is invalid`, () => {
       const wrapper = render(<ExamResultInput inputId="fizz" />);
       const input = wrapper.getByTestId('input');
       fireEvent.change(input, { target: { value: '103' } });
-      expect(useFormContextMockedReturn.setValue).toHaveBeenCalledWith('fizz', 0);
+      expect(useFormContextMockedReturn.setValue).toHaveBeenCalledWith('fizz', null);
     });
 
     it(`calls setError when invalid value was entered`, () => {
