@@ -32,7 +32,7 @@ const CalculatorPage: FC = () => {
           className="bg-primaryBg border-l-4 border-primary text-primary p-4 lg:w-1/2 xl:w-1/3 rounded "
           role="alert"
         >
-          <p className="font-bold mb-2 flex items-center">
+          <p className="font-bold mb-2 flex items-center font-primary">
             <AiOutlineWarning className="mr-2 text-xl" />
             Przypomnienie
           </p>

@@ -60,7 +60,7 @@ const Calculator: FC = () => {
           />
         </FormProvider>
       </div>
-      <div className="mt-5 lg:ml-5">
+      <div className="mt-5 lg:mt-0 lg:ml-5">
         <CalculatorTotal total={points.total} />
       </div>
     </div>

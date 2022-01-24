@@ -37,6 +37,7 @@ module.exports = {
         controlComponents: ['Input', 'Checkbox'],
       },
     ],
+    'jsx-a11y/anchor-is-valid': 'off', // see https://nextjs.org/docs/api-reference/next/link
   },
   overrides: [
     {

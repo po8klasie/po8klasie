@@ -5,6 +5,9 @@ import { IconType } from 'react-icons';
 export const roundedLinkClassName =
   'flex items-center px-5 py-3 border-4 border-primary rounded-3xl text-primary hover:bg-primary hover:text-white transition';
 
+export const roundedSmallLinkClassName =
+  'items-center px-4 py-2 border-2 border-primary rounded-3xl text-primary hover:bg-primary hover:text-white transition';
+
 const RoundedExternalLink = forwardRef<
   HTMLAnchorElement,
   { icon: IconType } & HTMLProps<HTMLAnchorElement>
