@@ -1,4 +1,4 @@
-import { type } from "os";
+import { type } from 'os';
 
 export interface LocalEnvironment {
   REACT_APP_GRAPHQL_ENDPOINT: string;
@@ -40,9 +40,12 @@ const getExampleEnvironment = (): Environment => ({
 
 export const isProduction = process.env.NODE_ENV === 'production';
 
-export const environment: Environment = typeof window === 'undefined' ? getExampleEnvironment() : (
-  isProduction ? getProdEnvironment() : getDevEnvironment()
-);
+export const environment: Environment =
+  typeof window === 'undefined'
+    ? getExampleEnvironment()
+    : isProduction
+    ? getProdEnvironment()
+    : getDevEnvironment();
 
 export const isEnvVarEmpty = (name: keyof Environment): boolean =>
   !environment[name] || environment[name] === `\${${name}}`;
