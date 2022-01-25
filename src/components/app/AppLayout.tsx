@@ -1,12 +1,12 @@
 import { FC } from 'react';
-import Navbar from '../website/Navbar';
-import Footer from '../website/Footer';
+import AppNavbar from './AppNavbar';
+import AppFooter from './AppFooter';
 
 const AppLayout: FC = ({ children }) => (
   <div className="bg-appBg">
-    <Navbar navbarWrapperClassName="py-4" />
-    <main className="pt-32">{children}</main>
-    <Footer />
+    <AppNavbar />
+    <main className="pt-20 lg:pt-32">{children}</main>
+    <AppFooter />
   </div>
 );
 

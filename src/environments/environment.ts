@@ -1,3 +1,5 @@
+import { type } from 'os';
+
 export interface LocalEnvironment {
   REACT_APP_GRAPHQL_ENDPOINT: string;
   REACT_APP_APP_ENVIRONMENT: string;
@@ -16,20 +18,34 @@ export interface Environment {
   MATOMO_SITE_ID: string;
 }
 
-const prodEnvironment: Environment = window.config;
+const getProdEnvironment = (): Environment => window.config;
 
-const devEnvironment: Environment = {
+const getDevEnvironment = (): Environment => ({
+  APP_FRONTEND_RELEASE: 'v0.0.0',
+  APP_ENVIRONMENT: 'local',
   GRAPHQL_ENDPOINT: process.env.REACT_APP_GRAPHQL_ENDPOINT,
-  APP_FRONTEND_RELEASE: process.env.REACT_APP_APP_FRONTEND_RELEASE,
-  APP_ENVIRONMENT: process.env.REACT_APP_APP_ENVIRONMENT,
   PUBLIC_SENTRY_DSN: process.env.REACT_APP_PUBLIC_SENTRY_DSN,
   MATOMO_BASE_URL: process.env.REACT_APP_MATOMO_BASE_URL,
   MATOMO_SITE_ID: process.env.REACT_APP_MATOMO_SITE_ID,
-};
+});
+
+const getExampleEnvironment = (): Environment => ({
+  APP_FRONTEND_RELEASE: 'v0.0.0',
+  APP_ENVIRONMENT: 'local',
+  GRAPHQL_ENDPOINT: '',
+  PUBLIC_SENTRY_DSN: '',
+  MATOMO_BASE_URL: '',
+  MATOMO_SITE_ID: '',
+});
 
 export const isProduction = process.env.NODE_ENV === 'production';
 
-export const environment: Environment = isProduction ? prodEnvironment : devEnvironment;
+export const environment: Environment =
+  typeof window === 'undefined'
+    ? getExampleEnvironment()
+    : isProduction
+    ? getProdEnvironment()
+    : getDevEnvironment();
 
 export const isEnvVarEmpty = (name: keyof Environment): boolean =>
   !environment[name] || environment[name] === `\${${name}}`;

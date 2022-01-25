@@ -27,19 +27,26 @@ const Calculator: FC = () => {
 
   useEffect(() => {
     const subscription = formMethods.watch((values, { name }) => {
-      const data = { ...calc.data };
-      let val = _.get(values, name as string);
+      let data = values;
+      if (name) {
+        data = JSON.parse(JSON.stringify(calc.data)); // deep clone. Object.assign won't work
+        let val = _.get({ ...values }, name as string);
 
-      if (['string', 'number'].includes(typeof val)) {
-        const parsed = parseFloat(val);
-        val = !Number.isNaN(parsed) ? parsed : null;
+        if (['string', 'number'].includes(typeof val)) {
+          const parsed = parseFloat(val);
+          val = !Number.isNaN(parsed) ? parsed : null;
+        }
+        _.set(data, name as string, val);
       }
-      _.set(data, name as string, val);
       calc.setData(data as InputData);
       setPoints(calc.points);
     });
     return () => subscription.unsubscribe();
   }, [formMethods, calc]);
+
+  const handleReset = () => {
+    formMethods.reset(initialInputData);
+  };
 
   return (
     <div className="lg:flex mt-4">
@@ -58,8 +65,8 @@ const Calculator: FC = () => {
           />
         </FormProvider>
       </div>
-      <div className="mt-5 lg:ml-5">
-        <CalculatorTotal total={points.total} />
+      <div className="mt-5 lg:mt-0 lg:ml-5">
+        <CalculatorTotal total={points.total} onReset={handleReset} />
       </div>
     </div>
   );

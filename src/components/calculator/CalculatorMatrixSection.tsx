@@ -28,7 +28,7 @@ const CalculatorMatrixSection: FC<CalculatorMatrixSectionProps> = ({
   return (
     <div className="p-5 border-b border-lighten">
       <h3 className="text-2xl font-bold mb-3">{sectionName}</h3>
-      <div className="grid grid-cols-5 gap-x-2 mb-3" data-testid="header">
+      <div className="grid grid-cols-5 gap-x-4 mb-3" data-testid="header">
         <span className="col-span-3">{columns[0]}</span>
         <span className="text-center">{columns[1]}</span>
         <span className="text-center">{columns[2]}</span>

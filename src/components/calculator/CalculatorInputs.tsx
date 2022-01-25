@@ -70,7 +70,7 @@ export const ExamResultInput: FC<CalculatorInputProps> = ({ inputId, ...props })
       {...props}
       onChange={handleChange}
       value={internalValue}
-      inputMode="numeric"
+      inputMode="decimal"
       maxLength={3}
       placeholder="%"
       data-testid="input"

@@ -1,4 +1,6 @@
-const colors = require('tailwindcss/colors');
+// https://css-tricks.com/snippets/css/system-font-stack/
+const systemFontStack =
+  '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"';
 
 module.exports = {
   purge: ['./src/components/**/*.{js,ts,jsx,tsx}', './src/pages/**/*.{js,ts,jsx,tsx}'],
@@ -12,15 +14,20 @@ module.exports = {
       gray: '#626262',
       light: '#DCDCDC',
       white: '#FFFFFF',
-      // appBg: '#E2E5E6',
+      appBg: '#FBFBFB',
       red: {
         '500': 'red',
       },
       lighten: '#E2E5E6',
     },
+    fontFamily: {
+      primary: `Jost, ${systemFontStack}`,
+      secondary: `Source Sans Pro, ${systemFontStack}`,
+    },
     extend: {
       width: {
         container: '80vw',
+        wideContainer: 'calc(100% - 4rem)',
         narrowContainer: '60vw',
       },
       zIndex: {
@@ -30,7 +37,7 @@ module.exports = {
   },
   variants: {
     extend: {
-      margin: ['first'],
+      margin: ['first', 'last'],
     },
   },
   plugins: [require('@tailwindcss/forms')],
