@@ -28,6 +28,8 @@ COPY jest.config.js ./
 
 COPY entrypoint.tests.sh ./
 
+ENTRYPOINT ["/bin/sh", "-c"]
+
 # Final image stage
 
 FROM node:16-alpine AS runner
