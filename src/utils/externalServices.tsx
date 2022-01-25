@@ -4,14 +4,14 @@ import React, { FC } from 'react';
 import { MatomoInstance } from '@datapunt/matomo-tracker-react/lib/types';
 import { ApolloClient, from, HttpLink, InMemoryCache } from '@apollo/client';
 import { onError } from '@apollo/client/link/error';
-import { environment, isEnvVarEmpty, isProduction } from '../environments/environment';
+import { environment, isProduction } from '../environments/environment';
 
 const { PUBLIC_SENTRY_DSN, MATOMO_BASE_URL, MATOMO_SITE_ID, GRAPHQL_ENDPOINT } = environment;
 
 // Sentry
 
 export const setupSentry = (): void => {
-  if (isProduction && !isEnvVarEmpty('PUBLIC_SENTRY_DSN'))
+  if (isProduction && PUBLIC_SENTRY_DSN)
     Sentry.init({
       dsn: PUBLIC_SENTRY_DSN,
     });
@@ -29,7 +29,7 @@ export const createMatomoInstance = (): MatomoInstance =>
   });
 
 export const AnalyticsProvider: FC = ({ children }) => {
-  if (isEnvVarEmpty('MATOMO_BASE_URL') || isEnvVarEmpty('MATOMO_SITE_ID')) return <>{children}</>;
+  if (!MATOMO_BASE_URL || !MATOMO_SITE_ID) return <>{children}</>;
 
   const instance = createMatomoInstance();
 
