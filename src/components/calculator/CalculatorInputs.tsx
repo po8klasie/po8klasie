@@ -1,5 +1,5 @@
 import { useFormContext } from 'react-hook-form';
-import { ChangeEvent, FC, HTMLProps, KeyboardEvent, useState } from 'react';
+import { ChangeEvent, FC, HTMLProps, KeyboardEvent } from 'react';
 import { isExamResultValid, isGradeValid } from '@warsawlo/points-calculator/lib/utils/validators';
 
 export interface CalculatorInputProps extends HTMLProps<HTMLInputElement> {
@@ -7,24 +7,22 @@ export interface CalculatorInputProps extends HTMLProps<HTMLInputElement> {
 }
 
 export const GradeInput: FC<CalculatorInputProps> = ({ inputId, ...props }) => {
-  const { register, setValue: setValueOriginal, setError } = useFormContext();
-  const r = register(inputId);
-  const setValue = (value: unknown) => setValueOriginal(inputId, value);
-  const [internalValue, setInternalValue] = useState('');
+  const { watch, setValue: setValueOriginal, setError } = useFormContext();
+  const value = watch(inputId);
+  const setValue = (updatedValue: number | null) => setValueOriginal(inputId, updatedValue);
 
   const handleKeyDown = (e: KeyboardEvent) => {
-    e.preventDefault();
     if (['Backspace', 'Delete'].includes(e.key)) {
-      setInternalValue('');
+      e.preventDefault();
       setValue(null);
-      return;
     }
-    if (e.key.length > 1) return;
+  };
 
-    setInternalValue(e.key);
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const updatedValue = e.target.value.at(-1);
 
-    const parsedKey = parseInt(e.key, 10);
-    if (isGradeValid(parsedKey)) setValue(parsedKey);
+    const parsedValue = parseInt(updatedValue, 10);
+    if (isGradeValid(parsedValue)) setValue(parsedValue);
     else {
       setValue(null);
       setError(inputId, { message: 'Invalid value' });
@@ -33,30 +31,25 @@ export const GradeInput: FC<CalculatorInputProps> = ({ inputId, ...props }) => {
 
   const inputProps: Partial<HTMLProps<HTMLInputElement>> = {
     ...props,
-    ...r,
     placeholder: '5',
     'aria-label': 'Ocena',
     inputMode: 'numeric',
-    value: internalValue,
+    value: value ?? '',
     onKeyDown: handleKeyDown,
+    onChange: handleChange,
+    autoComplete: 'off',
   };
 
   return <input {...inputProps} data-testid="input" />;
 };
 
 export const ExamResultInput: FC<CalculatorInputProps> = ({ inputId, ...props }) => {
-  const { setValue: setValueOriginal, setError } = useFormContext();
-  const setValue = (value: unknown) => setValueOriginal(inputId, value);
-  const [internalValue, setInternalValue] = useState('');
+  const { watch, setValue: setValueOriginal, setError } = useFormContext();
+  const value = watch(inputId);
+  const setValue = (updatedValue: number | null) => setValueOriginal(inputId, updatedValue);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-
-    if (value.length <= 3) {
-      setInternalValue(value);
-    }
-
-    const score = parseInt(value, 10) / 100;
+    const score = parseInt(e.target.value, 10) / 100;
     if (isExamResultValid(score)) {
       setValue(score);
     } else {
@@ -69,7 +62,7 @@ export const ExamResultInput: FC<CalculatorInputProps> = ({ inputId, ...props })
     <input
       {...props}
       onChange={handleChange}
-      value={internalValue}
+      value={value ? value * 100 : ''}
       inputMode="decimal"
       maxLength={3}
       placeholder="%"
