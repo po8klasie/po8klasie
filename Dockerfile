@@ -1,6 +1,6 @@
 # JS building stage
 
-FROM node:14.17.5-alpine AS js-build
+FROM node:16.13.2-alpine AS js-build
 
 ENV SOURCE /opt/warsawlo
 RUN mkdir -p $SOURCE
