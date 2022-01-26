@@ -19,7 +19,8 @@ export const GradeInput: FC<CalculatorInputProps> = ({ inputId, ...props }) => {
   };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const updatedValue = e.target.value.at(-1);
+    const len = e.target.value.length;
+    const updatedValue = len > 0 ? e.target.value[len - 1] : '';
 
     const parsedValue = parseInt(updatedValue, 10);
     if (isGradeValid(parsedValue)) setValue(parsedValue);
