@@ -18,6 +18,8 @@ const customNextConfig = {
     '/warszawa/legacy': { page: '/warszawa/legacy/[[...slug]]' },
   }),
 
+  outputStandalone: true,
+
   // next-optimized-images options
   responsive: {
     adapter: require('responsive-loader/sharp'),

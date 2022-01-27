@@ -1,12 +1,13 @@
-# JS building stage
+# Building stage
 
-FROM node:16.13.2-alpine AS js-build
+FROM node:16.13.2-alpine AS builder
 
-ENV SOURCE /opt/warsawlo
-RUN mkdir -p $SOURCE
-WORKDIR $SOURCE
+# Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
+RUN apk add --no-cache libc6-compat libtool automake autoconf nasm g++ make libpng-dev
 
-RUN apk add libtool automake autoconf nasm g++ make libpng-dev
+RUN mkdir -p /opt/po8klasie
+
+WORKDIR /opt/po8klasie
 
 COPY package.json yarn.lock ./
 
@@ -19,35 +20,44 @@ COPY public ./public
 COPY src ./src
 COPY sentry.client.config.ts sentry.server.config.ts ./
 
-RUN yarn prepare-bundle
+RUN yarn build
 
 COPY .prettierrc.js .prettierignore ./
 COPY .eslintrc.js .eslintignore ./
 COPY jest.config.js ./
 
-COPY entrypoint.ci.sh .
+COPY entrypoint.tests.sh ./
 
 ENTRYPOINT ["/bin/sh", "-c"]
 
 # Final image stage
 
-FROM nginx:1.20.1
+FROM node:16.13.2-alpine AS runner
 
 LABEL maintainer="mlazowik@gmail.com"
 
-RUN rm /etc/nginx/conf.d/default.conf
+RUN mkdir -p /opt/po8klasie
 
-COPY nginx.conf /etc/nginx/
-COPY nginx-app.conf /etc/nginx/conf.d/app.conf.template
+WORKDIR /opt/po8klasie
 
-ENV NGINX_ROOT /opt/nginx
-RUN mkdir -p $NGINX_ROOT
-WORKDIR $NGINX_ROOT
+ENV NODE_ENV production
 
-COPY entrypoint.sh .
+RUN addgroup -g 1001 -S nodejs
+RUN adduser -S nextjs -u 1001
 
-COPY --from=js-build /opt/warsawlo/out ./out
+COPY --from=builder /opt/po8klasie/next.config.js ./
+COPY --from=builder /opt/po8klasie/public ./public
+COPY --from=builder /opt/po8klasie/.next ./.next
+COPY --from=builder /opt/po8klasie/node_modules ./node_modules
+COPY --from=builder /opt/po8klasie/package.json ./package.json
 
-ENTRYPOINT ["/bin/bash", "-c"]
+USER nextjs
 
-CMD ["bash /opt/nginx/entrypoint.sh"]
+EXPOSE 3000
+
+ENV PORT 3000
+
+# https://nextjs.org/telemetry
+ENV NEXT_TELEMETRY_DISABLED 1
+
+CMD ["yarn", "next", "start"]

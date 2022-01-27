@@ -59,7 +59,7 @@ jobs:
         labels: ${{ steps.meta.outputs.labels }}
         push: false
         load: true
-        target: js-build
+        target: builder
         cache-from: type=registry,ref=ghcr.io/po8klasie/po8klasie:cache-master
 
     - name: Get SHA tag
