@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import Head from 'next/head';
+import { NextSeo } from 'next-seo';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import 'tailwindcss/tailwind.css';
 
@@ -10,13 +10,10 @@ import Calculator from '../components/calculator/Calculator';
 const CalculatorPage: FC = () => {
   return (
     <AppLayout>
-      <Head>
-        <title>Kalkulator punktów - po8klasie</title>
-        <meta
-          name="description"
-          content="Oblicz swoje punkty rekrutacyjne z kalkulatorem punktów wyszukiwarki szkół średnich po8klasie"
-        />
-      </Head>
+      <NextSeo
+        title="Kalkulator punktów"
+        description="Oblicz swoje punkty rekrutacyjne z kalkulatorem punktów wyszukiwarki szkół średnich po8klasie"
+      />
       <div className="w-container mx-auto">
         <h1 className="flex items-center text-3xl font-bold">
           Kalkulator punktów

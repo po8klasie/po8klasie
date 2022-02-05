@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import Head from 'next/head';
+import { NextSeo } from 'next-seo';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import 'tailwindcss/tailwind.css';
 
@@ -17,9 +17,7 @@ import SupportUsSection from '../components/website/LandingPage/SupportUsSection
 const LandingPage: FC = () => {
   return (
     <Layout>
-      <Head>
-        <title>po8klasie - wyszukiwarka szkół średnich</title>
-      </Head>
+      <NextSeo titleTemplate="po8klasie - wyszukiwarka szkół średnich" />
       <HeroSection />
       <WhatDoWeDoSection />
       <CivicTechSection />
