@@ -58,6 +58,8 @@ jobs:
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
 
+    # Since secrets are not passed to workflows triggered from forks
+    # (we can't push images to registry cache) we use local cache
     - name: Mount Docker cache
       uses: actions/cache@v2
       with:
