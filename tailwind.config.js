@@ -11,6 +11,7 @@ module.exports = {
       primaryBg: '#F5E8FC',
       primaryLight: '#FCF8FE',
       dark: '#222122',
+      lightGray: '#9B9B9B',
       gray: '#626262',
       light: '#DCDCDC',
       white: '#FFFFFF',
@@ -32,7 +33,11 @@ module.exports = {
       },
       zIndex: {
         '-1': '-1',
+        99999: 99999,
       },
+      spacing: {
+        navbarHeight: 'var(--navbar-height)'
+      }
     },
   },
   variants: {

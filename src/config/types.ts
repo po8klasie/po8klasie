@@ -1,3 +1,5 @@
+import { SchoolInfoSectionId } from '../components/app/SchoolPage/schoolInfoSections/schoolInfoSections';
+
 export type FilterDefinition = {
   key: string;
   component: string; // TODO: More strict types
@@ -12,8 +14,13 @@ export interface AppearanceConfig {
   appName: string;
 }
 
+export interface SchoolInfoConfig {
+  enabledSchoolInfoSectionIds: SchoolInfoSectionId[];
+}
+
 export interface ProjectConfig {
   projectID: string;
   filters: FiltersConfig;
   appearance: AppearanceConfig;
+  schoolInfo: SchoolInfoConfig;
 }

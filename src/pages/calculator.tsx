@@ -18,7 +18,7 @@ const CalculatorPage: FC = () => {
         />
       </Head>
       <div className="w-container mx-auto">
-        <h1 className="flex items-center text-3xl font-bold">
+        <h1 className="flex items-center text-3xl font-bold mt-5 lg:mt-10">
           Kalkulator punktów
           <span className="flex rounded-full bg-primaryBg text-primary uppercase px-2 py-1 text-xs font-bold ml-3">
             New

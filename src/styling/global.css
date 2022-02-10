@@ -1,12 +1,19 @@
-body {
+:root {
     --primary-font: 'Jost', sans-serif;
     --primary: #9D54BF;
 
-    background: #FBFBFB;
+    --navbar-height: 3.5rem;
+}
+
+@screen lg {
+    :root {
+        --navbar-height: 4.5rem;
+    }
 }
 
 @layer base {
     body {
+        @apply bg-appBg;
         @apply font-secondary !important;
     }
     h1, h2, h3, h4, h5, h6 {
