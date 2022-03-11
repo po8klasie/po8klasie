@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { LatLngExpression } from 'leaflet';
-import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
+import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
 import { getSchoolMarker } from '../../../utils/mapMarkers';
 import styled from '../../../styling/styled';
 import { doesSchoolHaveCoords, getSchoolCoords } from '../../../utils/map';
@@ -35,7 +35,7 @@ const SchoolLocationMap: FC<SchoolLocationMapProps> = ({ schoolName, schoolType,
 
   return (
     <MapWrapper>
-      <Map center={coords} zoom={ZOOM}>
+      <MapContainer center={coords} zoom={ZOOM}>
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -44,7 +44,7 @@ const SchoolLocationMap: FC<SchoolLocationMapProps> = ({ schoolName, schoolType,
         <Marker position={coords} icon={getSchoolMarker(schoolType)}>
           <Popup>{schoolName}</Popup>
         </Marker>
-      </Map>
+      </MapContainer>
     </MapWrapper>
   );
 };

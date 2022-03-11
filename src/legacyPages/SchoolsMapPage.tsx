@@ -1,6 +1,6 @@
 import React, { useMemo, useState, FC, useCallback } from 'react';
 import { Link, RouteComponentProps } from '@reach/router';
-import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
+import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
 import useDeepCompareEffect from 'use-deep-compare-effect';
 import { BsGrid, BsX } from 'react-icons/bs';
 import ClipLoader from 'react-spinners/ClipLoader';
@@ -183,7 +183,7 @@ const SchoolsMapPage: FC<RouteComponentProps> = () => {
         />
       </SidebarWrapper>
       <MapWrapper>
-        <Map center={DEFAULT_CENTER} zoom={DEFAULT_ZOOM} bounds={bounds} fullscreenControl>
+        <MapContainer center={DEFAULT_CENTER} zoom={DEFAULT_ZOOM} bounds={bounds} fullscreenControl>
           <TileLayer
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -214,7 +214,7 @@ const SchoolsMapPage: FC<RouteComponentProps> = () => {
                 </Marker>
               );
             })}
-        </Map>
+        </MapContainer>
         <Overlay active={isOverlayActive}>
           {!error && schoolsNotFound && <NotFoundInfo />}
           {error && <ErrorInfo />}
