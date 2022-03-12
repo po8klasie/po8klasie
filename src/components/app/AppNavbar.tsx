@@ -10,7 +10,11 @@ const links: [string, string][] = [
   ['Kalkulator punktów', '/calculator'],
 ];
 
-const AppNavbar: FC = () => {
+interface AppNavbarProps {
+  projectName?: string;
+}
+
+const AppNavbar: FC<AppNavbarProps> = ({ projectName }) => {
   const router = useRouter();
   const [isMenuCollapsed, setIsMenuCollapsed] = useState(false);
   const toggleMenu = () => setIsMenuCollapsed(!isMenuCollapsed);
@@ -20,12 +24,12 @@ const AppNavbar: FC = () => {
   };
 
   return (
-    <div className="fixed top-0 left-0 w-full z-10 bg-white border-b border-lighten font-primary">
+    <div className="fixed top-0 left-0 w-full z-99999 bg-white border-b border-lighten font-primary h-navbarHeight flex items-center">
       <div className="w-container mx-auto lg:flex justify-between items-center py-3">
         <div className="flex items-center justify-between">
           <Link href="/">
             <a>
-              <Brand className="font-bold text-xl" />
+              <Brand projectName={projectName} className="font-bold text-xl" />
             </a>
           </Link>
           <button className="text-xl lg:hidden" onClick={toggleMenu} type="button">

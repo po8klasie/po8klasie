@@ -15,7 +15,7 @@ const CalculatorPage: FC = () => {
         description="Oblicz swoje punkty rekrutacyjne z kalkulatorem punktów wyszukiwarki szkół średnich po8klasie"
       />
       <div className="w-container mx-auto">
-        <h1 className="flex items-center text-3xl font-bold">
+        <h1 className="flex items-center text-3xl font-bold mt-5 lg:mt-10">
           Kalkulator punktów
           <span className="flex rounded-full bg-primaryBg text-primary uppercase px-2 py-1 text-xs font-bold ml-3">
             New
