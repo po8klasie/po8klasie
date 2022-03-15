@@ -8,6 +8,10 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+env:
+  PKG_DEV_BASE_URL: europe-central2-docker.pkg.dev
+  DOCKER_IMAGE: europe-central2-docker.pkg.dev/warsawlo/po8klasie
+
 jobs:
   analyze: # See https://codeql.github.com/
     runs-on: ubuntu-latest
@@ -49,8 +53,7 @@ jobs:
       id: meta
       uses: crazy-max/ghaction-docker-meta@v2
       with:
-        images: |
-          ghcr.io/po8klasie/po8klasie
+        images: ${{ env.DOCKER_IMAGE }}
         tags: |
           type=sha
           type=ref,event=pr
@@ -77,7 +80,7 @@ jobs:
         load: true
         target: builder
         cache-from: |
-          type=registry,ref=ghcr.io/po8klasie/po8klasie:cache-master
+          type=registry,ref=${{ env.DOCKER_IMAGE }}:cache-master
           type=local,src=/tmp/.test-building-buildx-cache
 
     - name: Get SHA tag

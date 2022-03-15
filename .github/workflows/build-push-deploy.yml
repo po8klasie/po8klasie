@@ -6,9 +6,9 @@ on:
     - master
 
 env:
-  PROJECT_ID: ${{ secrets.GCE_PROJECT }}
-  GCE_INSTANCE: instance-1
-  GCE_INSTANCE_ZONE: europe-west4-a
+  PKG_DEV_BASE_URL: europe-central2-docker.pkg.dev
+  DOCKER_IMAGE: europe-central2-docker.pkg.dev/warsawlo/po8klasie
+  CLOUD_RUN_SERVICE: po8klasie-frontend-test
 
 jobs:
   build-push-deploy:
@@ -34,8 +34,7 @@ jobs:
       id: meta
       uses: crazy-max/ghaction-docker-meta@v2
       with:
-        images: |
-          ghcr.io/po8klasie/po8klasie
+        images: ${{ env.DOCKER_IMAGE }}
         tags: |
           type=ref,event=branch
           type=sha
@@ -45,12 +44,20 @@ jobs:
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
 
-    - name: Login to GitHub Container Registry
+    - id: auth
+      name: Authenticate to Google Cloud
+      uses: google-github-actions/auth@v0
+      with:
+        token_format: access_token
+        workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
+        service_account: ${{ secrets.GCP_DEPLOYMENT_SERVICE_ACCOUNT }}
+
+    - name: Login to Google Artifacts Registry
       uses: docker/login-action@v1
       with:
-        registry: ghcr.io
-        username: ${{ secrets.GHCR_USERNAME }}
-        password: ${{ secrets.GHCR_TOKEN }}
+        registry: ${{ env.PKG_DEV_BASE_URL }}
+        username: oauth2accesstoken
+        password: ${{ steps.auth.outputs.access_token }}
 
     - name: Build and push
       uses: docker/build-push-action@v2
@@ -58,27 +65,14 @@ jobs:
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
         push: true
-        cache-from: type=registry,ref=ghcr.io/po8klasie/po8klasie:cache-master
-        cache-to: type=registry,mode=max,ref=ghcr.io/po8klasie/po8klasie:cache-master
-
-    - uses: google-github-actions/setup-gcloud@master
-      with:
-        version: '290.0.1'
-        service_account_key: ${{ secrets.GCE_SA_KEY }}
-        project_id: ${{ secrets.GCE_PROJECT }}
-
-    - name: Clean ssh keys
-      run: |-
-        # https://github.com/kyma-project/test-infra/issues/93#issuecomment-457263589
-        for i in $(gcloud compute os-login ssh-keys list --format="table[no-heading](value.fingerprint)"); do
-            echo "Removing ssh key" $i;
-            gcloud compute os-login ssh-keys remove --key $i || true;
-        done
+        cache-from: type=registry,ref=${{ env.DOCKER_IMAGE }}:cache-master
+        cache-to: type=registry,mode=max,ref=${{ env.DOCKER_IMAGE }}:cache-master
 
     - name: Deploy
-      run: |-
-        gcloud compute ssh --zone ${GCE_INSTANCE_ZONE} ${GCE_INSTANCE} -- \
-          -tt -C "cd /home/mlazowik/infra/app && bash update-frontend.sh && yes | docker system prune"
+      uses: google-github-actions/deploy-cloudrun@v0
+      with:
+        service: ${{ env.CLOUD_RUN_SERVICE }}
+        image: ${{ env.DOCKER_IMAGE }}
 
     - name: Purge cache
       uses: jakejarvis/cloudflare-purge-action@v0.3.0
