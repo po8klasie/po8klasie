@@ -18,6 +18,13 @@ const customNextConfig = {
     '/warszawa/legacy': { page: '/warszawa/legacy/[[...slug]]' },
   }),
 
+  rewrites: () => [
+    {
+      source: '/api/:slug*',
+      destination: `${process.env.API_URL}/:slug*`,
+    },
+  ],
+
   outputStandalone: true,
 
   // next-optimized-images options
