@@ -18,12 +18,17 @@ const customNextConfig = {
     '/warszawa/legacy': { page: '/warszawa/legacy/[[...slug]]' },
   }),
 
-  rewrites: () => [
-    {
-      source: '/api/:slug*',
-      destination: `${process.env.API_URL}/:slug*`,
-    },
-  ],
+  rewrites: () => {
+    if (!process.env.API_URL)
+      return [];
+
+    return [
+      {
+        source: '/api/external/:slug*',
+        destination: `${process.env.API_URL}/:slug*`,
+      },
+    ]
+  },
 
   outputStandalone: true,
 
