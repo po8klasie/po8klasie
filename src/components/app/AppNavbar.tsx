@@ -4,20 +4,24 @@ import { useRouter } from 'next/router';
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
 import { roundedSmallLinkClassName } from '../website/RoundedExternalLink';
 import Brand from '../website/Brand';
-
-const links: [string, string][] = [
-  ['Strona główna', '/'],
-  ['Kalkulator punktów', '/calculator'],
-];
+import { useProjectConfig } from '../../config/projectConfigContext';
 
 interface AppNavbarProps {
   projectName?: string;
+  wide?: boolean;
 }
 
-const AppNavbar: FC<AppNavbarProps> = ({ projectName }) => {
+const AppNavbar: FC<AppNavbarProps> = ({ projectName, wide }) => {
   const router = useRouter();
+  const { projectID } = useProjectConfig();
   const [isMenuCollapsed, setIsMenuCollapsed] = useState(false);
   const toggleMenu = () => setIsMenuCollapsed(!isMenuCollapsed);
+
+  const links: [string, string][] = [
+    ['Strona główna', '/'],
+    ['Szkoły', `/${projectID}/search`],
+    ['Kalkulator punktów', '/calculator'],
+  ];
 
   const getLinkClassName = (href: string) => {
     return router.pathname === href ? 'font-bold' : '';
@@ -25,7 +29,11 @@ const AppNavbar: FC<AppNavbarProps> = ({ projectName }) => {
 
   return (
     <div className="fixed top-0 left-0 w-full z-99999 bg-white border-b border-lighten font-primary h-navbarHeight flex items-center">
-      <div className="w-container mx-auto lg:flex justify-between items-center py-3">
+      <div
+        className={`${
+          wide ? 'w-wideContainer' : 'w-container'
+        } mx-auto lg:flex justify-between items-center py-3`}
+      >
         <div className="flex items-center justify-between">
           <Link href="/">
             <a>

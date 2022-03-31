@@ -1,4 +1,5 @@
 import { SchoolInfoSectionId } from '../components/app/SchoolPage/schoolInfoSections/schoolInfoSections';
+import { MapContainerProps } from 'react-leaflet';
 
 export type FilterDefinition = {
   key: string;
@@ -8,7 +9,11 @@ export type FilterDefinition = {
   initialValue: string | unknown[];
 };
 
-export type FiltersConfig = FilterDefinition[];
+export type SearchViewConfig = {
+  mapOptions: MapContainerProps;
+  defaultQuery: Record<string, string>;
+  filters: FilterDefinition[];
+};
 
 export interface AppearanceConfig {
   appName: string;
@@ -20,7 +25,7 @@ export interface SchoolInfoConfig {
 
 export interface ProjectConfig {
   projectID: string;
-  filters: FiltersConfig;
+  searchView: SearchViewConfig;
   appearance: AppearanceConfig;
   schoolInfo: SchoolInfoConfig;
 }

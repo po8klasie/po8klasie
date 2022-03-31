@@ -1,0 +1,38 @@
+.propertiesList {
+    display: flex;
+    list-style: none;
+    padding-inline-start: 1.2rem;
+    margin: 0;
+    flex-wrap: wrap;
+}
+
+.propertiesList li:not(:first-of-type) {
+    margin-left: 1.5em;
+}
+
+.propertiesList li::before {
+    content: "\2022";  /* unicode for a bullet */
+    color: var(--bullet-color);
+    font-weight: bold;
+    display: inline-block;
+    width: 1rem;
+    margin-left: -1rem;
+}
+
+.schoolPropertiesList {
+    --bullet-color: #C4C4C4;
+
+    composes: propertiesList;
+
+    padding-inline-start: 0;
+}
+
+.schoolPropertiesList li:first-of-type::before {
+    content: none;
+}
+
+.schoolClassesList {
+    --bullet-color: var(--primary);
+
+    composes: propertiesList;
+}

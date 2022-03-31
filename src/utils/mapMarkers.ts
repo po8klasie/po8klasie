@@ -1,6 +1,7 @@
 import L from 'leaflet';
 import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
+import markerIcon from '../assets/app/marker.png';
 import marker1 from '../assets/icons/markers/marker1.png';
 import marker2 from '../assets/icons/markers/marker2.png';
 import marker3 from '../assets/icons/markers/marker3.png';
@@ -32,6 +33,10 @@ const createMarker = (iconUrl: string) =>
     iconUrl,
     ...commonMarkerOptions,
   });
+
+export const markerImage = markerIcon;
+
+export const marker = createMarker(markerImage);
 
 export const highSchoolMarkerImage = marker1;
 

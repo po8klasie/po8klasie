@@ -1,7 +1,9 @@
+import gdyniaConfig from './gdynia';
+import krakowConfig from './krakow';
 import warszawaConfig from './warszawa';
 import { ProjectConfig } from './types';
 
-const projectConfigsList: ProjectConfig[] = [warszawaConfig];
+const projectConfigsList: ProjectConfig[] = [gdyniaConfig, krakowConfig, warszawaConfig];
 
 export const projectsIDs = projectConfigsList.map(({ projectID }) => projectID);
 

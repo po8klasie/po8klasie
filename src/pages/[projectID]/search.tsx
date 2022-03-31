@@ -1,17 +1,27 @@
 import React, { FC } from 'react';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import 'tailwindcss/tailwind.css';
+import { ApolloProvider } from '@apollo/client';
 import { withProjectConfig, ProjectConfigConsumerProps } from '../../config/withProjectConfig';
 import { getProjectConfigStaticProps, getStaticPathsPerProject } from '../../config/nextHelpers';
+import AppLayout from '../../components/app/AppLayout';
+import SearchView from '../../components/app/SearchPage/SearchView';
+import { apolloClient } from '../../utils/externalServices';
 
-type SearchPageProps = ProjectConfigConsumerProps<'appearance' | 'filters'>;
+type SchoolPageProps = ProjectConfigConsumerProps<'appearance' | 'searchView'>;
 
-const SearchPage: FC<SearchPageProps> = ({
-  PROJECT: {
-    appearance: { appName },
-  },
-}) => <h1>Hello world from {appName}</h1>;
+const SchoolPage: FC<SchoolPageProps> = ({ PROJECT: { appearance } }) => {
+  return (
+    <ApolloProvider client={apolloClient}>
+      <AppLayout projectAppearance={appearance} wideNavbar noFooter>
+        <SearchView />
+      </AppLayout>
+    </ApolloProvider>
+  );
+};
 
-export default withProjectConfig<SearchPageProps>(SearchPage);
+export default withProjectConfig<SchoolPageProps>(SchoolPage);
 
-export const getStaticProps = getProjectConfigStaticProps(['appearance']);
+export const getStaticProps = getProjectConfigStaticProps(['appearance', 'searchView']);
 
 export const getStaticPaths = getStaticPathsPerProject;

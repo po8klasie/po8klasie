@@ -19,15 +19,14 @@ const customNextConfig = {
   }),
 
   rewrites: () => {
-    if (!process.env.API_URL)
-      return [];
+    if (!process.env.API_URL) return [];
 
     return [
       {
         source: '/api/external/:slug*',
         destination: `${process.env.API_URL}/:slug*`,
       },
-    ]
+    ];
   },
 
   outputStandalone: true,

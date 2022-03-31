@@ -36,8 +36,9 @@ module.exports = {
         99999: 99999,
       },
       spacing: {
-        navbarHeight: 'var(--navbar-height)'
-      }
+        navbarHeight: 'var(--navbar-height)',
+        filtersRowHeight: 'var(--filters-row-height)',
+      },
     },
   },
   variants: {

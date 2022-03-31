@@ -17,7 +17,10 @@ export const getProjectConfigStaticProps = (projectConfigKeys: (keyof ProjectCon
 
   return {
     props: {
-      PROJECT: partialProjectConfig,
+      PROJECT: {
+        projectID,
+        ...partialProjectConfig,
+      },
     },
   };
 };

@@ -1,10 +1,10 @@
 import { FC } from 'react';
 import { MapContainer, Marker, TileLayer } from 'react-leaflet';
-import { LatLngExpression } from "leaflet";
+import { LatLngExpression } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
 interface SchoolLocationMapProps {
-  position: LatLngExpression
+  position: LatLngExpression;
 }
 
 const SchoolLocationMap: FC<SchoolLocationMapProps> = ({ position }) => (
