@@ -53,7 +53,7 @@ const SchoolCard: FC<SchoolCardProps> = ({ school, projectID }) => {
           <span className="whitespace-nowrap mr-4">Profile klas</span>
           {school.classProfiles ? (
             <ul className={styles.schoolClassesList}>
-              {school.classProfiles.map((profile) => (
+              {school.classProfiles.split(',').map((profile) => (
                 <li key={profile}>{profile}</li>
               ))}
             </ul>

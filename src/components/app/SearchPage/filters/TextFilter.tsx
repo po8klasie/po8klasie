@@ -8,7 +8,7 @@ export interface TextFilterOptions {
 }
 
 interface TextFilterProps {
-  value: string;
+  value: unknown;
   onChange: (value: string) => void;
   options?: TextFilterOptions;
 }
@@ -32,7 +32,7 @@ const TextFilter: FC<TextFilterProps> = ({ value, onChange, options }) => {
         className={styles.textInput}
         placeholder={options?.placeholder}
         type="text"
-        value={value}
+        value={value as string}
         onChange={handleChange}
       />
       <Icon />

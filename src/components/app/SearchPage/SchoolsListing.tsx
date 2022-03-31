@@ -13,7 +13,7 @@ const SchoolsListing: FC<AlphaV3SchoolsListingProps> = ({ results }) => {
   return (
     <div className={styles.schoolsListing}>
       {results.map((school) => (
-        <SchoolCard key={school.id} school={school} projectID={projectID} />
+        <SchoolCard key={school.id} school={school} projectID={projectID as string} />
       ))}
     </div>
   );

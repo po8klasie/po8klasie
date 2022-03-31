@@ -32,7 +32,7 @@ interface DropdownFilterOptions {
 
 interface DropdownFilterProps {
   options: DropdownFilterOptions;
-  value: unknown[];
+  value: unknown;
   onChange: (values: unknown[]) => void;
 }
 

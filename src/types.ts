@@ -1,3 +1,5 @@
+import { institutionTypes } from './utils/apiDataMapping';
+
 export interface School {
   id: number;
   is_public: boolean;
@@ -68,7 +70,7 @@ export interface RailsApiSchool {
   name: string;
   public: boolean;
   rspoInstitutionId: number;
-  rspoInstitutionTypeId: number;
+  rspoInstitutionTypeId: keyof typeof institutionTypes;
   sportFacilities: null | string;
   street: string;
   studentsPerTeacher: null;

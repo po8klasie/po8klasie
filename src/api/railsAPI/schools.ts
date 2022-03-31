@@ -1,27 +1,13 @@
 import useSWR from 'swr';
 import qs, { StringifiableRecord } from 'query-string';
-import { isPlainObject, camelCase } from 'lodash';
+import fetcher from './fetcher';
+import { RailsApiSchool } from '../../types';
 
-const camelCaseKeys = (o: Record<string, unknown>): Record<string, unknown> | unknown[] => {
-  if (isPlainObject(o)) {
-    const n: Record<string, unknown> = {};
-
-    Object.keys(o).forEach((k) => {
-      n[camelCase(k)] = camelCaseKeys(o[k] as Record<string, unknown>);
-    });
-
-    return n;
-  } else if (Array.isArray(o)) {
-    return o.map((i) => camelCaseKeys(i));
-  }
-
-  return o;
-};
-
-const fetcher = (url: string) =>
-  fetch(url)
-    .then((res) => res.json())
-    .then(camelCaseKeys);
+interface RailsApiSchoolsDataResponse {
+  results: RailsApiSchool[];
+  totalItems: number;
+  page: number;
+}
 
 const useSchoolsData = (filtersValues: StringifiableRecord, defaultQuery: StringifiableRecord) => {
   const endpointUrl = qs.stringifyUrl(
@@ -35,7 +21,7 @@ const useSchoolsData = (filtersValues: StringifiableRecord, defaultQuery: String
     { skipEmptyString: true, arrayFormat: 'comma' },
   );
 
-  return useSWR(endpointUrl, fetcher);
+  return useSWR(endpointUrl, (key) => fetcher<RailsApiSchoolsDataResponse>(key));
 };
 
 export default useSchoolsData;

@@ -13,7 +13,7 @@ export const getLanguageEmoji = (lang: string): string => {
   }
 };
 
-const institutionTypes = {
+export const institutionTypes = {
   90: 'Bednarska Szkoła Realna',
   58: 'Biblioteki pedagogiczne',
   93: 'Branżowa szkoła I stopnia',
@@ -31,7 +31,7 @@ const institutionTypes = {
   15: 'Liceum profilowane',
   27: 'Liceum sztuk plastycznych',
   40: 'Międzyszkolny ośrodek sportowy',
-  48: 'Młodzieżowy dom kultury',
+  38: 'Młodzieżowy dom kultury',
   54: 'Młodzieżowy Ośrodek Socjoterapii ze szkołami',
   53: 'Młodzieżowy Ośrodek Wychowawczy',
   35: 'Nauczycielskie Kolegium Języków Obcych',

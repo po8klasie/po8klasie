@@ -40,13 +40,12 @@ const AlphaV3FiltersRow: FC<UseFiltersValuesReturnType> = ({ setFiltersValues, f
   return (
     <div className={styles.filtersRow}>
       {filtersConfig.map(({ options, key, component }) => {
-        const FilterComponent = filtersComponents[component];
+        const FilterComponent = filtersComponents[component as keyof typeof filtersComponents];
         return (
           <FilterComponent
-            filterKey={key}
             options={options}
             onChange={handleFiltersChange(key)}
-            value={filtersValues[key] as string}
+            value={filtersValues[key]}
           />
         );
       })}
