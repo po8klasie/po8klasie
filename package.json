@@ -28,7 +28,7 @@
     "axios": "^0.20.0",
     "babel-plugin-inline-react-svg": "^1.1.1",
     "camelcase-keys": "^7.0.2",
-    "chart.js": "^2.9.3",
+    "chart.js": "^2.9.4",
     "chartjs": "^0.3.24",
     "country-flag-icons": "^1.4.25",
     "emotion-theming": "^10.0.27",
