@@ -10,6 +10,7 @@ export const withProjectConfig = <T extends ProjectConfigConsumerProps<any>>(
   WrappedComponent: FC<T>,
 ): FC<T> => (props) => (
   <ProjectConfigProvider value={props.PROJECT}>
+    {console.log(props.PROJECT)}
     <WrappedComponent {...props} />
   </ProjectConfigProvider>
 );

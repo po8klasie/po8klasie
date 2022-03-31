@@ -3,6 +3,7 @@
     --primary: #9D54BF;
 
     --navbar-height: 3.5rem;
+    --filters-row-height: 5rem;
 }
 
 @screen lg {

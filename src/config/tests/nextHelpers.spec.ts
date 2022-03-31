@@ -1,6 +1,5 @@
 import * as projectConfigIndex from '../index';
 import { getProjectConfigStaticProps, getStaticPathsPerProject } from '../nextHelpers';
-import appearance from '../warszawa/appearance';
 
 describe('config/nextHelpers', () => {
   describe('getProjectConfigStaticProps', () => {
@@ -28,6 +27,7 @@ describe('config/nextHelpers', () => {
       expect(result).toEqual({
         props: {
           PROJECT: {
+            projectID: 'bar',
             appearance: fakeConfig.appearance,
           },
         },

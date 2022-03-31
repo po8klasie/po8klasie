@@ -4,7 +4,7 @@ import appearance from './appearance';
 import schoolInfo from './schoolInfo';
 
 const projectConfig: ProjectConfig = {
-  projectID: 'warszawa',
+  projectID: 'krakow',
   searchView,
   appearance,
   schoolInfo,
