@@ -18,9 +18,10 @@ const camelCaseKeys = (o: Record<string, unknown>): Record<string, unknown> | un
   return o;
 };
 
-const fetcher = (url: string) => fetch(url)
-  .then((res) => res.json())
-  .then(camelCaseKeys)
+const fetcher = (url: string) =>
+  fetch(url)
+    .then((res) => res.json())
+    .then(camelCaseKeys);
 
 const useSchoolsData = (filtersValues: StringifiableRecord, defaultQuery: StringifiableRecord) => {
   const endpointUrl = qs.stringifyUrl(
