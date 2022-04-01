@@ -9,7 +9,8 @@ const camelCaseKeys = (o: Record<string, unknown>): Record<string, unknown> | un
     });
 
     return n;
-  } else if (Array.isArray(o)) {
+  }
+  if (Array.isArray(o)) {
     return o.map((i) => camelCaseKeys(i));
   }
 

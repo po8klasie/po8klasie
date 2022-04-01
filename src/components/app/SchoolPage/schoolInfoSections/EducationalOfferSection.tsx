@@ -28,7 +28,7 @@ const tmpExtracurriculars = [
 
 const EducationalOfferSection: FC = () => {
   return (
-    <SchoolInfoSection source="Urząd Miasta w Gdyni" id="educationalOffer">
+    <SchoolInfoSection overwriteFooter="Dane poglądowe" id="educationalOffer">
       <div className="p-3">
         <h3 className="text-lg font-bold text-dark">Oferta edukacyjna</h3>
         <h4 className="text-dark text-base font-semibold mt-2">Zajęcia dodatkowe</h4>

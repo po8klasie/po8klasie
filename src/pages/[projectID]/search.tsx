@@ -10,7 +10,7 @@ import { apolloClient } from '../../utils/externalServices';
 
 type SchoolPageProps = ProjectConfigConsumerProps<'appearance' | 'searchView'>;
 
-const SchoolPage: FC<SchoolPageProps> = ({ PROJECT: { appearance } }) => {
+const SearchPage: FC<SchoolPageProps> = ({ PROJECT: { appearance } }) => {
   return (
     <ApolloProvider client={apolloClient}>
       <AppLayout projectAppearance={appearance} wideNavbar noFooter>
@@ -20,7 +20,7 @@ const SchoolPage: FC<SchoolPageProps> = ({ PROJECT: { appearance } }) => {
   );
 };
 
-export default withProjectConfig<SchoolPageProps>(SchoolPage);
+export default withProjectConfig<SchoolPageProps>(SearchPage);
 
 export const getStaticProps = getProjectConfigStaticProps(['appearance', 'searchView']);
 
