@@ -66,7 +66,7 @@
   },
   "scripts": {
     "start": "next dev",
-    "start-production": "next start",
+    "start-production": "NODE_ENV=production node server.js",
     "build": "next build",
     "export": "next export",
     "prepare-bundle": "yarn build && yarn export",
