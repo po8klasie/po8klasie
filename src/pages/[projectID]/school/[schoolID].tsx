@@ -46,9 +46,7 @@ export const getServerSideProps = async (
     };
 
   const fetcher = await import('../../../api/railsAPI/fetcher').then((m) => m.default);
-  const school = (await fetcher(
-    `${process.env.API_URL}/institutions/${schoolID}`,
-  )) as RailsApiSchool;
+  const school = (await fetcher(`/institutions/${schoolID}`)) as RailsApiSchool;
 
   return {
     props: {
@@ -57,3 +55,8 @@ export const getServerSideProps = async (
     },
   };
 };
+
+// https://nextjs.org/docs/api-reference/next.config.js/runtime-configuration
+// A page that relies on publicRuntimeConfig must use getInitialProps to opt-out of Automatic Static Optimization.
+// Runtime configuration won't be available to any page (or component in a page) without getInitialProps.
+export const getInitialProps = (): void => {};

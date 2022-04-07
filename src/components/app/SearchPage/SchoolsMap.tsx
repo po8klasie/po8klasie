@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
 import { Map as LeafletMap, latLngBounds } from 'leaflet';
-import { MapContainer, Marker, Popup, TileLayer, TileLayerProps } from 'react-leaflet';
+import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
 import { BsChevronRight } from 'react-icons/bs';
 import { marker } from '../../../utils/mapMarkers';
 import styles from './styles/SchoolsMap.module.css';
@@ -8,7 +8,7 @@ import 'leaflet/dist/leaflet.css';
 import { useProjectConfig } from '../../../config/projectConfigContext';
 import { SearchViewConfig } from '../../../config/types';
 import { RailsApiSchool } from '../../../types';
-import { mapBoxTileLayerProps, parseCoords } from "../../../utils/map";
+import { mapBoxTileLayerProps, parseCoords } from '../../../utils/map';
 
 interface SchoolsMapProps {
   results: RailsApiSchool[];
