@@ -12,7 +12,7 @@ interface RailsApiSchoolsDataResponse {
 const useSchoolsData = (filtersValues: StringifiableRecord, defaultQuery: StringifiableRecord) => {
   const endpointUrl = qs.stringifyUrl(
     {
-      url: '/api/external/institutions',
+      url: '/institutions',
       query: {
         ...filtersValues,
         ...defaultQuery,

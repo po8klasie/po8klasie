@@ -5,6 +5,9 @@ const customNextConfig = {
   env: {
     PUBLIC_URL: '',
   },
+  publicRuntimeConfig: {
+    API_URL: process.env.API_URL
+  },
   experimental: {
     craCompat: true,
   },

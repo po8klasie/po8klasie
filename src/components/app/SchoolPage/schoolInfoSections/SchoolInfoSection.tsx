@@ -1,16 +1,29 @@
 import { FC } from 'react';
 
-interface SchoolInfoSectionProps {
-  id: string;
-  source: string;
-  updateTime?: Date;
+interface SchoolUpdateInfoProps {
+  updateTime: string;
 }
 
-const SchoolInfoSection: FC<SchoolInfoSectionProps> = ({ id, children, source }) => (
+const SchoolUpdateInfo: FC<SchoolUpdateInfoProps> = ({ updateTime }) => (
+  <span>Aktualizacja: {new Date(updateTime).toLocaleDateString('pl')}</span>
+);
+
+interface SchoolInfoSectionProps {
+  id: string;
+  updateTime: string;
+  overwriteFooter?: string;
+}
+
+const SchoolInfoSection: FC<SchoolInfoSectionProps> = ({
+  id,
+  children,
+  updateTime,
+  overwriteFooter,
+}) => (
   <div className="mt-5 first:mt-0 border border-light rounded-lg" id={id}>
     {children}
     <div className="border-light border-t py-2 px-5 text-right text-gray text-sm">
-      Źródło: {source} | Aktualizacja: {new Date(/* tmp */).toLocaleDateString('pl')}
+      {overwriteFooter || <SchoolUpdateInfo updateTime={updateTime} />}
     </div>
   </div>
 );

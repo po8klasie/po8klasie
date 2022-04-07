@@ -2,13 +2,16 @@ import { FC, useMemo } from 'react';
 import SchoolPageMenu from './SchoolPageMenu';
 import schoolInfoSections from './schoolInfoSections/schoolInfoSections';
 import { SchoolInfoConfig } from '../../../config/types';
+import { RailsApiSchool } from '../../../types';
 
 interface SchoolPageContentProps {
   schoolInfoConfig: SchoolInfoConfig;
+  school: RailsApiSchool;
 }
 
 const SchoolPageContent: FC<SchoolPageContentProps> = ({
   schoolInfoConfig: { enabledSchoolInfoSectionIds },
+  school,
 }) => {
   const sectionConfigs = useMemo(
     () => enabledSchoolInfoSectionIds.map((sectionId) => schoolInfoSections[sectionId]),
@@ -21,7 +24,7 @@ const SchoolPageContent: FC<SchoolPageContentProps> = ({
       </div>
       <div className="col-span-4 pt-5">
         {sectionConfigs.map(({ SectionComponent, id }) => (
-          <SectionComponent key={id} />
+          <SectionComponent key={id} school={school} />
         ))}
       </div>
     </div>

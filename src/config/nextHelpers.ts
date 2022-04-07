@@ -5,9 +5,10 @@ export type GetProjectConfigStaticPropsContext = {
   params: { projectID: string };
 };
 
-export const getProjectConfigStaticProps = (projectConfigKeys: (keyof ProjectConfig)[]) => async ({
-  params: { projectID },
-}: GetProjectConfigStaticPropsContext) => {
+export const getProjectConfigProps = async (
+  projectConfigKeys: (keyof ProjectConfig)[],
+  projectID: string,
+) => {
   const { getProjectConfig } = await import('./index');
   const projectConfig = getProjectConfig(projectID);
 
@@ -16,11 +17,17 @@ export const getProjectConfigStaticProps = (projectConfigKeys: (keyof ProjectCon
   );
 
   return {
+    projectID,
+    ...partialProjectConfig,
+  };
+};
+
+export const getProjectConfigStaticProps = (projectConfigKeys: (keyof ProjectConfig)[]) => async ({
+  params: { projectID },
+}: GetProjectConfigStaticPropsContext) => {
+  return {
     props: {
-      PROJECT: {
-        projectID,
-        ...partialProjectConfig,
-      },
+      PROJECT: await getProjectConfigProps(projectConfigKeys, projectID),
     },
   };
 };
