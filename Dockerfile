@@ -22,6 +22,8 @@ COPY sentry.client.config.ts sentry.server.config.ts ./
 
 RUN yarn build
 
+COPY server.js ./
+
 COPY .prettierrc.js .prettierignore ./
 COPY .eslintrc.js .eslintignore ./
 COPY jest.config.js ./
@@ -50,6 +52,7 @@ COPY --from=builder /opt/po8klasie/public ./public
 COPY --from=builder /opt/po8klasie/.next ./.next
 COPY --from=builder /opt/po8klasie/node_modules ./node_modules
 COPY --from=builder /opt/po8klasie/package.json ./package.json
+COPY --from=builder /opt/po8klasie/server.js ./server.js
 
 USER nextjs
 
@@ -60,4 +63,4 @@ ENV PORT 3000
 # https://nextjs.org/telemetry
 ENV NEXT_TELEMETRY_DISABLED 1
 
-CMD ["yarn", "next", "start"]
+CMD ["yarn", "start-production"]
