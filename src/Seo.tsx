@@ -1,8 +1,12 @@
 import { DefaultSeo as DefaultNextSeo, DefaultSeoProps } from 'next-seo';
-import { environment } from './environments/environment';
+import getConfig from "next/config";
+const { publicRuntimeConfig } = getConfig();
+
+// public publicRuntimeConfig is not available in next error pages
+const APP_ENVIRONMENT = publicRuntimeConfig ? publicRuntimeConfig.APP_ENVIRONMENT : '';
 
 export const defaultSeoConfig: DefaultSeoProps = {
-  dangerouslySetAllPagesToNoIndex: environment.APP_ENVIRONMENT !== 'production', // do not index test server
+  dangerouslySetAllPagesToNoIndex: APP_ENVIRONMENT !== 'production', // do not index test server
   defaultTitle: 'po8klasie - wyszukiwarka szkół średnich',
   titleTemplate: '%s | po8klasie',
   twitter: {

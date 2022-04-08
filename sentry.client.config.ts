@@ -1,9 +1,10 @@
 import * as Sentry from '@sentry/nextjs';
 import { Integrations as TracingIntegrations } from '@sentry/tracing';
-import { environment } from './src/environments/environment';
+import getConfig from "next/config";
+const { publicRuntimeConfig } = getConfig();
 
-if (environment.APP_FRONTEND_RELEASE) {
-  const { APP_ENVIRONMENT, APP_FRONTEND_RELEASE, PUBLIC_SENTRY_DSN } = environment;
+if (publicRuntimeConfig.APP_FRONTEND_RELEASE) {
+  const { APP_ENVIRONMENT, APP_FRONTEND_RELEASE, PUBLIC_SENTRY_DSN } = publicRuntimeConfig;
 
   Sentry.init({
     dsn: PUBLIC_SENTRY_DSN,

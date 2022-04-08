@@ -1,14 +1,12 @@
 import React, { FC } from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import 'tailwindcss/tailwind.css';
-import { ApolloProvider } from '@apollo/client';
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 import { ParsedUrlQuery } from 'querystring';
 import { withProjectConfig, ProjectConfigConsumerProps } from '../../config/withProjectConfig';
 import { getProjectConfigProps } from '../../config/nextHelpers';
 import AppLayout from '../../components/app/AppLayout';
 import SearchView from '../../components/app/SearchPage/SearchView';
-import { apolloClient } from '../../utils/externalServices';
 import { ProjectConfig } from '../../config/types';
 
 type SchoolPageProps = ProjectConfigConsumerProps<'appearance' | 'searchView'>;
@@ -19,11 +17,9 @@ interface SearchPageParams extends ParsedUrlQuery {
 
 const SearchPage: FC<SchoolPageProps> = ({ PROJECT: { appearance } }) => {
   return (
-    <ApolloProvider client={apolloClient}>
-      <AppLayout projectAppearance={appearance} wideNavbar noFooter>
-        <SearchView />
-      </AppLayout>
-    </ApolloProvider>
+    <AppLayout projectAppearance={appearance} wideNavbar noFooter>
+      <SearchView />
+    </AppLayout>
   );
 };
 

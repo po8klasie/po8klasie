@@ -42,3 +42,8 @@ const CalculatorPage: FC = () => {
 };
 
 export default CalculatorPage;
+
+// https://nextjs.org/docs/api-reference/next.config.js/runtime-configuration
+// A page that relies on publicRuntimeConfig must use getInitialProps/getServerSideProps to opt-out of Automatic Static Optimization.
+// Runtime configuration won't be available to any page (or component in a page) without getInitialProps/getServerSideProps.
+export const getServerSideProps = () => ({ props: {} });

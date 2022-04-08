@@ -1,14 +1,9 @@
 import React, { FC } from 'react';
 import { AppProps } from 'next/app';
-import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import { DefaultSeo } from '../Seo';
 import 'normalize.css';
-import '../styling/global.css';
-
-const NextMatomoInitalizer = dynamic(() => import('../components/NextMatomoInitializer'), {
-  ssr: false,
-});
+import '../global.css';
 
 const App: FC<AppProps> = ({ Component, pageProps }) => {
   return (
@@ -17,10 +12,14 @@ const App: FC<AppProps> = ({ Component, pageProps }) => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <DefaultSeo />
-      <NextMatomoInitalizer />
       <Component {...pageProps} />
     </>
   );
 };
+
+// https://nextjs.org/docs/api-reference/next.config.js/runtime-configuration
+// A page that relies on publicRuntimeConfig must use getInitialProps to opt-out of Automatic Static Optimization.
+// Runtime configuration won't be available to any page (or component in a page) without getInitialProps.
+export const getInitialProps = (): void => {};
 
 export default App;

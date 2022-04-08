@@ -6,7 +6,10 @@ const customNextConfig = {
     PUBLIC_URL: '',
   },
   publicRuntimeConfig: {
-    API_URL: process.env.API_URL
+    API_URL: process.env.API_URL,
+    APP_ENVIRONMENT: process.env.APP_ENVIRONMENT,
+    APP_FRONTEND_RELEASE: process.env.APP_FRONTEND_RELEASE,
+    PUBLIC_SENTRY_DSN: process.env.PUBLIC_SENTRY_DSN
   },
   experimental: {
     craCompat: true,
