@@ -1,8 +1,12 @@
 import { FC } from 'react';
 import { FaGithub, FaFacebookF, FaLinkedinIn, FaTwitter } from 'react-icons/fa';
 import { IconType } from 'react-icons';
+import getConfig from 'next/config';
 import Brand from '../website/Brand';
-import { environment } from '../../environments/environment';
+
+const { publicRuntimeConfig } = getConfig();
+
+const { APP_ENVIRONMENT, APP_FRONTEND_RELEASE } = publicRuntimeConfig;
 
 const socialLinks: [string, IconType][] = [
   ['https://fb.com/po8klasie', FaFacebookF],
@@ -20,8 +24,8 @@ const AppFooter: FC = () => (
         <div className="lg:flex items-center">
           <Brand className="font-bold text-xl" />
           <span className="text-black lg:ml-10 flex items-center mt-5 lg:mt-0 text-sm lg:text-base">
-            wersja {environment.APP_FRONTEND_RELEASE}
-            <span className="text-sm text-gray ml-2">{environment.APP_ENVIRONMENT}</span>
+            wersja {APP_FRONTEND_RELEASE}
+            <span className="text-sm text-gray ml-2">{APP_ENVIRONMENT}</span>
           </span>
         </div>
         <div className="flex flex-col-reverse lg:flex-row lg:items-center items-end">
