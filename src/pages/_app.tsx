@@ -17,4 +17,9 @@ const App: FC<AppProps> = ({ Component, pageProps }) => {
   );
 };
 
+// https://nextjs.org/docs/api-reference/next.config.js/runtime-configuration
+// A page that relies on publicRuntimeConfig must use getInitialProps to opt-out of Automatic Static Optimization.
+// Runtime configuration won't be available to any page (or component in a page) without getInitialProps.
+export const getInitialProps = (): void => {};
+
 export default App;
