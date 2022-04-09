@@ -1,14 +1,12 @@
 const { withSentryConfig } = require('@sentry/nextjs');
 const withOptimizedImages = require('next-optimized-images');
 
-const isProduction = process.env.NODE_ENV === 'production';
-
 const customNextConfig = {
   env: {
     PUBLIC_URL: '',
   },
   publicRuntimeConfig: {
-    API_URL: isProduction ? process.env.API_URL : '/api/external',
+    API_URL: process.env.API_URL,
     APP_ENVIRONMENT: process.env.APP_ENVIRONMENT,
     APP_FRONTEND_RELEASE: process.env.APP_FRONTEND_RELEASE,
     PUBLIC_SENTRY_DSN: process.env.PUBLIC_SENTRY_DSN
@@ -27,7 +25,8 @@ const customNextConfig = {
   }),
 
   rewrites: () => {
-    if (!process.env.API_URL || isProduction) return [];
+    if (!process.env.API_URL) return [];
+
     return [
       {
         source: '/api/external/:slug*',
