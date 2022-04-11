@@ -1,10 +1,8 @@
-<img alt="po8klasie" src="https://warsawlo.pl/logo/full.png" width="200px" />
-
 # po8klasie
-:poland: Prawdopodobnie najprostsza i najszybsza wyszukiwarka warszawskich szkół średnich. <br/>
+:poland: Prawdopodobnie najprostsza i najszybsza wyszukiwarka szkół średnich. <br/>
 Wkrótce produkcyjnie dostępna dla wszystkich!
 
-:uk: Probably the simplest and fastest search engine for Warsaw high schools. <br />
+:uk: Probably the simplest and fastest high schools lookup service. <br />
 Soon available in production for everyone!
 
 If you want to contribute to po8klasie, please read our [contribution guide](CONTRIBUTING.md).
@@ -12,7 +10,7 @@ If you want to contribute to po8klasie, please read our [contribution guide](CON
   
 ## Quick start 
 
-> *NOTE*: This project was bootstrapped using [Create React App](https://github.com/facebook/create-react-app) (typescript template).
+> *NOTE*: This project relies on [Next.js Framework](https://nextjs.org/).
 
 1. Clone this repo :arrow_down:
 ```shell script  
@@ -40,12 +38,14 @@ yarn start
 
 | Name | Required | Description |
 | - | :-: | - |
-| `GRAPHQL_ENDPOINT` | :heavy_check_mark: | Url where GraphQL API is hosted (include a trailing slash) |
-| `PUBLIC_SENTRY_DSN` | :x: | Sentry DSN. If it's not specified, Sentry Client is not initialized. |
-| `MATOMO_BASE_URL` | :x: | Matomo base url (include a trailing slash). If it's not specified, Matomo Client is not initialized. |
-| `MATOMO_SITE_ID` | :x: | Matomo site ID. If it's not specified, Matomo Client is not initialized. |
+| `API_URL` | :heavy_check_mark: | Url where the API is hosted (do NOT include a trailing slash) |
+| `APP_ENVIRONMENT` | :x: | e.g. `production`, `test`. It's used by Sentry and displayed in the footer. |
+| `APP_FRONTEND_RELEASE` | :x: | e.g. docker image tag. It's used by Sentry and displayed in the footer. |
+| `MAPBOX_ACCESS_TOKEN` | :x: | Mapbox access token. If it's not specified, Open Street Map tiles are load. |
+| `PUBLIC_SENTRY_DSN` | :x: | Sentry DSN. If it's not specified, Sentry client is not initialized. |
+| `POSTHOG_API_KEY` | :x: | Posthog API key. If it's not specified, Posthog Analytics client is not initialized. |
 
-> *NOTE:* In development environment prefix each env var name with `REACT_APP_` (eg. `REACT_APP_API_URL`)
+> *NOTE:* If you don't want to spin up local API server, for development purposes use `https://test.po8klasie.pl/api` as `API_URL`.
 
 ### Linter & formatter
 Currently, we are in process of setting up [eslint](https://eslint.org) and [prettier](https://prettier.io).
@@ -74,17 +74,15 @@ You can find detailed guide of how to set up po8klasie for production use in our
     
     
 ## More resources  
-* To learn more about CRA, go to [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).    
+* To learn more about Next.js Framework, go to [Next.js website](https://nextjs.org/).    
 * To learn React, check out the [React documentation](https://reactjs.org/).  
   
   
-## Our supporters  
-This is a civic tech and open-source project crafted by volunteers in cooperation with Code For Poland program of ePaństwo Foundation.    
-        
-<a href="https://codeforpoland.org">    
-  <img alt="Code For Poland logo" src="https://kodujdlapolski.pl/wp-content/themes/web-kodujdlapolski.pl/images/logo.png" height="70px"/>  
-</a>
-&nbsp;&nbsp;&nbsp;
-<a href="https://epf.org.pl">  
-  <img alt="ePaństwo Foundation" src="https://epf.org.pl/en/wp-content/themes/epf/images/logo-epanstwo.svgz" height="60px" />    
-</a>
+## Team & our partners
+This is a civic tech and open-source project crafted by volunteers. 
+Core team members are listed on [po8klasie.pl website](https://po8klasie.pl).
+
+Our partners:
+* [City of Gdynia](https://www.gdynia.pl/)
+* [Moje Państwo Foundation](https://mojepanstwo.pl/)
+* [SurveyLab](https://www.surveylab.com/)
