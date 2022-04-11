@@ -77,7 +77,8 @@
     "lint:fix": "eslint --fix --ext .js,.jsx,.ts,.tsx .",
     "lint:v2:check": "eslint --ext .js,.jsx,.ts,.tsx ./src/pages ./src/components/website ./src/components/app ./src/components/calculator",
     "lint:v2:fix": "eslint --fix --ext .js,.jsx,.ts,.tsx ./src/pages ./src/components/website ./src/components/app ./src/components/calculator",
-    "graphql:codegen": "graphql-codegen --config codegen.yml -r dotenv/config"
+    "graphql:codegen": "graphql-codegen --config codegen.yml -r dotenv/config",
+    "pr": "gh pr create -R po8klasie/po8klasie"
   },
   "browserslist": {
     "production": [
