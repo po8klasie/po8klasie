@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import posthog from 'posthog-js';
+import { publicRuntimeConfig } from "../runtimeConfig";
 
 const posthogApiHost = 'https://app.posthog.com'
 
