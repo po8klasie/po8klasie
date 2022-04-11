@@ -20,7 +20,7 @@ const MockUpImage: FC<{ src: string; placeholder: string; alt: string }> = ({
 
 const WhatDoWeDoSection: FC = () => (
   <div className="mt-32">
-    <h2 className="text-center text-3xl font-bold">Co tworzymy?</h2>
+    <h2 className="text-center text-3xl font-bold">W jaki sposób pomagamy?</h2>
     <div className="w-4/5 mx-auto mt-20">
       <div className="grid grid-cols-1 gap-x-10 gap-y-20 lg:grid-cols-2">
         <div className="flex items-center">

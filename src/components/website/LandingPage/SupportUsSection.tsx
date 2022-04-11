@@ -15,6 +15,9 @@ const SupportCard: FC<{ title: string; linkElement: JSX.Element }> = ({
   </div>
 );
 
+const donationsUrl = 'https://ko-fi.com/po8klasie';
+const githubProfileUrl = 'https://github.com/po8klasie';
+
 // support-us id is used in navbar. -top-52 to leverage navbar height
 const SupportUsSection: FC = () => (
   <div className="my-32 relative">
@@ -30,29 +33,38 @@ const SupportUsSection: FC = () => (
             </a>
           }
         >
-          Jeśli chcesz wesprzeć rozwój naszego projektu jako firma lub organizacja pozarządowa.
+          Chcesz wesprzeć rozwój naszego projektu jako firma lub organizacja pozarządowa?
         </SupportCard>
         <SupportCard
-          title="Patronite"
-          linkElement={<span className="text-dark opacity-60 font-bold text-lg">Wkrótce</span>}
+          title="Buy us a coffee"
+          linkElement={
+            <a
+              href={donationsUrl}
+              target="_blank"
+              rel="noreferrer noopener"
+              className="underline font-bold text-lg"
+            >
+              Wesprzyj nas
+            </a>
+          }
         >
           Pracujemy wolontaryjnie. Twoje wsparcie pozwoli nam szybciej wdrożyć wszystkie niesamowite
           możliwości <Brand />.
         </SupportCard>
         <SupportCard
-          title="GitHub Sponsors"
-          linkElement={<span className="text-dark opacity-60 font-bold text-lg">Wkrótce</span>}
+          title="Współtwórz aplikację"
+          linkElement={
+            <a
+              href={githubProfileUrl}
+              target="_blank"
+              rel="noreferrer noopener"
+              className="underline font-bold text-lg"
+            >
+              Zobacz projekt na GitHubie
+            </a>
+          }
         >
-          Jeśli ciekawi Cię techniczna strona naszego projektu, zerknij na nasz{' '}
-          <a
-            className="underline"
-            href="https://github.com/po8klasie"
-            target="_blank"
-            rel="noreferrer noopener"
-          >
-            profil na GitHubie
-          </a>
-          . Będziesz mógł wspierać nas też przez GitHub Sponsors.
+          Chcesz zaangażować się od strony technicznej?
         </SupportCard>
       </div>
     </div>
