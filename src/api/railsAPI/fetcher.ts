@@ -1,11 +1,5 @@
-import getConfig from 'next/config'
 import { camelCase, isPlainObject } from 'lodash';
-
-// https://nextjs.org/docs/api-reference/next.config.js/runtime-configuration
-// We use publicRuntimeConfig, so every page which imports this file
-// must use getInitialProps to opt-out of Automatic Static Optimization.
-// Runtime configuration won't be available to any page (or component in a page) without getInitialProps.
-const { publicRuntimeConfig } = getConfig()
+import { publicRuntimeConfig } from "../../runtimeConfig";
 
 const camelCaseKeys = (o: Record<string, unknown>): Record<string, unknown> | unknown[] => {
   if (isPlainObject(o)) {
