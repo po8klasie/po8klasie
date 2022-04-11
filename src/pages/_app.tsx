@@ -2,10 +2,12 @@ import React, { FC } from 'react';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 import { DefaultSeo } from '../Seo';
+import usePosthogPageChangeTracker from '../hooks/usePosthogPageChangeTracker';
 import 'normalize.css';
 import '../global.css';
 
 const App: FC<AppProps> = ({ Component, pageProps }) => {
+  usePosthogPageChangeTracker();
   return (
     <>
       <Head>
