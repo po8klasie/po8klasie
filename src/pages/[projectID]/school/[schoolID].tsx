@@ -45,8 +45,7 @@ export const getServerSideProps = async (
   const fetcher = await import('../../../api/railsAPI/fetcher').then((m) => m.default);
   const school = (await fetcher(`/institutions/${schoolID}`)) as RailsApiSchool;
 
-  if(!school.id)
-    return { notFound: true}
+  if (!school.id) return { notFound: true };
 
   return {
     props: {
