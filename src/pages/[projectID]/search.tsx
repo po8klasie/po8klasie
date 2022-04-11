@@ -8,6 +8,7 @@ import { getProjectConfigProps } from '../../config/nextHelpers';
 import AppLayout from '../../components/app/AppLayout';
 import SearchView from '../../components/app/SearchPage/SearchView';
 import { ProjectConfig } from '../../config/types';
+import { NextSeo } from 'next-seo';
 
 type SchoolPageProps = ProjectConfigConsumerProps<'appearance' | 'searchView'>;
 
@@ -18,6 +19,7 @@ interface SearchPageParams extends ParsedUrlQuery {
 const SearchPage: FC<SchoolPageProps> = ({ PROJECT: { appearance } }) => {
   return (
     <AppLayout projectAppearance={appearance} wideNavbar noFooter>
+      <NextSeo title={appearance.appName} />
       <SearchView />
     </AppLayout>
   );
@@ -32,10 +34,7 @@ export const getServerSideProps = async (
 
   if (!projectID)
     return {
-      redirect: {
-        permanent: false,
-        destination: '/500',
-      },
+      notFound: true,
     };
 
   return {

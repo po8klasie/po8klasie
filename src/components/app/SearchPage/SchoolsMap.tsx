@@ -8,7 +8,7 @@ import 'leaflet/dist/leaflet.css';
 import { useProjectConfig } from '../../../config/projectConfigContext';
 import { SearchViewConfig } from '../../../config/types';
 import { RailsApiSchool } from '../../../types';
-import { mapBoxTileLayerProps, parseCoords } from '../../../utils/map';
+import { parseCoords, tileLayerProps } from '../../../utils/map';
 
 interface SchoolsMapProps {
   results: RailsApiSchool[];
@@ -44,7 +44,7 @@ const SchoolsMap: FC<SchoolsMapProps> = ({ results, onExpandToggle, isExpanded }
         fullscreenControl
         {...mapOptions}
       >
-        <TileLayer {...mapBoxTileLayerProps} />
+        <TileLayer {...tileLayerProps} />
         {results.map(({ latitude, longitude, name, id }) => {
           if (!latitude || !longitude) return null;
 

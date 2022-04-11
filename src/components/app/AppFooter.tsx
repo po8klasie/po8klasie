@@ -1,10 +1,8 @@
 import { FC } from 'react';
 import { FaGithub, FaFacebookF, FaLinkedinIn, FaTwitter } from 'react-icons/fa';
 import { IconType } from 'react-icons';
-import getConfig from 'next/config';
 import Brand from '../website/Brand';
-
-const { publicRuntimeConfig } = getConfig();
+import { publicRuntimeConfig } from '../../runtimeConfig';
 
 const { APP_ENVIRONMENT, APP_FRONTEND_RELEASE } = publicRuntimeConfig;
 

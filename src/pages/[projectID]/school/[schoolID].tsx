@@ -10,6 +10,7 @@ import SchoolHero from '../../../components/app/SchoolPage/SchoolHero';
 import SchoolPageContent from '../../../components/app/SchoolPage/SchoolPageContent';
 import { RailsApiSchool } from '../../../types';
 import { ProjectConfig } from '../../../config/types';
+import { NextSeo } from 'next-seo';
 
 interface SchoolPageProps extends ProjectConfigConsumerProps<'appearance' | 'schoolInfo'> {
   school: RailsApiSchool;
@@ -17,6 +18,7 @@ interface SchoolPageProps extends ProjectConfigConsumerProps<'appearance' | 'sch
 
 const SchoolPage: FC<SchoolPageProps> = ({ PROJECT: { appearance, schoolInfo }, school }) => (
   <AppLayout projectAppearance={appearance}>
+    <NextSeo title={appearance.appName} />
     <SchoolHero school={school} />
     <SchoolPageContent schoolInfoConfig={schoolInfo} school={school} />
   </AppLayout>
@@ -39,14 +41,14 @@ export const getServerSideProps = async (
 
   if (!schoolID || !projectID)
     return {
-      redirect: {
-        permanent: false,
-        destination: '/500',
-      },
+      notFound: true,
     };
 
   const fetcher = await import('../../../api/railsAPI/fetcher').then((m) => m.default);
   const school = (await fetcher(`/institutions/${schoolID}`)) as RailsApiSchool;
+
+  if(!school.id)
+    return { notFound: true}
 
   return {
     props: {

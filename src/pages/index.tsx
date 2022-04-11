@@ -17,7 +17,11 @@ import SupportUsSection from '../components/website/LandingPage/SupportUsSection
 const LandingPage: FC = () => {
   return (
     <Layout>
-      <NextSeo titleTemplate="po8klasie - wyszukiwarka szkół średnich" />
+      <NextSeo
+        titleTemplate="%s"
+        title="po8klasie"
+        description="Wyszukiwarka szkół średnich. Wierzymy, że wybór szkoły średniej nie powinien ograniczać się tylko do kryterium punktowego."
+      />
       <HeroSection />
       <WhatDoWeDoSection />
       <CivicTechSection />
