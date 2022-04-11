@@ -32,10 +32,7 @@ export const getServerSideProps = async (
 
   if (!projectID)
     return {
-      redirect: {
-        permanent: false,
-        destination: '/500',
-      },
+      notFound: true,
     };
 
   return {

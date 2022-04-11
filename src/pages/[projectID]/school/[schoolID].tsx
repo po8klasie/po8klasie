@@ -39,14 +39,14 @@ export const getServerSideProps = async (
 
   if (!schoolID || !projectID)
     return {
-      redirect: {
-        permanent: false,
-        destination: '/500',
-      },
+      notFound: true,
     };
 
   const fetcher = await import('../../../api/railsAPI/fetcher').then((m) => m.default);
   const school = (await fetcher(`/institutions/${schoolID}`)) as RailsApiSchool;
+
+  if(!school.id)
+    return { notFound: true}
 
   return {
     props: {
