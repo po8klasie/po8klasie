@@ -7,6 +7,7 @@ export interface IPublicRuntimeConfig {
   APP_FRONTEND_RELEASE: string
   PUBLIC_SENTRY_DSN: string
   MAPBOX_ACCESS_TOKEN: string
+  POSTHOG_API_KEY: string
 }
 
 const emptyPublicRuntimeConfig: IPublicRuntimeConfig = {
@@ -15,6 +16,7 @@ const emptyPublicRuntimeConfig: IPublicRuntimeConfig = {
     APP_FRONTEND_RELEASE: '',
     PUBLIC_SENTRY_DSN: '',
     MAPBOX_ACCESS_TOKEN: '',
+    POSTHOG_API_KEY: '',
 };
 
 // https://nextjs.org/docs/api-reference/next.config.js/runtime-configuration

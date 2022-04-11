@@ -11,6 +11,7 @@ const customNextConfig = {
     APP_FRONTEND_RELEASE: process.env.APP_FRONTEND_RELEASE,
     PUBLIC_SENTRY_DSN: process.env.PUBLIC_SENTRY_DSN,
     MAPBOX_ACCESS_TOKEN: process.env.MAPBOX_ACCESS_TOKEN,
+    POSTHOG_API_KEY: process.env.POSTHOG_API_KEY
   },
   experimental: {
     craCompat: true,
