@@ -1,9 +1,7 @@
 import { DefaultSeo as DefaultNextSeo, DefaultSeoProps } from 'next-seo';
-import getConfig from "next/config";
-const { publicRuntimeConfig } = getConfig();
+import { publicRuntimeConfig } from "./runtimeConfig";
 
-// public publicRuntimeConfig is not available in next error pages
-const APP_ENVIRONMENT = publicRuntimeConfig ? publicRuntimeConfig.APP_ENVIRONMENT : '';
+const { APP_ENVIRONMENT } = publicRuntimeConfig;
 
 export const defaultSeoConfig: DefaultSeoProps = {
   dangerouslySetAllPagesToNoIndex: APP_ENVIRONMENT !== 'production', // do not index test server

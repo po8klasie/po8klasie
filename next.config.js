@@ -9,7 +9,8 @@ const customNextConfig = {
     API_URL: process.env.API_URL,
     APP_ENVIRONMENT: process.env.APP_ENVIRONMENT,
     APP_FRONTEND_RELEASE: process.env.APP_FRONTEND_RELEASE,
-    PUBLIC_SENTRY_DSN: process.env.PUBLIC_SENTRY_DSN
+    PUBLIC_SENTRY_DSN: process.env.PUBLIC_SENTRY_DSN,
+    MAPBOX_ACCESS_TOKEN: process.env.MAPBOX_ACCESS_TOKEN,
   },
   experimental: {
     craCompat: true,
