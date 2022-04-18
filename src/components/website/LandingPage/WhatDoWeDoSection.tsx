@@ -7,7 +7,7 @@ import comparisonMockUpImg from '../../../assets/website/img/comparison-mockup.p
 import comparisonMockUpImgPlaceholder from '../../../assets/website/img/comparison-mockup.png?lqip';
 import schoolViewMockUpImg from '../../../assets/website/img/school-view-mockup.png';
 import schoolViewMockUpImgPlaceholder from '../../../assets/website/img/school-view-mockup.png?lqip';
-import { useTranslation } from "next-i18next";
+import { useTranslation } from 'next-i18next';
 
 const MockUpImage: FC<{ src: string; placeholder: string; alt: string }> = ({
   src: imgSrc,
@@ -20,16 +20,14 @@ const MockUpImage: FC<{ src: string; placeholder: string; alt: string }> = ({
 );
 
 const WhatDoWeDoSection: FC = () => {
-  const { t } = useTranslation("landing", { keyPrefix: "whatDoWeDoSection" });
+  const { t } = useTranslation('landing', { keyPrefix: 'whatDoWeDoSection' });
   return (
     <div className="mt-32">
       <h2 className="text-center text-3xl font-bold">{t('howDoWeHelp')}</h2>
       <div className="w-4/5 mx-auto mt-20">
         <div className="grid grid-cols-1 gap-x-10 gap-y-20 lg:grid-cols-2">
           <div className="flex items-center">
-            <p className="text-lg">
-              {t('tile1Text')}
-            </p>
+            <p className="text-lg">{t('tile1Text')}</p>
           </div>
           <div className="w-full">
             <MockUpImage
@@ -47,15 +45,11 @@ const WhatDoWeDoSection: FC = () => {
             />
           </div>
           <div className="flex items-center">
-            <p className="text-lg">
-              {t('tile2Text')}
-            </p>
+            <p className="text-lg">{t('tile2Text')}</p>
           </div>
 
           <div className="flex items-center">
-            <p className="text-lg">
-              {t('tile3Text')}
-            </p>
+            <p className="text-lg">{t('tile3Text')}</p>
           </div>
           <div className="w-full">
             <MockUpImage
@@ -68,6 +62,6 @@ const WhatDoWeDoSection: FC = () => {
       </div>
     </div>
   );
-}
+};
 
 export default WhatDoWeDoSection;

@@ -1,7 +1,7 @@
 import { FC, MouseEvent as ReactMouseEvent, useEffect, useState } from 'react';
 import Brand from './Brand';
 import { roundedLinkClassName } from './RoundedExternalLink';
-import { useTranslation } from "next-i18next";
+import { useTranslation } from 'next-i18next';
 
 const getScrollToSectionProps = (to: string) => ({
   href: to === 'top' ? '#' : `${to}`,
