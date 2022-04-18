@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { NextSeo } from 'next-seo';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import 'tailwindcss/tailwind.css';
 
@@ -13,6 +14,9 @@ import FeaturesSection from '../components/website/LandingPage/FeaturesSection';
 import TeamSection from '../components/website/LandingPage/TeamSection';
 import OurStorySection from '../components/website/LandingPage/OurStorySection';
 import SupportUsSection from '../components/website/LandingPage/SupportUsSection';
+import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
+import { ProjectConfig } from "../config/types";
+import { SSRConfig } from "next-i18next";
 
 const LandingPage: FC = () => {
   return (
@@ -40,4 +44,8 @@ export default LandingPage;
 // https://nextjs.org/docs/api-reference/next.config.js/runtime-configuration
 // A page that relies on publicRuntimeConfig must use getInitialProps/getServerSideProps to opt-out of Automatic Static Optimization.
 // Runtime configuration won't be available to any page (or component in a page) without getInitialProps/getServerSideProps.
-export const getServerSideProps = () => ({ props: {} });
+export const getServerSideProps = async (
+  { locale }: GetServerSidePropsContext,
+): Promise<GetServerSidePropsResult<SSRConfig>>  => (
+  { props: await serverSideTranslations(locale as string, ['landing']) }
+);

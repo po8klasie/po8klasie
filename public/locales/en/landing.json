@@ -1,0 +1,18 @@
+{
+  "navbar": {
+    "supportTheProject": "Support the project"
+  },
+  "heroSection": {
+    "title": "helps you choose your school",
+    "subTitle": "We believe that school choice should not be limited by points thresholds"
+  },
+  "whatDoWeDoSection": {
+    "howDoWeHelp": "How do we help?",
+    "tile1Text": "We gather data from multiple sources to help students and parents choose a secondary school. We want to offer as much relevant information as we can to reduce the stress connected with the choice.",
+    "tile1AltText": "Screenshot of the school browser",
+    "tile2Text": "You can conveniently search for interesting schools according to the criteria you choose. You will find all the most important information on the profile of each school.",
+    "tile2AltText": "Screenshot of the school comparison site",
+    "tile3Text": "There is no longer any need to browse through lots of school websites or rankings. You can even compare schools in terms of commute time, dangerous places along the way and the level of smog pollution!",
+    "tile3AltText": "Screenshot of the school page"
+  }
+}
