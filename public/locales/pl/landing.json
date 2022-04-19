@@ -1,0 +1,18 @@
+{
+  "navbar": {
+    "supportTheProject": "Wesprzyj projekt"
+  },
+  "heroSection": {
+    "title": "pomaga Ci wybrać szkołę średnią",
+    "subTitle": "Wierzymy, że wybór szkoły średniej nie powinien ograniczać się do kryterium punktowego"
+  },
+  "whatDoWeDoSection": {
+    "howDoWeHelp": "W jaki sposób pomagamy?",
+    "tile1Text": "Łączymy dane z różnych źródeł, aby wesprzeć młodzież i rodziców w wyborze szkoły średniej. Chcemy oferować jak najwięcej ważnych informacji, aby wybór szkoły nie był tak stresujący.",
+    "tile1AltText": "Zrzut ekranu wyszukiwarki",
+    "tile2Text": "W wygodny sposób wyszukasz interesujące szkoły według wybranych przez Ciebie kryteriów. Na profilu każdej szkoły znajdziesz wszystkie najważniejsze informacje. Porównasz szkoły ze sobą — prosto i łatwo, bez ręcznego robienia zestawienia.",
+    "tile2AltText": "Zrzut ekranu porównywarki szkół",
+    "tile3Text": "Już nie ma potrzeby przeglądania wielu stron szkół, czy rankingów. Porównasz szkoły nawet względem czasu dotarcia, niebezpiecznych miejsc po drodze, jak i poziomu zanieczyszczenia smogiem!",
+    "tile3AltText": "Zrzut ekranu widoku szkoły"
+  }
+}
