@@ -36,7 +36,7 @@
     "leaflet": "^1.6.0",
     "leaflet-gesture-handling": "^1.1.8",
     "leaflet.fullscreen": "^1.6.0",
-    "lodash": "^4.17.20",
+    "lodash": "^4.17.21",
     "lodash.debounce": "^4.0.8",
     "nanoid": "^3.1.12",
     "next": "^12.1.4",
