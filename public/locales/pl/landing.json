@@ -51,5 +51,9 @@
     "secondaryHeader3": "Współtwórz aplikację",
     "textContent3": "Chcesz zaangażować się od strony technicznej?",
     "textFooter3": "Zobacz projekt na GitHubie"
+  },
+  "contactUsSection": {
+    "mainHeader1": "Skontaktuj się z nami",
+    "mainHeader2": "Polub nas na Facebooku"
   }
 }

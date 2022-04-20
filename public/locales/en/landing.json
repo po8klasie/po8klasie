@@ -51,5 +51,9 @@
     "secondaryHeader3": "Contribute to the codebase",
     "textContent3": "Would you like to help us develop the project?",
     "textFooter3": "Take a look on GitHub"
+  },
+  "contactUsSection": {
+    "mainHeader1": "Contact us",
+    "mainHeader2": "Like our Facebook page"
   }
 }
