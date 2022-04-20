@@ -21,5 +21,13 @@
     "textFragment1": "we work according to the principles of",
     "textFragment2": "Civic Tech",
     "textFragment3": "(civic technologies). This is a form of civic activism that employs digital technologies in improving and strengthening the cooperation between the citizens and the government administration. Civic tech initiatives have their origins in practical problems in the public sphere regarding normal people."
+  },
+  "featuresSection": {
+    "mainHeader": "For students and parents",
+    "secondaryHeader1": "Browser",
+    "secondaryHeader2": "Research",
+    "textContent1": "Choosing which high school you are going to attend is a very important step towards higher education. We would like to enable everybody to focus on it without needlessly wasting time reasearching schools that might fit your requirements. We want to make it easy for you to find the school that fits your needs.",
+    "textContent2": "We aspire to present data that is most needed by the students. With help from researchers and NGO activists we work with local governments to present data that is most needed by the candidates. We want to make it easy for you to find the school that fits your needs.",
+    "surveyInvitation": "Fill our survey"
   }
 }
