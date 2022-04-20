@@ -39,5 +39,17 @@
   },
   "partnersSection": {
     "mainHeader": "Partners"
+  },
+  "supportUsSection": {
+    "mainHeader": "Support us",
+    "secondaryHeader1": "Become a sponsor",
+    "textContent1": "Would your company or NGO be interested in sponsoring the development of our project?",
+    "textFooter1": "Contact us",
+    "secondaryHeader2": "Buy us a coffee",
+    "textContent2": "We work a wolunteers. Your support will allow us to faster develop new awesome features.",
+    "textFooter2": "Support us",
+    "secondaryHeader3": "Contribute to the codebase",
+    "textContent3": "Would you like to help us develop the project?",
+    "textFooter3": "Take a look on GitHub"
   }
 }

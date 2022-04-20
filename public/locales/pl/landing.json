@@ -39,5 +39,17 @@
   },
   "partnersSection": {
     "mainHeader": "Partnerzy"
+  },
+  "supportUsSection": {
+    "mainHeader": "Wesprzyj nas",
+    "secondaryHeader1": "Zostań sponsorem",
+    "textContent1": "Jeśli chcesz wesprzeć rozwój naszego projektu jako firma lub organizacja pozarządowa.",
+    "textFooter1": "Skontaktuj się z nami",
+    "secondaryHeader2": "Buy us a coffee",
+    "textContent2": "Pracujemy wolontaryjnie. Twoje wsparcie pozwoli nam szybciej wdrożyć wszystkie niesamowite możliwości po8klasie.",
+    "textFooter2": "Wesprzyj nas",
+    "secondaryHeader3": "Współtwórz aplikację",
+    "textContent3": "Chcesz zaangażować się od strony technicznej?",
+    "textFooter3": "Zobacz projekt na GitHubie"
   }
 }
