@@ -14,5 +14,12 @@
     "tile2AltText": "Screenshot of the school comparison site",
     "tile3Text": "There is no longer any need to browse through lots of school websites or rankings. You can even compare schools in terms of commute time, dangerous places along the way and the level of smog pollution!",
     "tile3AltText": "Screenshot of the school page"
+  },
+  "civicTechSection": {
+    "civicTechnology": "Civil Society Technology",
+    "project": "At",
+    "textFragment1": "we work according to the principles of",
+    "textFragment2": "Civic Tech",
+    "textFragment3": "(civic technologies). This is a form of civic activism that employs digital technologies in improving and strengthening the cooperation between the citizens and the government administration. Civic tech initiatives have their origins in practical problems in the public sphere regarding normal people."
   }
 }

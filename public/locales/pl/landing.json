@@ -14,5 +14,12 @@
     "tile2AltText": "Zrzut ekranu porównywarki szkół",
     "tile3Text": "Już nie ma potrzeby przeglądania wielu stron szkół, czy rankingów. Porównasz szkoły nawet względem czasu dotarcia, niebezpiecznych miejsc po drodze, jak i poziomu zanieczyszczenia smogiem!",
     "tile3AltText": "Zrzut ekranu widoku szkoły"
+  },
+  "civicTechSection": {
+    "civicTechnology": "Technologia obywatelska",
+    "project": "Projekt",
+    "textFragment1": "tworzymy zgodnie z zasadami",
+    "textFragment2": "civic tech",
+    "textFragment3": "(technologii obywatelskich). To forma aktywizmu społecznego, która włącza technologie cyfrowe do wzmocnienia i poprawy współpracy między obywatelami a administracją publiczną. Inicjatywy civic tech mają swoje źródło w konkretnych problemach sfery publicznej dotyczących zwykłych ludzi."
   }
 }
