@@ -29,5 +29,9 @@
     "textContent1": "Wybór szkoły średniej jest bardzo ważnym krokiem w kierunku dalszej edukacji. Chcielibyśmy, aby każdy mógł się na nim w pełni skupić bez niepotrzebnego poświęcania czasu i energii na research szkół dopasowanych do Twoich priorytetów.",
     "textContent2": "Dążymy do tego, aby prezentować dane, które najbardziej są potrzebne uczniom. Przy wsparciu badaczy i aktywistów NGO dbamy o to, aby samorządy udostępniały właśnie te dane, których kandydaci najbardziej potrzebują.",
     "surveyInvitation": "Weź udział w badaniu"
+  },
+  "ourStrorySection": {
+    "mainHeader": "Historia",
+    "textContent1": "Michał, który zainicjował projkt sam stanął przed problem rozproszonych informacji o szkołach średnich podczas swojej rekrutacji. Postanowił rozwiązać ten problem. Jendocześnie ucząc się programowania, tworzył z wszystkich wyszukanych informacji bazę danych warszawskich liceów. Tym projektem wciągnął innych fascynatów. Wiedziliśmy, że nie możemy ograniczać się do liceów."
   }
 }

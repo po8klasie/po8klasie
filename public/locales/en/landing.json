@@ -29,5 +29,9 @@
     "textContent1": "Choosing which high school you are going to attend is a very important step towards higher education. We would like to enable everybody to focus on it without needlessly wasting time reasearching schools that might fit your requirements. We want to make it easy for you to find the school that fits your needs.",
     "textContent2": "We aspire to present data that is most needed by the students. With help from researchers and NGO activists we work with local governments to present data that is most needed by the candidates. We want to make it easy for you to find the school that fits your needs.",
     "surveyInvitation": "Fill our survey"
+  },
+  "ourStrorySection": {
+    "mainHeader": "History",
+    "textContent1": "Michał who started the project on hist own, has encountered the problem of data about high schools being scattered across the internet during his own recruitment. He has decided to solve that problem. While learning how to code, with all the available information he created an app for searching across the high schools from Warsaw. Since then the project has expanded and many developers and non technical people have contributed to its development. We knew that we couln't just stop at high schools."
   }
 }
