@@ -3,6 +3,7 @@ import ProgressiveImage from 'react-progressive-graceful-image';
 import { IconType } from 'react-icons';
 import { FaGithub, FaGlobe, FaLinkedinIn } from 'react-icons/fa';
 import teamMembers, { TeamMember } from '../data/team';
+import { useTranslation } from 'next-i18next';
 
 const IMAGE_SIZE = 150;
 
@@ -62,17 +63,20 @@ const TeamMemberCard: FC<{ teamMember: TeamMember; alignToRight?: boolean }> = (
   </div>
 );
 
-const TeamSection: FC = () => (
-  <div className="mt-32">
-    <div className="w-1/2 mx-auto">
-      <h2 className="text-center text-3xl font-bold">Wolontariusze, którzy tworzą ten projekt</h2>
-      <div className="mt-20 grid gap-x-20 gap-y-14 sm:grid-cols-2 xl:grid-cols-3">
-        {teamMembers.map((teamMember) => (
-          <TeamMemberCard key={teamMember.name} teamMember={teamMember} />
-        ))}
+const TeamSection: FC = () => {
+  const { t } = useTranslation('landing', { keyPrefix: 'teamSection' });
+  return (
+    <div className="mt-32">
+      <div className="w-1/2 mx-auto">
+        <h2 className="text-center text-3xl font-bold">{t('mainHeader')}</h2>
+        <div className="mt-20 grid gap-x-20 gap-y-14 sm:grid-cols-2 xl:grid-cols-3">
+          {teamMembers.map((teamMember) => (
+            <TeamMemberCard key={teamMember.name} teamMember={teamMember} />
+          ))}
+        </div>
       </div>
     </div>
-  </div>
-);
+  )
+};
 
 export default TeamSection;

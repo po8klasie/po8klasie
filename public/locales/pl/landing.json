@@ -33,5 +33,11 @@
   "ourStrorySection": {
     "mainHeader": "Historia",
     "textContent1": "Michał, który zainicjował projkt sam stanął przed problem rozproszonych informacji o szkołach średnich podczas swojej rekrutacji. Postanowił rozwiązać ten problem. Jendocześnie ucząc się programowania, tworzył z wszystkich wyszukanych informacji bazę danych warszawskich liceów. Tym projektem wciągnął innych fascynatów. Wiedziliśmy, że nie możemy ograniczać się do liceów."
+  },
+  "teamSection": {
+    "mainHeader": "Wolontariusze, którzy tworzą ten projekt"
+  },
+  "partnersSection": {
+    "mainHeader": "Partnerzy"
   }
 }

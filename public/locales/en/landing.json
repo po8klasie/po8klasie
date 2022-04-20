@@ -33,5 +33,11 @@
   "ourStrorySection": {
     "mainHeader": "History",
     "textContent1": "Michał who started the project on hist own, has encountered the problem of data about high schools being scattered across the internet during his own recruitment. He has decided to solve that problem. While learning how to code, with all the available information he created an app for searching across the high schools from Warsaw. Since then the project has expanded and many developers and non technical people have contributed to its development. We knew that we couln't just stop at high schools."
+  },
+  "teamSection": {
+    "mainHeader": "Wolunteers who contribute to the project"
+  },
+  "partnersSection": {
+    "mainHeader": "Partners"
   }
 }
