@@ -26,38 +26,38 @@ const FeaturesSection: FC = () => {
   const { t } = useTranslation('landing', { keyPrefix: 'featuresSection' });
   return (
     <div className="mt-32">
-    <h2 className="text-center text-3xl font-bold"> {t('mainHeader')} </h2>
-    <div className="w-4/5 mx-auto mt-20">
-      <div className="grid gap-x-10 gap-y-20 lg:grid-cols-2">
-        <div className="flex items-center">
-          <div>
-            <h3 className="text-2xl font-bold mb-4"> {t('secondaryHeader1')} </h3>
-            <p className="text-lg">
-              {t('textContent1')}
-            </p>
+      <h2 className="text-center text-3xl font-bold"> {t('mainHeader')} </h2>
+      <div className="w-4/5 mx-auto mt-20">
+        <div className="grid gap-x-10 gap-y-20 lg:grid-cols-2">
+          <div className="flex items-center">
+            <div>
+              <h3 className="text-2xl font-bold mb-4"> {t('secondaryHeader1')} </h3>
+              <p className="text-lg">
+                {t('textContent1')}
+              </p>
+            </div>
           </div>
-        </div>
-        <div className="w-full">
-          <Image alt="" src={lookupImg} placeholder={lookupImgPlaceholder} />
-        </div>
+          <div className="w-full">
+            <Image alt="" src={lookupImg} placeholder={lookupImgPlaceholder} />
+          </div>
 
-        <div className="flex items-center">
-          <div>
-            <h3 className="text-2xl font-bold mb-4">  {t('secondaryHeader2')} </h3>
-            <p className="text-lg">
-              {t('textContent2')}
-            </p>
-            <RoundedExternalLink href={SURVEY_LINK} icon={FaWpforms} className="inline-flex mt-10">
-              {t('surveyInvitation')}
-            </RoundedExternalLink>
+          <div className="flex items-center">
+            <div>
+              <h3 className="text-2xl font-bold mb-4">  {t('secondaryHeader2')} </h3>
+              <p className="text-lg">
+                {t('textContent2')}
+              </p>
+              <RoundedExternalLink href={SURVEY_LINK} icon={FaWpforms} className="inline-flex mt-10">
+                {t('surveyInvitation')}
+              </RoundedExternalLink>
+            </div>
           </div>
-        </div>
-        <div className="w-full">
-          <Image alt="" src={surveyImg} placeholder={surveyImgPlaceholder} />
+          <div className="w-full">
+            <Image alt="" src={surveyImg} placeholder={surveyImgPlaceholder} />
+          </div>
         </div>
       </div>
     </div>
-  </div>
   )
 };
 
