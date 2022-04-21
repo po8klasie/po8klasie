@@ -14,5 +14,46 @@
     "tile2AltText": "Screenshot of the school comparison site",
     "tile3Text": "There is no longer any need to browse through lots of school websites or rankings. You can even compare schools in terms of commute time, dangerous places along the way and the level of smog pollution!",
     "tile3AltText": "Screenshot of the school page"
+  },
+  "civicTechSection": {
+    "civicTechnology": "Civic Tech",
+    "project": "At",
+    "textFragment1": "we work according to the principles of",
+    "textFragment2": "Civic Tech",
+    "textFragment3": "(civic technologies). This is a form of civic activism that employs digital technologies in improving and strengthening the cooperation between the citizens and the government administration. Civic tech initiatives have their origins in practical problems in the public sphere regarding normal people."
+  },
+  "featuresSection": {
+    "mainHeader": "For students and parents",
+    "secondaryHeader1": "Browser",
+    "secondaryHeader2": "Research",
+    "textContent1": "Choosing which high school you are going to attend is a very important step towards higher education. We would like to enable everybody to focus on it without needlessly wasting time reasearching schools that might fit your requirements. We want to make it easy for you to find the school that fits your needs.",
+    "textContent2": "We aspire to present data that is most needed by the students. With help from researchers and NGO activists we work with local governments to present data that is most needed by the candidates. We want to make it easy for you to find the school that fits your needs.",
+    "surveyInvitation": "Fill our survey"
+  },
+  "ourStrorySection": {
+    "mainHeader": "History",
+    "textContent1": "Michał who started the project on hist own, has encountered the problem of data about high schools being scattered across the internet during his own recruitment. He has decided to solve that problem. While learning how to code, with all the available information he created an app for searching across the high schools from Warsaw. Since then the project has expanded and many developers and non technical people have contributed to its development. We knew that we couln't just stop at high schools."
+  },
+  "teamSection": {
+    "mainHeader": "Wolunteers who contribute to the project"
+  },
+  "partnersSection": {
+    "mainHeader": "Partners"
+  },
+  "supportUsSection": {
+    "mainHeader": "Support us",
+    "secondaryHeader1": "Become a sponsor",
+    "textContent1": "Would your company or NGO be interested in sponsoring the development of our project?",
+    "textFooter1": "Contact us",
+    "secondaryHeader2": "Buy us a coffee",
+    "textContent2": "We work a wolunteers. Your support will allow us to faster develop new awesome features.",
+    "textFooter2": "Support us",
+    "secondaryHeader3": "Contribute to the codebase",
+    "textContent3": "Would you like to help us develop the project?",
+    "textFooter3": "Take a look on GitHub"
+  },
+  "contactUsSection": {
+    "mainHeader1": "Contact us",
+    "mainHeader2": "Like our Facebook page"
   }
 }
