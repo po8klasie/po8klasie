@@ -1,0 +1,59 @@
+{
+  "navbar": {
+    "supportTheProject": "Wesprzyj projekt"
+  },
+  "heroSection": {
+    "title": "pomaga Ci wybrać szkołę średnią",
+    "subTitle": "Wierzymy, że wybór szkoły średniej nie powinien ograniczać się do kryterium punktowego"
+  },
+  "whatDoWeDoSection": {
+    "howDoWeHelp": "W jaki sposób pomagamy?",
+    "tile1Text": "Łączymy dane z różnych źródeł, aby wesprzeć młodzież i rodziców w wyborze szkoły średniej. Chcemy oferować jak najwięcej ważnych informacji, aby wybór szkoły nie był tak stresujący.",
+    "tile1AltText": "Zrzut ekranu wyszukiwarki",
+    "tile2Text": "W wygodny sposób wyszukasz interesujące szkoły według wybranych przez Ciebie kryteriów. Na profilu każdej szkoły znajdziesz wszystkie najważniejsze informacje. Porównasz szkoły ze sobą — prosto i łatwo, bez ręcznego robienia zestawienia.",
+    "tile2AltText": "Zrzut ekranu porównywarki szkół",
+    "tile3Text": "Już nie ma potrzeby przeglądania wielu stron szkół, czy rankingów. Porównasz szkoły nawet względem czasu dotarcia, niebezpiecznych miejsc po drodze, jak i poziomu zanieczyszczenia smogiem!",
+    "tile3AltText": "Zrzut ekranu widoku szkoły"
+  },
+  "civicTechSection": {
+    "civicTechnology": "Technologia obywatelska",
+    "project": "Projekt",
+    "textFragment1": "tworzymy zgodnie z zasadami",
+    "textFragment2": "civic tech",
+    "textFragment3": "(technologii obywatelskich). To forma aktywizmu społecznego, która włącza technologie cyfrowe do wzmocnienia i poprawy współpracy między obywatelami a administracją publiczną. Inicjatywy civic tech mają swoje źródło w konkretnych problemach sfery publicznej dotyczących zwykłych ludzi."
+  },
+  "featuresSection": {
+    "mainHeader": "Dla uczniów i rodziców",
+    "secondaryHeader1": "Wyszukiwarka",
+    "secondaryHeader2": "Research",
+    "textContent1": "Wybór szkoły średniej jest bardzo ważnym krokiem w kierunku dalszej edukacji. Chcielibyśmy, aby każdy mógł się na nim w pełni skupić bez niepotrzebnego poświęcania czasu i energii na research szkół dopasowanych do Twoich priorytetów.",
+    "textContent2": "Dążymy do tego, aby prezentować dane, które najbardziej są potrzebne uczniom. Przy wsparciu badaczy i aktywistów NGO dbamy o to, aby samorządy udostępniały właśnie te dane, których kandydaci najbardziej potrzebują.",
+    "surveyInvitation": "Weź udział w badaniu"
+  },
+  "ourStrorySection": {
+    "mainHeader": "Historia",
+    "textContent1": "Michał, który zainicjował projkt sam stanął przed problem rozproszonych informacji o szkołach średnich podczas swojej rekrutacji. Postanowił rozwiązać ten problem. Jendocześnie ucząc się programowania, tworzył z wszystkich wyszukanych informacji bazę danych warszawskich liceów. Tym projektem wciągnął innych fascynatów. Wiedziliśmy, że nie możemy ograniczać się do liceów."
+  },
+  "teamSection": {
+    "mainHeader": "Wolontariusze, którzy tworzą ten projekt"
+  },
+  "partnersSection": {
+    "mainHeader": "Partnerzy"
+  },
+  "supportUsSection": {
+    "mainHeader": "Wesprzyj nas",
+    "secondaryHeader1": "Zostań sponsorem",
+    "textContent1": "Jeśli chcesz wesprzeć rozwój naszego projektu jako firma lub organizacja pozarządowa.",
+    "textFooter1": "Skontaktuj się z nami",
+    "secondaryHeader2": "Buy us a coffee",
+    "textContent2": "Pracujemy wolontaryjnie. Twoje wsparcie pozwoli nam szybciej wdrożyć wszystkie niesamowite możliwości po8klasie.",
+    "textFooter2": "Wesprzyj nas",
+    "secondaryHeader3": "Współtwórz aplikację",
+    "textContent3": "Chcesz zaangażować się od strony technicznej?",
+    "textFooter3": "Zobacz projekt na GitHubie"
+  },
+  "contactUsSection": {
+    "mainHeader1": "Skontaktuj się z nami",
+    "mainHeader2": "Polub nas na Facebooku"
+  }
+}

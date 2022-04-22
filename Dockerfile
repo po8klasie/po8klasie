@@ -19,6 +19,7 @@ COPY postcss.config.js tailwind.config.js ./
 COPY public ./public
 COPY src ./src
 COPY sentry.client.config.ts sentry.server.config.ts ./
+COPY next-i18next.config.js ./
 
 RUN yarn build
 

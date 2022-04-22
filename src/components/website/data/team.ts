@@ -22,7 +22,7 @@ export interface TeamMember {
 const teamMembers: TeamMember[] = [
   {
     name: 'Michał Oręziak',
-    roles: ['Koordynator projektu', 'Front-end Developer'],
+    roles: ['Project coordinator', 'Front-end Developer'],
     image: MichalOreziakImg,
     imagePlaceholder: MichalOreziakImgPlaceholder,
     links: [
@@ -69,7 +69,7 @@ const teamMembers: TeamMember[] = [
   },
   {
     name: 'Wojciech Sańko',
-    roles: ['Rozwój produktu', 'Partnerstwa'],
+    roles: ['Product growth and partnership manager'],
     image: WojciechSankoImg,
     imagePlaceholder: WojciechSankoImgPlaceholder,
     links: [['linkedin', 'https://www.linkedin.com/in/wojciech-sa%C5%84ko-7776461b/']],

@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
+import { appWithTranslation } from 'next-i18next';
 import { DefaultSeo } from '../Seo';
 import usePosthogPageChangeTracker from '../hooks/usePosthogPageChangeTracker';
 import 'normalize.css';
@@ -24,4 +25,4 @@ const App: FC<AppProps> = ({ Component, pageProps }) => {
 // Runtime configuration won't be available to any page (or component in a page) without getInitialProps.
 export const getInitialProps = (): void => {};
 
-export default App;
+export default appWithTranslation(App);

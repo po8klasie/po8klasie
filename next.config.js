@@ -1,5 +1,6 @@
 const { withSentryConfig } = require('@sentry/nextjs');
 const withOptimizedImages = require('next-optimized-images');
+const { i18n } = require('./next-i18next.config');
 
 const customNextConfig = {
   env: {
@@ -48,6 +49,7 @@ const customNextConfig = {
     disableServerWebpackPlugin: true,
     disableClientWebpackPlugin: true,
   },
+  i18n
 };
 
 module.exports = withSentryConfig(withOptimizedImages(customNextConfig));

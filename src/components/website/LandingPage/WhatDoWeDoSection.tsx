@@ -7,6 +7,7 @@ import comparisonMockUpImg from '../../../assets/website/img/comparison-mockup.p
 import comparisonMockUpImgPlaceholder from '../../../assets/website/img/comparison-mockup.png?lqip';
 import schoolViewMockUpImg from '../../../assets/website/img/school-view-mockup.png';
 import schoolViewMockUpImgPlaceholder from '../../../assets/website/img/school-view-mockup.png?lqip';
+import { useTranslation } from 'next-i18next';
 
 const MockUpImage: FC<{ src: string; placeholder: string; alt: string }> = ({
   src: imgSrc,
@@ -18,58 +19,49 @@ const MockUpImage: FC<{ src: string; placeholder: string; alt: string }> = ({
   </ProgressiveImage>
 );
 
-const WhatDoWeDoSection: FC = () => (
-  <div className="mt-32">
-    <h2 className="text-center text-3xl font-bold">W jaki sposób pomagamy?</h2>
-    <div className="w-4/5 mx-auto mt-20">
-      <div className="grid grid-cols-1 gap-x-10 gap-y-20 lg:grid-cols-2">
-        <div className="flex items-center">
-          <p className="text-lg">
-            Łączymy dane z różnych źródeł, aby wesprzeć młodzież i rodziców w wyborze szkoły
-            średniej. Chcemy oferować jak najwięcej ważnych informacji, aby wybór szkoły nie był tak
-            stresujący.
-          </p>
-        </div>
-        <div className="w-full">
-          <MockUpImage
-            alt="Zrzut ekranu wyszukiwarki"
-            src={searchMockUpImg}
-            placeholder={searchMockUpImgPlaceholder}
-          />
-        </div>
+const WhatDoWeDoSection: FC = () => {
+  const { t } = useTranslation('landing', { keyPrefix: 'whatDoWeDoSection' });
+  return (
+    <div className="mt-32">
+      <h2 className="text-center text-3xl font-bold">{t('howDoWeHelp')}</h2>
+      <div className="w-4/5 mx-auto mt-20">
+        <div className="grid grid-cols-1 gap-x-10 gap-y-20 lg:grid-cols-2">
+          <div className="flex items-center">
+            <p className="text-lg">{t('tile1Text')}</p>
+          </div>
+          <div className="w-full">
+            <MockUpImage
+              alt={t('tile1AltText')}
+              src={searchMockUpImg}
+              placeholder={searchMockUpImgPlaceholder}
+            />
+          </div>
 
-        <div className="w-full">
-          <MockUpImage
-            alt="Zrzut ekranu porównywarki szkół"
-            src={comparisonMockUpImg}
-            placeholder={comparisonMockUpImgPlaceholder}
-          />
-        </div>
-        <div className="flex items-center">
-          <p className="text-lg">
-            W wygodny sposób wyszukasz interesujące szkoły według wybranych przez Ciebie kryteriów.
-            Na profilu każdej szkoły znajdziesz wszystkie najważniejsze informacje. Porównasz szkoły
-            ze sobą — prosto i łatwo, bez ręcznego robienia zestawienia.
-          </p>
-        </div>
+          <div className="w-full">
+            <MockUpImage
+              alt={t('tile2AltText')}
+              src={comparisonMockUpImg}
+              placeholder={comparisonMockUpImgPlaceholder}
+            />
+          </div>
+          <div className="flex items-center">
+            <p className="text-lg">{t('tile2Text')}</p>
+          </div>
 
-        <div className="flex items-center">
-          <p className="text-lg">
-            Już nie ma potrzeby przeglądania wielu stron szkół, czy rankingów. Porównasz szkoły
-            nawet względem czasu dotarcia, niebezpiecznych miejsc po drodze, jak i poziomu
-            zanieczyszczenia smogiem!
-          </p>
-        </div>
-        <div className="w-full">
-          <MockUpImage
-            alt="Zrzut ekranu widoku szkoły"
-            src={schoolViewMockUpImg}
-            placeholder={schoolViewMockUpImgPlaceholder}
-          />
+          <div className="flex items-center">
+            <p className="text-lg">{t('tile3Text')}</p>
+          </div>
+          <div className="w-full">
+            <MockUpImage
+              alt={t('tile3AltText')}
+              src={schoolViewMockUpImg}
+              placeholder={schoolViewMockUpImgPlaceholder}
+            />
+          </div>
         </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default WhatDoWeDoSection;
