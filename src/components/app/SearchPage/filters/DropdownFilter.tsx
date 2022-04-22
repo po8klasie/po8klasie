@@ -1,23 +1,6 @@
-import React, { FC, useState } from 'react';
-import PerfectScrollbar from 'react-perfect-scrollbar';
+import { FC, Fragment, useState } from 'react';
+import { Listbox, Transition } from '@headlessui/react';
 import { MdCheck, MdExpandMore } from 'react-icons/md';
-import 'react-perfect-scrollbar/dist/css/styles.css';
-import styles from './styles/DropdownFilter.module.css';
-
-const useSelected = (initialState: unknown[], isMultipleChoice: boolean) => {
-  const [selected, setSelected] = useState(initialState);
-
-  const toggleItemMultiple = (choiceId: unknown) =>
-    selected.includes(choiceId) ? selected.filter((i) => i !== choiceId) : [...selected, choiceId];
-
-  const toggleItemSingle = (choiceId: unknown) => (selected.includes(choiceId) ? [] : [choiceId]);
-
-  const selectItem = (choiceId: unknown) => {
-    setSelected(isMultipleChoice ? toggleItemMultiple(choiceId) : toggleItemSingle(choiceId));
-  };
-
-  return { selected, setSelected, selectItem };
-};
 
 interface DropdownChoice {
   value: string;
@@ -36,45 +19,58 @@ interface DropdownFilterProps {
   onChange: (values: unknown[]) => void;
 }
 
-const DropdownFilter: FC<DropdownFilterProps> = ({
-  onChange,
-  options: { title, choices, isMultipleChoice },
-}) => {
-  const { selected, selectItem } = useSelected([], !!isMultipleChoice);
-  const isDropdownActive = selected.length > 0;
+const DropdownFilter: FC<DropdownFilterProps> = ({ onChange, options: { title, choices } }) => {
+  const [selected, setSelected] = useState();
 
-  /* TODO(micorix): add keyboard listener and proper ARIA */
-  /* eslint-disable jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions */
   return (
-    <div className={styles.dropdownWrapper} onMouseLeave={() => onChange(selected)}>
-      <button
-        type="button"
-        className={isDropdownActive ? styles.dropdownButtonActive : styles.dropdownButton}
-      >
-        {title}
-        <MdExpandMore />
-        <span className={styles.dropdownSpace} />
-      </button>
-      <div className={styles.dropdownListWrapper}>
-        <PerfectScrollbar>
-          <ul className={styles.dropdownList}>
-            {choices.map((choice: DropdownChoice) => (
-              <li
-                className={
-                  selected.includes(choice.value)
-                    ? styles.dropdownListItemActive
-                    : styles.dropdownListItem
-                }
-                onClick={() => selectItem(choice.value)}
-                key={choice.value}
-              >
-                {choice.label} <MdCheck />
-              </li>
-            ))}
-          </ul>
-        </PerfectScrollbar>
-      </div>
+    <div className="mx-2 top-16">
+      <Listbox value={selected} onChange={setSelected}>
+        <div className="relative">
+          <Listbox.Button className="relative w-full py-2 pl-4 pr-10 text-left bg-white rounded-full shadow-md border border-light cursor-default md:text-base">
+            <span className="block truncate">{title}</span>
+            <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+              <MdExpandMore className="w-5 h-5" aria-hidden="true" />
+            </span>
+          </Listbox.Button>
+          <Transition
+            as={Fragment}
+            leave="transition ease-in duration-100"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            <Listbox.Options className="absolute w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+              {choices.map((choice: DropdownChoice) => (
+                <Listbox.Option
+                  key={choice.value}
+                  className={({ active }) =>
+                    `cursor-default select-none relative py-2 pl-10 pr-4 ${
+                      active ? 'text-primaryLight bg-primary' : 'text-gray-900'
+                    }`
+                  }
+                  value={choice.value}
+                >
+                  {({ selected }) => (
+                    <>
+                      <span
+                        className={`block truncate ${selected ? 'font-medium' : 'font-normal'}`}
+                      >
+                        {choice.label}
+                      </span>
+                      {selected ? (
+                        <span className="absolute inset-y-0 left-0 flex items-center pl-3">
+                          <MdCheck className="w-5 h-5" aria-hidden="true" />
+                        </span>
+                      ) : null}
+                    </>
+                  )}
+                </Listbox.Option>
+              ))}
+            </Listbox.Options>
+          </Transition>
+        </div>
+      </Listbox>
     </div>
   );
 };
+
 export default DropdownFilter;

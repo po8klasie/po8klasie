@@ -1,5 +1,6 @@
 import React, { Dispatch, FC, SetStateAction, useState } from 'react';
 import { useProjectConfig } from '../../../config/projectConfigContext';
+import { MdOutlineFilterAlt } from 'react-icons/md';
 import filtersComponents from './filters';
 import styles from './filters/styles/FiltersRow.module.css';
 import { SearchViewConfig } from '../../../config/types';
@@ -49,6 +50,17 @@ const AlphaV3FiltersRow: FC<UseFiltersValuesReturnType> = ({ setFiltersValues, f
           />
         );
       })}
+      <div className="mx-2 block">
+        <button
+          className="inline-flex items-center justify-center rounded-full shadow-md border border-light px-4 py-2 bg-white text-base leading-6"
+          id="menu-button"
+          aria-expanded="true"
+          aria-haspopup="true"
+        >
+          <MdOutlineFilterAlt className="mr-2 text-xl" />
+          Filtry
+        </button>
+      </div>
     </div>
   );
 };

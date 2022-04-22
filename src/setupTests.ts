@@ -5,4 +5,4 @@ import Adapter from '@wojtekmaj/enzyme-adapter-react-17'; // there is no officia
 
 configure({ adapter: new Adapter() });
 
-export default {}
+export default {};
