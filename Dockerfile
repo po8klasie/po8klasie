@@ -54,6 +54,7 @@ COPY --from=builder /opt/po8klasie/.next ./.next
 COPY --from=builder /opt/po8klasie/node_modules ./node_modules
 COPY --from=builder /opt/po8klasie/package.json ./package.json
 COPY --from=builder /opt/po8klasie/server.js ./server.js
+COPY --from=builder /opt/po8klasie/next-i18next.config.js ./
 
 USER nextjs
 
