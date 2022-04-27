@@ -16,6 +16,7 @@ module.exports = {
       light: '#DCDCDC',
       white: '#FFFFFF',
       appBg: '#FBFBFB',
+      transparent: 'transparent',
       red: {
         '500': 'red',
       },

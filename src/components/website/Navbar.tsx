@@ -1,7 +1,12 @@
 import { FC, MouseEvent as ReactMouseEvent, useEffect, useState } from 'react';
 import Brand from './Brand';
-import { roundedLinkClassName } from './RoundedExternalLink';
+import { roundedSmallLinkClassName } from './RoundedExternalLink';
 import { useTranslation } from 'next-i18next';
+import { Popover } from '@headlessui/react';
+import { FiMenu, FiX } from 'react-icons/fi';
+import Link from 'next/link';
+import { ProjectsList } from './LandingPage/HeroSection';
+import capitalize from 'lodash/capitalize';
 
 const getScrollToSectionProps = (to: string) => ({
   href: to === 'top' ? '#' : `${to}`,
@@ -22,14 +27,19 @@ const getScrollToSectionProps = (to: string) => ({
   },
 });
 
-const bgStyles = 'bg-opacity-70 backdrop-filter backdrop-blur-2xl bg-white border-b border-light';
+const backdropStyles = 'bg-opacity-70 backdrop-filter backdrop-blur-2xl';
+const navbarBgStyle = `${backdropStyles} bg-white border-light border-b`;
+const popoverPanelClassName = `${backdropStyles}  border-light md:border rounded md:absolute top-7 bg-transparent md:bg-white md:left-1/2 md:-translate-x-1/2 transform md:px-4`;
 
 interface NavbarProps {
   navbarWrapperClassName: string;
+  projectsList: ProjectsList;
 }
 
-const Navbar: FC<NavbarProps> = ({ navbarWrapperClassName }) => {
+const Navbar: FC<NavbarProps> = ({ navbarWrapperClassName, projectsList }) => {
   const [shouldNavbarHaveBackground, setShouldNavbarHaveBackground] = useState(false);
+  const [isNavbarCollapsed, setNavbarCollapsed] = useState(true);
+
   const { t } = useTranslation('landing');
   useEffect(() => {
     const handleScroll = () => setShouldNavbarHaveBackground(window.scrollY > 10);
@@ -40,19 +50,56 @@ const Navbar: FC<NavbarProps> = ({ navbarWrapperClassName }) => {
   return (
     <div
       className={`fixed top-0 left-0 w-full z-10 transition duration-100 ${
-        shouldNavbarHaveBackground && bgStyles
+        (shouldNavbarHaveBackground || !isNavbarCollapsed) && navbarBgStyle
       } ${navbarWrapperClassName ?? ''}`}
     >
-      <div className="w-container mx-auto flex justify-between items-center">
-        <a {...getScrollToSectionProps('top')}>
-          <Brand className="font-bold text-2xl" />
-        </a>
-        <a
-          {...getScrollToSectionProps('support-us')}
-          className={['font-bold', roundedLinkClassName].join(' ')}
+      <div className="w-container mx-auto md:flex justify-between items-center">
+        <div className="flex justify-between items-center w-full">
+          <a {...getScrollToSectionProps('top')}>
+            <Brand className="font-bold text-2xl" />
+          </a>
+          <span className="md:hidden" onClick={() => setNavbarCollapsed(!isNavbarCollapsed)}>
+            {isNavbarCollapsed ? <FiMenu /> : <FiX />}
+          </span>
+        </div>
+        <div
+          className={`w-full mt-5 md:flex items-center justify-end ${
+            isNavbarCollapsed && 'hidden'
+          }`}
         >
-          {t('navbar.supportTheProject')}
-        </a>
+          <ul className="flex md:flex-row flex-col">
+            <li className="my-1">
+              <Popover className="relative">
+                <Popover.Button className="font-bold">{t('navbar.schools')}</Popover.Button>
+                <Popover.Panel className={popoverPanelClassName}>
+                  <ul>
+                    {projectsList.map(({ projectID, appName }) => (
+                      <li className="ml-2 md:ml-0 my-2">
+                        <a href={`/${projectID}`}>{capitalize(appName)}</a>
+                      </li>
+                    ))}
+                  </ul>
+                </Popover.Panel>
+              </Popover>
+            </li>
+            <li className="font-bold md:mx-10 my-1">
+              <Link href="/calculator">
+                <a>{t('navbar.pointsCalculator')}</a>
+              </Link>
+            </li>
+          </ul>
+          <span className="block mt-5 md:mt-0 md:ml-5">
+            <a
+              {...getScrollToSectionProps('support-us')}
+              className={[
+                'font-bold inline-block w-full sm:w-auto text-center',
+                roundedSmallLinkClassName,
+              ].join(' ')}
+            >
+              {t('navbar.supportTheProject')}
+            </a>
+          </span>
+        </div>
       </div>
     </div>
   );

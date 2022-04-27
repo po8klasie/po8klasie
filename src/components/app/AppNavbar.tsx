@@ -34,17 +34,24 @@ const AppNavbar: FC<AppNavbarProps> = ({ projectName, wide }) => {
           wide ? 'w-wideContainer' : 'w-container'
         } mx-auto lg:flex justify-between items-center py-3`}
       >
-        <div className="flex items-center justify-between">
+        <div className="relative flex items-center justify-between">
           <Link href="/">
-            <a>
+            <a className="flex items-center">
               <Brand projectName={projectName} className="font-bold text-xl" />
+              <span className="ml-2 rounded-full bg-primaryBg text-primary uppercase px-2 py-1 text-xs font-bold">
+                Beta
+              </span>
             </a>
           </Link>
           <button className="text-xl lg:hidden" onClick={toggleMenu} type="button">
             {isMenuCollapsed ? <AiOutlineClose /> : <AiOutlineMenu />}
           </button>
         </div>
-        <div className={`lg:flex items-center ${!isMenuCollapsed && 'hidden'} lg:block`}>
+        <div
+          className={`lg:flex items-center absolute z-10 top-navbarHeight bg-white w-container lg:w-auto pb-3 lg:pb-0 lg:static ${
+            !isMenuCollapsed && 'hidden'
+          }`}
+        >
           <ul className="lg:flex lg:mr-8">
             {links.map(([text, href]) => (
               <li key={href} className="lg:mx-4 my-4 lg:my-0">

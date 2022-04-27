@@ -51,7 +51,7 @@ const SupportUsSection: FC = () => {
               </a>
             }
           >
-            {t('textContent2')}  <Brand />.
+            {t('textContent2')} <Brand />.
           </SupportCard>
           <SupportCard
             title={t('secondaryHeader3')}
@@ -71,7 +71,7 @@ const SupportUsSection: FC = () => {
         </div>
       </div>
     </div>
-  )
+  );
 };
 
 export default SupportUsSection;
