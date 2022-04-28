@@ -4,6 +4,8 @@ import mojePanstwoImg from '../../../assets/website/img/partners/MojePanstwo-log
 import mojePanstwoImgPlaceholder from '../../../assets/website/img/partners/MojePanstwo-logo.png?lqip';
 import surveyLabImg from '../../../assets/website/img/partners/SurveyLab-logo.png';
 import surveyLabImgPlaceholder from '../../../assets/website/img/partners/SurveyLab-logo.png?lqip';
+import nerdsFamilyImg from '../../../assets/website/img/partners/NerdsFamily-logo.png';
+import nerdsFamilyImgPlaceholder from '../../../assets/website/img/partners/NerdsFamily-logo.png?lqip';
 
 export interface Partner {
   name: string;
@@ -33,5 +35,11 @@ export const partners: Partner[] = [
     image: surveyLabImg,
     imagePlaceholder: surveyLabImgPlaceholder,
     href: 'https://surveylab.com',
+  },
+  {
+    name: 'nerds.family',
+    image: nerdsFamilyImg,
+    imagePlaceholder: nerdsFamilyImgPlaceholder,
+    href: 'https://nerds.family',
   },
 ];
