@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import AppNavbar from './AppNavbar';
 import AppFooter from './AppFooter';
+import BetaBanner from './BetaBanner';
 import { ProjectConfig } from '../../config/types';
 
 interface AppLayoutProps {
@@ -14,6 +15,7 @@ const AppLayout: FC<AppLayoutProps> = ({ children, projectAppearance, wideNavbar
     <AppNavbar projectName={projectAppearance?.appName} wide={wideNavbar} />
     <main className="pt-navbarHeight">{children}</main>
     {!noFooter && <AppFooter />}
+    <BetaBanner />
   </div>
 );
 

@@ -32,9 +32,7 @@ const FeaturesSection: FC = () => {
           <div className="flex items-center">
             <div>
               <h3 className="text-2xl font-bold mb-4"> {t('secondaryHeader1')} </h3>
-              <p className="text-lg">
-                {t('textContent1')}
-              </p>
+              <p className="text-lg">{t('textContent1')}</p>
             </div>
           </div>
           <div className="w-full">
@@ -43,11 +41,13 @@ const FeaturesSection: FC = () => {
 
           <div className="flex items-center">
             <div>
-              <h3 className="text-2xl font-bold mb-4">  {t('secondaryHeader2')} </h3>
-              <p className="text-lg">
-                {t('textContent2')}
-              </p>
-              <RoundedExternalLink href={SURVEY_LINK} icon={FaWpforms} className="inline-flex mt-10">
+              <h3 className="text-2xl font-bold mb-4"> {t('secondaryHeader2')} </h3>
+              <p className="text-lg">{t('textContent2')}</p>
+              <RoundedExternalLink
+                href={SURVEY_LINK}
+                icon={FaWpforms}
+                className="inline-flex mt-10"
+              >
                 {t('surveyInvitation')}
               </RoundedExternalLink>
             </div>
@@ -58,7 +58,7 @@ const FeaturesSection: FC = () => {
         </div>
       </div>
     </div>
-  )
+  );
 };
 
 export default FeaturesSection;

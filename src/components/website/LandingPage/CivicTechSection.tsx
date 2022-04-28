@@ -6,15 +6,15 @@ const CivicTechSection: FC = () => {
   const { t } = useTranslation('landing', { keyPrefix: 'civicTechSection' });
   return (
     <div className="mt-32 py-32 bg-primaryLight">
-    <div className="w-narrowContainer mx-auto">
-      <h2 className="text-center text-3xl font-bold"> {t("civicTechnology")} </h2>
-      <p className="mt-10 text-center text-lg">
-        {t('project')} <Brand /> {t('textFragment1')} <strong> {t('textFragment2')}</strong> {t('textFragment3')}
-      </p>
+      <div className="w-narrowContainer mx-auto">
+        <h2 className="text-center text-3xl font-bold"> {t('civicTechnology')} </h2>
+        <p className="mt-10 text-center text-lg">
+          {t('project')} <Brand /> {t('textFragment1')} <strong> {t('textFragment2')}</strong>{' '}
+          {t('textFragment3')}
+        </p>
+      </div>
     </div>
-  </div>
   );
 };
 
 export default CivicTechSection;
-

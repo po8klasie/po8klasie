@@ -5,7 +5,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import 'tailwindcss/tailwind.css';
 
 import Layout from '../components/website/Layout';
-import HeroSection from '../components/website/LandingPage/HeroSection';
+import HeroSection, { ProjectsList } from "../components/website/LandingPage/HeroSection";
 import PartnersSection from '../components/website/LandingPage/PartnersSection';
 import ContactUsSection from '../components/website/LandingPage/ContactUsSection';
 import WhatDoWeDoSection from '../components/website/LandingPage/WhatDoWeDoSection';
@@ -17,16 +17,21 @@ import SupportUsSection from '../components/website/LandingPage/SupportUsSection
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 import { ProjectConfig } from '../config/types';
 import { SSRConfig } from 'next-i18next';
+import { projectConfigs } from '../config';
 
-const LandingPage: FC = () => {
+interface LandingPageProps {
+  projectsList: ProjectsList
+}
+
+const LandingPage: FC<LandingPageProps> = ({ projectsList }) => {
   return (
-    <Layout>
+    <Layout projectsList={projectsList}>
       <NextSeo
         titleTemplate="%s"
         title="po8klasie"
         description="Wyszukiwarka szkół średnich. Wierzymy, że wybór szkoły średniej nie powinien ograniczać się tylko do kryterium punktowego."
       />
-      <HeroSection />
+      <HeroSection projectsList={projectsList} />
       <WhatDoWeDoSection />
       <CivicTechSection />
       <FeaturesSection />
@@ -46,6 +51,12 @@ export default LandingPage;
 // Runtime configuration won't be available to any page (or component in a page) without getInitialProps/getServerSideProps.
 export const getServerSideProps = async ({
   locale,
-}: GetServerSidePropsContext): Promise<GetServerSidePropsResult<SSRConfig>> => ({
-  props: await serverSideTranslations(locale as string, ['landing']),
+}: GetServerSidePropsContext): Promise<GetServerSidePropsResult<any>> => ({
+  props: {
+    ...(await serverSideTranslations(locale as string, ['landing'])),
+    projectsList: Object.values(projectConfigs).map(({ projectID, appearance }) => ({
+      projectID,
+      appName: appearance.appName,
+    })),
+  },
 });

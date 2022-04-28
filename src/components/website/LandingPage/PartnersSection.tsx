@@ -41,7 +41,7 @@ const PartnersSection: FC = () => {
         </div>
       </div>
     </div>
-  )
+  );
 };
 
 export default PartnersSection;

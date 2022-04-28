@@ -1,10 +1,13 @@
 {
   "navbar": {
-    "supportTheProject": "Wesprzyj projekt"
+    "supportTheProject": "Wesprzyj projekt",
+    "schools": "Szkoły",
+    "pointsCalculator": "Kalkulator punktów"
   },
   "heroSection": {
     "title": "pomaga Ci wybrać szkołę średnią",
-    "subTitle": "Wierzymy, że wybór szkoły średniej nie powinien ograniczać się do kryterium punktowego"
+    "subTitle": "Wierzymy, że wybór szkoły średniej nie powinien ograniczać się do kryterium punktowego",
+    "selectCity": "Wybierz miasto"
   },
   "whatDoWeDoSection": {
     "howDoWeHelp": "W jaki sposób pomagamy?",

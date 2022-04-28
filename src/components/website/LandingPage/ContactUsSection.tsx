@@ -7,7 +7,7 @@ import { useTranslation } from 'next-i18next';
 const ContactUsSection: FC = () => {
   const { t } = useTranslation('landing', { keyPrefix: 'contactUsSection' });
   return (
-    <div className="my-32">
+    <div className="my-32" id="contact-us">
       <div className="w-container mx-auto">
         <h2 className="text-center text-3xl font-bold">{t('mainHeader1')}</h2>
         <div className="mt-10 flex justify-center flex-wrap">
@@ -30,7 +30,7 @@ const ContactUsSection: FC = () => {
         </div>
       </div>
     </div>
-  )
+  );
 };
 
 export default ContactUsSection;

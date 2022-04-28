@@ -1,10 +1,13 @@
 {
   "navbar": {
-    "supportTheProject": "Support the project"
+    "supportTheProject": "Support the project",
+    "schools": "Schools",
+    "pointsCalculator": "Points calculator"
   },
   "heroSection": {
     "title": "helps you choose your school",
-    "subTitle": "We believe that school choice should not be limited by points thresholds"
+    "subTitle": "We believe that school choice should not be limited by points thresholds",
+    "selectCity": "Select the city"
   },
   "whatDoWeDoSection": {
     "howDoWeHelp": "How do we help?",
