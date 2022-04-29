@@ -74,6 +74,11 @@ const TeamSection: FC = () => {
             <TeamMemberCard key={teamMember.name} teamMember={teamMember} />
           ))}
         </div>
+        <span className="block mt-10 text-gray opacity-70 hover:opacity-100">
+          <a href="https://github.com/po8klasie" target="_blank" rel="noreferrer noopener">
+            Zobacz wszystkich kontrybutorów na GitHubie
+          </a>
+        </span>
       </div>
     </div>
   );
