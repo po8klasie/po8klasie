@@ -8,6 +8,7 @@ export interface IPublicRuntimeConfig {
   PUBLIC_SENTRY_DSN: string
   MAPBOX_ACCESS_TOKEN: string
   POSTHOG_API_KEY: string
+  SHOW_LINKS_TO_APP: string
 }
 
 const emptyPublicRuntimeConfig: IPublicRuntimeConfig = {
@@ -17,7 +18,10 @@ const emptyPublicRuntimeConfig: IPublicRuntimeConfig = {
     PUBLIC_SENTRY_DSN: '',
     MAPBOX_ACCESS_TOKEN: '',
     POSTHOG_API_KEY: '',
+    SHOW_LINKS_TO_APP: ''
 };
+
+export const isFeatureFlagEnabled = (flagValue: string) => flagValue === 'true'
 
 // https://nextjs.org/docs/api-reference/next.config.js/runtime-configuration
 // We use publicRuntimeConfig, so every page which imports this file

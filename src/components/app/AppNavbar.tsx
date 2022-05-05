@@ -5,6 +5,7 @@ import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
 import { roundedSmallLinkClassName } from '../website/RoundedExternalLink';
 import Brand from '../website/Brand';
 import { useProjectConfig } from '../../config/projectConfigContext';
+import { isFeatureFlagEnabled, publicRuntimeConfig } from "../../runtimeConfig";
 
 interface AppNavbarProps {
   projectName?: string;
@@ -19,9 +20,14 @@ const AppNavbar: FC<AppNavbarProps> = ({ projectName, wide }) => {
 
   const links: [string, string][] = [
     ['Strona główna', '/'],
-    ['Szkoły', `/${projectID}/search`],
+    ];
+
+  if (isFeatureFlagEnabled(publicRuntimeConfig.SHOW_LINKS_TO_APP))
+    links.push(['Szkoły', `/${projectID}/search`]);
+
+  links.concat([
     ['Kalkulator punktów', '/calculator'],
-  ];
+  ])
 
   const getLinkClassName = (href: string) => {
     return router.pathname === href ? 'font-bold' : '';
