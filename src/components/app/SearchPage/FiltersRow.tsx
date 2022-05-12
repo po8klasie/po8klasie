@@ -3,6 +3,7 @@ import { useProjectConfig } from '../../../config/projectConfigContext';
 import filtersComponents from './filters';
 import styles from './filters/styles/FiltersRow.module.css';
 import { SearchViewConfig } from '../../../config/types';
+import MobileFilters from "./MobileFilters";
 
 type FiltersValues = Record<string, string | unknown[]>;
 
@@ -39,16 +40,19 @@ const AlphaV3FiltersRow: FC<UseFiltersValuesReturnType> = ({ setFiltersValues, f
 
   return (
     <div className={styles.filtersRow}>
-      {filtersConfig.map(({ options, key, component }) => {
+      {filtersConfig.map(({ options, key, displayInRowOnMobile, component }) => {
         const FilterComponent = filtersComponents[component as keyof typeof filtersComponents];
         return (
-          <FilterComponent
-            options={options}
-            onChange={handleFiltersChange(key)}
-            value={filtersValues[key]}
-          />
+          <span className={!displayInRowOnMobile ? 'hidden md:inline-block' : ''}>
+            <FilterComponent
+              options={options}
+              onChange={handleFiltersChange(key)}
+              value={filtersValues[key]}
+            />
+          </span>
         );
       })}
+      <MobileFilters onFiltersChange={handleFiltersChange} filtersValues={filtersValues} />
     </div>
   );
 };

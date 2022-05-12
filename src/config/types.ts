@@ -6,6 +6,7 @@ export type FilterDefinition = {
   component: string; // TODO: More strict types
   options?: any; // TODO: More strict types
   validator: string; // TODO: More strict types
+  displayInRowOnMobile: boolean;
   initialValue: string | unknown[];
 };
 
