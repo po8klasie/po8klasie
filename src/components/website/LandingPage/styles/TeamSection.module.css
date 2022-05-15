@@ -1,0 +1,33 @@
+.teamGrid {
+    @apply mt-20 grid gap-x-20 gap-y-14 grid-cols-2 md:grid-cols-6 xl:grid-cols-8;
+}
+
+/* https://css-irl.info/controlling-leftover-grid-items/ magic */
+.teamGrid > * {
+    grid-column: span 2;
+}
+
+.teamGrid > *:first-child:nth-child(4n + 1) {
+    grid-column-end: 4;
+}
+.teamGrid > *:last-child:nth-child(4n - 1) {
+    grid-column-end: auto;
+}
+
+@media (max-width: theme('screens.xl')) {
+    .teamGrid > *:first-child:nth-child(4n + 1) {
+        grid-column-end: auto;
+    }
+    .teamGrid > *:last-child:nth-child(4n - 1) {
+        grid-column-end: 5;
+    }
+}
+
+@media (max-width: theme('screens.md')) {
+    .teamGrid > *:first-child:nth-child(4n + 1) {
+        grid-column-end: auto;
+    }
+    .teamGrid > *:last-child:nth-child(4n - 1) {
+        grid-column-end: auto;
+    }
+}
