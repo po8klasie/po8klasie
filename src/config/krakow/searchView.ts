@@ -15,6 +15,7 @@ const searchViewConfig: SearchViewConfig = {
       component: 'text',
       validator: 'string',
       initialValue: '',
+      displayInRowOnMobile: true,
       options: {
         placeholder: 'Nazwa szkoły lub słowo kluczowe',
         icon: 'BsSearch',
@@ -25,6 +26,7 @@ const searchViewConfig: SearchViewConfig = {
       component: 'dropdown',
       validator: 'none',
       initialValue: [],
+      displayInRowOnMobile: false,
       options: {
         title: 'Szkoła publiczna',
         isMultipleChoice: false,
@@ -45,6 +47,7 @@ const searchViewConfig: SearchViewConfig = {
       component: 'dropdown',
       validator: 'none',
       initialValue: [],
+      displayInRowOnMobile: false,
       options: {
         title: 'Typ szkoły',
         isMultipleChoice: false,
