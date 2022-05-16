@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { BsCheckCircleFill } from 'react-icons/bs';
 import { IconType } from 'react-icons';
 import SchoolInfoSection from './SchoolInfoSection';
+import DataAvailableSoonOverlay from "./DataAvailableSoonOverlay";
 
 interface ItemWithIconProps {
   icon: IconType;
@@ -29,20 +30,22 @@ const tmpExtracurriculars = [
 const EducationalOfferSection: FC = () => {
   return (
     <SchoolInfoSection
-      overwriteFooter="Dane poglądowe"
+      overwriteFooter="Dane dostępne wkrótce"
       id="educationalOffer"
       updateTime={new Date().toDateString()}
     >
       <div className="p-3">
         <h3 className="text-lg font-bold text-dark">Oferta edukacyjna</h3>
-        <h4 className="text-dark text-base font-semibold mt-2">Zajęcia dodatkowe</h4>
-        <ul className="mt-2 grid md:grid-cols-3 xl:grid-cols-5 gap-x-4 gap-y-2 text-gray">
-          {tmpExtracurriculars.map((name) => (
-            <li key={name}>
-              <ItemWithIcon icon={BsCheckCircleFill}>{name}</ItemWithIcon>
-            </li>
-          ))}
-        </ul>
+        <DataAvailableSoonOverlay>
+          <h4 className="text-dark text-base font-semibold mt-2">Zajęcia dodatkowe</h4>
+          <ul className="mt-2 grid md:grid-cols-3 xl:grid-cols-5 gap-x-4 gap-y-2 text-gray">
+            {tmpExtracurriculars.map((name) => (
+              <li key={name}>
+                <ItemWithIcon icon={BsCheckCircleFill}>{name}</ItemWithIcon>
+              </li>
+            ))}
+          </ul>
+        </DataAvailableSoonOverlay>
       </div>
     </SchoolInfoSection>
   );
