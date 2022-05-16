@@ -1,9 +1,14 @@
 import TextFilter from './TextFilter';
-import DropdownFilter from './DropdownFilter';
+import DropdownFilter, { MobileDropdownFilter } from "./DropdownFilter";
 
 const filtersComponents = {
   text: TextFilter,
   dropdown: DropdownFilter,
 };
+
+export const mobileFiltersComponents = {
+  text: TextFilter,
+  dropdown: MobileDropdownFilter
+}
 
 export default filtersComponents;

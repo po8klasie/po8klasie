@@ -1,7 +1,7 @@
 .filtersRow {
     position: sticky;
     top: var(--navbar-height);
-    z-index: 999;
+    z-index: 30;
     background: white;
     height: var(--filters-row-height);
     border-bottom: 1px solid #E2E5E6;
