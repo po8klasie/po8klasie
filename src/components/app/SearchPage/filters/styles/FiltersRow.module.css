@@ -1,5 +1,5 @@
 .filtersRow {
-    position: sticky;
+    position: fixed;
     top: var(--navbar-height);
     z-index: 30;
     background: white;
@@ -39,4 +39,11 @@
 
 .textInput:focus {
     outline: none;
+}
+
+
+@media(max-width: theme('screens.lg')) {
+    .textInputWrapper {
+        width: auto;
+    }
 }

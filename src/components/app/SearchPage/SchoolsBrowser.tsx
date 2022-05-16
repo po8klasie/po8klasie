@@ -13,12 +13,16 @@ const SchoolsBrowser: FC<SchoolsBrowserProps> = ({ results }) => {
   const [isMapExpanded, setMapExpanded] = useState(false);
   const handleExpandToggle = () => setMapExpanded(!isMapExpanded);
 
+  // < tailwind lg https://tailwindcss.com/docs/responsive-design
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 1024
+
   return (
     <div>
       <SchoolsListing results={results} />
       <SchoolsMap
         results={results}
-        isExpanded={isMapExpanded}
+        isExpanded={isMobile || isMapExpanded}
+        hideExpandBtn={isMobile}
         onExpandToggle={handleExpandToggle}
       />
     </div>
