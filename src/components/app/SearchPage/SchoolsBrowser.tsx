@@ -13,7 +13,7 @@ const SchoolsBrowser: FC<SchoolsBrowserProps> = ({ results }) => {
   const [isMapExpanded, setMapExpanded] = useState(false);
   const handleExpandToggle = () => setMapExpanded(!isMapExpanded);
 
-  // < tailwind lg https://tailwindcss.com/docs/responsive-design
+  // less than tailwind's `lg` preset https://tailwindcss.com/docs/responsive-design
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 1024
 
   return (
