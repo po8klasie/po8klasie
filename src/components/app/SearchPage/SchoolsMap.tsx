@@ -14,10 +14,11 @@ interface SchoolsMapProps {
   results: RailsApiSchool[];
   onExpandToggle: () => void;
   isExpanded: boolean;
+  hideExpandBtn: boolean;
 }
 
 /* Warning! This is client-side only component. It needs to be imported using dynamic() */
-const SchoolsMap: FC<SchoolsMapProps> = ({ results, onExpandToggle, isExpanded }) => {
+const SchoolsMap: FC<SchoolsMapProps> = ({ results, onExpandToggle, isExpanded, hideExpandBtn }) => {
   const [map, setMap] = useState<LeafletMap | null>(null);
   const { searchView: searchViewConfig } = useProjectConfig();
   const { mapOptions } = searchViewConfig as SearchViewConfig;
@@ -64,9 +65,13 @@ const SchoolsMap: FC<SchoolsMapProps> = ({ results, onExpandToggle, isExpanded }
           );
         })}
       </MapContainer>
-      <button className={styles.mapExpandButton} onClick={onExpandToggle} type="button">
-        <BsChevronRight />
-      </button>
+      {
+        !hideExpandBtn && (
+          <button className={styles.mapExpandButton} onClick={onExpandToggle} type="button">
+            <BsChevronRight />
+          </button>
+        )
+      }
     </div>
   );
 };
