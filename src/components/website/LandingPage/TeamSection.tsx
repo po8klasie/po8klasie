@@ -4,7 +4,7 @@ import { IconType } from 'react-icons';
 import { FaGithub, FaGlobe, FaLinkedinIn } from 'react-icons/fa';
 import teamMembers, { TeamMember } from '../data/team';
 import { useTranslation } from 'next-i18next';
-
+import styles from './styles/TeamSection.module.css'
 const IMAGE_SIZE = 150;
 
 const iconMapping: Record<string, IconType> = {
@@ -69,7 +69,7 @@ const TeamSection: FC = () => {
     <div className="mt-32">
       <div className="w-1/2 mx-auto">
         <h2 className="text-center text-3xl font-bold">{t('mainHeader')}</h2>
-        <div className="mt-20 grid gap-x-20 gap-y-14 sm:grid-cols-2 xl:grid-cols-3">
+        <div className={styles.teamGrid}>
           {teamMembers.map((teamMember) => (
             <TeamMemberCard key={teamMember.name} teamMember={teamMember} />
           ))}
