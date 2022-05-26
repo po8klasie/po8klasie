@@ -21,6 +21,7 @@ module.exports = {
         '500': 'red',
       },
       lighten: '#E2E5E6',
+      lightBlue: '#EFF5F8'
     },
     fontFamily: {
       primary: `Jost, ${systemFontStack}`,
@@ -45,6 +46,7 @@ module.exports = {
   variants: {
     extend: {
       margin: ['first', 'last'],
+      backgroundColor: ['even']
     },
   },
   plugins: [require('@tailwindcss/forms')],

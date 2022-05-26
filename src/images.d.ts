@@ -17,3 +17,13 @@ declare module '*.jpg?lqip' {
   const content: any;
   export default content;
 }
+
+declare module '*.jpeg' {
+  const content: any;
+  export default content;
+}
+
+declare module '*.jpeg?lqip' {
+  const content: any;
+  export default content;
+}

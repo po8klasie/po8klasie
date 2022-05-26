@@ -1,9 +1,10 @@
 import { FC } from 'react';
 import OverviewSection from './OverviewSection';
 import EducationalOfferSection from './EducationalOfferSection';
+import ClassProfilesSection from "./ClassProfilesSection";
 import { SectionComponentProps } from './types';
 
-export type SchoolInfoSectionId = 'overview' | 'educationalOffer';
+export type SchoolInfoSectionId = 'overview' | 'classProfiles' | 'educationalOffer';
 
 export interface SchoolInfoSectionConfig {
   id: SchoolInfoSectionId;
@@ -16,6 +17,11 @@ const schoolInfoSections: Record<SchoolInfoSectionId, SchoolInfoSectionConfig> =
     id: 'overview',
     name: 'Podstawowe informacje',
     SectionComponent: OverviewSection,
+  },
+  classProfiles: {
+    id: 'classProfiles',
+    name: 'Profile klas',
+    SectionComponent: ClassProfilesSection,
   },
   educationalOffer: {
     id: 'educationalOffer',
