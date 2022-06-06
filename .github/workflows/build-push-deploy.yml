@@ -5,6 +5,10 @@ on:
     branches:
       - master
 
+permissions:
+  contents: 'read'
+  id-token: 'write'
+
 env:
   GCP_DEPLOYMENT_SERVICE_ACCOUNT: ${{ secrets.GCP_DEPLOYMENT_SERVICE_ACCOUNT }}
   WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
