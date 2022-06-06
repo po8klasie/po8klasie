@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { BsCheckCircleFill } from 'react-icons/bs';
+import { BsCheckCircle } from '@react-icons/all-files/bs/BsCheckCircle';
 import { IconType } from 'react-icons';
 import SchoolInfoSection from './SchoolInfoSection';
 import DataAvailableSoonOverlay from "./DataAvailableSoonOverlay";
@@ -41,7 +41,7 @@ const EducationalOfferSection: FC = () => {
           <ul className="mt-2 grid md:grid-cols-3 xl:grid-cols-5 gap-x-4 gap-y-2 text-gray">
             {tmpExtracurriculars.map((name) => (
               <li key={name}>
-                <ItemWithIcon icon={BsCheckCircleFill}>{name}</ItemWithIcon>
+                <ItemWithIcon icon={BsCheckCircle}>{name}</ItemWithIcon>
               </li>
             ))}
           </ul>

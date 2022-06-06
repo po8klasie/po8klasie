@@ -17,14 +17,7 @@ const TextFilter: FC<TextFilterProps> = ({ value, onChange, options }) => {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => onChange(e.target.value);
 
   const icon = options?.icon as string;
-  const Icon = icon
-    ? dynamic(
-        () => import('react-icons/all').then((bundle) => bundle[icon]) as Promise<ComponentType>,
-        {
-          ssr: false,
-        },
-      )
-    : () => null;
+  const Icon =  () => null;
 
   return (
     <div className={styles.textInputWrapper}>

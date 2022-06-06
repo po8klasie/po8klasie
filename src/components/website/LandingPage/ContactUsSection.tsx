@@ -1,6 +1,7 @@
 import { FC } from 'react';
-import { FaFacebookF, FaFacebookMessenger } from 'react-icons/fa';
-import { BsEnvelope } from 'react-icons/bs';
+import { FaFacebookF } from '@react-icons/all-files/fa/FaFacebookF';
+import { FaFacebookMessenger } from '@react-icons/all-files/fa/FaFacebookMessenger';
+import { BsEnvelope } from '@react-icons/all-files/bs/BsEnvelope';
 import RoundedExternalLink from '../RoundedExternalLink';
 import { useTranslation } from 'next-i18next';
 

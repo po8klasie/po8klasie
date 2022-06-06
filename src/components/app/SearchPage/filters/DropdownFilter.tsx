@@ -1,6 +1,7 @@
 import React, { FC, useEffect, useState } from "react";
 import PerfectScrollbar from 'react-perfect-scrollbar';
-import { MdCheck, MdExpandMore } from 'react-icons/md';
+import { MdCheck } from '@react-icons/all-files/md/MdCheck';
+import { MdExpandMore } from '@react-icons/all-files/md/MdExpandMore';
 import { Disclosure } from "@headlessui/react";
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import styles from './styles/DropdownFilter.module.css';

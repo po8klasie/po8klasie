@@ -1,6 +1,8 @@
 import { FC } from 'react';
 import dynamic from 'next/dynamic';
-import { MdOutlineHome, MdLink, MdOutlineEmail } from 'react-icons/md';
+import { MdHome } from '@react-icons/all-files/md/MdHome';
+import { MdLink } from '@react-icons/all-files/md/MdLink';
+import { MdEmail } from '@react-icons/all-files/md/MdEmail';
 import { IconType } from 'react-icons';
 import { LatLngTuple } from 'leaflet';
 import SchoolInfoSection from './SchoolInfoSection';
@@ -33,7 +35,7 @@ const OverviewSection: FC<SectionComponentProps> = ({ school }) => {
             <h3 className="text-lg font-bold text-dark">Podstawowe informacje</h3>
             <ul className="mt-2 text-gray">
               <li className="my-2">
-                <ItemWithIcon icon={MdOutlineHome}>
+                <ItemWithIcon icon={MdHome}>
                   {school.street} {school.buildingNo}, {school.zipCode} {school.town}
                 </ItemWithIcon>
               </li>
@@ -45,7 +47,7 @@ const OverviewSection: FC<SectionComponentProps> = ({ school }) => {
               {/*   <ItemWithIcon icon={MdPhone}>{school.}</ItemWithIcon> */}
               {/* </li> */}
               <li className="my-2">
-                <ItemWithIcon icon={MdOutlineEmail}>{school.email}</ItemWithIcon>
+                <ItemWithIcon icon={MdEmail}>{school.email}</ItemWithIcon>
               </li>
               {/* not yet implemented */}
               {/* <li className="my-2"> */}
