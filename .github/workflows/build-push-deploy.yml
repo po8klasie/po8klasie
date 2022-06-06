@@ -70,7 +70,7 @@ jobs:
         uses: 'google-github-actions/deploy-cloudrun@v0'
         with:
           service: ${{ env.CLOUDRUN_SERVICE }}
-          image: ${{ env.DOCKER_IMAGE }}:master-${{ GITHUB_SHA }}
+          image: ${{ env.DOCKER_IMAGE }}:master-${{ env.GITHUB_SHA }}
 
       - name: Purge cache
         uses: jakejarvis/cloudflare-purge-action@v0.3.0
