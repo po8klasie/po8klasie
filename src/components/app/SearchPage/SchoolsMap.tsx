@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
 import { Map as LeafletMap, latLngBounds } from 'leaflet';
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
-import { BsChevronRight } from 'react-icons/bs';
+import { BsChevronRight } from '@react-icons/all-files/bs/BsChevronRight';
 import { marker } from '../../../utils/mapMarkers';
 import styles from './styles/SchoolsMap.module.css';
 import 'leaflet/dist/leaflet.css';

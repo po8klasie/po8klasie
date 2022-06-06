@@ -1,7 +1,9 @@
 import { FC, forwardRef, HTMLProps } from 'react';
 import ProgressiveImage from 'react-progressive-graceful-image';
 import { IconType } from 'react-icons';
-import { FaGithub, FaGlobe, FaLinkedinIn } from 'react-icons/fa';
+import { FaGithub } from '@react-icons/all-files/fa/FaGithub';
+import { FaGlobe } from '@react-icons/all-files/fa/FaGlobe';
+import { FaLinkedinIn } from '@react-icons/all-files/fa/FaLinkedinIn';
 import teamMembers, { TeamMember } from '../data/team';
 import { useTranslation } from 'next-i18next';
 import styles from './styles/TeamSection.module.css'

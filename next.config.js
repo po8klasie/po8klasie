@@ -2,6 +2,10 @@ const { withSentryConfig } = require('@sentry/nextjs');
 const withOptimizedImages = require('next-optimized-images');
 const { i18n } = require('./next-i18next.config');
 
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+})
+
 const customNextConfig = {
   env: {
     PUBLIC_URL: '',
@@ -23,11 +27,6 @@ const customNextConfig = {
   images: {
     disableStaticImages: true,
   },
-  exportPathMap: async (defaultPathMap) => ({
-    ...defaultPathMap,
-    '/warszawa/legacy': { page: '/warszawa/legacy/[[...slug]]' },
-  }),
-
   rewrites: () => {
     if (!process.env.API_URL) return [];
 
@@ -50,7 +49,12 @@ const customNextConfig = {
     disableServerWebpackPlugin: true,
     disableClientWebpackPlugin: true,
   },
-  i18n
+  i18n,
+  eslint: {
+    // Warning: This allows production builds to successfully complete even if
+    // your project has ESLint errors.
+    ignoreDuringBuilds: true,
+  },
 };
 
-module.exports = withSentryConfig(withOptimizedImages(customNextConfig));
+module.exports = withBundleAnalyzer(withSentryConfig(withOptimizedImages(customNextConfig)));

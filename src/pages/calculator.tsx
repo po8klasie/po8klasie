@@ -3,7 +3,7 @@ import { NextSeo } from 'next-seo';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import 'tailwindcss/tailwind.css';
 
-import { AiOutlineWarning } from 'react-icons/ai';
+import { AiOutlineWarning } from '@react-icons/all-files/ai/AiOutlineWarning';
 import AppLayout from '../components/app/AppLayout';
 import Calculator from '../components/calculator/Calculator';
 

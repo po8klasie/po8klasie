@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { FiX } from 'react-icons/fi';
+import { FiX } from '@react-icons/all-files/fi/FiX';
 import { useState } from 'react';
 
 const BANNER_LOCAL_STORAGE_KEY = 'BETA_BANNER_SHOWN';

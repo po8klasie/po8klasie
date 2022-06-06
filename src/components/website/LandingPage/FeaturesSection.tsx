@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import ProgressiveImage from 'react-progressive-graceful-image';
-import { FaWpforms } from 'react-icons/fa';
+import { FaWpforms } from '@react-icons/all-files/fa/FaWpforms';
 import RoundedExternalLink from '../RoundedExternalLink';
 
 import lookupImg from '../../../assets/website/img/features-lookup.png';

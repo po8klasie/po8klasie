@@ -1,7 +1,8 @@
 import { FC, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
+import { AiOutlineClose } from '@react-icons/all-files/ai/AiOutlineClose';
+import { AiOutlineMenu } from '@react-icons/all-files/ai/AiOutlineMenu';
 import { roundedSmallLinkClassName } from '../website/RoundedExternalLink';
 import Brand from '../website/Brand';
 import { useProjectConfig } from '../../config/projectConfigContext';

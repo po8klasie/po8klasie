@@ -3,8 +3,8 @@ import { Dialog } from '@headlessui/react'
 import { mobileFiltersComponents } from "./filters";
 import { useProjectConfig } from "../../../config/projectConfigContext";
 import { SearchViewConfig } from "../../../config/types";
-import { BiFilterAlt } from "react-icons/bi";
-import { FiX } from "react-icons/fi";
+import { BiFilterAlt } from '@react-icons/all-files/bi/BiFilterAlt';
+import { FiX } from '@react-icons/all-files/fi/FiX';
 
 interface MobileFiltersProps {
   onFiltersChange: (filterKey: string) => (value: unknown[] | string) => void

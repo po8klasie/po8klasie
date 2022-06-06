@@ -1,5 +1,8 @@
 import { FC } from 'react';
-import { FaGithub, FaFacebookF, FaLinkedinIn, FaTwitter } from 'react-icons/fa';
+import { FaGithub } from '@react-icons/all-files/fa/FaGithub';
+import { FaFacebookF } from '@react-icons/all-files/fa/FaFacebookF';
+import { FaLinkedinIn } from '@react-icons/all-files/fa/FaLinkedinIn';
+import { FaTwitter } from '@react-icons/all-files/fa/FaTwitter';
 import { IconType } from 'react-icons';
 import Brand from '../website/Brand';
 import { publicRuntimeConfig } from '../../runtimeConfig';
