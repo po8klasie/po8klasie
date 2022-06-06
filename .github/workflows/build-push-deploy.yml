@@ -33,7 +33,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: ${{ DOCKER_IMAGE }}
+          images: ${{ env.DOCKER_IMAGE }}
           tags: |
             type=sha,enable=true,prefix=master-,format=long
           flavor: |
@@ -47,8 +47,8 @@ jobs:
         uses: 'google-github-actions/auth@v0'
         with:
           token_format: 'access_token'
-          workload_identity_provider: ${{ WORKLOAD_IDENTITY_PROVIDER }}
-          service_account: ${{ GCP_DEPLOYMENT_SERVICE_ACCOUNT }}
+          workload_identity_provider: ${{ env.WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ env.GCP_DEPLOYMENT_SERVICE_ACCOUNT }}
 
       - name: Login to GCR
         uses: docker/login-action@v2
@@ -63,14 +63,14 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           push: true
-          cache-from: type=registry,ref=${{ secrets.DOCKER_IMAGE }}:cache-master
-          cache-to: type=registry,mode=max,ref=${{ secrets.DOCKER_IMAGE }}:cache-master
+          cache-from: type=registry,ref=${{ env.DOCKER_IMAGE }}:cache-master
+          cache-to: type=registry,mode=max,ref=${{ env.DOCKER_IMAGE }}:cache-master
 
       - id: 'deploy'
         uses: 'google-github-actions/deploy-cloudrun@v0'
         with:
-          service: ${{ CLOUDRUN_SERVICE }}
-          image: ${{ DOCKER_IMAGE }}:master-${{ GITHUB_SHA }}
+          service: ${{ env.CLOUDRUN_SERVICE }}
+          image: ${{ env.DOCKER_IMAGE }}:master-${{ GITHUB_SHA }}
 
       - name: Purge cache
         uses: jakejarvis/cloudflare-purge-action@v0.3.0
