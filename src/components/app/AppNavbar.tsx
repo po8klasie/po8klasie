@@ -23,15 +23,13 @@ const AppNavbar: FC<AppNavbarProps> = ({ projectName, wide }) => {
     ['Strona główna', '/'],
     ];
 
-  if (isFeatureFlagEnabled(publicRuntimeConfig.SHOW_LINKS_TO_APP))
+  if (isFeatureFlagEnabled(publicRuntimeConfig.SHOW_LINKS_TO_APP) && projectID)
     links.push(['Szkoły', `/${projectID}/search`]);
 
-  links.concat([
-    ['Kalkulator punktów', '/calculator'],
-  ])
+  links.push(['Kalkulator punktów', projectID ? `/calculator?projectID=${projectID}` : '/calculator'])
 
   const getLinkClassName = (href: string) => {
-    return router.pathname === href ? 'font-bold' : '';
+    return router.pathname === href.split('?')[0] ? 'font-bold' : '';
   };
 
   return (
@@ -55,30 +53,32 @@ const AppNavbar: FC<AppNavbarProps> = ({ projectName, wide }) => {
           </button>
         </div>
         <div
-          className={`lg:flex items-center absolute z-10 top-navbarHeight bg-white w-container lg:w-auto pb-3 lg:pb-0 lg:static ${
-            !isMenuCollapsed && 'hidden'
+          className={` absolute z-10 top-navbarHeight bg-white w-full left-0 lg:w-auto pb-3 lg:pb-0 lg:static ${
+            !isMenuCollapsed && 'hidden lg:block'
           }`}
         >
-          <ul className="lg:flex lg:mr-8">
-            {links.map(([text, href]) => (
-              <li key={href} className="lg:mx-4 my-4 lg:my-0">
-                <Link href={href}>
-                  <a className={getLinkClassName(href)}>{text}</a>
-                </Link>
-              </li>
-            ))}
-          </ul>
-          <Link href="/#support-us">
-            <a
-              className={[
-                'font-bold cursor-pointer inline-block w-full sm:w-auto text-center',
-                roundedSmallLinkClassName,
-                '',
-              ].join(' ')}
-            >
-              Wesprzyj projekt
-            </a>
-          </Link>
+          <div className="w-container mx-auto lg:w-full lg:flex items-center">
+            <ul className="lg:flex lg:mr-8">
+              {links.map(([text, href]) => (
+                <li key={href} className="lg:mx-4 my-4 lg:my-0">
+                  <Link href={href}>
+                    <a className={getLinkClassName(href)}>{text}</a>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <Link href="/#support-us">
+              <a
+                className={[
+                  'font-bold cursor-pointer inline-block w-full sm:w-auto text-center',
+                  roundedSmallLinkClassName,
+                  '',
+                ].join(' ')}
+              >
+                Wesprzyj projekt
+              </a>
+            </Link>
+          </div>
         </div>
       </div>
     </div>

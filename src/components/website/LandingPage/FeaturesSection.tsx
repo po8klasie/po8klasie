@@ -1,16 +1,11 @@
 import { FC } from 'react';
 import ProgressiveImage from 'react-progressive-graceful-image';
-import { FaWpforms } from '@react-icons/all-files/fa/FaWpforms';
-import RoundedExternalLink from '../RoundedExternalLink';
-
 import lookupImg from '../../../assets/website/img/features-lookup.png';
 import lookupImgPlaceholder from '../../../assets/website/img/features-lookup.png?lqip';
 import surveyImg from '../../../assets/website/img/features-survey.png';
 import surveyImgPlaceholder from '../../../assets/website/img/features-survey.png?lqip';
 
 import { useTranslation } from 'next-i18next';
-
-const SURVEY_LINK = 'https://here4.pl/wybor-ankieta-12';
 
 const Image: FC<{ src: string; placeholder: string; alt: string }> = ({
   src: imgSrc,
@@ -43,13 +38,6 @@ const FeaturesSection: FC = () => {
             <div>
               <h3 className="text-2xl font-bold mb-4"> {t('secondaryHeader2')} </h3>
               <p className="text-lg">{t('textContent2')}</p>
-              <RoundedExternalLink
-                href={SURVEY_LINK}
-                icon={FaWpforms}
-                className="inline-flex mt-10"
-              >
-                {t('surveyInvitation')}
-              </RoundedExternalLink>
             </div>
           </div>
           <div className="w-full">
