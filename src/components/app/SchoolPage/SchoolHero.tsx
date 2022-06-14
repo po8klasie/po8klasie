@@ -28,10 +28,10 @@ const SchoolHero: FC<SchoolHeroProps> = ({ school }) => {
               Powrót do listy
             </a>
           </Link>
-          <h1 className="text-3xl font-bold mt-4">{school.name}</h1>
-          <ul className="flex">
+          <h1 className="text-2xl md:text-3xl font-bold mt-4">{school.name}</h1>
+          <ul className="lg:flex lg:mt-0 mt-2">
             {descriptors.map((d) => (
-              <li key={d} className="mx-2 first:ml-0 text-gray">
+              <li key={d} className="lg:mx-2 first:ml-0 text-gray">
                 {d}
               </li>
             ))}

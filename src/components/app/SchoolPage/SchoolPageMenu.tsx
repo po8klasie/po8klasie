@@ -17,7 +17,7 @@ const SchoolPageMenu: FC<SchoolPageMenuProps> = ({ sectionConfigs }) => {
     }
   };
   return (
-    <ul className="top-navbarHeight sticky pt-5 flex md:block">
+    <ul className="top-navbarHeight sticky pt-5 block">
       {sectionConfigs.map(({ id, name }) => (
         <li
           key={id}

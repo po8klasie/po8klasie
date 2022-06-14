@@ -6,6 +6,7 @@ import 'tailwindcss/tailwind.css';
 import { AiOutlineWarning } from '@react-icons/all-files/ai/AiOutlineWarning';
 import AppLayout from '../components/app/AppLayout';
 import Calculator from '../components/calculator/Calculator';
+import withProjectConfig from "../config/withProjectConfig";
 
 const CalculatorPage: FC = () => {
   return (
@@ -41,7 +42,7 @@ const CalculatorPage: FC = () => {
   );
 };
 
-export default CalculatorPage;
+export default withProjectConfig(CalculatorPage);
 
 // https://nextjs.org/docs/api-reference/next.config.js/runtime-configuration
 // A page that relies on publicRuntimeConfig must use getInitialProps/getServerSideProps to opt-out of Automatic Static Optimization.

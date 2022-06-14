@@ -49,7 +49,7 @@ const ClassProfilesSection: FC = () => {
         <h3 className="text-lg font-bold text-dark">Profile klas</h3>
       </div>
       <DataAvailableSoonOverlay>
-        <table className="my-2 w-full">
+        <table className="my-2 w-full hidden lg:block">
           <thead className="text-gray text-left">
           <tr>
             <th className="px-3">Klasa</th>
@@ -76,6 +76,27 @@ const ClassProfilesSection: FC = () => {
             </tr>
           ))}
         </table>
+        <div className="lg:hidden pb-5">
+          {tmpClassProfiles.map(([classSymbol, classLabel, extendedSubjects, countedSubjects, threshold]) => (
+            <details className="px-2 mt-2">
+              <summary>
+                <ClassSymbol classSymbol={classSymbol} />
+                <span className="ml-2 font-semibold">{classLabel}</span>
+              </summary>
+              <div className="px-4 mb-7">
+                <h5 className="mt-2">Przedmioty rozszerzone</h5>
+                <ul className="list-disc pl-6">
+                  {extendedSubjects.map(subject => <li>{subject}</li>)}
+                </ul>
+                <h5 className="mt-2">Przedmioty puntkowane</h5>
+                <ul className="list-disc pl-6">
+                  {countedSubjects.map(subject => <li>{subject}</li>)}
+                </ul>
+                <h5 className="mt-2">Próg punktowy: {threshold}</h5>
+              </div>
+            </details>
+          ))}
+        </div>
       </DataAvailableSoonOverlay>
     </SchoolInfoSection>
   );

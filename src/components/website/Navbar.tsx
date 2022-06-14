@@ -74,7 +74,7 @@ const Navbar: FC<NavbarProps> = ({ navbarWrapperClassName, projectsList }) => {
               isFeatureFlagEnabled(publicRuntimeConfig.SHOW_LINKS_TO_APP) && (
                 <li className="my-1">
                   <Popover className="relative">
-                    <Popover.Button className="font-bold">{t('navbar.schools')}</Popover.Button>
+                    <Popover.Button className="font-bold md:mx-5">{t('navbar.schools')}</Popover.Button>
                     <Popover.Panel className={popoverPanelClassName}>
                       <ul>
                         {projectsList.map(({ projectID, appName }) => (
@@ -88,10 +88,18 @@ const Navbar: FC<NavbarProps> = ({ navbarWrapperClassName, projectsList }) => {
                 </li>
               )
             }
-            <li className="font-bold md:mx-10 my-1">
+            <li className="font-bold md:mx-5 my-1">
               <Link href="/calculator">
                 <a>{t('navbar.pointsCalculator')}</a>
               </Link>
+            </li>
+            <li className="font-bold md:mx-5 my-1">
+              <a
+                target="_blank"
+                rel="noreferrer noopener"
+                href="https://blog.po8klasie.pl">
+                Blog
+              </a>
             </li>
           </ul>
           <span className="block mt-5 md:mt-0 md:ml-5">
