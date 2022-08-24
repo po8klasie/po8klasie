@@ -26,6 +26,7 @@ export interface ISchoolData extends ISchoolSearchData {
   phone: string
   website: string
   postalCode: string
+  description: string
 }
 
 
