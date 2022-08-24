@@ -6,12 +6,11 @@ const searchViewConfig: SearchViewConfig = {
     zoom: 15,
   },
   defaultQuery: {
-    page_size: '1000',
-    area_query: 'Warszawa',
+    project_id: 'warszawa',
   },
   filters: [
     {
-      key: 'name_query',
+      key: 'query',
       component: 'text',
       validator: 'string',
       initialValue: '',
@@ -22,7 +21,7 @@ const searchViewConfig: SearchViewConfig = {
       },
     },
     {
-      key: 'public_school',
+      key: 'is_public',
       component: 'dropdown',
       validator: 'none',
       initialValue: [],

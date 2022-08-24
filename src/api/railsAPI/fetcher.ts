@@ -21,6 +21,5 @@ const camelCaseKeys = (o: Record<string, unknown>): Record<string, unknown> | un
 const fetcher = <T>(path: string): Promise<T> =>
   fetch(`${publicRuntimeConfig.API_URL}${path}`)
     .then((res) => res.json())
-    .then((res) => camelCaseKeys(res) as T);
 
 export default fetcher;

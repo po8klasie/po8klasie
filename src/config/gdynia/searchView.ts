@@ -6,8 +6,7 @@ const searchViewConfig: SearchViewConfig = {
     zoom: 15,
   },
   defaultQuery: {
-    page_size: '1000',
-    area_query: 'Gdynia',
+    project_id: 'gdynia',
   },
   filters: [
     {

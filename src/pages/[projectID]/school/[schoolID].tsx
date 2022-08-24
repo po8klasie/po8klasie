@@ -8,12 +8,12 @@ import { getProjectConfigProps } from '../../../config/nextHelpers';
 import AppLayout from '../../../components/app/AppLayout';
 import SchoolHero from '../../../components/app/SchoolPage/SchoolHero';
 import SchoolPageContent from '../../../components/app/SchoolPage/SchoolPageContent';
-import { RailsApiSchool } from '../../../types';
+import { ISchoolData } from "../../../types";
 import { ProjectConfig } from '../../../config/types';
 import { NextSeo } from 'next-seo';
 
 interface SchoolPageProps extends ProjectConfigConsumerProps<'appearance' | 'schoolInfo'> {
-  school: RailsApiSchool;
+  school: ISchoolData
 }
 
 const SchoolPage: FC<SchoolPageProps> = ({ PROJECT: { appearance, schoolInfo }, school }) => (
@@ -34,7 +34,7 @@ interface SchoolPageParams extends ParsedUrlQuery {
 export const getServerSideProps = async (
   context: GetServerSidePropsContext<SchoolPageParams>,
 ): Promise<
-  GetServerSidePropsResult<{ PROJECT: Partial<ProjectConfig>; school: RailsApiSchool }>
+  GetServerSidePropsResult<{ PROJECT: Partial<ProjectConfig>; school: ISchoolData }>
 > => {
   const schoolID = context?.params?.schoolID;
   const projectID = context?.params?.projectID;
@@ -45,9 +45,9 @@ export const getServerSideProps = async (
     };
 
   const fetcher = await import('../../../api/railsAPI/fetcher').then((m) => m.default);
-  const school = (await fetcher(`/institutions/${schoolID}`)) as RailsApiSchool;
+  const school = (await fetcher(`/facility/${schoolID}`)) as ISchoolData;
 
-  if (!school.id) return { notFound: true };
+  if (!school.rspo) return { notFound: true };
 
   return {
     props: {

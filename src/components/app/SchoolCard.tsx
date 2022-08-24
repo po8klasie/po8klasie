@@ -1,21 +1,21 @@
 import React, { FC } from 'react';
 import Link from 'next/link';
 import styles from './styles/SchoolCard.module.css';
-import { RailsApiSchool } from '../../types';
+import { ISchoolSearchData } from "../../types";
 import {
   getLanguageEmoji,
   getSchoolTypeFromRspoInstitutionTypeId,
 } from '../../utils/apiDataMapping';
 
 interface ForeignLanguagesProps {
-  foreignLanguages: string | null;
+  foreignLanguages: string[] | null;
 }
 
 const ForeignLanguages: FC<ForeignLanguagesProps> = ({ foreignLanguages }) => {
-  if (!foreignLanguages) return <span>brak danych</span>;
+  if (!foreignLanguages || foreignLanguages.length === 0) return <span>brak danych</span>;
   return (
     <>
-      {foreignLanguages.split(',').map((lang: string) => (
+      {foreignLanguages.map((lang: string) => (
         <span className="first:ml-0 mx-2">{getLanguageEmoji(lang)}</span>
       ))}
     </>
@@ -23,24 +23,23 @@ const ForeignLanguages: FC<ForeignLanguagesProps> = ({ foreignLanguages }) => {
 };
 
 export interface SchoolCardProps {
-  school: RailsApiSchool;
-  projectID: string;
+  school: ISchoolSearchData
 }
 
-const SchoolCard: FC<SchoolCardProps> = ({ school, projectID }) => {
+const SchoolCard: FC<SchoolCardProps> = ({ school}) => {
   return (
     <div className="border border-light rounded-md">
       <div className="m-4 text-gray">
         <h3 className="font-primary font-semibold text-lg text-dark hover:underline">
-          <Link href={`/${projectID}/school/${school.id}`}>
+          <Link href={`/${school.projectId}/school/${school.rspo}`}>
             <a>{school.name}</a>
           </Link>
         </h3>
         <ul className={styles.schoolPropertiesList}>
-          <li>{school.public ? 'Szkoła publiczna' : 'Szkoła niepubliczna'}</li>
-          <li>{getSchoolTypeFromRspoInstitutionTypeId(school.rspoInstitutionTypeId)}</li>
+          <li>{school.isPublic ? 'Szkoła publiczna' : 'Szkoła niepubliczna'}</li>
+          <li>{getSchoolTypeFromRspoInstitutionTypeId(school.rspoFacilityType)}</li>
           <li>
-            {school.street} {school.buildingNo}, {school.town}
+            {school.street} {school.buildingNumber}, {school.city}
           </li>
         </ul>
         <div className="mt-2 flex items-center">
@@ -53,7 +52,7 @@ const SchoolCard: FC<SchoolCardProps> = ({ school, projectID }) => {
           <span className="whitespace-nowrap mr-4">Profile klas</span>
           {school.classProfiles ? (
             <ul className={styles.schoolClassesList}>
-              {school.classProfiles.split(',').map((profile) => (
+              {school.classProfiles.map((profile) => (
                 <li key={profile}>{profile}</li>
               ))}
             </ul>
