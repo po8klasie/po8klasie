@@ -1,15 +1,15 @@
 import React, { FC, useState } from 'react';
 import dynamic from 'next/dynamic';
 import SchoolsListing from './SchoolsListing';
-import { RailsApiSchool } from '../../../types';
+import { ISchoolSearchData } from "../../../types";
 
 const SchoolsMap = dynamic(() => import('./SchoolsMap'), { ssr: false });
 
 interface SchoolsBrowserProps {
-  results: RailsApiSchool[];
+  items: ISchoolSearchData[];
 }
 
-const SchoolsBrowser: FC<SchoolsBrowserProps> = ({ results }) => {
+const SchoolsBrowser: FC<SchoolsBrowserProps> = ({ items }) => {
   const [isMapExpanded, setMapExpanded] = useState(false);
   const handleExpandToggle = () => setMapExpanded(!isMapExpanded);
 
@@ -18,9 +18,9 @@ const SchoolsBrowser: FC<SchoolsBrowserProps> = ({ results }) => {
 
   return (
     <div>
-      <SchoolsListing results={results} />
+      <SchoolsListing items={items} />
       <SchoolsMap
-        results={results}
+        results={items}
         isExpanded={isMobile || isMapExpanded}
         hideExpandBtn={isMobile}
         onExpandToggle={handleExpandToggle}

@@ -1,21 +1,21 @@
 import { FC } from 'react';
 import Link from 'next/link';
 import { BsArrowLeftShort } from '@react-icons/all-files/bs/BsArrowLeftShort';
-import { RailsApiSchool } from '../../../types';
+import { ISchoolData } from "../../../types";
 import { useProjectConfig } from '../../../config/projectConfigContext';
 import { getSchoolTypeFromRspoInstitutionTypeId } from '../../../utils/apiDataMapping';
 
 interface SchoolHeroProps {
-  school: RailsApiSchool;
+  school: ISchoolData;
 }
 
 const SchoolHero: FC<SchoolHeroProps> = ({ school }) => {
   const { projectID } = useProjectConfig();
 
   const descriptors = [
-    school.public ? 'Szkoła publiczna' : 'Szkoła niepubliczna',
-    getSchoolTypeFromRspoInstitutionTypeId(school.rspoInstitutionTypeId),
-    school.town,
+    school.isPublic ? 'Szkoła publiczna' : 'Szkoła niepubliczna',
+    getSchoolTypeFromRspoInstitutionTypeId(school.rspoFacilityType),
+    school.city,
   ];
 
   return (

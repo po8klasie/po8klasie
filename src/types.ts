@@ -1,5 +1,34 @@
 import { institutionTypes } from './utils/apiDataMapping';
 
+export interface ISchoolSearchData {
+  projectId: string
+  name: string
+  rspo: string
+  rspoFacilityType: keyof typeof institutionTypes
+  street: string
+  buildingNumber: string
+  apartmentNumber: string
+  city: string
+
+  isPublic: boolean
+
+  latitude: number
+  longitude: number
+
+  borough: string
+
+  foreignLanguages: string[] | null
+  classProfiles: string[] | null
+}
+
+export interface ISchoolData extends ISchoolSearchData {
+  email: string
+  phone: string
+  website: string
+  postalCode: string
+}
+
+
 export interface RailsApiSchool {
   apartmentNo: string;
   buildingNo: string;
