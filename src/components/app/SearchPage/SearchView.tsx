@@ -41,7 +41,7 @@ const SearchView: FC = () => {
   return (
     <div>
       <FiltersRow filtersValues={filtersValues} setFiltersValues={setFiltersValues} />
-      <SchoolsBrowser results={data ? data.results : []} />
+      <SchoolsBrowser items={data ? data.items : []} />
     </div>
   );
 };

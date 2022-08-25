@@ -28,7 +28,7 @@ const OverviewSection: FC<SectionComponentProps> = ({ school }) => {
   const position: LatLngTuple = parseCoords(school);
 
   return (
-    <SchoolInfoSection id="overview" updateTime={school.updatedAt}>
+    <SchoolInfoSection id="overview" overwriteFooter="" updateTime="">
       <div className="py-3 px-5">
         <div className="grid lg:grid-cols-6">
           <div className="col-span-3 xl:col-span-2">
@@ -36,7 +36,7 @@ const OverviewSection: FC<SectionComponentProps> = ({ school }) => {
             <ul className="mt-2 text-gray">
               <li className="my-2">
                 <ItemWithIcon icon={MdHome}>
-                  {school.street} {school.buildingNo}, {school.zipCode} {school.town}
+                  {school.street} {school.buildingNumber}, {school.postalCode} {school.city}
                 </ItemWithIcon>
               </li>
               <li className="my-2">

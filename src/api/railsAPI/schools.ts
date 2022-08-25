@@ -1,27 +1,25 @@
 import useSWR from 'swr';
 import qs, { StringifiableRecord } from 'query-string';
 import fetcher from './fetcher';
-import { RailsApiSchool } from '../../types';
+import { ISchoolData } from "../../types";
 
-interface RailsApiSchoolsDataResponse {
-  results: RailsApiSchool[];
-  totalItems: number;
-  page: number;
+interface SchoolsDataResponse {
+  items: ISchoolData[];
 }
 
 const useSchoolsData = (filtersValues: StringifiableRecord, defaultQuery: StringifiableRecord) => {
   const endpointUrl = qs.stringifyUrl(
     {
-      url: '/institutions',
+      url: '/facility/',
       query: {
         ...filtersValues,
         ...defaultQuery,
       },
     },
-    { skipEmptyString: true, arrayFormat: 'comma' },
+    { skipEmptyString: true },
   );
 
-  return useSWR(endpointUrl, (key) => fetcher<RailsApiSchoolsDataResponse>(key));
+  return useSWR(endpointUrl, (key) => fetcher<SchoolsDataResponse>(key));
 };
 
 export default useSchoolsData;

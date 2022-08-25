@@ -7,11 +7,11 @@ import styles from './styles/SchoolsMap.module.css';
 import 'leaflet/dist/leaflet.css';
 import { useProjectConfig } from '../../../config/projectConfigContext';
 import { SearchViewConfig } from '../../../config/types';
-import { RailsApiSchool } from '../../../types';
+import { ISchoolSearchData, RailsApiSchool } from "../../../types";
 import { parseCoords, tileLayerProps } from '../../../utils/map';
 
 interface SchoolsMapProps {
-  results: RailsApiSchool[];
+  results: ISchoolSearchData[];
   onExpandToggle: () => void;
   isExpanded: boolean;
   hideExpandBtn: boolean;
@@ -46,17 +46,17 @@ const SchoolsMap: FC<SchoolsMapProps> = ({ results, onExpandToggle, isExpanded, 
         {...mapOptions}
       >
         <TileLayer {...tileLayerProps} />
-        {results.map(({ latitude, longitude, name, id }) => {
+        {results.map(({ latitude, longitude, name, rspo}) => {
           if (!latitude || !longitude) return null;
 
           return (
             <Marker
               position={{
-                lat: parseFloat(latitude),
-                lng: parseFloat(longitude),
+                lat: parseFloat(`${latitude}`),
+                lng: parseFloat(`${longitude}`),
               }}
               icon={marker}
-              key={id}
+              key={rspo}
             >
               <Popup className={styles.markerPopup}>
                 <h4>{name}</h4>

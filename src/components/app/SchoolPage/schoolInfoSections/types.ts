@@ -1,5 +1,5 @@
-import { RailsApiSchool } from '../../../../types';
+import { ISchoolData } from "../../../../types";
 
 export interface SectionComponentProps {
-  school: RailsApiSchool;
+  school: ISchoolData;
 }

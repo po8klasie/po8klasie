@@ -1,11 +1,11 @@
 import { LatLngTuple } from 'leaflet';
-import { RailsApiSchool } from '../types';
+import { ISchoolSearchData } from "../types";
 import { TileLayerProps } from "react-leaflet";
 import { publicRuntimeConfig } from "../runtimeConfig";
 
-export const parseCoords = (school: RailsApiSchool): LatLngTuple => [
-  parseFloat(school.latitude),
-  parseFloat(school.longitude),
+export const parseCoords = (school: ISchoolSearchData): LatLngTuple => [
+  parseFloat(`${school.latitude}`),
+  parseFloat(`${school.longitude}`),
 ];
 
 const { MAPBOX_ACCESS_TOKEN } = publicRuntimeConfig;
