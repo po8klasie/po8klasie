@@ -1,0 +1,29 @@
+.grid {
+    @apply block;
+}
+
+
+.routeWrapper {
+    @apply relative;
+}
+
+
+
+.routeTooltip {
+    @apply hidden absolute bottom-full left-1/2 bg-dark text-white whitespace-nowrap;
+    @apply px-3 py-2 rounded;
+    transform: translateX(-50%);
+}
+
+.routeName {
+    @apply my-2 mr-2 px-3 py-1 bg-primaryBg rounded-lg border border-primaryBg transition;
+    @apply flex items-center;
+}
+
+.routeWrapper:hover .routeName {
+    @apply border-dark border-opacity-20 cursor-pointer;
+}
+
+.routeWrapper:hover .routeTooltip {
+    @apply block;
+}

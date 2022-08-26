@@ -1,5 +1,21 @@
 import { institutionTypes } from './utils/apiDataMapping';
 
+export interface IPublicTransportRoute {
+  name: string
+  routeFrom?: string
+  routeTo?: string
+  ref?: string
+  type: string
+  operator?: string
+}
+
+export interface IPublicTransportStop {
+  name: string
+  latitude: number
+  longitude: number
+  publicTransportRoutes: IPublicTransportRoute[]
+}
+
 export interface ISchoolSearchData {
   projectId: string
   name: string
@@ -21,12 +37,18 @@ export interface ISchoolSearchData {
   classProfiles: string[] | null
 }
 
+export interface IPublicTransportStopWrapper {
+  distance: number
+  publicTransportStop: IPublicTransportStop
+}
+
 export interface ISchoolData extends ISchoolSearchData {
   email: string
   phone: string
   website: string
   postalCode: string
   description: string
+  publicTransportStops: IPublicTransportStopWrapper[]
 }
 
 
