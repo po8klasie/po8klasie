@@ -9,9 +9,12 @@ RUN mkdir -p /opt/po8klasie
 
 WORKDIR /opt/po8klasie
 
-COPY package.json yarn.lock ./
+COPY package.json yarn.lock .yarnrc.yml ./
 
-RUN yarn install --frozen-lockfile
+# https://yarnpkg.com/features/zero-installs#how-do-you-reach-this-zero-install-state-youre-advocating-for
+COPY .yarn ./.yarn
+
+RUN yarn install --immutable
 
 COPY tsconfig.json ./
 COPY next.config.js next-env.d.ts ./

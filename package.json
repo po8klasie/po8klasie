@@ -2,6 +2,7 @@
   "name": "po8klasie",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "yarn@3.2.3",
   "dependencies": {
     "@headlessui/react": "^1.6.0",
     "@react-icons/all-files": "^4.1.0",
