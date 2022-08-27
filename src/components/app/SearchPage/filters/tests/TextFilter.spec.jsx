@@ -1,11 +1,11 @@
 /* global describe, it, expect */
 import React from 'react';
-import { shallow } from 'enzyme';
 import TextFilter from '../TextFilter';
+import { render, screen } from "@testing-library/react";
 
 describe('alpha/v3/search/TextFilter', () => {
   it('renders input with given value', () => {
-    const wrapper = shallow(
+    render(
       <TextFilter
         value="foo"
         onChange={() => {
@@ -14,6 +14,6 @@ describe('alpha/v3/search/TextFilter', () => {
       />,
     );
 
-    expect(wrapper.find('input').prop('value')).toEqual('foo');
+    expect(screen.getByRole("textbox").value).toEqual('foo');
   });
 });
