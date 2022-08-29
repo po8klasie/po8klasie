@@ -45,7 +45,7 @@ export const getServerSideProps = async (
     };
 
   const fetcher = await import('../../../api/railsAPI/fetcher').then((m) => m.default);
-  const school = (await fetcher(`/facility/${schoolID}`)) as ISchoolData;
+  const school = (await fetcher(`/institution/${schoolID}`)) as ISchoolData;
 
   if (!school.rspo) return { notFound: true };
 

@@ -10,7 +10,7 @@ interface SchoolsDataResponse {
 const useSchoolsData = (filtersValues: StringifiableRecord, defaultQuery: StringifiableRecord) => {
   const endpointUrl = qs.stringifyUrl(
     {
-      url: '/facility/',
+      url: '/institution/',
       query: {
         ...filtersValues,
         ...defaultQuery,
