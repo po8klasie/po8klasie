@@ -2,10 +2,10 @@ import { FC } from 'react';
 import Footer from './Footer';
 import Navbar from './Navbar';
 import styles from './styles/Layout.module.css';
-import { ProjectsList } from "./LandingPage/HeroSection";
+import { ProjectsList } from './LandingPage/HeroSection';
 
 interface LayoutProps {
-  projectsList: ProjectsList
+  projectsList: ProjectsList;
 }
 
 const Layout: FC<LayoutProps> = ({ children, projectsList }) => (

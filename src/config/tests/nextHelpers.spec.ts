@@ -1,5 +1,6 @@
 import * as projectConfigIndex from '../index';
 import { getProjectConfigStaticProps, getStaticPathsPerProject } from '../nextHelpers';
+import { ProjectConfig } from '../types';
 
 describe('config/nextHelpers', () => {
   describe('getProjectConfigStaticProps', () => {
@@ -11,7 +12,7 @@ describe('config/nextHelpers', () => {
     it('calls getProjectConfig with proper projectID', async () => {
       const spy = jest
         .spyOn(projectConfigIndex, 'getProjectConfig')
-        .mockImplementation(() => fakeConfig as any);
+        .mockImplementation(() => (fakeConfig as unknown) as ProjectConfig);
 
       await getProjectConfigStaticProps(['appearance'])({ params: { projectID: 'foo' } });
       expect(spy).toHaveBeenCalledWith('foo');

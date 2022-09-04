@@ -1,5 +1,5 @@
 import { DefaultSeo as DefaultNextSeo, DefaultSeoProps } from 'next-seo';
-import { publicRuntimeConfig } from "./runtimeConfig";
+import { publicRuntimeConfig } from './runtimeConfig';
 
 const { APP_ENVIRONMENT } = publicRuntimeConfig;
 

@@ -6,7 +6,7 @@ import 'tailwindcss/tailwind.css';
 import { AiOutlineWarning } from '@react-icons/all-files/ai/AiOutlineWarning';
 import AppLayout from '../components/app/AppLayout';
 import Calculator from '../components/calculator/Calculator';
-import withProjectConfig from "../config/withProjectConfig";
+import withProjectConfig from '../config/withProjectConfig';
 
 const CalculatorPage: FC = () => {
   return (

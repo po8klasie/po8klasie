@@ -6,7 +6,7 @@ export const splitArrayInHalf = <T>(arr: T[]): T[][] => {
 export const removeFromArray = <T>(arr: T[], element: T): T[] =>
   arr.filter((el: T) => el !== element);
 
-export const removeFromObject = (obj: any, keys: string[]) => {
+export const removeFromObject = (obj: Record<string, unknown>, keys: string[]) => {
   const clonedObj = { ...obj };
   keys.forEach((key) => delete clonedObj[key]);
   return clonedObj;

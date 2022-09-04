@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { BsCheckCircle } from '@react-icons/all-files/bs/BsCheckCircle';
 import { IconType } from 'react-icons';
 import SchoolInfoSection from './SchoolInfoSection';
-import DataAvailableSoonOverlay from "./DataAvailableSoonOverlay";
+import DataAvailableSoonOverlay from './DataAvailableSoonOverlay';
 
 interface ItemWithIconProps {
   icon: IconType;

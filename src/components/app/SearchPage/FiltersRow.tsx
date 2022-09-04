@@ -3,7 +3,7 @@ import { useProjectConfig } from '../../../config/projectConfigContext';
 import filtersComponents from './filters';
 import styles from './filters/styles/FiltersRow.module.css';
 import { SearchViewConfig } from '../../../config/types';
-import MobileFilters from "./MobileFilters";
+import MobileFilters from './MobileFilters';
 
 type FiltersValues = Record<string, string | unknown[]>;
 

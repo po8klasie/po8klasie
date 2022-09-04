@@ -1,5 +1,3 @@
-import { IExtendedSubjectName } from '../types/graphql';
-
 export const foreignLanguages = {
   OBCY: 'język obcy',
   ANG: 'język angielski',
@@ -17,7 +15,7 @@ export const foreignLanguages = {
   JEZYK_KASZUBSKI: 'język kaszubski',
 };
 
-const subjectNames: Readonly<Record<IExtendedSubjectName, string>> = {
+const subjectNames: Readonly<Record<string, string>> = {
   BIOL: 'biologia',
   CHEM: 'chemia',
   FILOZ: 'filozofia',

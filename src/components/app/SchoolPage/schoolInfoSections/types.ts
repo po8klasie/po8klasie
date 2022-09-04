@@ -1,4 +1,4 @@
-import { ISchoolData } from "../../../../types";
+import { ISchoolData } from '../../../../types';
 
 export interface SectionComponentProps {
   school: ISchoolData;

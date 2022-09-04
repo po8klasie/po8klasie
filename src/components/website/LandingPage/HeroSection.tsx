@@ -4,42 +4,40 @@ import Brand from '../Brand';
 
 import heroGradientsImg from '../../../assets/website/img/hero-gradients.png';
 import heroGradientsImgPlaceholder from '../../../assets/website/img/hero-gradients.png?lqip';
-import { useTranslation } from "next-i18next";
+import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import capitalize from 'lodash/capitalize';
-import { isFeatureFlagEnabled, publicRuntimeConfig } from "../../../runtimeConfig";
+import { isFeatureFlagEnabled, publicRuntimeConfig } from '../../../runtimeConfig';
+
+const betaBadgeStyle =
+  'absolute -top-3 -right-3 rounded-full bg-primaryBg text-primary uppercase px-2 py-1 text-xs font-bold';
 
 export type ProjectsList = { projectID: string; appName: string }[];
 
 interface ProjectsLinksProps {
   projectsList: ProjectsList;
-  heading: string
+  heading: string;
 }
 
 const ProjectsLinks: FC<ProjectsLinksProps> = ({ projectsList, heading }) => (
   <>
     <h3 className="text-center text-lg">{heading}</h3>
     <div className="flex flex-wrap justify-center mt-5">
-    {
-      projectsList.map(({ projectID, appName }) => (
+      {projectsList.map(({ projectID, appName }) => (
         <Link href={`/${projectID}`}>
           <a className="relative py-2 px-5 border-2 font-bold m-3 hover:bg-opacity-10 hover:bg-primary transition">
             <span className={betaBadgeStyle}>Beta</span>
             {capitalize(appName)}
           </a>
         </Link>
-      ))
-    }
+      ))}
     </div>
   </>
-)
+);
 
 interface HeroSectionProps {
   projectsList: ProjectsList;
 }
-
-const betaBadgeStyle =
-  'absolute -top-3 -right-3 rounded-full bg-primaryBg text-primary uppercase px-2 py-1 text-xs font-bold';
 
 const HeroSection: FC<HeroSectionProps> = ({ projectsList }) => {
   const { t } = useTranslation('landing', { keyPrefix: 'heroSection' });

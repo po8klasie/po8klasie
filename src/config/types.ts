@@ -4,7 +4,7 @@ import { MapContainerProps } from 'react-leaflet';
 export type FilterDefinition = {
   key: string;
   component: string; // TODO: More strict types
-  options?: any; // TODO: More strict types
+  options?: Record<string, unknown>; // TODO: More strict types
   validator: string; // TODO: More strict types
   displayInRowOnMobile: boolean;
   initialValue: string | unknown[];

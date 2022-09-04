@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react';
 import dynamic from 'next/dynamic';
 import SchoolsListing from './SchoolsListing';
-import { ISchoolSearchData } from "../../../types";
+import { ISchoolSearchData } from '../../../types';
 
 const SchoolsMap = dynamic(() => import('./SchoolsMap'), { ssr: false });
 
@@ -14,7 +14,7 @@ const SchoolsBrowser: FC<SchoolsBrowserProps> = ({ items }) => {
   const handleExpandToggle = () => setMapExpanded(!isMapExpanded);
 
   // less than tailwind's `lg` preset https://tailwindcss.com/docs/responsive-design
-  const isMobile = typeof window !== 'undefined' && window.innerWidth < 1024
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 1024;
 
   return (
     <div>

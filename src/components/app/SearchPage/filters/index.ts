@@ -1,5 +1,5 @@
 import TextFilter from './TextFilter';
-import DropdownFilter, { MobileDropdownFilter } from "./DropdownFilter";
+import DropdownFilter, { MobileDropdownFilter } from './DropdownFilter';
 
 const filtersComponents = {
   text: TextFilter,
@@ -8,7 +8,7 @@ const filtersComponents = {
 
 export const mobileFiltersComponents = {
   text: TextFilter,
-  dropdown: MobileDropdownFilter
-}
+  dropdown: MobileDropdownFilter,
+};
 
 export default filtersComponents;
