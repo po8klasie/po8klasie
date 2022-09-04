@@ -11,18 +11,27 @@ import SchoolPageContent from '../../../components/app/SchoolPage/SchoolPageCont
 import { ISchoolData } from '../../../types';
 import { ProjectConfig } from '../../../config/types';
 import { NextSeo } from 'next-seo';
+import useSingleSchoolData, { createSingleSchoolDataQueryKey } from '../../../api/singleSchool';
+import { useRouter } from 'next/router';
+import { dehydrate, DehydratedState, QueryClient } from '@tanstack/react-query';
+import { queryClientOptions } from '../../../api/queryClient';
 
 interface SchoolPageProps extends ProjectConfigConsumerProps<'appearance' | 'schoolInfo'> {
   school: ISchoolData;
 }
 
-const SchoolPage: FC<SchoolPageProps> = ({ PROJECT: { appearance, schoolInfo }, school }) => (
-  <AppLayout projectAppearance={appearance}>
-    <NextSeo title={appearance.appName} />
-    <SchoolHero school={school} />
-    <SchoolPageContent schoolInfoConfig={schoolInfo} school={school} />
-  </AppLayout>
-);
+const SchoolPage: FC<SchoolPageProps> = ({ PROJECT: { appearance, schoolInfo } }) => {
+  const router = useRouter();
+  const { data: school } = useSingleSchoolData(router.query.schoolID as string);
+
+  return (
+    <AppLayout projectAppearance={appearance}>
+      <NextSeo title={appearance.appName} />
+      <SchoolHero school={school as ISchoolData} />
+      <SchoolPageContent schoolInfoConfig={schoolInfo} school={school as ISchoolData} />
+    </AppLayout>
+  );
+};
 
 export default withProjectConfig<SchoolPageProps>(SchoolPage);
 
@@ -33,7 +42,9 @@ interface SchoolPageParams extends ParsedUrlQuery {
 
 export const getServerSideProps = async (
   context: GetServerSidePropsContext<SchoolPageParams>,
-): Promise<GetServerSidePropsResult<{ PROJECT: Partial<ProjectConfig>; school: ISchoolData }>> => {
+): Promise<
+  GetServerSidePropsResult<{ PROJECT: Partial<ProjectConfig>; dehydratedState: DehydratedState }>
+> => {
   const schoolID = context?.params?.schoolID;
   const projectID = context?.params?.projectID;
 
@@ -42,15 +53,18 @@ export const getServerSideProps = async (
       notFound: true,
     };
 
-  const fetcher = await import('../../../api/railsAPI/fetcher').then((m) => m.default);
-  const school = (await fetcher(`/institution/${schoolID}`)) as ISchoolData;
+  const queryClient = new QueryClient(queryClientOptions);
 
-  if (!school.rspo) return { notFound: true };
+  const queryKey = createSingleSchoolDataQueryKey(schoolID);
+  await queryClient.prefetchQuery(queryKey);
+
+  const school = queryClient.getQueryData<ISchoolData>(queryKey);
+  if (!school || !school.rspo) return { notFound: true };
 
   return {
     props: {
       PROJECT: await getProjectConfigProps(['appearance', 'schoolInfo'], projectID),
-      school,
+      dehydratedState: dehydrate(queryClient),
     },
   };
 };
