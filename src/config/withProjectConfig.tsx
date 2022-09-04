@@ -7,7 +7,9 @@ export interface ProjectConfigConsumerProps<T extends keyof ProjectConfig> {
   PROJECT: Pick<ProjectConfig, T>;
 }
 
-export const withProjectConfig = <T extends ProjectConfigConsumerProps<unknown>>(
+// Disabling cause withProjectConfig will be removed soon
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const withProjectConfig = <T extends ProjectConfigConsumerProps<any>>(
   WrappedComponent: FC<T>,
 ): FC<T> => (props) => {
   console.log(props.PROJECT);

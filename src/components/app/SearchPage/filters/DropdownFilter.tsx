@@ -26,7 +26,7 @@ interface DropdownChoice {
   label: string;
 }
 
-interface DropdownFilterOptions {
+export interface DropdownFilterOptions {
   title: string;
   choices: DropdownChoice[];
   isMultipleChoice?: boolean;

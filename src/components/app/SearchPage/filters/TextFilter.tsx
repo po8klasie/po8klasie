@@ -9,7 +9,7 @@ export interface TextFilterOptions {
 interface TextFilterProps {
   value: unknown;
   onChange: (value: string) => void;
-  options?: TextFilterOptions;
+  options: TextFilterOptions;
 }
 
 const TextFilter: FC<TextFilterProps> = ({ value, onChange, options }) => {
