@@ -4,7 +4,13 @@ import {
   saveFavSchoolsToLocalStorage,
 } from '../utils/localStorageFavSchools';
 
-const useFavouriteSchools = (): any => {
+interface UseFavouriteSchoolsResult {
+  isSchoolFavourite: (schoolId: string) => boolean;
+  toggleFavouriteSchool: (schoolId: string) => void;
+  favouriteSchools: string[];
+}
+
+const useFavouriteSchools = (): UseFavouriteSchoolsResult => {
   const favouriteSchoolsFromStorage = getFavSchoolsFromLocalStorage();
   const [favouriteSchools, setFavouriteSchools] = useState<string[]>(favouriteSchoolsFromStorage);
 

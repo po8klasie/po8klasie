@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import Link from 'next/link';
 import styles from './styles/SchoolCard.module.css';
-import { ISchoolSearchData } from "../../types";
+import { ISchoolSearchData } from '../../types';
 import {
   getLanguageEmoji,
   getSchoolTypeFromRspoInstitutionTypeId,
@@ -23,10 +23,10 @@ const ForeignLanguages: FC<ForeignLanguagesProps> = ({ foreignLanguages }) => {
 };
 
 export interface SchoolCardProps {
-  school: ISchoolSearchData
+  school: ISchoolSearchData;
 }
 
-const SchoolCard: FC<SchoolCardProps> = ({ school}) => {
+const SchoolCard: FC<SchoolCardProps> = ({ school }) => {
   return (
     <div className="border border-light rounded-md">
       <div className="m-4 text-gray">

@@ -81,9 +81,7 @@ const teamMembers: TeamMember[] = [
     roles: ['Komunikacja'],
     image: AnnaWenerskaDzieduchImg,
     imagePlaceholder: AnnaWenerskaDzieduchImgPlaceholder,
-    links: [
-      ['linkedin', 'https://pl.linkedin.com/in/anna-wenerska-dzieduch'],
-    ],
+    links: [['linkedin', 'https://pl.linkedin.com/in/anna-wenerska-dzieduch']],
   },
 ];
 

@@ -1,5 +1,4 @@
-import React, { ChangeEvent, ComponentType, FC } from 'react';
-import dynamic from 'next/dynamic';
+import React, { ChangeEvent, FC } from 'react';
 import styles from './styles/FiltersRow.module.css';
 
 export interface TextFilterOptions {
@@ -10,14 +9,13 @@ export interface TextFilterOptions {
 interface TextFilterProps {
   value: unknown;
   onChange: (value: string) => void;
-  options?: TextFilterOptions;
+  options: TextFilterOptions;
 }
 
 const TextFilter: FC<TextFilterProps> = ({ value, onChange, options }) => {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => onChange(e.target.value);
 
-  const icon = options?.icon as string;
-  const Icon =  () => null;
+  const Icon = () => null;
 
   return (
     <div className={styles.textInputWrapper}>

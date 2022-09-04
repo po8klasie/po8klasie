@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 // https://css-tricks.com/snippets/css/system-font-stack/
 const systemFontStack =
   '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"';
@@ -18,10 +19,10 @@ module.exports = {
       appBg: '#FBFBFB',
       transparent: 'transparent',
       red: {
-        '500': 'red',
+        500: 'red',
       },
       lighten: '#E2E5E6',
-      lightBlue: '#EFF5F8'
+      lightBlue: '#EFF5F8',
     },
     fontFamily: {
       primary: `Jost, ${systemFontStack}`,
@@ -46,7 +47,7 @@ module.exports = {
   variants: {
     extend: {
       margin: ['first', 'last'],
-      backgroundColor: ['even']
+      backgroundColor: ['even'],
     },
   },
   plugins: [require('@tailwindcss/forms')],

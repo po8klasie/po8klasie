@@ -7,7 +7,7 @@ import styles from './styles/SchoolsMap.module.css';
 import 'leaflet/dist/leaflet.css';
 import { useProjectConfig } from '../../../config/projectConfigContext';
 import { SearchViewConfig } from '../../../config/types';
-import { ISchoolSearchData, RailsApiSchool } from "../../../types";
+import { ISchoolSearchData } from '../../../types';
 import { parseCoords, tileLayerProps } from '../../../utils/map';
 
 interface SchoolsMapProps {
@@ -18,7 +18,12 @@ interface SchoolsMapProps {
 }
 
 /* Warning! This is client-side only component. It needs to be imported using dynamic() */
-const SchoolsMap: FC<SchoolsMapProps> = ({ results, onExpandToggle, isExpanded, hideExpandBtn }) => {
+const SchoolsMap: FC<SchoolsMapProps> = ({
+  results,
+  onExpandToggle,
+  isExpanded,
+  hideExpandBtn,
+}) => {
   const [map, setMap] = useState<LeafletMap | null>(null);
   const { searchView: searchViewConfig } = useProjectConfig();
   const { mapOptions } = searchViewConfig as SearchViewConfig;
@@ -46,7 +51,7 @@ const SchoolsMap: FC<SchoolsMapProps> = ({ results, onExpandToggle, isExpanded, 
         {...mapOptions}
       >
         <TileLayer {...tileLayerProps} />
-        {results.map(({ latitude, longitude, name, rspo}) => {
+        {results.map(({ latitude, longitude, name, rspo }) => {
           if (!latitude || !longitude) return null;
 
           return (
@@ -65,13 +70,11 @@ const SchoolsMap: FC<SchoolsMapProps> = ({ results, onExpandToggle, isExpanded, 
           );
         })}
       </MapContainer>
-      {
-        !hideExpandBtn && (
-          <button className={styles.mapExpandButton} onClick={onExpandToggle} type="button">
-            <BsChevronRight />
-          </button>
-        )
-      }
+      {!hideExpandBtn && (
+        <button className={styles.mapExpandButton} onClick={onExpandToggle} type="button">
+          <BsChevronRight />
+        </button>
+      )}
     </div>
   );
 };

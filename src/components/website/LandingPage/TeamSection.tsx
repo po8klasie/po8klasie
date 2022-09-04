@@ -6,7 +6,7 @@ import { FaGlobe } from '@react-icons/all-files/fa/FaGlobe';
 import { FaLinkedinIn } from '@react-icons/all-files/fa/FaLinkedinIn';
 import teamMembers, { TeamMember } from '../data/team';
 import { useTranslation } from 'next-i18next';
-import styles from './styles/TeamSection.module.css'
+import styles from './styles/TeamSection.module.css';
 const IMAGE_SIZE = 150;
 
 const iconMapping: Record<string, IconType> = {

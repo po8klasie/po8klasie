@@ -40,10 +40,8 @@
     "test": "jest test",
     "format:check": "prettier --parser typescript --list-different \"**/*.{js,jsx,ts,tsx}\"",
     "format:write": "prettier --parser typescript --write \"**/*.{js,jsx,ts,tsx}\"",
-    "lint:check": "eslint --ext .js,.jsx,.ts,.tsx .",
+    "lint:check": "eslint --ext .js,.jsx,.ts,.tsx --max-warnings=0 .",
     "lint:fix": "eslint --fix --ext .js,.jsx,.ts,.tsx .",
-    "lint:v2:check": "eslint --ext .js,.jsx,.ts,.tsx ./src/pages ./src/components/website ./src/components/app ./src/components/calculator",
-    "lint:v2:fix": "eslint --fix --ext .js,.jsx,.ts,.tsx ./src/pages ./src/components/website ./src/components/app ./src/components/calculator",
     "pr": "gh pr create -R po8klasie/po8klasie"
   },
   "browserslist": {

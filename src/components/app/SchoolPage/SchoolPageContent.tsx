@@ -2,7 +2,7 @@ import { FC, useMemo } from 'react';
 import SchoolPageMenu from './SchoolPageMenu';
 import schoolInfoSections from './schoolInfoSections/schoolInfoSections';
 import { SchoolInfoConfig } from '../../../config/types';
-import { ISchoolData } from "../../../types";
+import { ISchoolData } from '../../../types';
 
 interface SchoolPageContentProps {
   schoolInfoConfig: SchoolInfoConfig;

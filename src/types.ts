@@ -1,56 +1,55 @@
 import { institutionTypes } from './utils/apiDataMapping';
 
 export interface IPublicTransportRoute {
-  name: string
-  routeFrom?: string
-  routeTo?: string
-  ref?: string
-  type: string
-  operator?: string
+  name: string;
+  routeFrom?: string;
+  routeTo?: string;
+  ref?: string;
+  type: string;
+  operator?: string;
 }
 
 export interface IPublicTransportStop {
-  name: string
-  latitude: number
-  longitude: number
-  publicTransportRoutes: IPublicTransportRoute[]
+  name: string;
+  latitude: number;
+  longitude: number;
+  publicTransportRoutes: IPublicTransportRoute[];
 }
 
 export interface ISchoolSearchData {
-  projectId: string
-  name: string
-  rspo: string
-  rspoFacilityType: keyof typeof institutionTypes
-  street: string
-  buildingNumber: string
-  apartmentNumber: string
-  city: string
+  projectId: string;
+  name: string;
+  rspo: string;
+  rspoFacilityType: keyof typeof institutionTypes;
+  street: string;
+  buildingNumber: string;
+  apartmentNumber: string;
+  city: string;
 
-  isPublic: boolean
+  isPublic: boolean;
 
-  latitude: number
-  longitude: number
+  latitude: number;
+  longitude: number;
 
-  borough: string
+  borough: string;
 
-  foreignLanguages: string[] | null
-  classProfiles: string[] | null
+  foreignLanguages: string[] | null;
+  classProfiles: string[] | null;
 }
 
 export interface IPublicTransportStopWrapper {
-  distance: number
-  publicTransportStop: IPublicTransportStop
+  distance: number;
+  publicTransportStop: IPublicTransportStop;
 }
 
 export interface ISchoolData extends ISchoolSearchData {
-  email: string
-  phone: string
-  website: string
-  postalCode: string
-  description: string
-  publicTransportStops: IPublicTransportStopWrapper[]
+  email: string;
+  phone: string;
+  website: string;
+  postalCode: string;
+  description: string;
+  publicTransportStops: IPublicTransportStopWrapper[];
 }
-
 
 export interface RailsApiSchool {
   apartmentNo: string;
@@ -83,4 +82,4 @@ export interface RailsApiSchool {
   extracurricularActivities: string | null;
 }
 
-export type SearchData = Record<string, string | number | any[]>;
+export type SearchData = Record<string, string | number | unknown[]>;

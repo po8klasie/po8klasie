@@ -19,10 +19,20 @@
     "noEmit": true,
     "jsx": "preserve"
   },
-  "include": [
-    "src",
-  ],
   "exclude": [
-    "node_modules"
+    "node_modules/",
+    ".github/",
+    "build",
+    ".next/",
+    "out/",
+    "coverage/"
+  ],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.js",
+    "**/*.jsx",
+    ".eslintrc.js"
   ]
 }

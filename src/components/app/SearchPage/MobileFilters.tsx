@@ -1,25 +1,26 @@
-import React, { FC, useState } from "react";
-import { Dialog } from '@headlessui/react'
-import { mobileFiltersComponents } from "./filters";
-import { useProjectConfig } from "../../../config/projectConfigContext";
-import { SearchViewConfig } from "../../../config/types";
+import React, { FC, useState } from 'react';
+import { Dialog } from '@headlessui/react';
+import { mobileFiltersComponents } from './filters';
+import { useProjectConfig } from '../../../config/projectConfigContext';
+import { SearchViewConfig } from '../../../config/types';
 import { BiFilterAlt } from '@react-icons/all-files/bi/BiFilterAlt';
 import { FiX } from '@react-icons/all-files/fi/FiX';
 
 interface MobileFiltersProps {
-  onFiltersChange: (filterKey: string) => (value: unknown[] | string) => void
+  onFiltersChange: (filterKey: string) => (value: unknown[] | string) => void;
   filtersValues: Record<string, string | unknown[]>;
 }
 
-const MobileFilters: FC<MobileFiltersProps> = ({ onFiltersChange, filtersValues}) => {
-  let [isOpen, setIsOpen] = useState(false)
+const MobileFilters: FC<MobileFiltersProps> = ({ onFiltersChange, filtersValues }) => {
+  const [isOpen, setIsOpen] = useState(false);
   const { searchView } = useProjectConfig();
   const { filters: filtersConfig } = searchView as SearchViewConfig;
   return (
     <>
       <button
         className="rounded-xl border border-light px-3 py-1 mx-2 flex items-center md:hidden"
-        onClick={() => setIsOpen(!isOpen)}>
+        onClick={() => setIsOpen(!isOpen)}
+      >
         <BiFilterAlt className="mr-2" />
         Filtry
       </button>
@@ -31,7 +32,8 @@ const MobileFilters: FC<MobileFiltersProps> = ({ onFiltersChange, filtersValues}
             </button>
           </div>
           {filtersConfig.map(({ options, key, component, displayInRowOnMobile }) => {
-            const FilterComponent = mobileFiltersComponents[component as keyof typeof mobileFiltersComponents];
+            const FilterComponent =
+              mobileFiltersComponents[component as keyof typeof mobileFiltersComponents];
             if (displayInRowOnMobile) return null;
             return (
               <FilterComponent
@@ -44,7 +46,7 @@ const MobileFilters: FC<MobileFiltersProps> = ({ onFiltersChange, filtersValues}
         </Dialog.Panel>
       </Dialog>
     </>
-  )
-}
+  );
+};
 
 export default MobileFilters;

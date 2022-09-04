@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import Link from 'next/link';
 import { BsArrowLeftShort } from '@react-icons/all-files/bs/BsArrowLeftShort';
-import { ISchoolData } from "../../../types";
+import { ISchoolData } from '../../../types';
 import { useProjectConfig } from '../../../config/projectConfigContext';
 import { getSchoolTypeFromRspoInstitutionTypeId } from '../../../utils/apiDataMapping';
 

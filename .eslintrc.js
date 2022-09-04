@@ -47,5 +47,11 @@ module.exports = {
         'react/jsx-props-no-spreading': 'off',
       },
     },
+    {
+      files: ['jest.config.js', 'next.config.js', 'server.js'],
+      rules: {
+        '@typescript-eslint/no-var-requires': 'off',
+      },
+    },
   ],
 };

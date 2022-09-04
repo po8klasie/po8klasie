@@ -8,7 +8,7 @@ import { FiX } from '@react-icons/all-files/fi/FiX';
 import Link from 'next/link';
 import { ProjectsList } from './LandingPage/HeroSection';
 import capitalize from 'lodash/capitalize';
-import { isFeatureFlagEnabled, publicRuntimeConfig } from "../../runtimeConfig";
+import { isFeatureFlagEnabled, publicRuntimeConfig } from '../../runtimeConfig';
 
 const getScrollToSectionProps = (to: string) => ({
   href: to === 'top' ? '#' : `${to}`,
@@ -70,34 +70,31 @@ const Navbar: FC<NavbarProps> = ({ navbarWrapperClassName, projectsList }) => {
           }`}
         >
           <ul className="flex md:flex-row flex-col">
-            {
-              isFeatureFlagEnabled(publicRuntimeConfig.SHOW_LINKS_TO_APP) && (
-                <li className="my-1">
-                  <Popover className="relative">
-                    <Popover.Button className="font-bold md:mx-5">{t('navbar.schools')}</Popover.Button>
-                    <Popover.Panel className={popoverPanelClassName}>
-                      <ul>
-                        {projectsList.map(({ projectID, appName }) => (
-                          <li className="ml-2 md:ml-0 my-2">
-                            <a href={`/${projectID}`}>{capitalize(appName)}</a>
-                          </li>
-                        ))}
-                      </ul>
-                    </Popover.Panel>
-                  </Popover>
-                </li>
-              )
-            }
+            {isFeatureFlagEnabled(publicRuntimeConfig.SHOW_LINKS_TO_APP) && (
+              <li className="my-1">
+                <Popover className="relative">
+                  <Popover.Button className="font-bold md:mx-5">
+                    {t('navbar.schools')}
+                  </Popover.Button>
+                  <Popover.Panel className={popoverPanelClassName}>
+                    <ul>
+                      {projectsList.map(({ projectID, appName }) => (
+                        <li className="ml-2 md:ml-0 my-2">
+                          <a href={`/${projectID}`}>{capitalize(appName)}</a>
+                        </li>
+                      ))}
+                    </ul>
+                  </Popover.Panel>
+                </Popover>
+              </li>
+            )}
             <li className="font-bold md:mx-5 my-1">
               <Link href="/calculator">
                 <a>{t('navbar.pointsCalculator')}</a>
               </Link>
             </li>
             <li className="font-bold md:mx-5 my-1">
-              <a
-                target="_blank"
-                rel="noreferrer noopener"
-                href="https://blog.po8klasie.pl">
+              <a target="_blank" rel="noreferrer noopener" href="https://blog.po8klasie.pl">
                 Blog
               </a>
             </li>

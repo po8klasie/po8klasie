@@ -1,7 +1,7 @@
 import { LatLngTuple } from 'leaflet';
-import { ISchoolSearchData } from "../types";
-import { TileLayerProps } from "react-leaflet";
-import { publicRuntimeConfig } from "../runtimeConfig";
+import { ISchoolSearchData } from '../types';
+import { TileLayerProps } from 'react-leaflet';
+import { publicRuntimeConfig } from '../runtimeConfig';
 
 export const parseCoords = (school: ISchoolSearchData): LatLngTuple => [
   parseFloat(`${school.latitude}`),
@@ -21,4 +21,6 @@ export const osmTileLayerProps: TileLayerProps = {
   attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
 };
 
-export const tileLayerProps = publicRuntimeConfig.MAPBOX_ACCESS_TOKEN ? mapBoxTileLayerProps : osmTileLayerProps;
+export const tileLayerProps = publicRuntimeConfig.MAPBOX_ACCESS_TOKEN
+  ? mapBoxTileLayerProps
+  : osmTileLayerProps;

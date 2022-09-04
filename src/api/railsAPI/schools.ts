@@ -1,7 +1,7 @@
 import useSWR from 'swr';
 import qs, { StringifiableRecord } from 'query-string';
 import fetcher from './fetcher';
-import { ISchoolData } from "../../types";
+import { ISchoolData } from '../../types';
 
 interface SchoolsDataResponse {
   items: ISchoolData[];

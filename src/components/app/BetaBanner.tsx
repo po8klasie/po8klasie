@@ -19,7 +19,9 @@ const BetaBanner = () => {
   if (!shouldBannerBeShown) return null;
 
   return (
-    <div className="fixed bottom-0 w-full" style={{zIndex: 1000}}>  {/*higher than leaflet's*/}
+    <div className="fixed bottom-0 w-full" style={{ zIndex: 1000 }}>
+      {' '}
+      {/*higher than leaflet's*/}
       <div className="w-container mb-5 w-container mx-auto">
         <div className="relative bg-primaryBg backdrop-filter backdrop-blur-2xl bg-opacity-70 border-2 rounded border-primary text-primary px-5 py-2">
           <button className="absolute right-2 top-2" onClick={closeBanner}>

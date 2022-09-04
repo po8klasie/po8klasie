@@ -1,6 +1,6 @@
 import * as Sentry from '@sentry/nextjs';
 import { Integrations as TracingIntegrations } from '@sentry/tracing';
-import { publicRuntimeConfig } from "./src/runtimeConfig";
+import { publicRuntimeConfig } from './src/runtimeConfig';
 
 const { APP_ENVIRONMENT, APP_FRONTEND_RELEASE, PUBLIC_SENTRY_DSN } = publicRuntimeConfig;
 

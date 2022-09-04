@@ -1,7 +1,7 @@
 /* global describe, it, expect */
 import React from 'react';
 import TextFilter from '../TextFilter';
-import { render, screen } from "@testing-library/react";
+import { render, screen } from '@testing-library/react';
 
 describe('alpha/v3/search/TextFilter', () => {
   it('renders input with given value', () => {
@@ -14,6 +14,6 @@ describe('alpha/v3/search/TextFilter', () => {
       />,
     );
 
-    expect(screen.getByRole("textbox").value).toEqual('foo');
+    expect(screen.getByRole('textbox').value).toEqual('foo');
   });
 });

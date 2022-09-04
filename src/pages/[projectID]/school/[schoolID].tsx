@@ -8,12 +8,12 @@ import { getProjectConfigProps } from '../../../config/nextHelpers';
 import AppLayout from '../../../components/app/AppLayout';
 import SchoolHero from '../../../components/app/SchoolPage/SchoolHero';
 import SchoolPageContent from '../../../components/app/SchoolPage/SchoolPageContent';
-import { ISchoolData } from "../../../types";
+import { ISchoolData } from '../../../types';
 import { ProjectConfig } from '../../../config/types';
 import { NextSeo } from 'next-seo';
 
 interface SchoolPageProps extends ProjectConfigConsumerProps<'appearance' | 'schoolInfo'> {
-  school: ISchoolData
+  school: ISchoolData;
 }
 
 const SchoolPage: FC<SchoolPageProps> = ({ PROJECT: { appearance, schoolInfo }, school }) => (
@@ -33,9 +33,7 @@ interface SchoolPageParams extends ParsedUrlQuery {
 
 export const getServerSideProps = async (
   context: GetServerSidePropsContext<SchoolPageParams>,
-): Promise<
-  GetServerSidePropsResult<{ PROJECT: Partial<ProjectConfig>; school: ISchoolData }>
-> => {
+): Promise<GetServerSidePropsResult<{ PROJECT: Partial<ProjectConfig>; school: ISchoolData }>> => {
   const schoolID = context?.params?.schoolID;
   const projectID = context?.params?.projectID;
 

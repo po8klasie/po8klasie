@@ -1,10 +1,11 @@
+/* eslint-disable import/no-extraneous-dependencies */
 const { withSentryConfig } = require('@sentry/nextjs');
 const withOptimizedImages = require('next-optimized-images');
 const { i18n } = require('./next-i18next.config');
 
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
-})
+});
 
 const customNextConfig = {
   env: {
@@ -17,7 +18,7 @@ const customNextConfig = {
     PUBLIC_SENTRY_DSN: process.env.PUBLIC_SENTRY_DSN,
     MAPBOX_ACCESS_TOKEN: process.env.MAPBOX_ACCESS_TOKEN,
     POSTHOG_API_KEY: process.env.POSTHOG_API_KEY,
-    SHOW_LINKS_TO_APP: process.env.SHOW_LINKS_TO_APP
+    SHOW_LINKS_TO_APP: process.env.SHOW_LINKS_TO_APP,
   },
   experimental: {
     craCompat: true,
