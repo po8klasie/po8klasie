@@ -9,6 +9,8 @@ import AppLayout from '../../components/app/AppLayout';
 import SearchView from '../../components/app/SearchPage/SearchView';
 import { ProjectConfig } from '../../config/types';
 import { NextSeo } from 'next-seo';
+import { dehydrate, DehydratedState, QueryClient } from '@tanstack/react-query';
+import { queryClientOptions } from '../../api/queryClient';
 
 type SchoolPageProps = ProjectConfigConsumerProps<'appearance' | 'searchView'>;
 
@@ -29,7 +31,9 @@ export default withProjectConfig<SchoolPageProps>(SearchPage);
 
 export const getServerSideProps = async (
   context: GetServerSidePropsContext<SearchPageParams>,
-): Promise<GetServerSidePropsResult<{ PROJECT: Partial<ProjectConfig> }>> => {
+): Promise<
+  GetServerSidePropsResult<{ PROJECT: Partial<ProjectConfig>; dehydratedState: DehydratedState }>
+> => {
   const projectID = context?.params?.projectID;
 
   if (!projectID)
@@ -37,9 +41,15 @@ export const getServerSideProps = async (
       notFound: true,
     };
 
+  const queryClient = new QueryClient(queryClientOptions);
+
+  // TODO(micorix): Prefetch with params
+  await queryClient.prefetchQuery([`/institution/?project_id=${projectID}`]);
+
   return {
     props: {
       PROJECT: await getProjectConfigProps(['appearance', 'searchView'], projectID),
+      dehydratedState: dehydrate(queryClient),
     },
   };
 };

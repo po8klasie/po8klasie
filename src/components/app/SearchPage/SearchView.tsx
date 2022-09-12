@@ -3,7 +3,7 @@ import useDeepCompareEffect from 'use-deep-compare-effect';
 import qs, { StringifiableRecord } from 'query-string';
 import { useRouter } from 'next/router';
 import FiltersRow, { useFiltersValues } from './FiltersRow';
-import useSchoolsDataRails from '../../../api/railsAPI/schools';
+import useSchoolsDataRails from '../../../api/schools';
 import SchoolsBrowser from './SchoolsBrowser';
 import useDebouncedValue from '../../../hooks/useDebouncedValue';
 import { useProjectConfig } from '../../../config/projectConfigContext';
