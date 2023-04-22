@@ -1,3 +1,13 @@
+# This repository has been archived.
+
+Repository contents won't be updated and issues/discussions won't be monitored.
+
+We decided to continue to develop po8klasie respectively in:
+* [web-frontend repo](https://github.com/po8klasie/web-frontend)
+* [po8klasie-fastapi repo](https://github.com/po8klasie-fastapi)
+
+---
+
 # po8klasie
 :poland: Prawdopodobnie najprostsza i najszybsza wyszukiwarka szkół średnich. <br/>
 Wkrótce produkcyjnie dostępna dla wszystkich!
